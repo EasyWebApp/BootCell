@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es6",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "jsxFactory": "createCell"
+    },
+    "include": ["./source/**/*"],
+    "typedocOptions": {
+        "name": "BootCell",
+        "mode": "file",
+        "out": "docs/"
+    }
+}

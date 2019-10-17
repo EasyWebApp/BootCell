@@ -1,0 +1,65 @@
+{
+    "name": "boot-cell",
+    "version": "0.7.0",
+    "license": "LGPL-3.0",
+    "author": "shiy2008@gmail.com",
+    "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
+    "keywords": [
+        "web",
+        "component",
+        "ui",
+        "webcell",
+        "bootstrap"
+    ],
+    "homepage": "https://web-cell.dev/BootCell/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/EasyWebApp/BootCell.git"
+    },
+    "bugs": {
+        "url": "https://github.com/EasyWebApp/BootCell/issues"
+    },
+    "source": "source/index.ts",
+    "main": "source/index.ts",
+    "module": "source/index.ts",
+    "peerDependencies": {
+        "bootstrap": "^4.3.1",
+        "classnames": "^2.2.6",
+        "web-cell": "^2.0.0-beta.6"
+    },
+    "devDependencies": {
+        "@types/classnames": "^2.2.9",
+        "classnames": "^2.2.6",
+        "husky": "^3.0.9",
+        "lint-staged": "^9.4.2",
+        "open-cli": "^5.0.0",
+        "prettier": "^1.18.2",
+        "snabbdom": "^0.7.3",
+        "typedoc": "^0.15.0",
+        "typescript": "^3.6.4",
+        "web-cell": "^2.0.0-beta.6"
+    },
+    "scripts": {
+        "test": "lint-staged",
+        "pack-docs": "rm -rf docs/  &&  typedoc source/",
+        "build": "npm run pack-docs",
+        "help": "npm run pack-docs  &&  open-cli docs/index.html",
+        "prepublishOnly": "npm run build"
+    },
+    "lint-staged": {
+        "*.{md,less,json,yml,ts,tsx}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm test",
+            "pre-push": "npm run build"
+        }
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4
+    }
+}
