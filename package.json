@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -29,20 +29,27 @@
     },
     "devDependencies": {
         "@types/classnames": "^2.2.9",
+        "@types/jest": "^24.0.19",
         "classnames": "^2.2.6",
+        "happy-dom": "^0.4.8",
         "husky": "^3.0.9",
+        "identity-obj-proxy": "^3.0.0",
+        "jest": "^24.9.0",
         "lint-staged": "^9.4.2",
         "open-cli": "^5.0.0",
         "prettier": "^1.18.2",
         "snabbdom": "^0.7.3",
+        "snabbdom-looks-like": "^1.0.5",
+        "ts-jest": "^24.1.0",
         "typedoc": "^0.15.0",
         "typescript": "^3.6.4",
         "web-cell": "^2.0.0-beta.6"
     },
     "scripts": {
-        "test": "lint-staged",
+        "lint": "lint-staged",
+        "test": "lint-staged  &&  jest",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
-        "build": "npm run pack-docs",
+        "build": "npm test  &&  npm run pack-docs",
         "help": "npm run pack-docs  &&  open-cli docs/index.html",
         "prepublishOnly": "npm run build"
     },
@@ -54,12 +61,19 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm test",
+            "pre-commit": "npm run lint",
             "pre-push": "npm run build"
         }
     },
     "prettier": {
         "singleQuote": true,
         "tabWidth": 4
+    },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node",
+        "moduleNameMapper": {
+            "^.+\\.(css|less)$": "identity-obj-proxy"
+        }
     }
 }

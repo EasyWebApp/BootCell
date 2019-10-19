@@ -1,3 +1,4 @@
 .rts2_cache_*/
 docs/
+test/
 .travis.yml
