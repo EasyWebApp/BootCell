@@ -1,63 +1,57 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
 
-interface CardWrapperProps {
-    direction?: 'horizontal' | 'vertical';
-    left: any;
-    right: any;
-}
-
-function CardWrapper({
-    direction = 'vertical',
-    left,
-    right
-}: CardWrapperProps) {
-    return direction === 'vertical' ? (
-        [].concat(left, right)
-    ) : (
-        <div class="row no-gutters align-items-center">
-            <div class="col-sm-4">{left}</div>
-            <div class="col-sm-8">{right}</div>
-        </div>
-    );
-}
-
 interface CardProps {
+    id?: string;
     className?: string;
     title: string;
     text?: string;
     image?: any;
-    direction?: CardWrapperProps['direction'];
+    direction?: 'horizontal' | 'vertical';
     children?: any;
 }
 
 export function Card({
+    id,
     className = '',
     title,
     text,
     image,
-    direction,
+    direction = 'vertical',
     children
 }: CardProps) {
+    const vertical = direction === 'vertical',
+        header =
+            typeof image !== 'string' ? (
+                image
+            ) : (
+                <img className="card-img-top" src={image} />
+            ),
+        body = (
+            <div className="card-body">
+                <h5 className="card-title">{title}</h5>
+                {text && <p className="card-text">{text}</p>}
+                {children}
+            </div>
+        );
+
     return (
-        <div className={classNames('card', className)}>
-            <CardWrapper
-                direction={direction}
-                left={
-                    typeof image !== 'string' ? (
-                        image
-                    ) : (
-                        <img className="card-img-top" src={image} />
-                    )
-                }
-                right={
-                    <div className="card-body">
-                        <h5 className="card-title">{title}</h5>
-                        {text && <p className="card-text">{text}</p>}
-                        {children}
-                    </div>
-                }
-            />
+        <div
+            id={id}
+            className={classNames(
+                'card',
+                !vertical && 'justify-content-center',
+                className
+            )}
+        >
+            {vertical ? (
+                [header, body]
+            ) : (
+                <div class="row no-gutters align-items-center">
+                    <div class="col-sm-4">{header}</div>
+                    <div class="col-sm-8">{body}</div>
+                </div>
+            )}
         </div>
     );
 }

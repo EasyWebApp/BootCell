@@ -1,7 +1,7 @@
 import { component, mixin, attribute, watch, createCell } from 'web-cell';
 
-import style from './CountDown.less';
 import { ColorNames } from './utility';
+import style from './CountDown.less';
 
 interface TimeUnit {
     scale: number;
