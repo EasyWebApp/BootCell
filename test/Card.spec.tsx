@@ -2,7 +2,7 @@ import './DOM-polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { Card } from '../source/Card';
+import { Card } from '../source/Content';
 
 describe('Card', () => {
     it('should render Vertical layout by default', () => {

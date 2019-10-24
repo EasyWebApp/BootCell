@@ -68,18 +68,3 @@ export function parseTextTable<T = {}>(
               )
           );
 }
-
-export enum ColorNames {
-    primary = 'primary',
-    secondary = 'secondary',
-    success = 'success',
-    danger = 'danger',
-    warning = 'warning',
-    info = 'info',
-    light = 'light',
-    dark = 'dark',
-    body = 'body',
-    muted = 'muted',
-    white = 'white',
-    black = 'black'
-}

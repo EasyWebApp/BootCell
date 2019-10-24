@@ -12,7 +12,6 @@
     "typedocOptions": {
         "name": "BootCell",
         "mode": "file",
-        "excludeNotExported": true,
         "out": "docs/"
     }
 }

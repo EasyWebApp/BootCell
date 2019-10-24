@@ -17,16 +17,24 @@
 5. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
 6. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
 
-7. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-8. [FileInput](https://web-cell.dev/BootCell/classes/fileinput.html)
+7. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
+8. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+9. [FileInput](https://web-cell.dev/BootCell/classes/fileinput.html)
 
-9. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
+10. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
+
+## Constants
+
+1. [Color](https://web-cell.dev/BootCell/enums/color.html)
+2. [Theme](https://web-cell.dev/BootCell/enums/theme.html)
+3. [Size](https://web-cell.dev/BootCell/enums/size.html)
+4. [Status](https://web-cell.dev/BootCell/enums/status.html)
+5. [ColorNames](https://web-cell.dev/BootCell/globals.html#colornames)
 
 ## Utilities
 
-1. [ColorNames](https://web-cell.dev/BootCell/enums/colornames.html)
-2. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
-3. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
+1. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
+2. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
 
 [1]: https://www.webcomponents.org/
 [2]: https://github.com/EasyWebApp/WebCell/tree/v2

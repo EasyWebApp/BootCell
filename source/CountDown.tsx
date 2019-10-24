@@ -1,6 +1,6 @@
 import { component, mixin, attribute, watch, createCell } from 'web-cell';
 
-import { ColorNames } from './utility';
+import { Status } from './constant';
 import style from './CountDown.less';
 
 interface TimeUnit {
@@ -13,7 +13,7 @@ interface TimeSection {
     label: string;
 }
 
-const colors = Object.keys(ColorNames).slice(0, 4);
+const colors = Object.keys(Status).slice(0, 4);
 
 @component({
     tagName: 'count-down',

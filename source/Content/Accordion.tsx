@@ -1,6 +1,6 @@
 import { component, mixin, watch, on, createCell } from 'web-cell';
 import classNames from 'classnames';
-import { uniqueID } from './utility';
+import { uniqueID } from '../utility';
 
 interface AccordionItem {
     title: any;

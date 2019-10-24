@@ -1,6 +1,7 @@
 import { createCell, component, mixin, watch } from 'web-cell';
 import classNames from 'classnames';
 
+import { Theme } from './constant';
 import { uniqueID } from './utility';
 
 interface NavLinkProps {
@@ -22,8 +23,8 @@ export function NavLink({ title, href, active }: NavLinkProps) {
 
 interface NavBarProps {
     title: string;
-    theme?: string;
-    background?: string;
+    theme?: keyof typeof Theme;
+    background?: keyof typeof Theme;
     expand?: string;
     fixed?: string;
     menu?: NavLinkProps[];

@@ -2,7 +2,7 @@ import './DOM-polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { AccordionList } from '../source';
+import { AccordionList } from '../source/Content';
 
 describe('Accordion', () => {
     it('should render Card list', () => {

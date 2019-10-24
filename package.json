@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.9.2",
+    "version": "0.10.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
