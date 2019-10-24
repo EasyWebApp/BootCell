@@ -22,6 +22,12 @@
 
 9. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
 
+## Utilities
+
+1. [ColorNames](https://web-cell.dev/BootCell/enums/colornames.html)
+2. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
+3. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
+
 [1]: https://www.webcomponents.org/
 [2]: https://github.com/EasyWebApp/WebCell/tree/v2
 [3]: https://getbootstrap.com/
