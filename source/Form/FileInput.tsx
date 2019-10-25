@@ -41,7 +41,7 @@ export class FileInput extends mixin() {
 
         return (
             <div
-                className={className(style.container, value && style.active)}
+                className={className(style.fileBox, value && style.active)}
                 style={{ backgroundImage: `url(${value})` }}
                 title={file}
             >

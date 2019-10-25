@@ -1,39 +1,47 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { Status, Theme, Size } from '../constant';
 
-interface ButtonProps {
+import { HTMLHyperLinkProps, Status, Theme, Size } from '../utility';
+
+interface ButtonProps extends HTMLHyperLinkProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
-    href?: string | URL;
     disabled?: boolean;
-    tabIndex?: number;
     kind?: (keyof typeof Status) | (keyof typeof Theme) | 'link';
     outline?: boolean;
     size?: keyof typeof Size;
+    block?: boolean;
     children?: any[];
 }
 
 export function Button({
+    className,
     type = 'button',
-    href,
     disabled,
+    href,
+    target,
     tabIndex,
     kind = 'primary',
     outline,
     size,
-    children
+    block,
+    children,
+    ...rest
 }: ButtonProps) {
     const Class = `btn${outline ? '-outline' : ''}-${kind}`;
 
     return href ? (
         <a
+            {...rest}
             className={classNames(
                 'btn',
                 Class,
                 size && `btn-${size}`,
-                disabled && 'disabled'
+                block && 'btn-block',
+                disabled && 'disabled',
+                className
             )}
             href={href}
+            target={target}
             tabIndex={disabled ? -1 : tabIndex}
             role="button"
             aria-disabled={Boolean(disabled) + ''}
@@ -42,9 +50,16 @@ export function Button({
         </a>
     ) : (
         <button
+            {...rest}
             type={type}
-            className={classNames('btn', Class, size && `btn-${size}`)}
-            disabled
+            className={classNames(
+                'btn',
+                Class,
+                size && `btn-${size}`,
+                block && 'btn-block',
+                className
+            )}
+            disabled={disabled}
             tabIndex={tabIndex}
         >
             {children}

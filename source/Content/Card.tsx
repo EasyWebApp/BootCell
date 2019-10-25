@@ -1,9 +1,8 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
+import { HTMLProps } from '../utility';
 
-interface CardProps {
-    id?: string;
-    className?: string;
+interface CardProps extends HTMLProps {
     title: string;
     text?: string;
     image?: any;

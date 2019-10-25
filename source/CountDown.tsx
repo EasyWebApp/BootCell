@@ -1,6 +1,6 @@
 import { component, mixin, attribute, watch, createCell } from 'web-cell';
 
-import { Status } from './constant';
+import { Status } from './utility';
 import style from './CountDown.less';
 
 interface TimeUnit {

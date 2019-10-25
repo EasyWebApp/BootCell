@@ -1,8 +1,7 @@
 import { createCell, component, mixin, watch } from 'web-cell';
 import classNames from 'classnames';
 
-import { Theme } from './constant';
-import { uniqueID } from './utility';
+import { Theme, uniqueID } from '../utility';
 
 interface NavLinkProps {
     title: string;
