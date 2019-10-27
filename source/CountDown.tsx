@@ -71,18 +71,23 @@ export class CountDown extends mixin() {
 
     private timer?: any;
 
+    tick = () => {
+        this.rest = (this.endTime as number) - Date.now();
+
+        if (this.rest > 0) {
+            if (!this.timer) this.timer = setInterval(this.tick, 1000);
+        } else if (this.timer) clearInterval(this.timer);
+    };
+
     connectedCallback() {
         if (typeof this.endTime !== 'number')
             this.endTime = new Date(this.endTime).valueOf();
 
-        this.timer = setInterval(
-            () => (this.rest = (this.endTime as number) - Date.now()),
-            1000
-        );
+        this.tick();
     }
 
     disconnectedCallback() {
-        setInterval(this.timer);
+        clearInterval(this.timer);
     }
 
     render() {

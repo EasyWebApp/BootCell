@@ -3,6 +3,7 @@ export interface HTMLProps {
     className?: string;
     title?: string;
     tabIndex?: number;
+    onClick?: (event: MouseEvent) => any;
     [key: string]: any;
 }
 

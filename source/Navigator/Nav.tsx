@@ -9,7 +9,7 @@ interface NavLink extends HTMLHyperLinkProps {
     disabled?: boolean;
 }
 
-interface NavProps extends HTMLProps {
+export interface NavProps extends HTMLProps {
     list: NavLink[];
     direction?: 'row' | 'column';
     align?: 'start' | 'center' | 'end';
@@ -23,10 +23,13 @@ export function Nav({
     align,
     itemMode,
     itemWidth,
-    list
+    list,
+    children,
+    ...rest
 }: NavProps) {
     return (
         <nav
+            {...rest}
             className={classNames(
                 'nav',
                 direction && `flex-${direction}`,
