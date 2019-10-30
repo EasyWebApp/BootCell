@@ -8,7 +8,7 @@ interface ButtonProps extends HTMLHyperLinkProps {
     disabled?: boolean;
     kind?: (keyof typeof Status) | (keyof typeof Theme) | 'link';
     outline?: boolean;
-    size?: keyof typeof Size;
+    size?: 'sm' | 'lg';
     block?: boolean;
     children?: any[];
 }

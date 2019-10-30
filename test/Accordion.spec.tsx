@@ -16,11 +16,11 @@ describe('Accordion', () => {
             }),
             <main>
                 <section className="card">
-                    <header class="card-header" id="random_h_0">
-                        <h2 class="mb-0">
+                    <header className="card-header" id="random_h_0">
+                        <h2 className="mb-0">
                             <button
                                 type="button"
-                                class="btn btn-link"
+                                className="btn btn-link"
                                 data-index="0"
                                 aria-expanded="true"
                                 aria-controls="random_b_0"
@@ -31,18 +31,18 @@ describe('Accordion', () => {
                     </header>
                     <div
                         id="random_b_0"
-                        class="collapse show"
+                        className="collapse show"
                         aria-labelledby={'random_h_0'}
                     >
-                        <div class="card-body">test</div>
+                        <div className="card-body">test</div>
                     </div>
                 </section>
                 <section className="card">
-                    <header class="card-header" id="random_h_1">
-                        <h2 class="mb-0">
+                    <header className="card-header" id="random_h_1">
+                        <h2 className="mb-0">
                             <button
                                 type="button"
-                                class="btn btn-link collapsed"
+                                className="btn btn-link collapsed"
                                 data-index="1"
                                 aria-expanded="false"
                                 aria-controls="random_b_1"
@@ -53,10 +53,10 @@ describe('Accordion', () => {
                     </header>
                     <div
                         id="random_b_1"
-                        class="collapse"
+                        className="collapse"
                         aria-labelledby={'random_h_1'}
                     >
-                        <div class="card-body">example</div>
+                        <div className="card-body">example</div>
                     </div>
                 </section>
             </main>

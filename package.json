@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.12.1",
+    "version": "0.13.1",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -29,7 +29,7 @@
     },
     "devDependencies": {
         "@types/classnames": "^2.2.9",
-        "@types/jest": "^24.0.20",
+        "@types/jest": "^24.0.21",
         "classnames": "^2.2.6",
         "happy-dom": "^0.4.11",
         "husky": "^3.0.9",

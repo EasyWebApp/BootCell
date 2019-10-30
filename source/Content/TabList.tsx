@@ -1,12 +1,13 @@
 import { component, mixin, watch, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { uniqueID } from '../utility';
+
 import { NavProps, Nav } from '../Navigator';
+import { ListGroup } from './ListGroup';
 
 interface TabItem {
     title: any;
     content?: any;
-    active?: boolean;
     disabled?: boolean;
 }
 
@@ -18,7 +19,7 @@ export class TabList extends mixin() {
     UID = uniqueID();
 
     @watch
-    mode: NavProps['itemMode'] = 'tabs';
+    mode: NavProps['itemMode'] | 'list' = 'tabs';
 
     @watch
     direction: NavProps['direction'] = 'row';
@@ -32,6 +33,9 @@ export class TabList extends mixin() {
     @watch
     list: TabItem[] = [];
 
+    @watch
+    activeIndex = 0;
+
     handleTabChange = (event: MouseEvent) => {
         const {
             dataset: { index }
@@ -39,51 +43,79 @@ export class TabList extends mixin() {
 
         event.preventDefault(), event.stopPropagation();
 
-        this.list = this.list.map(({ title, content, disabled }, i) => ({
-            title,
-            content,
-            disabled,
-            active: i === +index
-        }));
+        this.activeIndex = +index;
     };
 
+    renderHeader() {
+        const {
+            mode,
+            direction,
+            tabAlign,
+            tabWidth,
+            list,
+            activeIndex,
+            UID
+        } = this;
+
+        const tabList = list.map(({ title, disabled }, index) => {
+            const bID = `${UID}_b_${index}`,
+                active = Boolean(!disabled && index === activeIndex);
+
+            return {
+                title,
+                disabled,
+                id: `${UID}_h_${index}`,
+                href: '#' + bID,
+                role: 'tab',
+                'aria-controls': bID,
+                'aria-selected': active + '',
+                'data-index': index + ''
+            };
+        });
+
+        return mode === 'list' ? (
+            <ListGroup
+                list={tabList}
+                activeIndex={activeIndex}
+                horizontal={direction === 'row'}
+                role="tablist"
+                onClick={this.handleTabChange}
+            />
+        ) : (
+            <Nav
+                direction={direction}
+                align={tabAlign}
+                itemMode={mode}
+                itemWidth={tabWidth}
+                list={tabList}
+                activeIndex={activeIndex}
+                role="tablist"
+                aria-orientation={
+                    direction === 'row' ? 'horizontal' : 'vertical'
+                }
+                onClick={this.handleTabChange}
+            />
+        );
+    }
+
     render() {
-        const { UID, mode, direction, tabAlign, tabWidth, list } = this;
+        const { UID, direction, list, activeIndex } = this;
 
         return (
-            <main>
-                <Nav
-                    direction={direction}
-                    align={tabAlign}
-                    itemMode={mode}
-                    itemWidth={tabWidth}
-                    list={list.map(({ title, active, disabled }, index) => {
-                        active = Boolean(!disabled && active);
-
-                        const bID = `${UID}_b_${index}`;
-
-                        return {
-                            title,
-                            active,
-                            disabled,
-                            id: `${UID}_h_${index}`,
-                            href: '#' + bID,
-                            role: 'tab',
-                            'aria-controls': bID,
-                            'aria-selected': active + '',
-                            'data-index': index + ''
-                        };
-                    })}
-                    onClick={this.handleTabChange}
-                />
+            <main
+                className={`d-flex ${
+                    direction === 'row' ? 'flex-column' : 'flex-row'
+                }`}
+            >
+                {this.renderHeader()}
 
                 <div className="tab-content">
-                    {list.map(({ active, content }, index) => (
+                    {list.map(({ content }, index) => (
                         <section
                             className={classNames(
                                 'tab-pane',
                                 'fade',
-                                active && 'active show'
+                                index === activeIndex && 'active show'
                             )}
                             id={`${UID}_b_${index}`}
                             role="tabpanel"

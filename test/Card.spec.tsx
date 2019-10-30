@@ -21,11 +21,11 @@ describe('Card', () => {
         assertLooksLike(
             <Card title="Test" image="test.png" direction="horizontal" />,
             <div className="card justify-content-center">
-                <div class="row no-gutters align-items-center">
-                    <div class="col-sm-4">
+                <div className="row no-gutters align-items-center">
+                    <div className="col-sm-4">
                         <img className="card-img-top" src="test.png" />
                     </div>
-                    <div class="col-sm-8">
+                    <div className="col-sm-8">
                         <div className="card-body">
                             <h5 className="card-title">Test</h5>
                         </div>

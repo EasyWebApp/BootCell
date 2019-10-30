@@ -45,11 +45,11 @@ export class AccordionList extends mixin<AccordionProps>() {
 
                     return (
                         <section className="card">
-                            <header class="card-header" id={hID}>
-                                <h2 class="mb-0">
+                            <header className="card-header" id={hID}>
+                                <h2 className="mb-0">
                                     <button
                                         type="button"
-                                        class={classNames(
+                                        className={classNames(
                                             'btn',
                                             'btn-link',
                                             !active && 'collapsed'
@@ -64,10 +64,13 @@ export class AccordionList extends mixin<AccordionProps>() {
                             </header>
                             <div
                                 id={bID}
-                                class={classNames('collapse', active && 'show')}
+                                className={classNames(
+                                    'collapse',
+                                    active && 'show'
+                                )}
                                 aria-labelledby={hID}
                             >
-                                <div class="card-body">{content}</div>
+                                <div className="card-body">{content}</div>
                             </div>
                         </section>
                     );

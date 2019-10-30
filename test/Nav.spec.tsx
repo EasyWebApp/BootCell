@@ -9,16 +9,19 @@ describe('Nav', () => {
         assertLooksLike(
             <Nav
                 list={[
-                    { title: 'Test', href: '#test', active: true },
+                    { title: 'Test', href: '#test' },
                     { title: 'Example', href: '#example', disabled: true }
                 ]}
             />,
             <nav className="nav">
-                <a className="nav-item nav-link active" href="#test">
+                <a
+                    className="nav-item nav-link text-nowrap active"
+                    href="#test"
+                >
                     Test
                 </a>
                 <a
-                    className="nav-item nav-link disabled"
+                    className="nav-item nav-link text-nowrap disabled"
                     href="#example"
                     tabIndex={-1}
                     aria-disabled="true"

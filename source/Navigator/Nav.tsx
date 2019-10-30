@@ -5,12 +5,12 @@ import { HTMLHyperLinkProps, HTMLProps } from '../utility';
 interface NavLink extends HTMLHyperLinkProps {
     title: string;
     href: string | URL;
-    active?: boolean;
     disabled?: boolean;
 }
 
 export interface NavProps extends HTMLProps {
     list: NavLink[];
+    activeIndex?: number;
     direction?: 'row' | 'column';
     align?: 'start' | 'center' | 'end';
     itemMode?: 'tabs' | 'pills';
@@ -24,6 +24,7 @@ export function Nav({
     itemMode,
     itemWidth,
     list,
+    activeIndex = 0,
     children,
     ...rest
 }: NavProps) {
@@ -39,13 +40,16 @@ export function Nav({
                 className
             )}
         >
-            {list.map(({ title, tabIndex, active, disabled, ...rest }) => (
+            {list.map(({ title, tabIndex, disabled, ...rest }, index) => (
                 <a
                     {...rest}
                     className={classNames(
                         'nav-item',
                         'nav-link',
-                        disabled ? 'disabled' : active && 'active'
+                        'text-nowrap',
+                        disabled
+                            ? 'disabled'
+                            : index === activeIndex && 'active'
                     )}
                     tabIndex={disabled ? -1 : tabIndex}
                     aria-disabled={Boolean(disabled) + ''}

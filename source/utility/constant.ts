@@ -22,7 +22,9 @@ export enum Color {
 export type ColorNames = Status | Theme | Color;
 
 export enum Size {
+    xl = 'xl',
     lg = 'lg',
     md = 'md',
-    sm = 'sm'
+    sm = 'sm',
+    xs = 'xs'
 }
