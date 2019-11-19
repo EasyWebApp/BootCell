@@ -61,7 +61,7 @@ export class CountDown extends mixin() {
 
                 rest -= value * scale;
 
-                list.push({ value, label });
+                list.push({ Math.max(value, 0), label });
 
                 return list;
             },
