@@ -7,7 +7,7 @@ interface CardProps extends HTMLProps {
     text?: string;
     image?: any;
     direction?: 'horizontal' | 'vertical';
-    children?: any;
+    defaultSlot?: any[];
 }
 
 export function Card({
@@ -17,7 +17,7 @@ export function Card({
     text,
     image,
     direction = 'vertical',
-    children
+    defaultSlot
 }: CardProps) {
     const vertical = direction === 'vertical',
         header =
@@ -30,7 +30,7 @@ export function Card({
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 {text && <p className="card-text">{text}</p>}
-                {children}
+                {defaultSlot}
             </div>
         );
 

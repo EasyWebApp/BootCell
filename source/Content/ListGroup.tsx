@@ -21,7 +21,7 @@ export function ListGroup({
     activeIndex = 0,
     flush,
     horizontal,
-    children,
+    defaultSlot,
     ...rest
 }: ListGroupProps) {
     var modeClass = '';

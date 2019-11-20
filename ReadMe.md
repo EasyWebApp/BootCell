@@ -19,14 +19,16 @@
 7. [TabList](https://web-cell.dev/BootCell/classes/tablist.html)
 8. [CarouselView](https://web-cell.dev/BootCell/classes/carouselview.html)
 
-9. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
-10. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
+9. [AlertBox](https://web-cell.dev/BootCell/classes/alertbox.html)
 
-11. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
-12. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-13. [FileInput](https://web-cell.dev/BootCell/classes/fileinput.html)
+10. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
+11. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
 
-14. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
+12. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
+13. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+14. [FileInput](https://web-cell.dev/BootCell/classes/fileinput.html)
+
+15. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
 
 ## Constants
 

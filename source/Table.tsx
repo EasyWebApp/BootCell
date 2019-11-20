@@ -8,7 +8,7 @@ interface TableProps {
     center?: boolean;
     striped?: boolean;
     hover?: boolean;
-    children?: any[];
+    defaultSlot?: any[];
 }
 
 export function Table({
@@ -16,7 +16,7 @@ export function Table({
     center,
     striped,
     hover,
-    children
+    defaultSlot
 }: TableProps) {
     return (
         <main
@@ -34,7 +34,7 @@ export function Table({
                     center && style['cell-center']
                 )}
             >
-                {children}
+                {defaultSlot}
             </table>
         </main>
     );

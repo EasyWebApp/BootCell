@@ -1,5 +1,4 @@
 import { createCell } from 'web-cell';
-
 import { uniqueID } from '../utility';
 
 interface BaseFieldProps {
@@ -9,20 +8,20 @@ interface BaseFieldProps {
     required?: boolean;
     label?: string;
     placeholder?: string;
-    [key: string]: string | boolean;
+    [key: string]: any;
 }
 
 interface FieldProps extends BaseFieldProps {
     is?: 'input' | 'select' | 'textarea';
     type?: string;
-    children?: any;
+    defaultSlot?: any[];
 }
 
 export function FormField({
     is,
     type = 'text',
     label,
-    children,
+    defaultSlot,
     ...rest
 }: FieldProps = {}) {
     const UID = uniqueID();
@@ -33,7 +32,7 @@ export function FormField({
         ),
         select: (
             <select className="form-control" id={UID} {...rest}>
-                {children}
+                {defaultSlot}
             </select>
         ),
         textarea: <textarea className="form-control" id={UID} {...rest} />
@@ -43,7 +42,7 @@ export function FormField({
         <section className="form-group">
             <label htmlFor={UID}>{label || rest.name}</label>
 
-            {!is && children[0] ? children : field[is || 'input']}
+            {!is && defaultSlot[0] ? defaultSlot : field[is || 'input']}
         </section>
     );
 }

@@ -25,7 +25,7 @@ export function Nav({
     itemWidth,
     list,
     activeIndex = 0,
-    children,
+    defaultSlot,
     ...rest
 }: NavProps) {
     return (

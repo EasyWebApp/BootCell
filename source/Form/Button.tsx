@@ -1,16 +1,15 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
-
 import { HTMLHyperLinkProps, Status, Theme, Size } from '../utility';
 
 interface ButtonProps extends HTMLHyperLinkProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
     disabled?: boolean;
-    kind?: (keyof typeof Status) | (keyof typeof Theme) | 'link';
+    kind?: keyof typeof Status | keyof typeof Theme | 'link';
     outline?: boolean;
     size?: 'sm' | 'lg';
     block?: boolean;
-    children?: any[];
+    defaultSlot?: any[];
 }
 
 export function Button({
@@ -24,7 +23,7 @@ export function Button({
     outline,
     size,
     block,
-    children,
+    defaultSlot,
     ...rest
 }: ButtonProps) {
     const Class = `btn${outline ? '-outline' : ''}-${kind}`;
@@ -46,7 +45,7 @@ export function Button({
             role="button"
             aria-disabled={Boolean(disabled) + ''}
         >
-            {children}
+            {defaultSlot}
         </a>
     ) : (
         <button
@@ -62,7 +61,7 @@ export function Button({
             disabled={disabled}
             tabIndex={tabIndex}
         >
-            {children}
+            {defaultSlot}
         </button>
     );
 }

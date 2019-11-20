@@ -50,31 +50,30 @@ export class CountDown extends mixin() {
     get timeSections() {
         var { rest } = this;
 
-        return this.units.reduce(
-            (list, { label }, index, units) => {
-                const scale = units
-                    .slice(index)
-                    .map(({ scale }) => scale)
-                    .reduce((sum: number, scale: number) => sum * scale, 1);
+        return this.units.reduce((list, { label }, index, units) => {
+            const scale = units
+                .slice(index)
+                .map(({ scale }) => scale)
+                .reduce((sum: number, scale: number) => sum * scale, 1);
 
-                const value = ~~(rest / scale);
+            const value = ~~(rest / scale);
 
-                rest -= value * scale;
+            rest -= value * scale;
 
-                list.push({ value, label });
+            list.push({ value, label });
 
-                return list;
-            },
-            [] as TimeSection[]
-        );
+            return list;
+        }, [] as TimeSection[]);
     }
 
     private timer?: any;
 
     tick = () => {
-        this.rest = (this.endTime as number) - Date.now();
+        const rest = (this.endTime as number) - Date.now();
 
-        if (this.rest > 0) {
+        if (rest > 0) {
+            this.rest = rest;
+
             if (!this.timer) this.timer = setInterval(this.tick, 1000);
         } else if (this.timer) clearInterval(this.timer);
     };

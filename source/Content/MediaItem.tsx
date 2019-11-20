@@ -6,7 +6,7 @@ interface MediaItemProps extends HTMLProps {
     image: string | URL;
     imageRow?: 'start' | 'center' | 'end';
     imageColumn?: 'left' | 'right';
-    children?: any[];
+    defaultSlot?: any[];
 }
 
 export function MediaItem({
@@ -15,7 +15,7 @@ export function MediaItem({
     image,
     imageRow = 'start',
     imageColumn = 'left',
-    children
+    defaultSlot
 }: MediaItemProps) {
     return (
         <section className={`media ${className}`}>
@@ -28,7 +28,7 @@ export function MediaItem({
             ) : null}
             <div className="media-body">
                 <h5 className="mt-0">{title}</h5>
-                {children}
+                {defaultSlot}
             </div>
             {imageColumn === 'right' ? (
                 <img
