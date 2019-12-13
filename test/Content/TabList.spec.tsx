@@ -1,8 +1,8 @@
-import './DOM-polyfill';
+import '../DOM-polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { TabList } from '../source';
+import { TabList } from '../../source';
 
 describe('Tab List', () => {
     it('should render a Tab List with "tabs" style', () => {

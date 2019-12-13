@@ -3,6 +3,7 @@ import { Window } from 'happy-dom';
 const window = new Window();
 
 for (const key of [
+    'self',
     'document',
     'HTMLElement',
     'HTMLUnknownElement',

@@ -1,20 +1,22 @@
-import './DOM-polyfill';
-import { createCell } from 'web-cell';
+import '../DOM-polyfill';
+import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { AccordionList } from '../source/Content';
+import { AccordionList } from '../../source/Content';
 
 describe('Accordion', () => {
     it('should render Card list', () => {
         assertLooksLike(
-            AccordionList.prototype.render.call({
-                UID: 'random',
-                list: [
-                    { title: 'Test', content: 'test', active: true },
-                    { title: 'Example', content: 'example' }
-                ]
-            }),
-            <main>
+            AccordionList.prototype.render.call(
+                { UID: 'random' },
+                {
+                    list: [
+                        { title: 'Test', content: 'test', active: true },
+                        { title: 'Example', content: 'example' }
+                    ]
+                }
+            ),
+            <Fragment>
                 <section className="card">
                     <header className="card-header" id="random_h_0">
                         <h2 className="mb-0">
@@ -59,7 +61,7 @@ describe('Accordion', () => {
                         <div className="card-body">example</div>
                     </div>
                 </section>
-            </main>
+            </Fragment>
         );
     });
 });

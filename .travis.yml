@@ -13,10 +13,11 @@ install:
     - npm install
 script:
     - npm run build
+    - echo '' > docs/.nojekyll
 deploy:
     provider: pages
     on:
         branch: master
     skip_cleanup: true
     local_dir: ${FOLDER}
-    github_token: ${TOKEN}
+    token: ${TOKEN}

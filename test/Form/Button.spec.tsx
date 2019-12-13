@@ -1,8 +1,8 @@
-import './DOM-polyfill';
+import '../DOM-polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { Button } from '../source/Form';
+import { Button } from '../../source/Form';
 
 describe('Button', () => {
     it('should render a Button with outline', () => {

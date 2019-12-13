@@ -1,4 +1,4 @@
-import { component, mixin, watch, createCell } from 'web-cell';
+import { component, mixin, watch, attribute, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { uniqueID } from '../utility';
 
@@ -11,22 +11,35 @@ interface TabItem {
     disabled?: boolean;
 }
 
+export interface TabListProps {
+    mode?: NavProps['itemMode'] | 'list';
+    direction?: NavProps['direction'];
+    tabAlign?: NavProps['align'];
+    tabWidth?: NavProps['itemWidth'];
+    list?: TabItem[];
+    activeIndex?: number;
+}
+
 @component({
     tagName: 'tab-list',
     renderTarget: 'children'
 })
-export class TabList extends mixin() {
+export class TabList extends mixin<TabListProps>() {
     UID = uniqueID();
 
+    @attribute
     @watch
-    mode: NavProps['itemMode'] | 'list' = 'tabs';
+    mode: TabListProps['mode'] = 'tabs';
 
+    @attribute
     @watch
     direction: NavProps['direction'] = 'row';
 
+    @attribute
     @watch
     tabAlign: NavProps['align'] = 'start';
 
+    @attribute
     @watch
     tabWidth: NavProps['itemWidth'];
 

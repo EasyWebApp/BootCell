@@ -1,4 +1,4 @@
-import { component, mixin, watch, on, createCell } from 'web-cell';
+import { component, mixin, watch, attribute, on, createCell } from 'web-cell';
 import classNames from 'classnames';
 
 import { uniqueID } from '../utility';
@@ -9,16 +9,25 @@ interface CarouselItem {
     detail?: string;
 }
 
+export interface CarouselProps {
+    mode?: 'slide' | 'fade';
+    interval?: number;
+    activeIndex?: number;
+    list?: CarouselItem[];
+}
+
 @component({
     tagName: 'carousel-view',
     renderTarget: 'children'
 })
-export class CarouselView extends mixin() {
+export class CarouselView extends mixin<CarouselProps>() {
     UID = uniqueID();
 
+    @attribute
     @watch
-    mode: 'slide' | 'fade' = 'slide';
+    mode: CarouselProps['mode'] = 'slide';
 
+    @attribute
     @watch
     interval = 0;
 
@@ -62,8 +71,8 @@ export class CarouselView extends mixin() {
         this.turnTo(+index);
     }
 
-    render() {
-        const { mode, UID, activeIndex, list } = this;
+    render({ mode, activeIndex, list }: CarouselProps) {
+        const { UID } = this;
 
         return (
             <div

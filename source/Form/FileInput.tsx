@@ -3,11 +3,19 @@ import className from 'classnames';
 
 import style from './FileInput.less';
 
+export interface FileInputProps {
+    name?: string;
+    required?: boolean;
+    accept?: string;
+    value?: string;
+    fileName?: string;
+}
+
 @component({
     tagName: 'file-input',
     renderTarget: 'children'
 })
-export class FileInput extends mixin() {
+export class FileInput extends mixin<FileInputProps>() {
     @attribute
     @watch
     name = '';
@@ -24,26 +32,24 @@ export class FileInput extends mixin() {
     value = '';
 
     @watch
-    file = '';
+    fileName = '';
 
     handleChange = (event: Event) => {
         const { files } = event.target as HTMLInputElement;
 
         if (files && files[0])
             (this.value = URL.createObjectURL(files[0])),
-                (this.file = files[0].name);
+                (this.fileName = files[0].name);
     };
 
-    render() {
-        const { name, required, accept, value, file } = this;
-
+    render({ name, required, accept, value, fileName }: FileInputProps) {
         const empty = !value || value.startsWith('blob:');
 
         return (
             <div
                 className={className(style.fileBox, value && style.active)}
-                style={{ backgroundImage: `url(${value})` }}
-                title={file}
+                style={{ backgroundImage: value && `url(${value})` }}
+                title={fileName}
             >
                 {empty ? null : (
                     <input type="hidden" name={name} value={value} />

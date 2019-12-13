@@ -1,4 +1,12 @@
-import { createCell, component, mixin, watch } from 'web-cell';
+import {
+    createCell,
+    VNodeChildElement,
+    component,
+    mixin,
+    watch,
+    attribute,
+    Fragment
+} from 'web-cell';
 import classNames from 'classnames';
 
 import { Theme, uniqueID } from '../utility';
@@ -20,13 +28,15 @@ export function NavLink({ title, href, active }: NavLinkProps) {
     );
 }
 
-interface NavBarProps {
-    title: string;
+export interface NavBarProps {
+    title: string | VNodeChildElement;
     theme?: keyof typeof Theme;
     background?: keyof typeof Theme;
+    narrow?: boolean;
     expand?: string;
     fixed?: string;
     menu?: NavLinkProps[];
+    open?: boolean;
 }
 
 @component({
@@ -34,18 +44,29 @@ interface NavBarProps {
     renderTarget: 'children'
 })
 export class NavBar extends mixin<NavBarProps>() {
+    UID = uniqueID();
+
+    @attribute
     @watch
     title = '';
 
+    @attribute
     @watch
     theme = 'dark';
 
+    @attribute
     @watch
     background = 'dark';
 
+    @attribute
+    @watch
+    narrow = false;
+
+    @attribute
     @watch
     expand = 'md';
 
+    @attribute
     @watch
     fixed = 'top';
 
@@ -55,27 +76,26 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     open = false;
 
-    render() {
-        const { title, theme, background, expand, fixed, menu, open } = this,
-            UID = uniqueID();
+    render({
+        title,
+        theme,
+        background,
+        narrow,
+        expand,
+        fixed,
+        menu,
+        open
+    }: NavBarProps) {
+        const { UID } = this;
 
-        return (
-            <header
-                className={classNames(
-                    'navbar',
-                    `navbar-${theme}`,
-                    `bg-${background}`,
-                    'box-shadow',
-                    `navbar-expand-${expand}`,
-                    `fixed-${fixed}`
-                )}
-            >
+        const content = (
+            <Fragment>
                 <a
                     target="_top"
                     href="."
                     className="navbar-brand d-flex align-items-center"
                 >
-                    <strong>{title}</strong>
+                    {title}
                 </a>
                 <button
                     type="button"
@@ -88,7 +108,7 @@ export class NavBar extends mixin<NavBarProps>() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <main
+                <div
                     className={classNames(
                         'collapse',
                         'navbar-collapse',
@@ -104,7 +124,22 @@ export class NavBar extends mixin<NavBarProps>() {
                             <NavLink {...item} />
                         ))}
                     </ul>
-                </main>
+                </div>
+            </Fragment>
+        );
+
+        return (
+            <header
+                className={classNames(
+                    'navbar',
+                    `navbar-${theme}`,
+                    `bg-${background}`,
+                    'box-shadow',
+                    `navbar-expand-${expand}`,
+                    `fixed-${fixed}`
+                )}
+            >
+                {narrow ? <div className="container">{content}</div> : content}
             </header>
         );
     }

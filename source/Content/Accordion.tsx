@@ -1,4 +1,4 @@
-import { component, mixin, watch, on, createCell } from 'web-cell';
+import { component, mixin, watch, on, createCell, Fragment } from 'web-cell';
 import classNames from 'classnames';
 import { HTMLProps, uniqueID } from '../utility';
 
@@ -34,11 +34,11 @@ export class AccordionList extends mixin<AccordionProps>() {
         }));
     }
 
-    render() {
-        const { UID, list } = this;
+    render({ list }: AccordionProps) {
+        const { UID } = this;
 
         return (
-            <main>
+            <Fragment>
                 {list.map(({ title, content, active }, index) => {
                     const hID = `${UID}_h_${index}`,
                         bID = `${UID}_b_${index}`;
@@ -75,7 +75,7 @@ export class AccordionList extends mixin<AccordionProps>() {
                         </section>
                     );
                 })}
-            </main>
+            </Fragment>
         );
     }
 }
