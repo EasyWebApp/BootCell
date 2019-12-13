@@ -3,16 +3,21 @@ import classNames from 'classnames';
 
 import { Status, Theme } from '../utility';
 
-type AlertType = keyof typeof Status | keyof typeof Theme;
+export interface AlertProps {
+    type?: keyof typeof Status | keyof typeof Theme;
+    title?: string;
+    closable?: boolean;
+    hidden?: boolean;
+}
 
 @component({
     tagName: 'alert-box',
     renderTarget: 'children'
 })
-export class AlertBox extends mixin() {
+export class AlertBox extends mixin<AlertProps>() {
     @attribute
     @watch
-    type: AlertType = 'primary';
+    type: AlertProps['type'] = 'primary';
 
     @attribute
     @watch

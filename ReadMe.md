@@ -9,26 +9,36 @@
 
 ## Components
 
-1. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-2. [Pagination](https://web-cell.dev/BootCell/classes/pagination.html)
+### Content
 
-3. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
+1. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
+2. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
+3. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 4. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
-5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-6. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-7. [TabList](https://web-cell.dev/BootCell/classes/tablist.html)
-8. [CarouselView](https://web-cell.dev/BootCell/classes/carouselview.html)
+5. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+6. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+7. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
-9. [AlertBox](https://web-cell.dev/BootCell/classes/alertbox.html)
+### Navigator
 
-10. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
-11. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
+1. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
+2. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
+3. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
 
-12. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
-13. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-14. [FileInput](https://web-cell.dev/BootCell/classes/fileinput.html)
+### Prompt
 
-15. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
+1. [Spinner](https://web-cell.dev/BootCell/interfaces/spinnerprops.html)
+2. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
+
+### Form
+
+1. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
+2. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+3. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+
+### Advanced
+
+1. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
 
 ## Constants
 

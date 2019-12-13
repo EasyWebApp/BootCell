@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import style from './Table.less';
 
-interface TableProps {
+export interface TableProps {
     theme?: string;
     center?: boolean;
     striped?: boolean;

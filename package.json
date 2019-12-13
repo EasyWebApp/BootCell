@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.15.2",
+    "version": "0.16.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -47,7 +47,7 @@
     },
     "scripts": {
         "lint": "lint-staged",
-        "test": "lint-staged  &&  jest",
+        "test": "lint-staged  &&  jest --forceExit",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
         "build": "npm test  &&  npm run pack-docs",
         "help": "npm run pack-docs  &&  open-cli docs/index.html",

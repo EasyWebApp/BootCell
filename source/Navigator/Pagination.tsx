@@ -1,14 +1,21 @@
-import { createCell, component, mixin, watch, on } from 'web-cell';
+import { createCell, component, mixin, watch, attribute, on } from 'web-cell';
 import classNames from 'classnames';
+
+export interface PaginationProps {
+    current?: number;
+    total?: number;
+}
 
 @component({
     tagName: 'page-box',
     renderTarget: 'children'
 })
-export class Pagination extends mixin() {
+export class Pagination extends mixin<PaginationProps>() {
+    @attribute
     @watch
     current = 1;
 
+    @attribute
     @watch
     total = 1;
 

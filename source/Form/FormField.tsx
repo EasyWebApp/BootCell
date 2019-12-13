@@ -11,7 +11,7 @@ interface BaseFieldProps {
     [key: string]: any;
 }
 
-interface FieldProps extends BaseFieldProps {
+export interface FieldProps extends BaseFieldProps {
     is?: 'input' | 'select' | 'textarea';
     type?: string;
     defaultSlot?: any[];

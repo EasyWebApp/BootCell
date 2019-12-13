@@ -8,7 +8,7 @@ interface AccordionItem {
     active?: boolean;
 }
 
-interface AccordionProps extends HTMLProps {
+export interface AccordionProps extends HTMLProps {
     list: AccordionItem[];
 }
 

@@ -15,14 +15,18 @@ interface TimeSection {
 
 const colors = Object.keys(Status).slice(0, 4);
 
+export interface CountDownProps {
+    endTime?: string | Date | number;
+}
+
 @component({
     tagName: 'count-down',
     renderTarget: 'children'
 })
-export class CountDown extends mixin() {
+export class CountDown extends mixin<CountDownProps>() {
     @attribute
     @watch
-    endTime: string | Date | number = Date.now();
+    endTime: CountDownProps['endTime'] = Date.now();
 
     @watch
     rest = 0;

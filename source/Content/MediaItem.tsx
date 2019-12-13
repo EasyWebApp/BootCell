@@ -1,7 +1,7 @@
 import { createCell } from 'web-cell';
 import { HTMLProps } from '../utility';
 
-interface MediaItemProps extends HTMLProps {
+export interface MediaItemProps extends HTMLProps {
     title: string;
     image: string | URL;
     imageRow?: 'start' | 'center' | 'end';

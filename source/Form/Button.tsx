@@ -1,8 +1,8 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, Status, Theme, Size } from '../utility';
+import { HTMLHyperLinkProps, Status, Theme } from '../utility';
 
-interface ButtonProps extends HTMLHyperLinkProps {
+export interface ButtonProps extends HTMLHyperLinkProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
     disabled?: boolean;
     kind?: keyof typeof Status | keyof typeof Theme | 'link';

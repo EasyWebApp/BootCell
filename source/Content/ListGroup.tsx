@@ -8,7 +8,7 @@ interface ListItem extends HTMLHyperLinkProps {
     disabled?: boolean;
 }
 
-interface ListGroupProps extends HTMLProps {
+export interface ListGroupProps extends HTMLProps {
     list: ListItem[];
     activeIndex?: number;
     flush?: boolean;
