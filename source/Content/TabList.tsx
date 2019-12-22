@@ -20,6 +20,14 @@ export interface TabListProps {
     activeIndex?: number;
 }
 
+const TabTransition = {
+    keyframes: [{ opacity: 1 }, { opacity: 0 }],
+    options: {
+        duration: 250,
+        easing: 'linear'
+    }
+};
+
 @component({
     tagName: 'tab-list',
     renderTarget: 'children'
@@ -49,14 +57,29 @@ export class TabList extends mixin<TabListProps>() {
     @watch
     activeIndex = 0;
 
-    handleTabChange = (event: MouseEvent) => {
+    private tabBody: HTMLElement;
+
+    handleTabChange = async (event: MouseEvent) => {
+        event.preventDefault(), event.stopPropagation();
+
+        if (!this.tabBody) return;
+
+        const keyframes = [...TabTransition.keyframes];
+
+        await this.tabBody.animate(keyframes, TabTransition.options).finished;
+
+        this.tabBody.style.opacity = '0';
+
         const {
             dataset: { index }
         } = event.target as HTMLElement;
 
-        event.preventDefault(), event.stopPropagation();
+        await this.setProps({ activeIndex: +index });
 
-        this.activeIndex = +index;
+        await this.tabBody.animate(keyframes.reverse(), TabTransition.options)
+            .finished;
+
+        this.tabBody.style.opacity = '1';
     };
 
     renderHeader() {
@@ -123,20 +146,16 @@ export class TabList extends mixin<TabListProps>() {
                 {this.renderHeader()}
 
                 <div className="tab-content">
-                    {list.map(({ content }, index) => (
+                    {(({ content }, index) => (
                         <section
-                            className={classNames(
-                                'tab-pane',
-                                'fade',
-                                index === activeIndex && 'active show'
-                            )}
+                            ref={(tag: HTMLElement) => (this.tabBody = tag)}
                             id={`${UID}_b_${index}`}
                             role="tabpanel"
                             aria-labelledby={`${UID}_h_${index}`}
                         >
                             {content}
                         </section>
-                    ))}
+                    ))(list[this.activeIndex], this.activeIndex)}
                 </div>
             </main>
         );

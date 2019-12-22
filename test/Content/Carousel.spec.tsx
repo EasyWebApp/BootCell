@@ -31,7 +31,7 @@ describe('Carousel View', () => {
                 </ol>
 
                 <main className="carousel-inner">
-                    <section className="carousel-item active">
+                    <section className="carousel-item">
                         <img
                             className="d-block w-100"
                             src="test.png"

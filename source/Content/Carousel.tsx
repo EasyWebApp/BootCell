@@ -16,6 +16,18 @@ export interface CarouselProps {
     list?: CarouselItem[];
 }
 
+const SlideTransition = {
+    keyframes: [
+        { transform: 'translateX(-100%)' },
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(100%)' }
+    ],
+    options: {
+        duration: 600,
+        easing: 'ease-in-out'
+    }
+};
+
 @component({
     tagName: 'carousel-view',
     renderTarget: 'children'
@@ -37,10 +49,47 @@ export class CarouselView extends mixin<CarouselProps>() {
     @watch
     list: CarouselItem[] = [];
 
-    turnTo(index = this.activeIndex + 1) {
-        const { length } = this.list;
+    private slideBox: HTMLElement;
+
+    async turnTo(index = this.activeIndex + 1) {
+        if (!this.slideBox) return;
+
+        const {
+            list: { length },
+            activeIndex
+        } = this;
+
+        const { children } = this.slideBox,
+            forward = activeIndex < index;
 
         this.activeIndex = (index < 0 ? length + index : index) % length;
+
+        const left = children[activeIndex] as HTMLElement,
+            right = children[this.activeIndex] as HTMLElement,
+            keyframes = [...SlideTransition.keyframes];
+
+        (left.style.display = 'block'),
+            (left.style.transform = 'translateX(0)');
+
+        (right.style.display = 'block'),
+            (right.style.transform = keyframes[forward ? 0 : 2].transform);
+
+        if (!forward) keyframes.reverse();
+
+        return new Promise(resolve =>
+            self.requestAnimationFrame(() =>
+                Promise.all([
+                    left
+                        .animate(keyframes.slice(1), SlideTransition.options)
+                        .finished.then(() => (left.style.display = 'none')),
+                    right
+                        .animate(keyframes.slice(0, 2), SlideTransition.options)
+                        .finished.then(
+                            () => (right.style.transform = 'translateX(0)')
+                        )
+                ]).then(resolve)
+            )
+        );
     }
 
     private timer: any;
@@ -94,14 +143,12 @@ export class CarouselView extends mixin<CarouselProps>() {
                     ))}
                 </ol>
 
-                <main className="carousel-inner">
-                    {list.map(({ image, title, detail }, index) => (
-                        <section
-                            className={classNames(
-                                'carousel-item',
-                                index === activeIndex && 'active'
-                            )}
-                        >
+                <main
+                    className="carousel-inner"
+                    ref={(tag: HTMLElement) => (this.slideBox = tag)}
+                >
+                    {list.map(({ image, title, detail }) => (
+                        <section className="carousel-item">
                             <img
                                 className="d-block w-100"
                                 src={image}

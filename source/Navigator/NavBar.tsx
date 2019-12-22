@@ -97,17 +97,18 @@ export class NavBar extends mixin<NavBarProps>() {
                 >
                     {title}
                 </a>
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    aria-controls={UID}
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                    onClick={() => (this.open = !this.open)}
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
+                {menu[0] && (
+                    <button
+                        type="button"
+                        className="navbar-toggler"
+                        aria-controls={UID}
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        onClick={() => (this.open = !this.open)}
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                )}
                 <div
                     className={classNames(
                         'collapse',

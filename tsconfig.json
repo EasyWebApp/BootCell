@@ -8,7 +8,7 @@
         "jsx": "react",
         "jsxFactory": "createCell"
     },
-    "include": ["./source/**/*", "./test/**/*"],
+    "include": ["./source/**/*"],
     "typedocOptions": {
         "name": "BootCell",
         "mode": "file",
