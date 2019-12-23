@@ -29,6 +29,7 @@
 
 1. [Spinner](https://web-cell.dev/BootCell/interfaces/spinnerprops.html)
 2. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
+3. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
 
 ### Form
 

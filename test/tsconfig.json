@@ -7,5 +7,6 @@
         "jsx": "react",
         "jsxFactory": "createCell",
         "target": "ES5"
-    }
+    },
+    "include": ["./**/*", "../source/utility/**/*"]
 }
