@@ -18,7 +18,7 @@ describe('Tab List', () => {
                 activeIndex: 0,
                 renderHeader: TabList.prototype.renderHeader
             }),
-            <main className="d-flex flex-column">
+            <div className="d-flex flex-column">
                 <nav
                     className="nav flex-row nav-tabs"
                     role="tablist"
@@ -59,7 +59,7 @@ describe('Tab List', () => {
                         test
                     </section>
                 </div>
-            </main>
+            </div>
         );
     });
 
@@ -76,7 +76,7 @@ describe('Tab List', () => {
                 activeIndex: 1,
                 renderHeader: TabList.prototype.renderHeader
             }),
-            <main className="d-flex flex-column">
+            <div className="d-flex flex-column">
                 <div
                     className="list-group list-group-horizontal"
                     role="tablist"
@@ -116,7 +116,7 @@ describe('Tab List', () => {
                         example
                     </section>
                 </div>
-            </main>
+            </div>
         );
     });
 });

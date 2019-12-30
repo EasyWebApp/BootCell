@@ -11,13 +11,13 @@ export interface CardProps extends HTMLProps {
 }
 
 export function Card({
-    id,
     className = '',
     title,
     text,
     image,
     direction = 'vertical',
-    defaultSlot
+    defaultSlot,
+    ...rest
 }: CardProps) {
     const vertical = direction === 'vertical',
         header =
@@ -36,7 +36,7 @@ export function Card({
 
     return (
         <div
-            id={id}
+            {...rest}
             className={classNames(
                 'card',
                 !vertical && 'justify-content-center',

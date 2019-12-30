@@ -11,3 +11,17 @@ export interface HTMLHyperLinkProps extends HTMLProps {
     href?: string | URL;
     target?: '_self' | '_parent' | '_top' | '_blank';
 }
+
+export interface BaseFieldProps extends HTMLProps {
+    name?: string;
+    defaultValue?: string;
+    value?: string;
+    required?: boolean;
+    label?: string;
+    placeholder?: string;
+    onFocus?: (event: FocusEvent) => any;
+    onBlur?: (event: FocusEvent) => any;
+    onInput?: (event: InputEvent) => any;
+    onChange?: (event: Event) => any;
+    [key: string]: any;
+}

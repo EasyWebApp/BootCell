@@ -34,8 +34,9 @@
 ### Form
 
 1. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
-2. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+2. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 3. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+4. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
 
 ### Advanced
 
@@ -53,6 +54,14 @@
 
 1. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
 2. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
+
+## Theme
+
+Replace **BootStrap official CSS** file with these 3th-party libraries's directly:
+
+-   https://bootswatch.com/
+-   https://fezvrasta.github.io/bootstrap-material-design/
+-   https://daemonite.github.io/material/
 
 [1]: https://www.webcomponents.org/
 [2]: https://github.com/EasyWebApp/WebCell/tree/v2

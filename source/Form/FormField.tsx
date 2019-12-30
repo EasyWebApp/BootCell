@@ -1,48 +1,87 @@
-import { createCell } from 'web-cell';
-import { uniqueID } from '../utility';
-
-interface BaseFieldProps {
-    name?: string;
-    defaultValue?: string;
-    value?: string;
-    required?: boolean;
-    label?: string;
-    placeholder?: string;
-    [key: string]: any;
-}
+import { createCell, VNodeChildElement } from 'web-cell';
+import { BaseFieldProps, uniqueID } from '../utility';
 
 export interface FieldProps extends BaseFieldProps {
     is?: 'input' | 'select' | 'textarea';
-    type?: string;
-    defaultSlot?: any[];
+    type?:
+        | 'button'
+        | 'checkbox'
+        | 'color'
+        | 'date'
+        | 'datetime-local'
+        | 'email'
+        | 'file'
+        | 'hidden'
+        | 'image'
+        | 'month'
+        | 'number'
+        | 'password'
+        | 'radio'
+        | 'range'
+        | 'reset'
+        | 'search'
+        | 'submit'
+        | 'tel'
+        | 'text'
+        | 'time'
+        | 'url'
+        | 'week';
+    fileButton?: string;
+    defaultSlot?: VNodeChildElement[];
 }
 
 export function FormField({
     is,
     type = 'text',
+    id = uniqueID(),
     label,
+    fileButton = 'Browse',
     defaultSlot,
     ...rest
 }: FieldProps = {}) {
-    const UID = uniqueID();
+    label = label || rest.name;
+
+    if (type === 'file')
+        return (
+            <div className="custom-file">
+                <input
+                    {...rest}
+                    type="file"
+                    className="custom-file-input"
+                    id={id}
+                />
+                <label
+                    className="custom-file-label"
+                    for={id}
+                    data-browse={fileButton}
+                >
+                    {label || 'Choose file'}
+                </label>
+            </div>
+        );
 
     const field = {
         input: (
-            <input type={type} className="form-control" id={UID} {...rest} />
+            <input
+                {...rest}
+                type={type}
+                className={type === 'range' ? 'custom-range' : 'form-control'}
+                id={id}
+            />
         ),
         select: (
-            <select className="form-control" id={UID} {...rest}>
+            <select {...rest} className="custom-select" id={id}>
                 {defaultSlot}
             </select>
         ),
-        textarea: <textarea className="form-control" id={UID} {...rest} />
+        textarea: <textarea {...rest} className="form-control" id={id} />
     };
 
     return (
-        <section className="form-group">
-            <label htmlFor={UID}>{label || rest.name}</label>
+        <div className="form-group">
+            {label && <label htmlFor={id}>{label}</label>}
 
             {!is && defaultSlot[0] ? defaultSlot : field[is || 'input']}
-        </section>
+        </div>
     );
 }

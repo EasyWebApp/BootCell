@@ -143,7 +143,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                     ))}
                 </ol>
 
-                <main
+                <div
                     className="carousel-inner"
                     ref={(tag: HTMLElement) => (this.slideBox = tag)}
                 >
@@ -162,7 +162,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                             )}
                         </section>
                     ))}
-                </main>
+                </div>
 
                 <a
                     className="carousel-control-prev"

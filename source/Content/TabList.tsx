@@ -138,7 +138,7 @@ export class TabList extends mixin<TabListProps>() {
         const { UID, direction, list, activeIndex } = this;
 
         return (
-            <main
+            <div
                 className={`d-flex ${
                     direction === 'row' ? 'flex-column' : 'flex-row'
                 }`}
@@ -157,7 +157,7 @@ export class TabList extends mixin<TabListProps>() {
                         </section>
                     ))(list[this.activeIndex], this.activeIndex)}
                 </div>
-            </main>
+            </div>
         );
     }
 }

@@ -1,9 +1,10 @@
-import { createCell } from 'web-cell';
+import { createCell, VNodeChildElement } from 'web-cell';
+import classNames from 'classnames';
 import { HTMLProps } from '../utility';
 
 export interface MediaItemProps extends HTMLProps {
     title: string;
-    image: string | URL;
+    image: string | URL | VNodeChildElement;
     imageRow?: 'start' | 'center' | 'end';
     imageColumn?: 'left' | 'right';
     defaultSlot?: any[];
@@ -15,28 +16,35 @@ export function MediaItem({
     image,
     imageRow = 'start',
     imageColumn = 'left',
-    defaultSlot
+    defaultSlot,
+    ...rest
 }: MediaItemProps) {
+    const left = imageColumn === 'left';
+
     return (
-        <section className={`media ${className}`}>
-            {imageColumn === 'left' ? (
+        <section
+            {...rest}
+            className={classNames(
+                'media',
+                className,
+                !left && 'flex-row-reverse'
+            )}
+        >
+            {typeof image === 'string' || image instanceof URL ? (
                 <img
                     src={image}
-                    className={`align-self-${imageRow} mr-3`}
+                    className={`align-self-${imageRow} ${
+                        left ? 'mr-3' : 'ml-3'
+                    }`}
                     alt={title}
                 />
-            ) : null}
+            ) : (
+                image
+            )}
             <div className="media-body">
                 <h5 className="mt-0">{title}</h5>
                 {defaultSlot}
             </div>
-            {imageColumn === 'right' ? (
-                <img
-                    src={image}
-                    className={`align-self-${imageRow} ml-3`}
-                    alt={title}
-                />
-            ) : null}
         </section>
     );
 }

@@ -1,9 +1,10 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
+import { HTMLProps } from '../utility';
 
 import style from './Table.less';
 
-export interface TableProps {
+export interface TableProps extends HTMLProps {
     theme?: string;
     center?: boolean;
     striped?: boolean;
@@ -16,10 +17,12 @@ export function Table({
     center,
     striped,
     hover,
-    defaultSlot
+    defaultSlot,
+    ...rest
 }: TableProps) {
     return (
-        <main
+        <div
+            {...rest}
             className={classNames(
                 'table-responsive',
                 `table-${theme}`,
@@ -36,6 +39,6 @@ export function Table({
             >
                 {defaultSlot}
             </table>
-        </main>
+        </div>
     );
 }

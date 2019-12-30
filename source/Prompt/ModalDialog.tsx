@@ -56,6 +56,25 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
         return this.props.open;
     }
 
+    async requestInput() {
+        const dialog = this.firstElementChild as HTMLDialogElement;
+
+        const closed = new Promise((resolve, reject) => {
+            dialog.addEventListener('close', ({ returnValue }) =>
+                resolve(returnValue)
+            );
+            dialog.addEventListener('cancel', reject);
+        });
+
+        this.open = true;
+
+        const value = await closed;
+
+        await this.setProps({ open: false });
+
+        return value;
+    }
+
     handleSubmit = (event: Event) => {
         event.preventDefault(), event.stopPropagation();
 

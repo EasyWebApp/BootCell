@@ -1,10 +1,10 @@
 import { createCell, Fragment, VNodeChildElement } from 'web-cell';
 import classNames from 'classnames';
-import { Status, Theme } from '../utility';
 
+import { HTMLProps, Status, Theme } from '../utility';
 import style from './Spinner.less';
 
-export interface SpinnerProps {
+export interface SpinnerProps extends HTMLProps {
     type?: 'border' | 'grow';
     color?: keyof typeof Status | keyof typeof Theme;
     small?: boolean;
@@ -17,7 +17,8 @@ export function Spinner({
     color,
     small,
     defaultSlot,
-    embed
+    embed,
+    ...rest
 }: SpinnerProps) {
     const scope = `spinner-${type}`;
 
@@ -27,6 +28,7 @@ export function Spinner({
 
     const body = (defaultSlot: VNodeChildElement[], hidden?: boolean) => (
         <div
+            {...rest}
             className={classNames(
                 scope,
                 color && `text-${color}`,

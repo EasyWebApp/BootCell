@@ -30,7 +30,7 @@ describe('Carousel View', () => {
                     <li data-index="1"></li>
                 </ol>
 
-                <main className="carousel-inner">
+                <div className="carousel-inner">
                     <section className="carousel-item">
                         <img
                             className="d-block w-100"
@@ -53,7 +53,7 @@ describe('Carousel View', () => {
                             <h5>Example</h5>
                         </div>
                     </section>
-                </main>
+                </div>
 
                 <a
                     className="carousel-control-prev"
