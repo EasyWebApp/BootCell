@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { FormField } from '../../source';
+import { FormField } from '../../source/Form/FormField';
 
 describe('Form Fields', () => {
     it('should render a Text Input with Form Group wrapped defaultly', () => {

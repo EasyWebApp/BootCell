@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { FileInput } from '../../source';
+import { FileInput } from '../../source/Form/FileInput';
 import style from '../source/Form/FileInput.less';
 
 const render = FileInput.prototype.render.bind({ onChange: () => {} });

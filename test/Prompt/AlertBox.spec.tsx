@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { AlertBox } from '../../source';
+import { AlertBox } from '../../source/Prompt/AlertBox';
 
 describe('Alert Box', () => {
     it('should render a Dismissible Alert while "closable" property equals True', () => {

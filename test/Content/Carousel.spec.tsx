@@ -1,4 +1,4 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 

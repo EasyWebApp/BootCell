@@ -58,13 +58,35 @@ export function parseTextTable<T = {}>(
     return !header
         ? data
         : data.slice(1).map(row =>
-              row.reduce(
-                  (object, item, index) => {
-                      object[data[0][index]] = item;
+              row.reduce((object, item, index) => {
+                  object[data[0][index]] = item;
 
-                      return object;
-                  },
-                  {} as T
-              )
+                  return object;
+              }, {} as T)
           );
+}
+
+const sandbox = document.createElement('template'),
+    fragment = document.createDocumentFragment();
+
+export function parseDOM(HTML: string) {
+    sandbox.innerHTML = HTML;
+
+    return Array.from(sandbox.content.childNodes).map(node => {
+        node.remove();
+        return node;
+    });
+}
+
+export function insertToCursor(...nodes: Node[]) {
+    fragment.append(...nodes);
+
+    const selection = self.getSelection();
+
+    if (!selection) return;
+
+    const range = selection.getRangeAt(0);
+
+    range.deleteContents();
+    range.insertNode(fragment);
 }

@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { ToggleField } from '../../source';
+import { ToggleField } from '../../source/Form/ToggleField';
 
 describe('', () => {
     it('should render an Inline Switch Checkbox', () => {

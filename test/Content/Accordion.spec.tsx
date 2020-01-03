@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { AccordionList } from '../../source/Content';
+import { AccordionList } from '../../source/Content/Accordion';
 
 describe('Accordion', () => {
     it('should render Card list', () => {

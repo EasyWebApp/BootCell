@@ -37,6 +37,7 @@
 2. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 3. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
 4. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+5. MarkdownEditor
 
 ### Advanced
 
@@ -64,7 +65,7 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 -   https://daemonite.github.io/material/
 
 [1]: https://www.webcomponents.org/
-[2]: https://github.com/EasyWebApp/WebCell/tree/v2
+[2]: https://web-cell.dev/
 [3]: https://getbootstrap.com/
 [4]: https://david-dm.org/EasyWebApp/BootCell
 [5]: https://travis-ci.com/EasyWebApp/BootCell

@@ -1,10 +1,14 @@
+import './polyfill';
 import { parseTextTable } from '../source/utility';
 
 describe('Utility methods', () => {
     describe('Text Table parser', () => {
         it('should parse Simple CSV', () => {
             expect(parseTextTable('1,2,3\n4,5,6')).toEqual(
-                expect.arrayContaining([[1, 2, 3], [4, 5, 6]])
+                expect.arrayContaining([
+                    [1, 2, 3],
+                    [4, 5, 6]
+                ])
             );
         });
 

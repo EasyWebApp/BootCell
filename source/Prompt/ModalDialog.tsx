@@ -8,7 +8,7 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
-import { Button } from '../Form';
+import { Button } from '../Form/Button';
 
 import style from './ModalDialog.less';
 

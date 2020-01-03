@@ -1,7 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
-import { NavBar } from '../../source';
+
+import { NavBar } from '../../source/Navigator/NavBar';
 
 describe('Navigator Bar', () => {
     it('should render Narrow Bar', () => {

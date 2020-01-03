@@ -1,8 +1,8 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { Nav } from '../../source';
+import { Nav } from '../../source/Navigator/Nav';
 
 describe('Nav', () => {
     it('should render Nav Links with different states', () => {

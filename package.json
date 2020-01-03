@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.18.1",
+    "version": "0.19.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -27,32 +27,47 @@
         "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
         "dialog-polyfill": "0.5.0",
+        "github-markdown-css": "^3.0.1",
+        "markdown-ime": "^1.0.3",
+        "marked": "^0.8.0",
         "web-animations-js": "^2.3.2",
-        "web-cell": "^2.0.0-rc.12"
+        "web-cell": "^2.0.0-rc.13"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.9",
+        "@types/core-js": "^2.5.2",
         "@types/jest": "^24.0.25",
+        "@types/marked": "^0.7.2",
+        "@webcomponents/webcomponentsjs": "^2.4.0",
+        "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
+        "core-js": "^3.6.1",
+        "dialog-polyfill": "0.5.0",
+        "github-markdown-css": "^3.0.1",
         "happy-dom": "^0.4.11",
         "husky": "^3.1.0",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^24.9.0",
         "less": "^3.10.3",
         "lint-staged": "^9.5.0",
+        "markdown-ime": "^1.0.3",
+        "marked": "^0.8.0",
         "microbundle": "^0.11.0",
         "open-cli": "^5.0.0",
+        "parcel-bundler": "^1.12.4",
         "prettier": "^1.19.1",
         "snabbdom": "^0.7.4",
         "snabbdom-looks-like": "^1.0.5",
         "ts-jest": "^24.2.0",
         "typedoc": "^0.15.6",
         "typescript": "^3.7.4",
-        "web-cell": "^2.0.0-rc.12"
+        "web-animations-js": "^2.3.2",
+        "web-cell": "^2.0.0-rc.13"
     },
     "scripts": {
         "lint": "lint-staged",
         "test": "lint-staged  &&  jest --forceExit",
+        "start": "cd test/  &&  parcel index.html --open",
         "pack-dist": "rm -rf dist/  &&  microbundle --external web-cell,classnames --globals web-cell=WebCell --name BootCell",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
         "build": "npm run pack-dist  &&  npm run pack-docs",
@@ -60,7 +75,7 @@
         "prepublishOnly": "npm test  &&  npm run build"
     },
     "lint-staged": {
-        "*.{md,less,json,yml,ts,tsx}": [
+        "*.{html,md,less,json,yml,ts,tsx}": [
             "prettier --write",
             "git add"
         ]

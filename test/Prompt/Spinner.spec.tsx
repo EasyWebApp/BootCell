@@ -1,8 +1,9 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { Spinner, Button } from '../../source';
+import { Spinner } from '../../source/Prompt/Spinner';
+import { Button } from '../../source/Form/Button';
 
 describe('Spinner', () => {
     it('should render a single Border Spinner by default', () => {

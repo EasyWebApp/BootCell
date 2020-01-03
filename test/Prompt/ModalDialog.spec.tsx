@@ -1,9 +1,10 @@
-import '../DOM-polyfill';
+import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { ModalDialog, Button } from '../../source';
+import { ModalDialog } from '../../source/Prompt/ModalDialog';
 import style from '../../source/Prompt/ModalDialog.less';
+import { Button } from '../../source/Form/Button';
 
 describe('Modal Dialog', () => {
     it('should render a Modal within <dialog /> & <form />', () => {
