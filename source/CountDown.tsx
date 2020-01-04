@@ -70,7 +70,7 @@ export class CountDown extends mixin<CountDownProps>() {
         }, [] as TimeSection[]);
     }
 
-    private timer?: any;
+    private timer: number;
 
     tick = () => {
         const rest = (this.endTime as number) - Date.now();
@@ -78,7 +78,7 @@ export class CountDown extends mixin<CountDownProps>() {
         if (rest > 0) {
             this.rest = rest;
 
-            if (!this.timer) this.timer = setInterval(this.tick, 1000);
+            if (!this.timer) this.timer = self.setInterval(this.tick, 1000);
         } else if (this.timer) clearInterval(this.timer);
     };
 

@@ -1,7 +1,9 @@
 import { component, mixin } from 'web-cell';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
-import { parseDOM, insertToCursor } from '../utility';
+import { SafeTurnDown, parseDOM, insertToCursor } from '../utility';
+
+const parser = new SafeTurnDown();
 
 @component({
     tagName: 'markdown-editor',
@@ -65,6 +67,14 @@ export class MarkdownEditor extends mixin() {
         for (const paragraph of Array.from(this.querySelectorAll('p p')))
             paragraph.replaceWith(...Array.from(paragraph.childNodes));
     };
+
+    set value(raw: string) {
+        this.innerHTML = marked(raw);
+    }
+
+    get value() {
+        return parser.turndown(this.innerHTML);
+    }
 
     get files() {
         return Array.from(

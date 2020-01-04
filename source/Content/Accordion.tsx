@@ -1,10 +1,18 @@
-import { component, mixin, watch, on, createCell, Fragment } from 'web-cell';
+import {
+    VNodeChildElement,
+    component,
+    mixin,
+    watch,
+    on,
+    createCell,
+    Fragment
+} from 'web-cell';
 import classNames from 'classnames';
 import { HTMLProps, uniqueID } from '../utility';
 
 interface AccordionItem {
-    title: any;
-    content: any;
+    title: VNodeChildElement;
+    content: VNodeChildElement[];
     active?: boolean;
 }
 

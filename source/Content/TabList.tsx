@@ -1,13 +1,19 @@
-import { component, mixin, watch, attribute, createCell } from 'web-cell';
-import classNames from 'classnames';
+import {
+    VNodeChildElement,
+    component,
+    mixin,
+    watch,
+    attribute,
+    createCell
+} from 'web-cell';
 import { uniqueID } from '../utility';
 
 import { NavProps, Nav } from '../Navigator';
 import { ListGroup } from './ListGroup';
 
 interface TabItem {
-    title: any;
-    content?: any;
+    title: string;
+    content?: VNodeChildElement[];
     disabled?: boolean;
 }
 

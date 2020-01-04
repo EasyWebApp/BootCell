@@ -92,12 +92,12 @@ export class CarouselView extends mixin<CarouselProps>() {
         );
     }
 
-    private timer: any;
+    private timer: number;
     private pause = false;
 
     connectedCallback() {
         if (this.interval)
-            this.timer = setInterval(
+            this.timer = self.setInterval(
                 () => this.pause || this.turnTo(),
                 this.interval * 1000
             );

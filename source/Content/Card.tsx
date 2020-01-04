@@ -1,13 +1,13 @@
-import { createCell } from 'web-cell';
+import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { HTMLProps } from '../utility';
 
 export interface CardProps extends HTMLProps {
     title: string;
     text?: string;
-    image?: any;
+    image?: VNodeChildElement;
     direction?: 'horizontal' | 'vertical';
-    defaultSlot?: any[];
+    defaultSlot?: VNodeChildElement[];
 }
 
 export function Card({

@@ -1,4 +1,4 @@
-import { createCell } from 'web-cell';
+import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { HTMLHyperLinkProps, Status, Theme } from '../utility';
 
@@ -9,7 +9,7 @@ export interface ButtonProps extends HTMLHyperLinkProps {
     outline?: boolean;
     size?: 'sm' | 'lg';
     block?: boolean;
-    defaultSlot?: any[];
+    defaultSlot?: VNodeChildElement[];
 }
 
 export function Button({

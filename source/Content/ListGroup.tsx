@@ -1,9 +1,9 @@
-import { createCell } from 'web-cell';
+import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { HTMLHyperLinkProps, HTMLProps, Status, Theme } from '../utility';
 
 interface ListItem extends HTMLHyperLinkProps {
-    content?: any[];
+    content?: VNodeChildElement[];
     color?: Status | Theme;
     disabled?: boolean;
 }

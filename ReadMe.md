@@ -21,9 +21,10 @@
 
 ### Navigator
 
-1. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
-2. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
-3. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
+1. [BreadCrumb](https://web-cell.dev/BootCell/interfaces/breadcrumbprops.html)
+2. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
+3. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
+4. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
 
 ### Prompt
 

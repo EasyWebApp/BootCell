@@ -1,4 +1,4 @@
-import { createCell } from 'web-cell';
+import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 import { HTMLProps } from '../utility';
 
@@ -9,7 +9,7 @@ export interface TableProps extends HTMLProps {
     center?: boolean;
     striped?: boolean;
     hover?: boolean;
-    defaultSlot?: any[];
+    defaultSlot?: VNodeChildElement[];
 }
 
 export function Table({
