@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.20.0",
+    "version": "0.21.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -73,7 +73,7 @@
         "lint": "lint-staged",
         "test": "lint-staged  &&  jest --forceExit",
         "start": "cd test/  &&  parcel index.html --open",
-        "pack-dist": "rm -rf dist/  &&  microbundle --external web-cell,classnames,marked,turndown,turndown-plugin-gfm,markdown-ime --globals web-cell=WebCell,turndown-plugin-gfm=gfm --name BootCell",
+        "pack-dist": "rm -rf dist/  &&  microbundle --external web-cell,classnames,marked,markdown-ime --globals web-cell=WebCell,classnames=classNames --name BootCell",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
         "build": "npm run pack-dist  &&  npm run pack-docs",
         "help": "npm run pack-docs  &&  open-cli docs/index.html",
