@@ -9,7 +9,7 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
-import { Theme, uniqueID } from '../utility';
+import { Theme, uniqueID, HTMLProps, WebCellProps } from '../utility';
 
 interface NavLinkProps {
     title: string;
@@ -28,7 +28,7 @@ export function NavLink({ title, href, active }: NavLinkProps) {
     );
 }
 
-export interface NavBarProps {
+export interface NavBarProps extends WebCellProps {
     title: string | VNodeChildElement;
     theme?: keyof typeof Theme;
     background?: keyof typeof Theme;
@@ -76,19 +76,14 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     open = false;
 
-    render({
-        title,
-        theme,
-        background,
-        narrow,
-        expand,
-        fixed,
-        menu,
-        open
-    }: NavBarProps) {
-        const { UID } = this;
+    renderContent() {
+        const {
+            UID,
+            props: { title, menu, open },
+            defaultSlot
+        } = this;
 
-        const content = (
+        return (
             <Fragment>
                 <a
                     target="_top"
@@ -104,7 +99,7 @@ export class NavBar extends mixin<NavBarProps>() {
                         aria-controls={UID}
                         aria-expanded="false"
                         aria-label="Toggle navigation"
-                        onClick={() => (this.open = !this.open)}
+                        onClick={() => (this.open = !open)}
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -125,9 +120,18 @@ export class NavBar extends mixin<NavBarProps>() {
                             <NavLink {...item} />
                         ))}
                     </ul>
+                    {defaultSlot[0] && (
+                        <div className="flex-grow-1 d-md-flex justify-content-end">
+                            {this.defaultSlot}
+                        </div>
+                    )}
                 </div>
             </Fragment>
         );
+    }
+
+    render({ theme, background, narrow, expand, fixed }: NavBarProps) {
+        const content = this.renderContent();
 
         return (
             <header

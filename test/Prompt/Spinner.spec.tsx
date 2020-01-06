@@ -2,8 +2,9 @@ import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { Spinner } from '../../source/Prompt/Spinner';
+import { Spinner, SpinnerBox } from '../../source/Prompt/Spinner';
 import { Button } from '../../source/Form/Button';
+import style from '../../source/Prompt/Spinner.less';
 
 describe('Spinner', () => {
     it('should render a single Border Spinner by default', () => {
@@ -28,6 +29,20 @@ describe('Spinner', () => {
                 />
                 Pending...
             </button>
+        );
+    });
+
+    it('should render Slots & Cover', () => {
+        assertLooksLike(
+            <SpinnerBox className="test" cover>
+                test
+            </SpinnerBox>,
+            <div className={`${style['spinner-box']} test`}>
+                test
+                <div className={`${style['spinner-cover']} ${style['active']}`}>
+                    <Spinner />
+                </div>
+            </div>
         );
     });
 });

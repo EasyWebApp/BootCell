@@ -2,29 +2,61 @@ import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { NavBar } from '../../source/Navigator/NavBar';
+import { NavBar, NavBarProps } from '../../source/Navigator/NavBar';
+
+const { render, renderContent } = NavBar.prototype;
+
+function InlineNavBar({
+    defaultSlot,
+    title,
+    menu,
+    theme,
+    background,
+    expand,
+    fixed,
+    narrow
+}: NavBarProps) {
+    return render.call(
+        {
+            renderContent: renderContent.bind({
+                UID: 'test',
+                defaultSlot,
+                props: {
+                    title,
+                    menu
+                }
+            })
+        },
+        {
+            theme,
+            background,
+            expand,
+            fixed,
+            narrow
+        }
+    );
+}
 
 describe('Navigator Bar', () => {
     it('should render Narrow Bar', () => {
         assertLooksLike(
-            NavBar.prototype.render.call(
-                { UID: 'test' },
-                {
-                    theme: 'dark',
-                    background: 'dark',
-                    expand: 'md',
-                    fixed: 'top',
-                    narrow: true,
-                    title: 'Test',
-                    menu: [
-                        {
-                            title: 'Example',
-                            href: '/example',
-                            active: true
-                        }
-                    ]
-                }
-            ),
+            <InlineNavBar
+                title="Test"
+                theme="dark"
+                background="dark"
+                expand="md"
+                fixed="top"
+                narrow={true}
+                menu={[
+                    {
+                        title: 'Example',
+                        href: '/example',
+                        active: true
+                    }
+                ]}
+            >
+                <a />
+            </InlineNavBar>,
             <header className="navbar navbar-dark bg-dark box-shadow navbar-expand-md fixed-top">
                 <div className="container">
                     <a
@@ -52,6 +84,9 @@ describe('Navigator Bar', () => {
                                 </a>
                             </li>
                         </ul>
+                        <div className="flex-grow-1 d-md-flex justify-content-end">
+                            <a />
+                        </div>
                     </div>
                 </div>
             </header>

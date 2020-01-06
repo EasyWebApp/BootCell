@@ -7,6 +7,36 @@
 
 [![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][6]
 
+## Usage
+
+```shell
+npm install boot-cell web-cell \
+    classnames marked turndown turndown-plugin-gfm \
+    markdown-ime
+```
+
+`index.html`
+
+```html
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/github-markdown-css@3.0.1/github-markdown.min.css"
+/>
+<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat"></script>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.0/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.0/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations-next.min.js"></script>
+```
+
 ## Components
 
 ### Content
@@ -29,8 +59,9 @@
 ### Prompt
 
 1. [Spinner](https://web-cell.dev/BootCell/interfaces/spinnerprops.html)
-2. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
-3. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
+2. [SpinnerBox](https://web-cell.dev/BootCell/interfaces/spinnerboxprops.html)
+3. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
+4. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
 
 ### Form
 
@@ -38,11 +69,11 @@
 2. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 3. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
 4. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-5. MarkdownEditor
+5. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Advanced
 
-1. [CountDown](https://web-cell.dev/BootCell/classes/countdown.html)
+1. [CountDown](https://web-cell.dev/BootCell/interfaces/countdownprops.html)
 
 ## Constants
 
@@ -56,6 +87,9 @@
 
 1. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
 2. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
+3. [parseDOM()](https://web-cell.dev/BootCell/globals.html#parsedom)
+4. [insertToCursor()](https://web-cell.dev/BootCell/globals.html#inserttocursor)
+5. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
 
 ## Theme
 

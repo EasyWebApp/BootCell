@@ -1,7 +1,9 @@
 import { component, mixin } from 'web-cell';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
-import { SafeTurnDown, parseDOM, insertToCursor } from '../utility';
+
+import { parseDOM, insertToCursor } from '../utility';
+import { SafeTurnDown } from '../utility/TurnDown';
 
 const parser = new SafeTurnDown();
 
@@ -34,8 +36,12 @@ export class MarkdownEditor extends mixin() {
 
         var list: DataTransferItem[] = Array.from(items);
 
-        if (list.find(({ type }) => /xml|html/.test(type)))
+        if (list.find(({ type }) => /xml|html/.test(type))) {
             list = list.filter(({ type }) => type !== 'text/plain');
+
+            if (list[1])
+                list = list.filter(({ type }) => !/xml|html/.test(type));
+        }
 
         const parts = await Promise.all(
             list.map((item: DataTransferItem) => {
@@ -48,14 +54,15 @@ export class MarkdownEditor extends mixin() {
 
                 if (file) {
                     const src = URL.createObjectURL(file);
+                    const data = `title="${file.name}" src="${src}"`;
 
                     switch (item.type.split('/')[0]) {
                         case 'image':
-                            return `<img src=${src}>`;
+                            return `<img ${data}>`;
                         case 'audio':
-                            return `<audio src=${src}></audio>`;
+                            return `<audio ${data}></audio>`;
                         case 'video':
-                            return `<video src=${src}></video>`;
+                            return `<video ${data}></video>`;
                     }
                 }
                 return '';
@@ -79,7 +86,8 @@ export class MarkdownEditor extends mixin() {
     get files() {
         return Array.from(
             this.querySelectorAll('img[src], audio[src], video[src]'),
-            ({ src }: HTMLImageElement) => src.startsWith('blob:') && src
+            ({ src, title }: HTMLImageElement) =>
+                src.startsWith('blob:') && { name: title, URI: src }
         ).filter(Boolean);
     }
 }

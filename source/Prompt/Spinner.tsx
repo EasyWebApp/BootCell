@@ -51,13 +51,18 @@ export function Spinner({
     );
 }
 
+export interface SpinnerBoxProps extends SpinnerProps {
+    cover: boolean;
+}
+
 export function SpinnerBox({
+    className,
     cover,
     defaultSlot,
     ...rest
-}: SpinnerProps & { cover: boolean }) {
+}: SpinnerBoxProps) {
     return (
-        <div className="position-relative">
+        <div className={classNames(style['spinner-box'], className)}>
             {defaultSlot}
 
             <div

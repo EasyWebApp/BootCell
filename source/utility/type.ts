@@ -1,3 +1,5 @@
+import { VNodeChildElement } from 'web-cell';
+
 export interface HTMLProps {
     id?: string;
     className?: string;
@@ -5,6 +7,10 @@ export interface HTMLProps {
     tabIndex?: number;
     onClick?: (event: MouseEvent) => any;
     [key: string]: any;
+}
+
+export interface WebCellProps {
+    defaultSlot?: VNodeChildElement[];
 }
 
 export interface HTMLHyperLinkProps extends HTMLProps {
