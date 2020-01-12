@@ -26,6 +26,7 @@ export interface FieldProps extends BaseFieldProps {
         | 'time'
         | 'url'
         | 'week';
+    label?: string;
     fileButton?: string;
     defaultSlot?: VNodeChildElement[];
 }

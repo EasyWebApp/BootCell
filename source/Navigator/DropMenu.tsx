@@ -109,9 +109,14 @@ export class DropMenu extends mixin<DropMenuProps>() {
             <div
                 className={classNames('dropdown-menu', open && 'show')}
                 aria-labelledby={UID}
+                onClick={() => (this.open = false)}
             >
                 {list.map(({ title, ...rest }) => (
-                    <a {...rest} className="dropdown-item">
+                    <a
+                        href="javascript: void"
+                        {...rest}
+                        className="dropdown-item"
+                    >
                         {title}
                     </a>
                 ))}

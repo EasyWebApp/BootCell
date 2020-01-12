@@ -43,11 +43,12 @@ npm install boot-cell web-cell \
 
 1. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
 2. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-3. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-4. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
-5. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-6. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-7. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+3. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
+4. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
+5. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
+6. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+7. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+8. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 

@@ -41,50 +41,36 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
     @watch
     size = '';
 
+    private box: HTMLDialogElement;
+
     @attribute
     set open(value: boolean) {
-        const dialog = this.firstElementChild as HTMLDialogElement;
-
-        if (dialog)
-            if (value) dialog.showModal();
-            else dialog.close();
-
-        this.setProps({ open: value });
+        if (value) this.box.showModal();
+        else this.box.close();
     }
 
     get open() {
-        return this.props.open;
+        return this.box.open;
     }
 
-    async requestInput() {
-        const dialog = this.firstElementChild as HTMLDialogElement;
-
-        const closed = new Promise((resolve, reject) => {
-            dialog.addEventListener('close', ({ returnValue }) =>
-                resolve(returnValue)
+    requestInput<D = { [key: string]: string }>() {
+        const result = new Promise<D>((resolve, reject) => {
+            this.box.addEventListener('close', () =>
+                resolve(
+                    Object.fromEntries([
+                        ...new FormData(
+                            this.box.firstElementChild as HTMLFormElement
+                        )
+                    ] as string[][])
+                )
             );
-            dialog.addEventListener('cancel', reject);
+            this.box.addEventListener('cancel', reject);
         });
 
         this.open = true;
 
-        const value = await closed;
-
-        await this.setProps({ open: false });
-
-        return value;
+        return result;
     }
-
-    handleSubmit = (event: Event) => {
-        event.preventDefault(), event.stopPropagation();
-
-        const dialog = this.firstElementChild as HTMLDialogElement,
-            form = new FormData(event.target as HTMLFormElement);
-
-        dialog.close(new URLSearchParams(Array.from(form) as string[][]) + '');
-
-        return this.setProps({ open: false });
-    };
 
     render({ title, closeSlot, confirmSlot, size }: ModalDialogProps) {
         return (
@@ -95,12 +81,7 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
                     size && `modal-${size}`
                 )}
             >
-                <form
-                    className="modal-content"
-                    method="dialog"
-                    onReset={() => (this.open = false)}
-                    onSubmit={this.handleSubmit}
-                >
+                <form className="modal-content" method="dialog">
                     <header className="modal-header">
                         <h5 className="modal-title">{title}</h5>
                         <button

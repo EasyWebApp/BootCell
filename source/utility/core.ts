@@ -72,14 +72,31 @@ const sandbox = document.createElement('template'),
 export function parseDOM(HTML: string) {
     sandbox.innerHTML = HTML;
 
-    return Array.from(sandbox.content.childNodes).map(node => {
+    return [...sandbox.content.childNodes].map(node => {
         node.remove();
         return node;
     });
 }
 
+export function* walkDOM(root: Node): Generator<Node> {
+    const children = [...root.childNodes];
+
+    yield root;
+
+    for (const node of children) yield* walkDOM(node);
+}
+
 export function insertToCursor(...nodes: Node[]) {
     fragment.append(...nodes);
+
+    for (const node of walkDOM(fragment))
+        if (
+            ![1, 3, 11].includes(node.nodeType) ||
+            ['meta', 'title', 'link', 'script'].includes(
+                node.nodeName.toLowerCase()
+            )
+        )
+            (node as ChildNode).replaceWith(...node.childNodes);
 
     const selection = self.getSelection();
 
