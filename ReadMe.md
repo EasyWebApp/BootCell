@@ -11,8 +11,8 @@
 
 ```shell
 npm install boot-cell web-cell \
-    classnames marked turndown turndown-plugin-gfm \
-    markdown-ime
+    classnames iterable-observer \
+    marked turndown turndown-plugin-gfm markdown-ime
 ```
 
 `index.html`
@@ -32,8 +32,8 @@ npm install boot-cell web-cell \
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.0/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.0/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations-next.min.js"></script>
 ```
 
@@ -43,12 +43,13 @@ npm install boot-cell web-cell \
 
 1. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
 2. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-3. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
+3. [InputCell](https://web-cell.dev/BootCell/globals.html#inputcellprops)
 4. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 5. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
-6. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-7. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-8. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+6. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+7. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+8. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+9. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 

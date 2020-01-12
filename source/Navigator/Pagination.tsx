@@ -39,8 +39,16 @@ export class Pagination extends mixin<PaginationProps>() {
         this.emit('change', this.current, { bubbles: true, composed: true });
     }
 
-    render() {
-        const { current, total } = this;
+    render({ current, total }: PaginationProps) {
+        const list = Array.from(Array(total), (_, index) => {
+            ++index;
+
+            return index === 1 || index === current || index === total
+                ? index
+                : index === 2 || index + 1 === total
+                ? '...'
+                : '';
+        }).filter(Boolean);
 
         return (
             <ul className="pagination justify-content-center">
@@ -50,32 +58,49 @@ export class Pagination extends mixin<PaginationProps>() {
                         current === 1 && 'disabled'
                     )}
                 >
-                    <a className="page-link" aria-disabled={current === 1}>
+                    <a
+                        className="page-link"
+                        aria-disabled={(current === 1) + ''}
+                    >
                         &lt;
                     </a>
                 </li>
-                {total < 2 ? null : (
-                    <li className="page-item">
-                        <a className="page-link">1</a>
-                    </li>
-                )}
-                <li className="page-item active" aria-current="page">
-                    <a className="page-link">
-                        {current} <span className="sr-only">(current)</span>
-                    </a>
-                </li>
-                {total < 3 ? null : (
-                    <li className="page-item">
-                        <a className="page-link">{total}</a>
-                    </li>
-                )}
+                {list.map(index => {
+                    const ellipsis = index === '...';
+
+                    return index !== current ? (
+                        <li
+                            className={classNames(
+                                'page-item',
+                                ellipsis && 'disabled'
+                            )}
+                        >
+                            <a
+                                className="page-link"
+                                aria-disabled={ellipsis + ''}
+                            >
+                                {index}
+                            </a>
+                        </li>
+                    ) : (
+                        <li className="page-item active" aria-current="page">
+                            <a className="page-link">
+                                {index}{' '}
+                                <span className="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    );
+                })}
                 <li
                     className={classNames(
                         'page-item',
                         current === total && 'disabled'
                     )}
                 >
-                    <a className="page-link" aria-disabled={current === total}>
+                    <a
+                        className="page-link"
+                        aria-disabled={(current === total) + ''}
+                    >
                         >
                     </a>
                 </li>
