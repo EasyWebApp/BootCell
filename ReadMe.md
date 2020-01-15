@@ -1,3 +1,5 @@
+![WebCell](https://web-cell.dev/WebCell-0.f1ffd28b.png)
+
 # BootCell
 
 [Web Components][1] UI library based on [WebCell v2][2] & [BootStrap v4][3]
@@ -70,9 +72,10 @@ npm install boot-cell web-cell \
 
 1. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
 2. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
-3. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-4. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-5. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+3. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
+4. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+5. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+6. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Advanced
 

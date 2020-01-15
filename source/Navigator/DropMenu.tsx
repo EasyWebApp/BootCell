@@ -12,15 +12,22 @@ import classNames from 'classnames';
 import { HTMLHyperLinkProps, uniqueID } from '../utility';
 import { ButtonProps, Button } from '../Form/Button';
 
+export interface DropMenuItem extends HTMLHyperLinkProps {
+    active?: boolean;
+    disabled?: boolean;
+}
+
 export interface DropMenuProps {
     title: VNodeChildElement;
     buttonKind?: ButtonProps['kind'];
     buttonSize?: ButtonProps['size'];
+    alignType?: 'left' | 'right';
+    alignSize?: '' | 'sm' | 'md' | 'lg' | 'xl';
     direction?: 'up' | 'down' | 'left' | 'right';
     href?: HTMLHyperLinkProps['href'];
     target?: HTMLHyperLinkProps['target'];
     open?: boolean;
-    list: HTMLHyperLinkProps[];
+    list: DropMenuItem[];
 }
 
 @component({
@@ -44,6 +51,14 @@ export class DropMenu extends mixin<DropMenuProps>() {
 
     @attribute
     @watch
+    alignType: DropMenuProps['alignType'] = 'left';
+
+    @attribute
+    @watch
+    alignSize: DropMenuProps['alignSize'] = '';
+
+    @attribute
+    @watch
     direction: DropMenuProps['direction'] = 'down';
 
     @attribute
@@ -59,7 +74,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
     open: boolean;
 
     @watch
-    list: HTMLHyperLinkProps[] = [];
+    list: DropMenuItem[] = [];
 
     renderButton() {
         const {
@@ -102,27 +117,52 @@ export class DropMenu extends mixin<DropMenuProps>() {
         );
     }
 
-    render({ href, direction, open, list }: DropMenuProps) {
-        const { UID } = this;
+    renderList() {
+        const { alignType, alignSize, open, UID, list } = this;
+        const alignment =
+            alignType === 'right'
+                ? [`dropdown-menu${alignSize && '-' + alignSize}-right`]
+                : alignType === 'left' && alignSize
+                ? ['dropdown-menu-right', `dropdown-menu-${alignSize}-left`]
+                : [];
 
-        const menu = (
+        return (
             <div
-                className={classNames('dropdown-menu', open && 'show')}
+                className={classNames(
+                    'dropdown-menu',
+                    ...alignment,
+                    open && 'show'
+                )}
                 aria-labelledby={UID}
                 onClick={() => (this.open = false)}
             >
-                {list.map(({ title, ...rest }) => (
-                    <a
-                        href="javascript: void"
-                        {...rest}
-                        className="dropdown-item"
-                    >
-                        {title}
-                    </a>
-                ))}
+                {list.map(
+                    ({ href, active, disabled, tabIndex, title, ...rest }) =>
+                        href ? (
+                            <a
+                                {...rest}
+                                className={classNames(
+                                    'dropdown-item',
+                                    active && 'active',
+                                    disabled && 'disabled'
+                                )}
+                                href={href}
+                                tabIndex={disabled ? -1 : tabIndex}
+                                aria-disabled={!!disabled + ''}
+                            >
+                                {title}
+                            </a>
+                        ) : title ? (
+                            <span className="dropdown-item-text">{title}</span>
+                        ) : (
+                            <div class="dropdown-divider" />
+                        )
+                )}
             </div>
         );
+    }
 
+    render({ href, direction, open }: DropMenuProps) {
         return (
             <div
                 className={classNames(
@@ -136,14 +176,14 @@ export class DropMenu extends mixin<DropMenuProps>() {
                 {href && direction === 'left' ? (
                     <Fragment>
                         <div class="btn-group dropleft" role="group">
-                            {menu}
+                            {this.renderList()}
                         </div>
                         {this.renderButton()}
                     </Fragment>
                 ) : (
                     <Fragment>
                         {this.renderButton()}
-                        {menu}
+                        {this.renderList()}
                     </Fragment>
                 )}
             </div>
