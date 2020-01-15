@@ -30,7 +30,7 @@ npm install boot-cell web-cell \
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@3.0.1/github-markdown.min.css"
 />
-<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.js"></script>
@@ -46,10 +46,11 @@ npm install boot-cell web-cell \
 3. [InputCell](https://web-cell.dev/BootCell/globals.html#inputcellprops)
 4. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 5. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
-6. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-7. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-8. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-9. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+6. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
+7. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+8. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+9. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+10. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 

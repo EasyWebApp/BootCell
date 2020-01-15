@@ -13,7 +13,7 @@ describe('Table', () => {
                 <tbody />
             </Table>,
             <div className="table-responsive">
-                <table className={`table table-light ${style.table}`}>
+                <table className={`table ${style.table}`}>
                     <tbody />
                 </table>
             </div>
@@ -22,12 +22,20 @@ describe('Table', () => {
 
     it('should render a Responsive Table with options', () => {
         assertLooksLike(
-            <Table center border striped hover small responsive="xl" />,
+            <Table
+                theme="dark"
+                center
+                border
+                striped
+                hover
+                small
+                responsive="xl"
+            />,
             <div className="table-responsive-xl">
                 <table
                     className={classNames(
                         'table',
-                        'table-light',
+                        'table-dark',
                         'table-bordered',
                         'table-striped',
                         'table-hover',

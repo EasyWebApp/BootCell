@@ -1,5 +1,5 @@
 import '../polyfill';
-import { createCell } from 'web-cell';
+import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { TabList } from '../../source/Content/TabList';
@@ -18,7 +18,7 @@ describe('Tab List', () => {
                 activeIndex: 0,
                 renderHeader: TabList.prototype.renderHeader
             }),
-            <div className="d-flex flex-column">
+            <Fragment>
                 <nav
                     className="nav flex-row nav-tabs"
                     role="tablist"
@@ -50,7 +50,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </nav>
-                <div className="tab-content">
+                <div className="tab-content bg-white">
                     <section
                         id="sample_b_0"
                         role="tabpanel"
@@ -59,7 +59,7 @@ describe('Tab List', () => {
                         test
                     </section>
                 </div>
-            </div>
+            </Fragment>
         );
     });
 
@@ -76,7 +76,7 @@ describe('Tab List', () => {
                 activeIndex: 1,
                 renderHeader: TabList.prototype.renderHeader
             }),
-            <div className="d-flex flex-column">
+            <Fragment>
                 <div
                     className="list-group list-group-horizontal"
                     role="tablist"
@@ -107,7 +107,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </div>
-                <div className="tab-content">
+                <div className="tab-content bg-white">
                     <section
                         id="sample_b_1"
                         role="tabpanel"
@@ -116,7 +116,7 @@ describe('Tab List', () => {
                         example
                     </section>
                 </div>
-            </div>
+            </Fragment>
         );
     });
 });

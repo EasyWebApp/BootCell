@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.22.0",
+    "version": "0.23.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -34,7 +34,7 @@
         "turndown": "^5.0.3",
         "turndown-plugin-gfm": "^1.0.2",
         "web-animations-js": "^2.3.2",
-        "web-cell": "^2.0.0-rc.13"
+        "web-cell": "^2.0.0-rc.15"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.9",
@@ -45,7 +45,7 @@
         "@webcomponents/webcomponentsjs": "^2.4.1",
         "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
-        "core-js": "^3.6.3",
+        "core-js": "^3.6.4",
         "dialog-polyfill": "0.5.0",
         "github-markdown-css": "^3.0.1",
         "happy-dom": "^0.4.11",
@@ -69,7 +69,7 @@
         "typedoc": "^0.15.8",
         "typescript": "^3.7.4",
         "web-animations-js": "^2.3.2",
-        "web-cell": "^2.0.0-rc.14"
+        "web-cell": "^2.0.0-rc.15"
     },
     "scripts": {
         "lint": "lint-staged",

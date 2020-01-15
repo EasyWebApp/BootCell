@@ -53,17 +53,15 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
         return this.box.open;
     }
 
+    valueOf() {
+        return Object.fromEntries([
+            ...new FormData(this.box.firstElementChild as HTMLFormElement)
+        ] as string[][]);
+    }
+
     requestInput<D = { [key: string]: string }>() {
         const result = new Promise<D>((resolve, reject) => {
-            this.box.addEventListener('close', () =>
-                resolve(
-                    Object.fromEntries([
-                        ...new FormData(
-                            this.box.firstElementChild as HTMLFormElement
-                        )
-                    ] as string[][])
-                )
-            );
+            this.box.addEventListener('close', () => resolve(this.valueOf()));
             this.box.addEventListener('cancel', reject);
         });
 

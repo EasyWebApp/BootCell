@@ -1,11 +1,11 @@
 import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLProps, BaseFieldProps } from '../utility';
+import { HTMLProps, Status, Theme, BaseFieldProps } from '../utility';
 
 import style from './Table.less';
 
 export interface TableProps extends HTMLProps {
-    theme?: string;
+    theme?: keyof typeof Status | keyof typeof Theme;
     center?: boolean;
     border?: boolean;
     striped?: boolean;
@@ -16,7 +16,7 @@ export interface TableProps extends HTMLProps {
 }
 
 export function Table({
-    theme = 'light',
+    theme,
     center,
     border,
     striped,
@@ -34,7 +34,7 @@ export function Table({
             <table
                 className={classNames(
                     'table',
-                    `table-${theme}`,
+                    theme && `table-${theme}`,
                     border != null &&
                         (border ? 'table-bordered' : 'table-borderless'),
                     striped && 'table-striped',

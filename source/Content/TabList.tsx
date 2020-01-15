@@ -4,8 +4,10 @@ import {
     mixin,
     watch,
     attribute,
-    createCell
+    createCell,
+    Fragment
 } from 'web-cell';
+import classNames from 'classnames';
 import { uniqueID } from '../utility';
 
 import { NavProps, Nav } from '../Navigator';
@@ -62,6 +64,15 @@ export class TabList extends mixin<TabListProps>() {
 
     @watch
     activeIndex = 0;
+
+    connectedCallback() {
+        this.classList.add(
+            'd-flex',
+            'w-100',
+            this.direction === 'row' ? 'flex-column' : 'flex-row'
+        );
+        super.connectedCallback();
+    }
 
     private tabBody: HTMLElement;
 
@@ -142,18 +153,23 @@ export class TabList extends mixin<TabListProps>() {
 
     render() {
         const { UID, direction, list, activeIndex } = this;
+        const column = direction === 'column';
 
         return (
-            <div
-                className={`d-flex ${
-                    direction === 'row' ? 'flex-column' : 'flex-row'
-                }`}
-            >
+            <Fragment>
                 {this.renderHeader()}
 
-                <div className="tab-content">
+                <div
+                    className={classNames(
+                        'tab-content',
+                        'flex-fill',
+                        'bg-white',
+                        column && 'ml-3'
+                    )}
+                >
                     {(({ content }, index) => (
                         <section
+                            className={classNames(column && 'h-100')}
                             ref={(tag: HTMLElement) => (this.tabBody = tag)}
                             id={`${UID}_b_${index}`}
                             role="tabpanel"
@@ -161,9 +177,9 @@ export class TabList extends mixin<TabListProps>() {
                         >
                             {content}
                         </section>
-                    ))(list[this.activeIndex], this.activeIndex)}
+                    ))(list[activeIndex], activeIndex)}
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }
