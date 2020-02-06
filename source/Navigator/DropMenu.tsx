@@ -76,6 +76,29 @@ export class DropMenu extends mixin<DropMenuProps>() {
     @watch
     list: DropMenuItem[] = [];
 
+    outClose = ({ target }: MouseEvent) => {
+        if (
+            this.compareDocumentPosition(target as HTMLElement) &
+            Node.DOCUMENT_POSITION_CONTAINED_BY
+        )
+            return;
+
+        this.open = false;
+    };
+
+    escapeClose = ({ code }: KeyboardEvent) =>
+        code === 'Escape' && (this.open = false);
+
+    connectedCallback() {
+        document.body.addEventListener('click', this.outClose);
+        self.addEventListener('keydown', this.escapeClose);
+    }
+
+    disconnectedCallback() {
+        document.body.removeEventListener('click', this.outClose);
+        self.removeEventListener('keydown', this.escapeClose);
+    }
+
     renderButton() {
         const {
             UID,
@@ -153,7 +176,9 @@ export class DropMenu extends mixin<DropMenuProps>() {
                                 {title}
                             </a>
                         ) : title ? (
-                            <span className="dropdown-item-text">{title}</span>
+                            <span {...rest} className="dropdown-item-text">
+                                {title}
+                            </span>
                         ) : (
                             <div class="dropdown-divider" />
                         )

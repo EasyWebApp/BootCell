@@ -9,7 +9,7 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
-import { Theme, uniqueID, HTMLProps, WebCellProps } from '../utility';
+import { Theme, Status, uniqueID, WebCellProps } from '../utility';
 
 interface NavLinkProps {
     title: string;
@@ -29,9 +29,9 @@ export function NavLink({ title, href, active }: NavLinkProps) {
 }
 
 export interface NavBarProps extends WebCellProps {
-    title: string | VNodeChildElement;
+    brand?: VNodeChildElement;
     theme?: keyof typeof Theme;
-    background?: keyof typeof Theme;
+    background?: keyof typeof Theme | keyof typeof Status;
     narrow?: boolean;
     expand?: string;
     fixed?: string;
@@ -48,7 +48,7 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    title = '';
+    brand = document.title;
 
     @attribute
     @watch
@@ -76,10 +76,33 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     open = false;
 
+    outClose = ({ target }: MouseEvent) => {
+        if (
+            this.compareDocumentPosition(target as HTMLElement) &
+            Node.DOCUMENT_POSITION_CONTAINED_BY
+        )
+            return;
+
+        this.open = false;
+    };
+
+    escapeClose = ({ code }: KeyboardEvent) =>
+        code === 'Escape' && (this.open = false);
+
+    connectedCallback() {
+        document.body.addEventListener('click', this.outClose);
+        self.addEventListener('keydown', this.escapeClose);
+    }
+
+    disconnectedCallback() {
+        document.body.removeEventListener('click', this.outClose);
+        self.removeEventListener('keydown', this.escapeClose);
+    }
+
     renderContent() {
         const {
             UID,
-            props: { title, menu, open },
+            props: { brand, menu, open },
             defaultSlot
         } = this;
 
@@ -90,7 +113,7 @@ export class NavBar extends mixin<NavBarProps>() {
                     href="."
                     className="navbar-brand d-flex align-items-center"
                 >
-                    {title}
+                    {brand}
                 </a>
                 {menu[0] && (
                     <button

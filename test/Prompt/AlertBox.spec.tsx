@@ -14,7 +14,7 @@ describe('Alert Box', () => {
                 defaultSlot: 'Example'
             }),
             <aside
-                className="alert alert-primary alert-dismissible fade show"
+                className="alert alert-primary alert-dismissible fade"
                 role="alert"
             >
                 <h4 className="alert-heading">Test</h4>

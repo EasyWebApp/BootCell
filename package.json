@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "0.23.2",
+    "version": "0.25.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2 & BootStrap v4",
@@ -39,7 +39,7 @@
     "devDependencies": {
         "@types/classnames": "^2.2.9",
         "@types/core-js": "^2.5.2",
-        "@types/jest": "^24.9.0",
+        "@types/jest": "^25.1.1",
         "@types/marked": "^0.7.2",
         "@types/turndown": "^5.0.0",
         "@webcomponents/webcomponentsjs": "^2.4.1",
@@ -48,13 +48,13 @@
         "core-js": "^3.6.4",
         "dialog-polyfill": "0.5.0",
         "github-markdown-css": "^3.0.1",
-        "happy-dom": "^0.4.11",
-        "husky": "^3.1.0",
+        "happy-dom": "^0.10.8",
+        "husky": "^4.2.1",
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.2",
-        "jest": "^24.9.0",
+        "jest": "^25.1.0",
         "less": "^3.10.3",
-        "lint-staged": "^9.5.0",
+        "lint-staged": "^10.0.7",
         "markdown-ime": "^1.0.3",
         "marked": "^0.8.0",
         "microbundle": "^0.11.0",
@@ -63,11 +63,11 @@
         "prettier": "^1.19.1",
         "snabbdom": "^0.7.4",
         "snabbdom-looks-like": "^1.0.5",
-        "ts-jest": "^24.3.0",
+        "ts-jest": "^25.2.0",
         "turndown": "^5.0.3",
         "turndown-plugin-gfm": "^1.0.2",
-        "typedoc": "^0.15.8",
-        "typescript": "^3.7.4",
+        "typedoc": "^0.16.9",
+        "typescript": "^3.7.5",
         "web-animations-js": "^2.3.2",
         "web-cell": "^2.0.0-rc.15"
     },
@@ -83,8 +83,7 @@
     },
     "lint-staged": {
         "*.{html,md,less,json,yml,ts,tsx}": [
-            "prettier --write",
-            "git add"
+            "prettier --write"
         ]
     },
     "husky": {

@@ -7,7 +7,7 @@ export interface AlertProps {
     type?: keyof typeof Status | keyof typeof Theme;
     title?: string;
     closable?: boolean;
-    hidden?: boolean;
+    open?: boolean;
 }
 
 @component({
@@ -29,23 +29,10 @@ export class AlertBox extends mixin<AlertProps>() {
 
     @attribute
     @watch
-    hidden = false;
-
-    handleHidden = (event: MouseEvent) => {
-        event.preventDefault();
-
-        this.hidden = true;
-    };
+    open = false;
 
     render() {
-        const {
-            title,
-            type,
-            defaultSlot,
-            closable,
-            hidden,
-            handleHidden
-        } = this;
+        const { title, type, defaultSlot, closable, open } = this;
 
         return (
             <aside
@@ -53,18 +40,18 @@ export class AlertBox extends mixin<AlertProps>() {
                     'alert',
                     `alert-${type}`,
                     closable && 'alert-dismissible fade',
-                    hidden ? '' : 'show'
+                    open ? 'show' : ''
                 )}
                 role="alert"
             >
                 {title && <h4 className="alert-heading">{title}</h4>}
                 {defaultSlot}
-                {closable && (
+                {!closable ? null : (
                     <button
                         type="button"
                         className="close"
                         aria-label="Close"
-                        onClick={handleHidden}
+                        onClick={() => (this.open = false)}
                     >
                         <span aria-hidden="true">&times;</span>
                     </button>

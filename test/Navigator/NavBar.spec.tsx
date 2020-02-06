@@ -8,7 +8,7 @@ const { render, renderContent } = NavBar.prototype;
 
 function InlineNavBar({
     defaultSlot,
-    title,
+    brand,
     menu,
     theme,
     background,
@@ -21,10 +21,7 @@ function InlineNavBar({
             renderContent: renderContent.bind({
                 UID: 'test',
                 defaultSlot,
-                props: {
-                    title,
-                    menu
-                }
+                props: { brand, menu }
             })
         },
         {
@@ -41,7 +38,7 @@ describe('Navigator Bar', () => {
     it('should render Narrow Bar', () => {
         assertLooksLike(
             <InlineNavBar
-                title="Test"
+                brand="Test"
                 theme="dark"
                 background="dark"
                 expand="md"
