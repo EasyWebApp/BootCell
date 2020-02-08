@@ -20,11 +20,12 @@ function InlineNavBar({
         {
             renderContent: renderContent.bind({
                 UID: 'test',
-                defaultSlot,
-                props: { brand, menu }
+                defaultSlot
             })
         },
         {
+            brand,
+            menu,
             theme,
             background,
             expand,
@@ -41,7 +42,7 @@ describe('Navigator Bar', () => {
                 brand="Test"
                 theme="dark"
                 background="dark"
-                expand="md"
+                expand="xs"
                 fixed="top"
                 narrow={true}
                 menu={[
@@ -54,39 +55,38 @@ describe('Navigator Bar', () => {
             >
                 <a />
             </InlineNavBar>,
-            <header className="navbar navbar-dark bg-dark box-shadow navbar-expand-md fixed-top">
-                <div className="container">
-                    <a
-                        target="_top"
-                        href="."
-                        className="navbar-brand d-flex align-items-center"
-                    >
-                        Test
-                    </a>
-                    <button
-                        type="button"
-                        className="navbar-toggler"
-                        aria-controls="test"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="test">
-                        <ul className="navbar-nav">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/example">
-                                    Example
-                                    <span className="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div className="flex-grow-1 d-md-flex justify-content-end">
-                            <a />
-                        </div>
+
+            <div className="container">
+                <a
+                    target="_top"
+                    href="."
+                    className="navbar-brand d-flex align-items-center"
+                >
+                    Test
+                </a>
+                <button
+                    type="button"
+                    className="navbar-toggler"
+                    aria-controls="test"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="test">
+                    <ul className="navbar-nav">
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/example">
+                                Example
+                                <span className="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div className="flex-grow-1 d-flex justify-content-end">
+                        <a />
                     </div>
                 </div>
-            </header>
+            </div>
         );
     });
 });

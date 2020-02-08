@@ -9,7 +9,7 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
-import { Theme, Status, uniqueID, WebCellProps } from '../utility';
+import { Theme, Status, Size, uniqueID, WebCellProps } from '../utility';
 
 interface NavLinkProps {
     title: string;
@@ -33,7 +33,7 @@ export interface NavBarProps extends WebCellProps {
     theme?: keyof typeof Theme;
     background?: keyof typeof Theme | keyof typeof Status;
     narrow?: boolean;
-    expand?: string;
+    expand?: keyof typeof Size;
     fixed?: string;
     menu?: NavLinkProps[];
     open?: boolean;
@@ -90,8 +90,24 @@ export class NavBar extends mixin<NavBarProps>() {
         code === 'Escape' && (this.open = false);
 
     connectedCallback() {
+        const { theme, background, expand, fixed } = this.props;
+
+        const Class = classNames(
+            'navbar',
+            `navbar-${theme}`,
+            `bg-${background}`,
+            'box-shadow',
+            'navbar-expand' + (expand === 'xs' ? '' : '-' + expand),
+            `fixed-${fixed}`
+        );
+
+        if (this.className.trim()) this.className += ' ' + Class;
+        else this.className = Class;
+
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
+
+        super.connectedCallback();
     }
 
     disconnectedCallback() {
@@ -99,12 +115,8 @@ export class NavBar extends mixin<NavBarProps>() {
         self.removeEventListener('keydown', this.escapeClose);
     }
 
-    renderContent() {
-        const {
-            UID,
-            props: { brand, menu, open },
-            defaultSlot
-        } = this;
+    renderContent({ brand, menu, open, expand }: NavBarProps) {
+        const { UID, defaultSlot } = this;
 
         return (
             <Fragment>
@@ -144,7 +156,13 @@ export class NavBar extends mixin<NavBarProps>() {
                         ))}
                     </ul>
                     {defaultSlot[0] && (
-                        <div className="flex-grow-1 d-md-flex justify-content-end">
+                        <div
+                            className={classNames(
+                                'flex-grow-1',
+                                `d${expand === 'xs' ? '' : '-' + expand}-flex`,
+                                'justify-content-end'
+                            )}
+                        >
                             {this.defaultSlot}
                         </div>
                     )}
@@ -153,22 +171,9 @@ export class NavBar extends mixin<NavBarProps>() {
         );
     }
 
-    render({ theme, background, narrow, expand, fixed }: NavBarProps) {
-        const content = this.renderContent();
+    render({ narrow, ...rest }: NavBarProps) {
+        const content = this.renderContent(rest);
 
-        return (
-            <header
-                className={classNames(
-                    'navbar',
-                    `navbar-${theme}`,
-                    `bg-${background}`,
-                    'box-shadow',
-                    `navbar-expand-${expand}`,
-                    `fixed-${fixed}`
-                )}
-            >
-                {narrow ? <div className="container">{content}</div> : content}
-            </header>
-        );
+        return narrow ? <div className="container">{content}</div> : content;
     }
 }

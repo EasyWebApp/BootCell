@@ -52,6 +52,7 @@ describe('Tab List', () => {
                 </nav>
                 <div className="tab-content bg-white">
                     <section
+                        className="fade show"
                         id="sample_b_0"
                         role="tabpanel"
                         aria-labelledby="sample_h_0"
@@ -109,6 +110,7 @@ describe('Tab List', () => {
                 </div>
                 <div className="tab-content bg-white">
                     <section
+                        className="fade show"
                         id="sample_b_1"
                         role="tabpanel"
                         aria-labelledby="sample_h_1"

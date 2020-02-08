@@ -58,6 +58,7 @@ npm install boot-cell web-cell \
 ### Reminder
 
 1. [Badge](https://web-cell.dev/BootCell/interfaces/badgeprops.html)
+2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
 
 ### Navigator
 

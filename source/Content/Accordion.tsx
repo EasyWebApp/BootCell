@@ -42,6 +42,12 @@ export class AccordionList extends mixin<AccordionProps>() {
         }));
     }
 
+    connectedCallback() {
+        this.classList.add('accordion');
+
+        super.connectedCallback();
+    }
+
     render({ list }: AccordionProps) {
         const { UID } = this;
 

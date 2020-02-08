@@ -4,6 +4,8 @@ import {
     mixin,
     watch,
     attribute,
+    transitOut,
+    transitIn,
     createCell,
     Fragment
 } from 'web-cell';
@@ -27,14 +29,6 @@ export interface TabListProps {
     list?: TabItem[];
     activeIndex?: number;
 }
-
-const TabTransition = {
-    keyframes: [{ opacity: 1 }, { opacity: 0 }],
-    options: {
-        duration: 250,
-        easing: 'linear'
-    }
-};
 
 @component({
     tagName: 'tab-list',
@@ -81,11 +75,7 @@ export class TabList extends mixin<TabListProps>() {
 
         if (!this.tabBody) return;
 
-        const keyframes = [...TabTransition.keyframes];
-
-        await this.tabBody.animate(keyframes, TabTransition.options).finished;
-
-        this.tabBody.style.opacity = '0';
+        await transitOut(this.tabBody, 'show');
 
         const {
             dataset: { index }
@@ -93,10 +83,7 @@ export class TabList extends mixin<TabListProps>() {
 
         await this.setProps({ activeIndex: +index });
 
-        await this.tabBody.animate(keyframes.reverse(), TabTransition.options)
-            .finished;
-
-        this.tabBody.style.opacity = '1';
+        await transitIn(this.tabBody, 'show');
     };
 
     renderHeader() {
@@ -169,7 +156,11 @@ export class TabList extends mixin<TabListProps>() {
                 >
                     {(({ content }, index) => (
                         <section
-                            className={classNames(column && 'h-100')}
+                            className={classNames(
+                                'fade',
+                                'show',
+                                column && 'h-100'
+                            )}
                             ref={(tag: HTMLElement) => (this.tabBody = tag)}
                             id={`${UID}_b_${index}`}
                             role="tabpanel"
