@@ -4,6 +4,7 @@ export * from './Jumbotron';
 export * from './Card';
 export * from './MediaItem';
 export * from './EdgeDetector';
+export * from './Collapse';
 export * from './Accordion';
 export * from './TabList';
 export * from './Carousel';

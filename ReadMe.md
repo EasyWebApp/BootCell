@@ -52,8 +52,9 @@ npm install boot-cell web-cell \
 7. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
 8. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
 9. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-10. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-11. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+10. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+11. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+12. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Reminder
 

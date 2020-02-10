@@ -8,7 +8,9 @@ import {
     Fragment
 } from 'web-cell';
 import classNames from 'classnames';
+
 import { HTMLProps, uniqueID } from '../utility';
+import { CollapseBox } from './Collapse';
 
 interface AccordionItem {
     title: VNodeChildElement;
@@ -76,16 +78,14 @@ export class AccordionList extends mixin<AccordionProps>() {
                                     </button>
                                 </h2>
                             </header>
-                            <div
+                            <CollapseBox
                                 id={bID}
-                                className={classNames(
-                                    'collapse',
-                                    active && 'show'
-                                )}
                                 aria-labelledby={hID}
+                                key={bID}
+                                open={active}
                             >
                                 <div className="card-body">{content}</div>
-                            </div>
+                            </CollapseBox>
                         </section>
                     );
                 })}
