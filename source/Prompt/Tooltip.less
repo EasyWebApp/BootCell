@@ -1,0 +1,30 @@
+:global {
+    .tooltip {
+        &.bs-tooltip-top {
+            top: -110%;
+            & > .arrow {
+                left: 1rem;
+            }
+        }
+        &.bs-tooltip-bottom {
+            bottom: -110%;
+            & > .arrow {
+                left: 1rem;
+            }
+        }
+        &.bs-tooltip-left {
+            top: 10%;
+            right: 100%;
+            & > .arrow {
+                top: 0.5rem;
+            }
+        }
+        &.bs-tooltip-right {
+            top: 10%;
+            left: 100%;
+            & > .arrow {
+                top: 0.5rem;
+            }
+        }
+    }
+}
