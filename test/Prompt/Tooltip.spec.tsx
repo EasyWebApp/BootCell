@@ -2,21 +2,19 @@ import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell, Fragment } from 'web-cell';
 
-import { TooltipBox, TooltipProps } from '../../source/Prompt/Tooltip';
+import { TooltipBox } from '../../source/Prompt/Tooltip';
 import { Button } from '../../source/Form/Button';
 
 const { render } = TooltipBox.prototype;
 
-function Tooltip({ defaultSlot, text, position = 'top' }: TooltipProps) {
-    return render.call({ defaultSlot }, { text, position });
-}
-
 describe('Tooltip', () => {
     it('should render a Horizontal Tooltip defaultly', () => {
         assertLooksLike(
-            <Tooltip text="notice">
-                <Button>Test</Button>
-            </Tooltip>,
+            render({
+                defaultSlot: [<Button>Test</Button>],
+                text: 'notice',
+                position: 'top'
+            }),
             <Fragment>
                 <Button>Test</Button>
                 <div className="tooltip bs-tooltip-top fade" role="tooltip">

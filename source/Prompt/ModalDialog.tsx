@@ -9,10 +9,11 @@ import {
 import classNames from 'classnames';
 
 import { Button } from '../Form/Button';
+import { WebCellProps } from '../utility/type';
 
 import style from './ModalDialog.less';
 
-export interface ModalDialogProps {
+export interface ModalDialogProps extends WebCellProps {
     title?: VNodeChildElement;
     closeSlot?: VNodeChildElement;
     confirmSlot?: VNodeChildElement;
@@ -70,7 +71,13 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
         return result;
     }
 
-    render({ title, closeSlot, confirmSlot, size }: ModalDialogProps) {
+    render({
+        size,
+        defaultSlot,
+        title,
+        closeSlot,
+        confirmSlot
+    }: ModalDialogProps) {
         return (
             <dialog
                 className={classNames(
@@ -90,7 +97,7 @@ export class ModalDialog extends mixin<ModalDialogProps>() {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </header>
-                    <div className="modal-body">{this.defaultSlot}</div>
+                    <div className="modal-body">{defaultSlot}</div>
                     <footer className="modal-footer">
                         <Button type="reset" kind="secondary">
                             {closeSlot}

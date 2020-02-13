@@ -101,6 +101,8 @@ export class CarouselView extends mixin<CarouselProps>() {
                 () => this.pause || this.turnTo(),
                 this.interval * 1000
             );
+
+        super.connectedCallback();
     }
 
     disconnectedCallback() {

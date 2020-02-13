@@ -2,16 +2,16 @@ import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { AlertBox } from '../../source/Prompt/AlertBox';
+import { AlertBox } from '../../source/Prompt/Alert';
 
-describe('Alert Box', () => {
+describe('Alert', () => {
     it('should render a Dismissible Alert while "closable" property equals True', () => {
         assertLooksLike(
-            AlertBox.prototype.render.call({
+            AlertBox.prototype.render({
                 type: 'primary',
                 title: 'Test',
                 closable: true,
-                defaultSlot: 'Example'
+                defaultSlot: ['Example']
             }),
             <aside
                 className="alert alert-primary alert-dismissible fade"

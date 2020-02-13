@@ -115,8 +115,8 @@ export class NavBar extends mixin<NavBarProps>() {
         self.removeEventListener('keydown', this.escapeClose);
     }
 
-    renderContent({ brand, menu, open, expand }: NavBarProps) {
-        const { UID, defaultSlot } = this;
+    renderContent({ brand, menu, open, expand, defaultSlot }: NavBarProps) {
+        const { UID } = this;
 
         return (
             <Fragment>
@@ -163,7 +163,7 @@ export class NavBar extends mixin<NavBarProps>() {
                                 'justify-content-end'
                             )}
                         >
-                            {this.defaultSlot}
+                            {defaultSlot}
                         </div>
                     )}
                 </div>

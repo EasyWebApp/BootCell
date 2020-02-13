@@ -1,6 +1,6 @@
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, HTMLProps } from '../utility';
+import { HTMLHyperLinkProps, HTMLProps, WebCellProps } from '../utility';
 
 interface NavLink extends HTMLHyperLinkProps {
     title: string;
@@ -8,7 +8,7 @@ interface NavLink extends HTMLHyperLinkProps {
     disabled?: boolean;
 }
 
-export interface NavProps extends HTMLProps {
+export interface NavProps extends HTMLProps, WebCellProps {
     list: NavLink[];
     activeIndex?: number;
     direction?: 'row' | 'column';

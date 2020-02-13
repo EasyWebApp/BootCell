@@ -1,14 +1,13 @@
 import { createCell, Fragment, VNodeChildElement } from 'web-cell';
 import classNames from 'classnames';
 
-import { HTMLProps, Status, Theme } from '../utility';
+import { HTMLProps, WebCellProps, Status, Theme } from '../utility';
 import style from './Spinner.less';
 
-export interface SpinnerProps extends HTMLProps {
+export interface SpinnerProps extends HTMLProps, WebCellProps {
     type?: 'border' | 'grow';
     color?: keyof typeof Status | keyof typeof Theme;
     small?: boolean;
-    defaultSlot?: VNodeChildElement[];
     embed?: boolean;
 }
 

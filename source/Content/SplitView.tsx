@@ -8,6 +8,8 @@ import { Observable } from 'iterable-observer';
 export class SplitView extends mixin() {
     connectedCallback() {
         this.classList.add('d-flex', 'w-100');
+
+        super.connectedCallback();
     }
 
     toggleDrag({ type, target, pointerId }: PointerEvent) {

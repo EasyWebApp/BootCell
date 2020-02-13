@@ -1,10 +1,16 @@
-import { VNodeChildElement, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLProps, Status, Theme, BaseFieldProps } from '../utility';
+import {
+    HTMLProps,
+    WebCellProps,
+    Status,
+    Theme,
+    BaseFieldProps
+} from '../utility';
 
 import style from './Table.less';
 
-export interface TableProps extends HTMLProps {
+export interface TableProps extends HTMLProps, WebCellProps {
     theme?: keyof typeof Status | keyof typeof Theme;
     center?: boolean;
     border?: boolean;
@@ -12,7 +18,6 @@ export interface TableProps extends HTMLProps {
     hover?: boolean;
     small?: boolean;
     responsive?: '' | 'sm' | 'md' | 'lg' | 'xl';
-    defaultSlot?: VNodeChildElement[];
 }
 
 export function Table({

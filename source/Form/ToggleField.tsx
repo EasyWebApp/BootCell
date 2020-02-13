@@ -1,16 +1,15 @@
-import { VNodeChildElement, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { BaseFieldProps, uniqueID } from '../utility';
+import { BaseFieldProps, WebCellProps, uniqueID } from '../utility';
 import { FieldProps } from './FormField';
 import { ButtonProps } from './Button';
 
-export interface ToggleFieldProps extends BaseFieldProps {
+export interface ToggleFieldProps extends BaseFieldProps, WebCellProps {
     type: 'radio' | 'checkbox';
     checked?: boolean;
     indeterminate?: boolean;
     switch?: boolean;
     inline?: boolean;
-    defaultSlot?: VNodeChildElement[];
 }
 
 export function ToggleField({

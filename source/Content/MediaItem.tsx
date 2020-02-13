@@ -1,13 +1,12 @@
 import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLProps } from '../utility';
+import { HTMLProps, WebCellProps } from '../utility';
 
-export interface MediaItemProps extends HTMLProps {
+export interface MediaItemProps extends HTMLProps, WebCellProps {
     title: string;
     image: string | URL | VNodeChildElement;
     imageRow?: 'start' | 'center' | 'end';
     imageColumn?: 'left' | 'right';
-    defaultSlot?: VNodeChildElement[];
 }
 
 export function MediaItem({

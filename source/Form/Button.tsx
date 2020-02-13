@@ -1,15 +1,14 @@
-import { VNodeChildElement, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, Status, Theme } from '../utility';
+import { HTMLHyperLinkProps, WebCellProps, Status, Theme } from '../utility';
 
-export interface ButtonProps extends HTMLHyperLinkProps {
+export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
     disabled?: boolean;
     kind?: keyof typeof Status | keyof typeof Theme | 'link';
     outline?: boolean;
     size?: 'sm' | 'lg';
     block?: boolean;
-    defaultSlot?: VNodeChildElement[];
 }
 
 export function Button({

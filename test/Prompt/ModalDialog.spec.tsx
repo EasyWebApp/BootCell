@@ -9,16 +9,12 @@ import { Button } from '../../source/Form/Button';
 describe('Modal Dialog', () => {
     it('should render a Modal within <dialog /> & <form />', () => {
         assertLooksLike(
-            ModalDialog.prototype.render.call(
-                {
-                    defaultSlot: 'test'
-                },
-                {
-                    title: 'Test',
-                    closeSlot: 'Close',
-                    confirmSlot: 'Confirm'
-                }
-            ),
+            ModalDialog.prototype.render({
+                title: 'Test',
+                defaultSlot: ['test'],
+                closeSlot: 'Close',
+                confirmSlot: 'Confirm'
+            }),
             <dialog className={`${style.dialog} modal-dialog`}>
                 <form className="modal-content" method="dialog">
                     <header className="modal-header">

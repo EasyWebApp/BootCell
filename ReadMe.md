@@ -75,7 +75,8 @@ npm install boot-cell web-cell \
 3. [TooltipBox](https://web-cell.dev/BootCell/interfaces/tooltipprops.html)
 4. [PopoverBox](https://web-cell.dev/BootCell/interfaces/popoverprops.html)
 5. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
-6. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
+6. [ToastBox](https://web-cell.dev/BootCell/interfaces/toastprops.html)
+7. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
 
 ### Form
 

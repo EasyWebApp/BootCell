@@ -1,6 +1,12 @@
 import { VNodeChildElement, createCell } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, HTMLProps, Status, Theme } from '../utility';
+import {
+    HTMLHyperLinkProps,
+    HTMLProps,
+    WebCellProps,
+    Status,
+    Theme
+} from '../utility';
 
 interface ListItem extends HTMLHyperLinkProps {
     content?: VNodeChildElement[];
@@ -8,7 +14,7 @@ interface ListItem extends HTMLHyperLinkProps {
     disabled?: boolean;
 }
 
-export interface ListGroupProps extends HTMLProps {
+export interface ListGroupProps extends HTMLProps, WebCellProps {
     list: ListItem[];
     activeIndex?: number;
     flush?: boolean;

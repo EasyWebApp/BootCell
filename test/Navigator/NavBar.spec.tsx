@@ -17,12 +17,7 @@ function InlineNavBar({
     narrow
 }: NavBarProps) {
     return render.call(
-        {
-            renderContent: renderContent.bind({
-                UID: 'test',
-                defaultSlot
-            })
-        },
+        { renderContent: renderContent.bind({ UID: 'test' }) },
         {
             brand,
             menu,
@@ -30,7 +25,8 @@ function InlineNavBar({
             background,
             expand,
             fixed,
-            narrow
+            narrow,
+            defaultSlot
         }
     );
 }

@@ -1,7 +1,7 @@
-import { createCell, VNodeChildElement } from 'web-cell';
-import { BaseFieldProps, uniqueID } from '../utility';
+import { createCell } from 'web-cell';
+import { BaseFieldProps, WebCellProps, uniqueID } from '../utility';
 
-export interface FieldProps extends BaseFieldProps {
+export interface FieldProps extends BaseFieldProps, WebCellProps {
     is?: 'input' | 'select' | 'textarea';
     type?:
         | 'button'
@@ -28,7 +28,6 @@ export interface FieldProps extends BaseFieldProps {
         | 'week';
     label?: string;
     fileButton?: string;
-    defaultSlot?: VNodeChildElement[];
 }
 
 export function FormField({

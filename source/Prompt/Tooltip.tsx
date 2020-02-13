@@ -46,10 +46,10 @@ export class TooltipBox extends mixin<TooltipProps>() {
         super.connectedCallback();
     }
 
-    render({ text, position }: TooltipProps) {
+    render({ defaultSlot, text, position }: TooltipProps) {
         return (
             <Fragment>
-                {this.defaultSlot}
+                {defaultSlot}
 
                 <div
                     className={`tooltip bs-tooltip-${position} fade`}

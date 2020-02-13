@@ -92,6 +92,8 @@ export class DropMenu extends mixin<DropMenuProps>() {
     connectedCallback() {
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
+
+        super.connectedCallback();
     }
 
     disconnectedCallback() {

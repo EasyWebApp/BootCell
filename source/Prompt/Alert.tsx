@@ -1,9 +1,9 @@
 import { component, mixin, attribute, watch, createCell } from 'web-cell';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility';
+import { WebCellProps, Status, Theme } from '../utility';
 
-export interface AlertProps {
+export interface AlertProps extends WebCellProps {
     type?: keyof typeof Status | keyof typeof Theme;
     title?: string;
     closable?: boolean;
@@ -31,9 +31,7 @@ export class AlertBox extends mixin<AlertProps>() {
     @watch
     open = false;
 
-    render() {
-        const { title, type, defaultSlot, closable, open } = this;
-
+    render({ title, type, defaultSlot, closable, open }: AlertProps) {
         return (
             <aside
                 className={classNames(

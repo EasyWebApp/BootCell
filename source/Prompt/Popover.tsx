@@ -87,10 +87,10 @@ export class PopoverBox extends mixin<PopoverProps>() {
         self.addEventListener('click', this.toggleByClick);
     }
 
-    render({ header, body, position }: PopoverProps) {
+    render({ defaultSlot, header, body, position }: PopoverProps) {
         return (
             <Fragment>
-                {this.defaultSlot}
+                {defaultSlot}
 
                 <div
                     className={`popover bs-popover-${position} fade`}
