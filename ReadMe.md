@@ -73,8 +73,9 @@ npm install boot-cell web-cell \
 1. [Spinner](https://web-cell.dev/BootCell/interfaces/spinnerprops.html)
 2. [SpinnerBox](https://web-cell.dev/BootCell/interfaces/spinnerboxprops.html)
 3. [TooltipBox](https://web-cell.dev/BootCell/interfaces/tooltipprops.html)
-4. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
-5. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
+4. [PopoverBox](https://web-cell.dev/BootCell/interfaces/popoverprops.html)
+5. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
+6. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
 
 ### Form
 

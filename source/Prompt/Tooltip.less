@@ -1,25 +1,32 @@
 :global {
-    .tooltip {
-        &.bs-tooltip-top {
-            top: -110%;
+    .tooltip,
+    .popover {
+        &.bs-tooltip-top,
+        &.bs-popover-top {
+            top: auto;
+            bottom: 110%;
             & > .arrow {
                 left: 1rem;
             }
         }
-        &.bs-tooltip-bottom {
-            bottom: -110%;
+        &.bs-tooltip-bottom,
+        &.bs-popover-bottom {
+            top: 110%;
             & > .arrow {
                 left: 1rem;
             }
         }
-        &.bs-tooltip-left {
+        &.bs-tooltip-left,
+        &.bs-popover-left {
             top: 10%;
+            left: auto;
             right: 100%;
             & > .arrow {
                 top: 0.5rem;
             }
         }
-        &.bs-tooltip-right {
+        &.bs-tooltip-right,
+        &.bs-popover-right {
             top: 10%;
             left: 100%;
             & > .arrow {

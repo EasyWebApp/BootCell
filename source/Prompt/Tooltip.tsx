@@ -9,7 +9,6 @@ import {
     transitIn,
     transitOut
 } from 'web-cell';
-import classNames from 'classnames';
 
 import { WebCellProps } from '../utility/type';
 import { Position } from '../utility/constant';
@@ -26,7 +25,6 @@ export interface TooltipProps extends WebCellProps {
     renderTarget: 'children'
 })
 export class TooltipBox extends mixin<TooltipProps>() {
-    @attribute
     @watch
     text = '';
 
@@ -54,11 +52,7 @@ export class TooltipBox extends mixin<TooltipProps>() {
                 {this.defaultSlot}
 
                 <div
-                    className={classNames(
-                        'tooltip',
-                        'bs-tooltip-' + position,
-                        'fade'
-                    )}
+                    className={`tooltip bs-tooltip-${position} fade`}
                     role="tooltip"
                 >
                     <div className="arrow" />
