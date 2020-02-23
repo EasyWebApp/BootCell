@@ -37,7 +37,10 @@ describe('Carousel View', () => {
                             src="test.png"
                             alt="Test"
                         />
-                        <div className="carousel-caption d-none d-md-block">
+                        <div
+                            className="carousel-caption d-none d-md-block"
+                            style={{ textShadow: '1px 2px 3px black' }}
+                        >
                             <h5>Test</h5>
                             <p>test</p>
                         </div>
@@ -49,7 +52,10 @@ describe('Carousel View', () => {
                             src="example.png"
                             alt="Example"
                         />
-                        <div className="carousel-caption d-none d-md-block">
+                        <div
+                            className="carousel-caption d-none d-md-block"
+                            style={{ textShadow: '1px 2px 3px black' }}
+                        >
                             <h5>Example</h5>
                         </div>
                     </section>

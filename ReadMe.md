@@ -36,7 +36,6 @@ npm install boot-cell web-cell \
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations-next.min.js"></script>
 ```
 
 ## Components

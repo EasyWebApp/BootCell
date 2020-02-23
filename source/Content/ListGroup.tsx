@@ -24,7 +24,7 @@ export interface ListGroupProps extends HTMLProps, WebCellProps {
 export function ListGroup({
     className,
     list,
-    activeIndex = 0,
+    activeIndex = -1,
     flush,
     horizontal,
     defaultSlot,

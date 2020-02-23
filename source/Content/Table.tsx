@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import {
     HTMLProps,
     WebCellProps,
-    Status,
-    Theme,
+    TableCellProps,
     BaseFieldProps
-} from '../utility';
+} from '../utility/type';
+import { Status, Theme } from '../utility/constant';
+import { FieldProps } from '../Form';
 
 import style from './Table.less';
 
@@ -55,25 +56,33 @@ export function Table({
     );
 }
 
-export interface TableCellProps {
-    colSpan?: number;
-    rowSpan?: number;
+export interface InputCellProps extends TableCellProps, BaseFieldProps {
+    is?: FieldProps['is'];
+    type?: FieldProps['type'];
 }
-
-export type InputCellProps = TableCellProps & BaseFieldProps;
 
 export function InputCell({
     colSpan,
     rowspan,
+    is = 'input',
+    type,
     defaultSlot,
     ...rest
 }: InputCellProps) {
+    const className =
+        'form-control border-left-0 border-right-0 border-top-0 rounded-0';
+
     return (
         <td colSpan={colSpan} rowspan={rowspan}>
-            <input
-                className="form-control border-left-0 border-right-0 border-top-0 rounded-0"
-                {...rest}
-            />
+            {is === 'input' ? (
+                <input {...rest} type={type} className={className} />
+            ) : is === 'select' ? (
+                <select {...rest} className={className}>
+                    {defaultSlot}
+                </select>
+            ) : (
+                <textarea {...rest} className={className} />
+            )}
         </td>
     );
 }

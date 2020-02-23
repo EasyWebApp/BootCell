@@ -1,4 +1,12 @@
-import { component, mixin, watch, attribute, on, createCell } from 'web-cell';
+import {
+    component,
+    mixin,
+    watch,
+    attribute,
+    on,
+    watchMotion,
+    createCell
+} from 'web-cell';
 import classNames from 'classnames';
 
 import { uniqueID } from '../utility';
@@ -16,18 +24,6 @@ export interface CarouselProps {
     list?: CarouselItem[];
 }
 
-const SlideTransition = {
-    keyframes: [
-        { transform: 'translateX(-100%)' },
-        { transform: 'translateX(0)' },
-        { transform: 'translateX(100%)' }
-    ],
-    options: {
-        duration: 600,
-        easing: 'ease-in-out'
-    }
-};
-
 @component({
     tagName: 'carousel-view',
     renderTarget: 'children'
@@ -41,7 +37,11 @@ export class CarouselView extends mixin<CarouselProps>() {
 
     @attribute
     @watch
-    interval = 0;
+    set interval(interval: number) {
+        this.setProps({
+            interval: interval && interval < 0.6 ? 0.6 : interval
+        });
+    }
 
     @watch
     activeIndex = 0;
@@ -64,32 +64,24 @@ export class CarouselView extends mixin<CarouselProps>() {
 
         this.activeIndex = (index < 0 ? length + index : index) % length;
 
-        const left = children[activeIndex] as HTMLElement,
-            right = children[this.activeIndex] as HTMLElement,
-            keyframes = [...SlideTransition.keyframes];
+        const current = children[activeIndex] as HTMLElement,
+            next = children[this.activeIndex] as HTMLElement,
+            direction = 'carousel-item-' + (forward ? 'left' : 'right'),
+            order = 'carousel-item-' + (forward ? 'next' : 'prev');
 
-        (left.style.display = 'block'),
-            (left.style.transform = 'translateX(0)');
+        next.classList.add(order);
 
-        (right.style.display = 'block'),
-            (right.style.transform = keyframes[forward ? 0 : 2].transform);
+        await new Promise(resolve => self.requestAnimationFrame(resolve));
 
-        if (!forward) keyframes.reverse();
+        const end = watchMotion('transition', next);
 
-        return new Promise(resolve =>
-            self.requestAnimationFrame(() =>
-                Promise.all([
-                    left
-                        .animate(keyframes.slice(1), SlideTransition.options)
-                        .finished.then(() => (left.style.display = 'none')),
-                    right
-                        .animate(keyframes.slice(0, 2), SlideTransition.options)
-                        .finished.then(
-                            () => (right.style.transform = 'translateX(0)')
-                        )
-                ]).then(resolve)
-            )
-        );
+        current.classList.add(direction), next.classList.add(direction);
+
+        await end;
+
+        next.classList.remove(order, direction), next.classList.add('active');
+
+        current.classList.remove('active', direction);
     }
 
     private timer: number;
@@ -108,6 +100,12 @@ export class CarouselView extends mixin<CarouselProps>() {
     disconnectedCallback() {
         if (this.timer) clearInterval(this.timer);
     }
+
+    init = (tag: HTMLElement) => {
+        this.slideBox = tag;
+
+        tag.children[this.activeIndex].classList.add('active');
+    };
 
     handlePause = ({ type }: MouseEvent) =>
         (this.pause = type === 'mouseenter');
@@ -145,11 +143,8 @@ export class CarouselView extends mixin<CarouselProps>() {
                     ))}
                 </ol>
 
-                <div
-                    className="carousel-inner"
-                    ref={(tag: HTMLElement) => (this.slideBox = tag)}
-                >
-                    {list.map(({ image, title, detail }) => (
+                <div className="carousel-inner" ref={this.init}>
+                    {list.map(({ image, title, detail }, index) => (
                         <section className="carousel-item">
                             <img
                                 className="d-block w-100"
@@ -157,7 +152,10 @@ export class CarouselView extends mixin<CarouselProps>() {
                                 alt={title}
                             />
                             {title && (
-                                <div className="carousel-caption d-none d-md-block">
+                                <div
+                                    className="carousel-caption d-none d-md-block"
+                                    style={{ textShadow: '1px 2px 3px black' }}
+                                >
                                     <h5>{title}</h5>
                                     {detail && <p>{detail}</p>}
                                 </div>

@@ -18,11 +18,17 @@ export interface HTMLHyperLinkProps extends HTMLProps {
     target?: '_self' | '_parent' | '_top' | '_blank';
 }
 
+export interface TableCellProps {
+    colSpan?: number;
+    rowSpan?: number;
+}
+
 export interface BaseFieldProps extends HTMLProps {
     name?: string;
     defaultValue?: string;
     value?: string;
     required?: boolean;
+    disabled?: boolean;
     placeholder?: string;
     onFocus?: (event: FocusEvent) => any;
     onBlur?: (event: FocusEvent) => any;

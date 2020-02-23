@@ -8,8 +8,13 @@ describe('Nav', () => {
     it('should render Nav Links with different states', () => {
         assertLooksLike(
             <ListGroup
+                activeIndex={0}
                 list={[
-                    { title: 'Test', href: '#test', content: <i>Test</i> },
+                    {
+                        title: 'Test',
+                        href: '#test',
+                        content: <i>Test</i>
+                    },
                     {
                         title: 'Example',
                         href: '#example',
