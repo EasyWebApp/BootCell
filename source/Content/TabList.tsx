@@ -17,7 +17,7 @@ import { ListGroup } from './ListGroup';
 
 interface TabItem {
     title: string;
-    content?: VNodeChildElement[];
+    content?: VNodeChildElement | VNodeChildElement[];
     disabled?: boolean;
 }
 
@@ -129,7 +129,6 @@ export class TabList extends mixin<TabListProps>() {
                 itemWidth={tabWidth}
                 list={tabList}
                 activeIndex={activeIndex}
-                role="tablist"
                 aria-orientation={
                     direction === 'row' ? 'horizontal' : 'vertical'
                 }
@@ -151,7 +150,7 @@ export class TabList extends mixin<TabListProps>() {
                         'tab-content',
                         'flex-fill',
                         'bg-white',
-                        column && 'ml-3'
+                        column ? 'ml-3' : 'mt-2'
                     )}
                 >
                     {(({ content }, index) => (

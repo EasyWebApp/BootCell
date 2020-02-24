@@ -2,12 +2,12 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v2][2] & [BootStrap v4][3]
+[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v4][3] & [FontAwesome v5][4]
 
-[![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][4]
-[![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][5]
+[![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][5]
+[![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][6]
 
-[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][6]
+[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][7]
 
 ## Usage
 
@@ -27,6 +27,10 @@ npm install boot-cell web-cell \
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
 />
 <link
     rel="stylesheet"
@@ -59,6 +63,7 @@ npm install boot-cell web-cell \
 
 1. [Badge](https://web-cell.dev/BootCell/interfaces/badgeprops.html)
 2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
+3. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
 
 ### Navigator
 
@@ -117,6 +122,7 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [1]: https://www.webcomponents.org/
 [2]: https://web-cell.dev/
 [3]: https://getbootstrap.com/
-[4]: https://david-dm.org/EasyWebApp/BootCell
-[5]: https://travis-ci.com/EasyWebApp/BootCell
-[6]: https://nodei.co/npm/boot-cell/
+[4]: https://fontawesome.com/
+[5]: https://david-dm.org/EasyWebApp/BootCell
+[6]: https://travis-ci.com/EasyWebApp/BootCell
+[7]: https://nodei.co/npm/boot-cell/

@@ -4,10 +4,12 @@ import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { TabList } from '../../source/Content/TabList';
 
+const { render, renderHeader } = TabList.prototype;
+
 describe('Tab List', () => {
     it('should render a Tab List with "tabs" style', () => {
         assertLooksLike(
-            TabList.prototype.render.call({
+            render.call({
                 UID: 'sample',
                 mode: 'tabs',
                 direction: 'row',
@@ -16,12 +18,11 @@ describe('Tab List', () => {
                     { title: 'Example', content: 'example', disabled: true }
                 ],
                 activeIndex: 0,
-                renderHeader: TabList.prototype.renderHeader
+                renderHeader
             }),
             <Fragment>
                 <nav
                     className="nav flex-row nav-tabs"
-                    role="tablist"
                     aria-orientation="horizontal"
                 >
                     <a
@@ -50,7 +51,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </nav>
-                <div className="tab-content bg-white">
+                <div className="tab-content bg-white mt-2">
                     <section
                         className="fade show"
                         id="sample_b_0"
@@ -66,7 +67,7 @@ describe('Tab List', () => {
 
     it('should render a Tab List with horizontal "list" style', () => {
         assertLooksLike(
-            TabList.prototype.render.call({
+            render.call({
                 UID: 'sample',
                 mode: 'list',
                 direction: 'row',
@@ -75,7 +76,7 @@ describe('Tab List', () => {
                     { title: 'Example', content: 'example' }
                 ],
                 activeIndex: 1,
-                renderHeader: TabList.prototype.renderHeader
+                renderHeader
             }),
             <Fragment>
                 <div
@@ -108,7 +109,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </div>
-                <div className="tab-content bg-white">
+                <div className="tab-content bg-white mt-2">
                     <section
                         className="fade show"
                         id="sample_b_1"

@@ -1,12 +1,4 @@
-import {
-    component,
-    mixin,
-    watch,
-    attribute,
-    Fragment,
-    createCell,
-    watchMotion
-} from 'web-cell';
+import { component, mixin, watch, attribute, watchMotion } from 'web-cell';
 
 export interface CollapseProps {
     open: boolean;
@@ -62,9 +54,5 @@ export class CollapseBox extends mixin<CollapseProps>() {
         }).observe(this);
 
         super.connectedCallback();
-    }
-
-    render() {
-        return <Fragment>{this.defaultSlot}</Fragment>;
     }
 }
