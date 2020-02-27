@@ -107,3 +107,24 @@ export function insertToCursor(...nodes: Node[]) {
     range.deleteContents();
     range.insertNode(fragment);
 }
+
+export function watchVisible(
+    root: Element,
+    handler: (visible: boolean) => any
+) {
+    var last = document.visibilityState === 'visible' ? 1 : 0;
+
+    function change(state: number) {
+        if (state === 3 || last === 3) handler(state === 3);
+
+        last = state;
+    }
+
+    new IntersectionObserver(([{ isIntersecting }]) =>
+        change(isIntersecting ? last | 2 : last & 1)
+    ).observe(root);
+
+    document.addEventListener('visibilitychange', () =>
+        change(document.visibilityState === 'visible' ? last | 1 : last & 2)
+    );
+}

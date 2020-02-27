@@ -149,8 +149,7 @@ export class TabList extends mixin<TabListProps>() {
                     className={classNames(
                         'tab-content',
                         'flex-fill',
-                        'bg-white',
-                        column ? 'ml-3' : 'mt-2'
+                        column ? 'ml-3' : 'pt-2'
                     )}
                 >
                     {(({ content }, index) => (

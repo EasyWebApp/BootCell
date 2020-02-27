@@ -136,7 +136,7 @@ export class NavBar extends mixin<NavBarProps>() {
                         aria-label="Toggle navigation"
                         onClick={() => (this.open = !open)}
                     >
-                        <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon" />
                     </button>
                 )}
                 <div

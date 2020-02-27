@@ -10,6 +10,8 @@ describe('Carousel View', () => {
             CarouselView.prototype.render.call(
                 { UID: 'test' },
                 {
+                    controls: true,
+                    indicators: true,
                     activeIndex: 0,
                     list: [
                         {
@@ -26,8 +28,8 @@ describe('Carousel View', () => {
             ),
             <div className="carousel slide" id="test">
                 <ol className="carousel-indicators">
-                    <li className="active" data-index="0"></li>
-                    <li data-index="1"></li>
+                    <li className="active" data-index="0" />
+                    <li data-index="1" />
                 </ol>
 
                 <div className="carousel-inner">
@@ -70,7 +72,7 @@ describe('Carousel View', () => {
                     <span
                         className="carousel-control-prev-icon"
                         aria-hidden="true"
-                    ></span>
+                    />
                     <span className="sr-only">Previous</span>
                 </a>
 
@@ -83,7 +85,7 @@ describe('Carousel View', () => {
                     <span
                         className="carousel-control-next-icon"
                         aria-hidden="true"
-                    ></span>
+                    />
                     <span className="sr-only">Next</span>
                 </a>
             </div>

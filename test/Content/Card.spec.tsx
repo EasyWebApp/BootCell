@@ -34,4 +34,26 @@ describe('Card', () => {
             </div>
         );
     });
+
+    it('should render Image-overlay layout as "overlay" enabled', () => {
+        assertLooksLike(
+            <Card
+                className="bg-dark text-white"
+                title="Test"
+                text="example"
+                image="test.png"
+                overlay
+            >
+                <time>Last updated 3 mins ago</time>
+            </Card>,
+            <div className="card bg-dark text-white">
+                <img className="card-img" src="test.png" />
+                <div className="card-img-overlay">
+                    <h5 className="card-title">Test</h5>
+                    <p className="card-text">example</p>
+                    <time>Last updated 3 mins ago</time>
+                </div>
+            </div>
+        );
+    });
 });

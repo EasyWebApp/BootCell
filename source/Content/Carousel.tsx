@@ -3,13 +3,14 @@ import {
     mixin,
     watch,
     attribute,
-    on,
+    delegate,
     watchMotion,
-    createCell
+    createCell,
+    Fragment
 } from 'web-cell';
 import classNames from 'classnames';
 
-import { uniqueID } from '../utility';
+import { uniqueID, watchVisible } from '../utility';
 
 interface CarouselItem {
     image: string | URL;
@@ -19,6 +20,8 @@ interface CarouselItem {
 
 export interface CarouselProps {
     mode?: 'slide' | 'fade';
+    controls?: boolean;
+    indicators?: boolean;
     interval?: number;
     activeIndex?: number;
     list?: CarouselItem[];
@@ -37,6 +40,14 @@ export class CarouselView extends mixin<CarouselProps>() {
 
     @attribute
     @watch
+    controls = false;
+
+    @attribute
+    @watch
+    indicators = false;
+
+    @attribute
+    @watch
     set interval(interval: number) {
         this.setProps({
             interval: interval && interval < 0.6 ? 0.6 : interval
@@ -47,7 +58,11 @@ export class CarouselView extends mixin<CarouselProps>() {
     activeIndex = 0;
 
     @watch
-    list: CarouselItem[] = [];
+    set list(list: CarouselItem[]) {
+        this.setProps({ list }).then(() =>
+            this.slideBox.children[this.activeIndex]?.classList.add('active')
+        );
+    }
 
     private slideBox: HTMLElement;
 
@@ -88,11 +103,20 @@ export class CarouselView extends mixin<CarouselProps>() {
     private pause = false;
 
     connectedCallback() {
-        if (this.interval)
+        if (!this.list) this.list = [];
+
+        if (!this.controls && !this.indicators && !this.interval)
+            this.interval = 3;
+
+        if (this.interval) {
+            watchVisible(this, visible => (this.pause = !visible));
+
             this.timer = self.setInterval(
                 () => this.pause || this.turnTo(),
                 this.interval * 1000
             );
+        }
+        this.addEventListener('click', this.handleSwitch);
 
         super.connectedCallback();
     }
@@ -101,26 +125,19 @@ export class CarouselView extends mixin<CarouselProps>() {
         if (this.timer) clearInterval(this.timer);
     }
 
-    init = (tag: HTMLElement) => {
-        this.slideBox = tag;
-
-        tag.children[this.activeIndex].classList.add('active');
-    };
-
     handlePause = ({ type }: MouseEvent) =>
         (this.pause = type === 'mouseenter');
 
-    @on(
-        'click',
-        '.carousel-indicators li, .carousel-control-prev, .carousel-control-next'
-    )
-    handleSwitch(event: MouseEvent, { dataset: { index } }: HTMLElement) {
-        event.preventDefault(), event.stopPropagation();
+    handleSwitch = delegate(
+        '.carousel-indicators li, .carousel-control-prev, .carousel-control-next',
+        (event: MouseEvent, { dataset: { index } }: HTMLElement) => {
+            event.preventDefault(), event.stopPropagation();
 
-        this.turnTo(+index);
-    }
+            this.turnTo(+index);
+        }
+    );
 
-    render({ mode, activeIndex, list }: CarouselProps) {
+    render({ mode, indicators, activeIndex, list, controls }: CarouselProps) {
         const { UID } = this;
 
         return (
@@ -134,17 +151,23 @@ export class CarouselView extends mixin<CarouselProps>() {
                 onMouseEnter={this.handlePause}
                 onMouseLeave={this.handlePause}
             >
-                <ol className="carousel-indicators">
-                    {list.map((_, index) => (
-                        <li
-                            className={index === activeIndex ? 'active' : null}
-                            data-index={index + ''}
-                        ></li>
-                    ))}
-                </ol>
-
-                <div className="carousel-inner" ref={this.init}>
-                    {list.map(({ image, title, detail }, index) => (
+                {!indicators ? null : (
+                    <ol className="carousel-indicators">
+                        {list.map((_, index) => (
+                            <li
+                                className={
+                                    index === activeIndex ? 'active' : null
+                                }
+                                data-index={index + ''}
+                            />
+                        ))}
+                    </ol>
+                )}
+                <div
+                    className="carousel-inner"
+                    ref={(tag: HTMLElement) => (this.slideBox = tag)}
+                >
+                    {list.map(({ image, title, detail }) => (
                         <section className="carousel-item">
                             <img
                                 className="d-block w-100"
@@ -163,32 +186,34 @@ export class CarouselView extends mixin<CarouselProps>() {
                         </section>
                     ))}
                 </div>
-
-                <a
-                    className="carousel-control-prev"
-                    href={'#' + UID}
-                    role="button"
-                    data-index={activeIndex - 1 + ''}
-                >
-                    <span
-                        className="carousel-control-prev-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span className="sr-only">Previous</span>
-                </a>
-
-                <a
-                    className="carousel-control-next"
-                    href={'#' + UID}
-                    role="button"
-                    data-index={activeIndex + 1 + ''}
-                >
-                    <span
-                        className="carousel-control-next-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span className="sr-only">Next</span>
-                </a>
+                {!controls ? null : (
+                    <Fragment>
+                        <a
+                            className="carousel-control-prev"
+                            href={'#' + UID}
+                            role="button"
+                            data-index={activeIndex - 1 + ''}
+                        >
+                            <span
+                                className="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            />
+                            <span className="sr-only">Previous</span>
+                        </a>
+                        <a
+                            className="carousel-control-next"
+                            href={'#' + UID}
+                            role="button"
+                            data-index={activeIndex + 1 + ''}
+                        >
+                            <span
+                                className="carousel-control-next-icon"
+                                aria-hidden="true"
+                            />
+                            <span className="sr-only">Next</span>
+                        </a>
+                    </Fragment>
+                )}
             </div>
         );
     }

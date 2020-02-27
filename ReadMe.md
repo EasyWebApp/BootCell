@@ -38,8 +38,8 @@ npm install boot-cell web-cell \
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.2/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.2/webcomponents-bundle.js"></script>
 ```
 
 ## Components
@@ -99,17 +99,20 @@ npm install boot-cell web-cell \
 
 1. [Color](https://web-cell.dev/BootCell/enums/color.html)
 2. [Theme](https://web-cell.dev/BootCell/enums/theme.html)
-3. [Size](https://web-cell.dev/BootCell/enums/size.html)
-4. [Status](https://web-cell.dev/BootCell/enums/status.html)
-5. [ColorNames](https://web-cell.dev/BootCell/globals.html#colornames)
+3. [Status](https://web-cell.dev/BootCell/enums/status.html)
+4. [ColorNames](https://web-cell.dev/BootCell/globals.html#colornames)
+5. [Size](https://web-cell.dev/BootCell/enums/size.html)
+6. [Position](https://web-cell.dev/BootCell/enums/position.html)
 
 ## Utilities
 
 1. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
 2. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
 3. [parseDOM()](https://web-cell.dev/BootCell/globals.html#parsedom)
-4. [insertToCursor()](https://web-cell.dev/BootCell/globals.html#inserttocursor)
-5. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
+4. [walkDOM()](https://web-cell.dev/BootCell/globals.html#walkdom)
+5. [insertToCursor()](https://web-cell.dev/BootCell/globals.html#inserttocursor)
+6. [watchVisible()](https://web-cell.dev/BootCell/globals.html#watchvisible)
+7. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
 
 ## Theme
 

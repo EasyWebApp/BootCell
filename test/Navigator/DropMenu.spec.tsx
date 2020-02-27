@@ -74,7 +74,7 @@ describe('Drop Menu', () => {
                     >
                         Example
                     </a>
-                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider" />
                     <span className="dropdown-item-text">Sample</span>
                 </div>
             </div>

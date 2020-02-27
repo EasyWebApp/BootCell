@@ -51,7 +51,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </nav>
-                <div className="tab-content bg-white mt-2">
+                <div className="tab-content pt-2">
                     <section
                         className="fade show"
                         id="sample_b_0"
@@ -109,7 +109,7 @@ describe('Tab List', () => {
                         Example
                     </a>
                 </div>
-                <div className="tab-content bg-white mt-2">
+                <div className="tab-content pt-2">
                     <section
                         className="fade show"
                         id="sample_b_1"
