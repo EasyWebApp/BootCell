@@ -1,14 +1,15 @@
-import { createCell, Fragment } from 'web-cell';
+import { WebCellProps, createCell, Fragment } from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import { WebCellProps } from '../utility/type';
 
-export interface JumbotronProps extends WebCellProps {
+export interface JumbotronProps extends WebCellProps, HTMLProps {
     fluid?: boolean;
     title: string;
     description: string;
 }
 
 export function Jumbotron({
+    className,
     fluid,
     title,
     description,
@@ -29,7 +30,13 @@ export function Jumbotron({
     );
 
     return (
-        <header className={classNames('jumbotron', fluid && 'jumbotron-fluid')}>
+        <header
+            className={classNames(
+                'jumbotron',
+                fluid && 'jumbotron-fluid',
+                className
+            )}
+        >
             {fluid ? <div className="container">{content}</div> : content}
         </header>
     );

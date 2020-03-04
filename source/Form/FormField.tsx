@@ -1,5 +1,7 @@
-import { createCell } from 'web-cell';
-import { BaseFieldProps, WebCellProps, uniqueID } from '../utility';
+import { WebCellProps, createCell } from 'web-cell';
+import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
+import classNames from 'classnames';
 
 export interface FieldProps extends BaseFieldProps, WebCellProps {
     is?: 'input' | 'select' | 'textarea';
@@ -31,6 +33,7 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
 }
 
 export function FormField({
+    className,
     is,
     type = 'text',
     id = uniqueID(),
@@ -43,7 +46,7 @@ export function FormField({
 
     if (type === 'file')
         return (
-            <div className="custom-file">
+            <div className={classNames('custom-file', className)}>
                 <input
                     {...rest}
                     type="file"
@@ -78,7 +81,7 @@ export function FormField({
     };
 
     return (
-        <div className="form-group">
+        <div className={classNames('form-group', className)}>
             {label && <label htmlFor={id}>{label}</label>}
 
             {!is && defaultSlot[0] ? defaultSlot : field[is || 'input']}

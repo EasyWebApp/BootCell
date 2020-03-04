@@ -1,6 +1,11 @@
-import { VNodeChildElement, createCell, Fragment } from 'web-cell';
+import {
+    WebCellProps,
+    VNodeChildElement,
+    createCell,
+    Fragment
+} from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import { HTMLProps, WebCellProps } from '../utility';
 
 export interface CardProps extends HTMLProps, WebCellProps {
     subtitle?: string;
@@ -13,7 +18,7 @@ export interface CardProps extends HTMLProps, WebCellProps {
 }
 
 export function Card({
-    className = '',
+    className,
     title,
     subtitle,
     text,

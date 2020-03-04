@@ -4,13 +4,12 @@ import {
     mixin,
     watch,
     attribute,
-    transitOut,
-    transitIn,
     createCell,
     Fragment
 } from 'web-cell';
+import { uniqueID } from 'web-utility/source/data';
+import { transitOut, transitIn } from 'web-utility/source/animation';
 import classNames from 'classnames';
-import { uniqueID } from '../utility';
 
 import { NavProps, Nav } from '../Navigator';
 import { ListGroup } from './ListGroup';

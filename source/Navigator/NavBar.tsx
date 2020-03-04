@@ -1,4 +1,5 @@
 import {
+    WebCellProps,
     createCell,
     VNodeChildElement,
     component,
@@ -7,9 +8,10 @@ import {
     attribute,
     Fragment
 } from 'web-cell';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { Theme, Status, Size, uniqueID, WebCellProps } from '../utility';
+import { Theme, Status, Size } from '../utility/constant';
 
 interface NavLinkProps {
     title: string;

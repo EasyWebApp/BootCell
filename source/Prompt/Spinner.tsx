@@ -1,7 +1,13 @@
-import { createCell, Fragment, VNodeChildElement } from 'web-cell';
+import {
+    WebCellProps,
+    createCell,
+    Fragment,
+    VNodeChildElement
+} from 'web-cell';
 import classNames from 'classnames';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 
-import { HTMLProps, WebCellProps, Status, Theme } from '../utility';
+import { Status, Theme } from '../utility/constant';
 import style from './Spinner.less';
 
 export interface SpinnerProps extends HTMLProps, WebCellProps {
@@ -12,6 +18,7 @@ export interface SpinnerProps extends HTMLProps, WebCellProps {
 }
 
 export function Spinner({
+    className,
     type = 'border',
     color,
     small,
@@ -31,7 +38,8 @@ export function Spinner({
             className={classNames(
                 scope,
                 color && `text-${color}`,
-                small && `${scope}-sm`
+                small && `${scope}-sm`,
+                className
             )}
             role="status"
             aria-hidden={!!hidden + ''}

@@ -7,9 +7,10 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { HTMLProps, uniqueID } from '../utility';
 import { CollapseBox } from './Collapse';
 
 interface AccordionItem {

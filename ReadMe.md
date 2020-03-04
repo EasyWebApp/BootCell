@@ -51,7 +51,7 @@ npm install boot-cell web-cell \
 3. [InputCell](https://web-cell.dev/BootCell/globals.html#inputcellprops)
 4. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
 5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-6. [MediaItem](https://web-cell.dev/BootCell/interfaces/mediaitemprops.html)
+6. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
 7. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
 8. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
 9. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
@@ -64,6 +64,7 @@ npm install boot-cell web-cell \
 1. [Badge](https://web-cell.dev/BootCell/interfaces/badgeprops.html)
 2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
 3. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
+4. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
 
 ### Navigator
 

@@ -1,15 +1,18 @@
-import { createCell, transitOut } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
+import { transitOut } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
-import { WebCellProps, Status, Theme } from '../utility';
+import { Status, Theme } from '../utility/constant';
 
-export interface AlertProps extends WebCellProps {
+export interface AlertProps extends WebCellProps, HTMLProps {
     type?: keyof typeof Status | keyof typeof Theme;
     title?: string;
     closable?: boolean;
 }
 
 export function Alert({
+    className,
     type = 'primary',
     title,
     defaultSlot,
@@ -21,7 +24,8 @@ export function Alert({
                 'alert',
                 `alert-${type}`,
                 closable && 'alert-dismissible fade',
-                'show'
+                'show',
+                className
             )}
             role="alert"
         >

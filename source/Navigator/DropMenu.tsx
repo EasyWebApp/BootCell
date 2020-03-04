@@ -7,9 +7,10 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
+import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { HTMLHyperLinkProps, uniqueID } from '../utility';
 import { ButtonProps, Button } from '../Form/Button';
 
 export interface DropMenuItem extends HTMLHyperLinkProps {

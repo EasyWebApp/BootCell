@@ -1,7 +1,8 @@
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { HTMLProps, WebCellProps, Status } from '../utility';
+import { Status } from '../utility/constant';
 
 export interface ProgressProps extends HTMLProps, WebCellProps {
     striped?: boolean;
@@ -11,6 +12,7 @@ export interface ProgressProps extends HTMLProps, WebCellProps {
 }
 
 export function Progress({
+    className,
     striped,
     animated,
     status = 'primary',
@@ -19,7 +21,7 @@ export function Progress({
     ...rest
 }: ProgressProps) {
     return (
-        <div {...rest} className="progress">
+        <div {...rest} className={classNames('progress', className)}>
             <div
                 className={classNames(
                     'progress-bar',

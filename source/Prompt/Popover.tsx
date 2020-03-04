@@ -1,16 +1,15 @@
 import {
+    WebCellProps,
     VNodeChildElement,
     component,
     mixin,
     createCell,
     Fragment,
     watch,
-    attribute,
-    transitIn,
-    transitOut
+    attribute
 } from 'web-cell';
+import { transitIn, transitOut } from 'web-utility/source/animation';
 
-import { WebCellProps } from '../utility/type';
 import { Position } from '../utility/constant';
 
 import './Tooltip.less';

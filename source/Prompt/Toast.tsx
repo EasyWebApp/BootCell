@@ -1,14 +1,15 @@
 import {
+    WebCellProps,
     VNodeChildElement,
     component,
     mixin,
     watch,
     attribute,
-    transitOut,
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps, WebCellProps } from '../utility/type';
+import { HTMLProps } from 'web-utility/source/DOM-type';
+import { transitOut } from 'web-utility/source/animation';
 
 export interface ToastProps extends HTMLProps, WebCellProps {
     icon: VNodeChildElement;

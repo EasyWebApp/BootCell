@@ -1,6 +1,8 @@
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, WebCellProps, Status, Theme } from '../utility';
+
+import { Status, Theme } from '../utility/constant';
 
 interface BadgeProps extends HTMLHyperLinkProps, WebCellProps {
     kind?: keyof typeof Status | keyof typeof Theme;

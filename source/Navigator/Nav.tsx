@@ -1,6 +1,6 @@
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { HTMLHyperLinkProps, HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, HTMLProps, WebCellProps } from '../utility';
 
 interface NavLink extends HTMLHyperLinkProps {
     title: string;

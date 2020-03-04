@@ -4,13 +4,13 @@ import {
     watch,
     attribute,
     delegate,
-    watchMotion,
     createCell,
     Fragment
 } from 'web-cell';
+import { uniqueID } from 'web-utility/source/data';
+import { watchMotion } from 'web-utility/source/animation';
+import { watchVisible } from 'web-utility/source/DOM';
 import classNames from 'classnames';
-
-import { uniqueID, watchVisible } from '../utility';
 
 interface CarouselItem {
     image: string | URL;
@@ -67,12 +67,12 @@ export class CarouselView extends mixin<CarouselProps>() {
     private slideBox: HTMLElement;
 
     async turnTo(index = this.activeIndex + 1) {
-        if (!this.slideBox) return;
-
         const {
             list: { length },
             activeIndex
         } = this;
+
+        if (!this.slideBox || !length) return;
 
         const { children } = this.slideBox,
             forward = activeIndex < index;
@@ -151,7 +151,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                 onMouseEnter={this.handlePause}
                 onMouseLeave={this.handlePause}
             >
-                {!indicators ? null : (
+                {!indicators || !list[1] ? null : (
                     <ol className="carousel-indicators">
                         {list.map((_, index) => (
                             <li
@@ -186,7 +186,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                         </section>
                     ))}
                 </div>
-                {!controls ? null : (
+                {!controls || !list[1] ? null : (
                     <Fragment>
                         <a
                             className="carousel-control-prev"

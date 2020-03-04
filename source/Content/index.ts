@@ -2,7 +2,7 @@ export * from './ListGroup';
 export * from './Table';
 export * from './Jumbotron';
 export * from './Card';
-export * from './MediaItem';
+export * from './MediaObject';
 export * from './EdgeDetector';
 export * from './Collapse';
 export * from './Accordion';

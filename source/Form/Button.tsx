@@ -1,6 +1,8 @@
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import { HTMLHyperLinkProps, WebCellProps, Status, Theme } from '../utility';
+
+import { Status, Theme } from '../utility/constant';
 
 export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';

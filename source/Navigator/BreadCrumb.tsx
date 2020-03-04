@@ -1,13 +1,13 @@
 import { createCell } from 'web-cell';
-import { HTMLHyperLinkProps } from '../utility';
+import { HTMLProps, HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 
-export interface BreadcrumbProps {
+export interface BreadcrumbProps extends HTMLProps {
     path: HTMLHyperLinkProps[];
 }
 
-export function BreadCrumb({ path }: BreadcrumbProps) {
+export function BreadCrumb({ className, path }: BreadcrumbProps) {
     return (
-        <nav aria-label="breadcrumb">
+        <nav className={className} aria-label="breadcrumb">
             <ol className="breadcrumb">
                 {path.map(({ title, ...rest }, index, { length }) =>
                     index + 1 === length ? (

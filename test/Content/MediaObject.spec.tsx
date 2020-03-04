@@ -2,57 +2,59 @@ import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { MediaItem } from '../../source/Content/MediaItem';
+import { MediaObject } from '../../source/Content/MediaObject';
 
 describe('Media Item', () => {
     it('should render Left layout defaultly', () => {
         assertLooksLike(
-            <MediaItem title="Test" image="test.png" />,
-            <section className="media">
+            <MediaObject title="Test" image="test.png" />,
+            <div className="media">
                 <img
-                    src="test.png"
                     className="align-self-start mr-3"
+                    style={{ width: '4rem' }}
+                    src="test.png"
                     alt="Test"
                 />
                 <div className="media-body">
                     <h5 className="mt-0">Test</h5>
                 </div>
-            </section>
+            </div>
         );
     });
 
     it('should render Right layout based on Flex', () => {
         assertLooksLike(
-            <MediaItem title="Test" image="test.png" imageColumn="right" />,
-            <section className="media flex-row-reverse">
+            <MediaObject title="Test" image="test.png" imageColumn="right" />,
+            <div className="media flex-row-reverse">
                 <img
-                    src="test.png"
                     className="align-self-start ml-3"
+                    style={{ width: '4rem' }}
+                    src="test.png"
                     alt="Test"
                 />
                 <div className="media-body">
                     <h5 className="mt-0">Test</h5>
                 </div>
-            </section>
+            </div>
         );
     });
 
     it('should be able to slot Custom Image & Text', () => {
         assertLooksLike(
-            <MediaItem
+            <MediaObject
                 title="Test"
                 image={<img src="test.png" />}
                 imageColumn="right"
             >
                 Example
-            </MediaItem>,
-            <section className="media flex-row-reverse">
+            </MediaObject>,
+            <div className="media flex-row-reverse">
                 <img src="test.png" />
                 <div className="media-body">
                     <h5 className="mt-0">Test</h5>
                     Example
                 </div>
-            </section>
+            </div>
         );
     });
 });

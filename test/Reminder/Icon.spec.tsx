@@ -2,7 +2,7 @@ import '../polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { Icon } from '../../source/Reminder/Icon';
+import { Icon, BGIcon } from '../../source/Reminder/Icon';
 
 describe('Icon', () => {
     it('should render a Solid-style Icon defaultly', () => {
@@ -39,6 +39,16 @@ describe('Icon', () => {
                     Home
                 </li>
             </ul>
+        );
+    });
+
+    it('should render a Stacked Square Icon', () => {
+        assertLooksLike(
+            <BGIcon type="square" name="github" size={2} color="dark" />,
+            <span className="fa-stack fa-2x text-dark">
+                <span className="fas fa-square fa-stack-2x" />
+                <span className="fas fa-github fa-inverse fa-stack-1x" />
+            </span>
         );
     });
 });

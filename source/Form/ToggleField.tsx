@@ -1,6 +1,8 @@
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
+import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
-import { BaseFieldProps, WebCellProps, uniqueID } from '../utility';
+
 import { FieldProps } from './FormField';
 import { ButtonProps } from './Button';
 
@@ -13,6 +15,7 @@ export interface ToggleFieldProps extends BaseFieldProps, WebCellProps {
 }
 
 export function ToggleField({
+    className,
     type,
     checked,
     indeterminate,
@@ -27,7 +30,8 @@ export function ToggleField({
             className={classNames(
                 'custom-control',
                 `custom-${Switch ? 'switch' : type}`,
-                inline && 'custom-control-inline'
+                inline && 'custom-control-inline',
+                className
             )}
         >
             <input
@@ -63,13 +67,14 @@ function toggleActive(event: MouseEvent) {
 }
 
 export function ToggleGroup({
+    className,
     list,
     type,
     name,
     kind = 'primary'
 }: ToggleGroupProps) {
     return (
-        <div className="btn-group btn-group-toggle">
+        <div className={classNames('btn-group', 'btn-group-toggle', className)}>
             {list.map(({ checked, title, ...rest }) => (
                 <label
                     className={classNames(

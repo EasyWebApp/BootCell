@@ -1,4 +1,5 @@
 import {
+    WebCellProps,
     VNodeChildElement,
     component,
     mixin,
@@ -9,7 +10,6 @@ import {
 import classNames from 'classnames';
 
 import { Button } from '../Form/Button';
-import { WebCellProps } from '../utility/type';
 
 import style from './ModalDialog.less';
 

@@ -1,4 +1,4 @@
-export * from './utility';
+export * from './utility/constant';
 export * from './Content';
 export * from './Reminder';
 export * from './Prompt';

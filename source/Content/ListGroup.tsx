@@ -1,12 +1,8 @@
-import { VNodeChildElement, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, createCell } from 'web-cell';
+import { HTMLHyperLinkProps, HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
-import {
-    HTMLHyperLinkProps,
-    HTMLProps,
-    WebCellProps,
-    Status,
-    Theme
-} from '../utility';
+
+import { Status, Theme } from '../utility/constant';
 
 interface ListItem extends HTMLHyperLinkProps {
     content?: VNodeChildElement[];

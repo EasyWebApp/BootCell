@@ -1,4 +1,5 @@
-import { component, mixin, watch, attribute, watchMotion } from 'web-cell';
+import { component, mixin, watch, attribute } from 'web-cell';
+import { watchMotion } from 'web-utility/source/animation';
 
 export interface CollapseProps {
     open: boolean;

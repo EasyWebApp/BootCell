@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-beta.4",
+    "version": "1.0.0-beta.7",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -34,7 +34,8 @@
         "marked": "^0.8.0",
         "turndown": "^5.0.3",
         "turndown-plugin-gfm": "^1.0.2",
-        "web-cell": "^2.0.0-rc.19"
+        "web-cell": "^2.0.0-rc.20",
+        "web-utility": "^0.11.2"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.9",
@@ -66,9 +67,10 @@
         "ts-jest": "^25.2.1",
         "turndown": "^5.0.3",
         "turndown-plugin-gfm": "^1.0.2",
-        "typedoc": "^0.16.10",
-        "typescript": "^3.8.2",
-        "web-cell": "^2.0.0-rc.19"
+        "typedoc": "^0.16.11",
+        "typescript": "^3.8.3",
+        "web-cell": "^2.0.0-rc.20",
+        "web-utility": "^0.11.2"
     },
     "scripts": {
         "lint": "lint-staged",
@@ -98,6 +100,7 @@
     "jest": {
         "preset": "ts-jest",
         "testEnvironment": "node",
+        "transformIgnorePatterns": [],
         "moduleNameMapper": {
             "^.+\\.(css|less)$": "identity-obj-proxy"
         }

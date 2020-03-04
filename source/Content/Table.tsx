@@ -1,11 +1,11 @@
-import { createCell } from 'web-cell';
-import classNames from 'classnames';
+import { WebCellProps, createCell } from 'web-cell';
 import {
     HTMLProps,
-    WebCellProps,
     TableCellProps,
     BaseFieldProps
-} from '../utility/type';
+} from 'web-utility/source/DOM-type';
+import classNames from 'classnames';
+
 import { Status, Theme } from '../utility/constant';
 import { FieldProps } from '../Form';
 
@@ -22,6 +22,7 @@ export interface TableProps extends HTMLProps, WebCellProps {
 }
 
 export function Table({
+    className,
     theme,
     center,
     border,
@@ -35,7 +36,10 @@ export function Table({
     return (
         <div
             {...rest}
-            className={`table-responsive${responsive && '-' + responsive}`}
+            className={classNames(
+                `table-responsive${responsive && '-' + responsive}`,
+                className
+            )}
         >
             <table
                 className={classNames(
@@ -62,6 +66,7 @@ export interface InputCellProps extends TableCellProps, BaseFieldProps {
 }
 
 export function InputCell({
+    className,
     colSpan,
     rowspan,
     is = 'input',
@@ -69,19 +74,19 @@ export function InputCell({
     defaultSlot,
     ...rest
 }: InputCellProps) {
-    const className =
+    const Class =
         'form-control border-left-0 border-right-0 border-top-0 rounded-0';
 
     return (
-        <td colSpan={colSpan} rowspan={rowspan}>
+        <td colSpan={colSpan} rowspan={rowspan} className={className}>
             {is === 'input' ? (
-                <input {...rest} type={type} className={className} />
+                <input {...rest} type={type} className={Class} />
             ) : is === 'select' ? (
-                <select {...rest} className={className}>
+                <select {...rest} className={Class}>
                     {defaultSlot}
                 </select>
             ) : (
-                <textarea {...rest} className={className} />
+                <textarea {...rest} className={Class} />
             )}
         </td>
     );

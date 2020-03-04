@@ -1,8 +1,8 @@
 import { component, mixin } from 'web-cell';
+import { parseDOM, insertToCursor } from 'web-utility/source/DOM';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
 
-import { parseDOM, insertToCursor } from '../utility';
 import { SafeTurnDown } from '../utility/TurnDown';
 
 const parser = new SafeTurnDown();
