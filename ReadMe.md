@@ -38,8 +38,8 @@ npm install boot-cell web-cell \
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.2/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.2/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
 ```
 
 ## Components
@@ -72,6 +72,8 @@ npm install boot-cell web-cell \
 2. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
 3. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
 4. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
+5. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+6. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
 
 ### Prompt
 
@@ -107,13 +109,7 @@ npm install boot-cell web-cell \
 
 ## Utilities
 
-1. [uniqueID()](https://web-cell.dev/BootCell/globals.html#uniqueid)
-2. [parseTextTable()](https://web-cell.dev/BootCell/globals.html#parsetexttable)
-3. [parseDOM()](https://web-cell.dev/BootCell/globals.html#parsedom)
-4. [walkDOM()](https://web-cell.dev/BootCell/globals.html#walkdom)
-5. [insertToCursor()](https://web-cell.dev/BootCell/globals.html#inserttocursor)
-6. [watchVisible()](https://web-cell.dev/BootCell/globals.html#watchvisible)
-7. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
+1. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
 
 ## Theme
 
