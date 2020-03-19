@@ -3,6 +3,8 @@ import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
+import style from './FormField.less';
+
 export interface FieldProps extends BaseFieldProps, WebCellProps {
     is?: 'input' | 'select' | 'textarea';
     type?:
@@ -29,6 +31,7 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
         | 'url'
         | 'week';
     label?: string;
+    labelFloat?: boolean;
     fileButton?: string;
 }
 
@@ -38,6 +41,7 @@ export function FormField({
     type = 'text',
     id = uniqueID(),
     label,
+    labelFloat,
     fileButton = 'Browse',
     defaultSlot,
     ...rest
@@ -80,11 +84,21 @@ export function FormField({
         textarea: <textarea {...rest} className="form-control" id={id} />
     };
 
-    return (
-        <div className={classNames('form-group', className)}>
-            {label && <label htmlFor={id}>{label}</label>}
+    if (labelFloat) label = label || rest.placeholder;
 
-            {!is && defaultSlot[0] ? defaultSlot : field[is || 'input']}
+    defaultSlot = [
+        label && <label htmlFor={id}>{label}</label>,
+        !is && defaultSlot[0] ? defaultSlot : field[is || 'input']
+    ];
+
+    return (
+        <div
+            className={classNames(
+                labelFloat ? style['form-label-group'] : 'form-group',
+                className
+            )}
+        >
+            {labelFloat ? defaultSlot.reverse() : defaultSlot}
         </div>
     );
 }

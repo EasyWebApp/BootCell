@@ -129,7 +129,7 @@ export class NavBar extends mixin<NavBarProps>() {
                 >
                     {brand}
                 </a>
-                {menu[0] && (
+                {(menu[0] || defaultSlot[0]) && (
                     <button
                         type="button"
                         className="navbar-toggler"

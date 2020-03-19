@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-rc.0",
+    "version": "1.0.0-rc.1",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -57,7 +57,7 @@
         "less": "^3.11.1",
         "lint-staged": "^10.0.8",
         "markdown-ime": "^1.0.3",
-        "marked": "^0.8.0",
+        "marked": "^0.8.1",
         "microbundle": "^0.11.0",
         "open-cli": "^5.0.0",
         "parcel-bundler": "^1.12.4",

@@ -3,6 +3,7 @@ import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
 import { FormField } from '../../source/Form/FormField';
+import style from '../../source/Form/FormField.less';
 
 describe('Form Fields', () => {
     it('should render a Text Input with Form Group wrapped defaultly', () => {
@@ -56,6 +57,21 @@ describe('Form Fields', () => {
                 >
                     Image
                 </label>
+            </div>
+        );
+    });
+
+    it('should render a Form Field with a Floating Label', () => {
+        assertLooksLike(
+            <FormField id="test" labelFloat placeholder="Test" />,
+            <div className={style['form-label-group']}>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="test"
+                    placeholder="Test"
+                />
+                <label htmlFor="test">Test</label>
             </div>
         );
     });
