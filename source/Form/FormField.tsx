@@ -46,7 +46,9 @@ export function FormField({
     defaultSlot,
     ...rest
 }: FieldProps = {}) {
-    label = label || rest.name;
+    if (labelFloat && !label) label = rest.placeholder;
+
+    if (!label) label = rest.name;
 
     if (type === 'file')
         return (
@@ -83,8 +85,6 @@ export function FormField({
         ),
         textarea: <textarea {...rest} className="form-control" id={id} />
     };
-
-    if (labelFloat) label = label || rest.placeholder;
 
     defaultSlot = [
         label && <label htmlFor={id}>{label}</label>,

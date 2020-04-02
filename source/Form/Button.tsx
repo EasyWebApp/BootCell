@@ -3,6 +3,7 @@ import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status, Theme } from '../utility/constant';
+import { IconProps, Icon } from '../Reminder';
 
 export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
@@ -64,5 +65,29 @@ export function Button({
         >
             {defaultSlot}
         </button>
+    );
+}
+
+export type IconButtonProps = IconProps & ButtonProps;
+
+export function IconButton({
+    className,
+    type,
+    disabled,
+    href,
+    target,
+    kind,
+    outline,
+    size,
+    block,
+    ...icon
+}: IconButtonProps) {
+    return (
+        <Button
+            className={classNames('p-1', className)}
+            {...{ type, disabled, href, target, kind, outline, size, block }}
+        >
+            <Icon {...icon} />
+        </Button>
     );
 }

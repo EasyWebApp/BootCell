@@ -190,31 +190,35 @@ export class DropMenu extends mixin<DropMenuProps>() {
         );
     }
 
-    render({ href, direction, open }: DropMenuProps) {
-        return (
-            <div
-                className={classNames(
-                    href || direction !== 'down' ? 'btn-group' : 'dropdown',
-                    (href
-                        ? !['down', 'left'].includes(direction)
-                        : direction !== 'down') && `drop${direction}`,
-                    open && 'show'
-                )}
-            >
-                {href && direction === 'left' ? (
-                    <Fragment>
-                        <div class="btn-group dropleft" role="group">
-                            {this.renderList()}
-                        </div>
-                        {this.renderButton()}
-                    </Fragment>
-                ) : (
-                    <Fragment>
-                        {this.renderButton()}
-                        {this.renderList()}
-                    </Fragment>
-                )}
-            </div>
+    updatedCallback() {
+        const { href, direction, open } = this;
+
+        const classNames = [
+            'd-inline-block',
+            href || direction !== 'down' ? 'btn-group' : 'dropdown'
+        ];
+
+        if (href ? !['down', 'left'].includes(direction) : direction !== 'down')
+            classNames.push(`drop${direction}`);
+
+        if (open) classNames.push('show');
+
+        this.classList.add(...classNames);
+    }
+
+    render({ href, direction }: DropMenuProps) {
+        return href && direction === 'left' ? (
+            <Fragment>
+                <div class="btn-group dropleft" role="group">
+                    {this.renderList()}
+                </div>
+                {this.renderButton()}
+            </Fragment>
+        ) : (
+            <Fragment>
+                {this.renderButton()}
+                {this.renderList()}
+            </Fragment>
         );
     }
 }

@@ -94,17 +94,14 @@ export class NavBar extends mixin<NavBarProps>() {
     connectedCallback() {
         const { theme, background, expand, fixed } = this.props;
 
-        const Class = classNames(
+        this.classList.add(
             'navbar',
             `navbar-${theme}`,
             `bg-${background}`,
-            'box-shadow',
+            'shadow',
             'navbar-expand' + (expand === 'xs' ? '' : '-' + expand),
             `fixed-${fixed}`
         );
-
-        if (this.className.trim()) this.className += ' ' + Class;
-        else this.className = Class;
 
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);

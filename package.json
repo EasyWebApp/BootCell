@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-rc.1",
+    "version": "1.0.0-rc.4",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -11,7 +11,7 @@
         "webcell",
         "bootstrap"
     ],
-    "homepage": "https://web-cell.dev/BootCell/",
+    "homepage": "https://bootstrap.web-cell.dev/",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/EasyWebApp/BootCell.git"
@@ -29,13 +29,13 @@
         "dialog-polyfill": "0.5.0",
         "@fortawesome/fontawesome-free": "^5.12.1",
         "iterable-observer": "^1.0.0-beta.2",
-        "github-markdown-css": "^3.0.1",
+        "github-markdown-css": "^4.0.0",
         "markdown-ime": "^1.0.3",
-        "marked": "^0.8.0",
-        "turndown": "^5.0.3",
+        "marked": "^0.8.2",
+        "turndown": "^6.0.0",
         "turndown-plugin-gfm": "^1.0.2",
         "web-cell": "^2.0.0-rc.20",
-        "web-utility": "^0.11.2"
+        "web-utility": "^0.13.0"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.10",
@@ -44,33 +44,35 @@
         "@types/marked": "^0.7.3",
         "@types/turndown": "^5.0.0",
         "@webcomponents/webcomponentsjs": "^2.4.3",
+        "autoprefixer": "^9.7.5",
         "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
         "core-js": "^3.6.4",
         "dialog-polyfill": "0.5.0",
-        "github-markdown-css": "^3.0.1",
+        "github-markdown-css": "^4.0.0",
         "happy-dom": "^0.10.8",
         "husky": "^4.2.3",
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.2",
-        "jest": "^25.1.0",
+        "jest": "^25.2.6",
         "less": "^3.11.1",
-        "lint-staged": "^10.0.8",
+        "lint-staged": "^10.1.1",
         "markdown-ime": "^1.0.3",
-        "marked": "^0.8.1",
+        "marked": "^0.8.2",
         "microbundle": "^0.11.0",
-        "open-cli": "^5.0.0",
+        "open-cli": "^6.0.1",
         "parcel-bundler": "^1.12.4",
-        "prettier": "^1.19.1",
+        "postcss-modules": "^1.5.0",
+        "prettier": "^2.0.2",
         "snabbdom": "^0.7.4",
         "snabbdom-looks-like": "^1.0.5",
-        "ts-jest": "^25.2.1",
-        "turndown": "^5.0.3",
+        "ts-jest": "^25.3.0",
+        "turndown": "^6.0.0",
         "turndown-plugin-gfm": "^1.0.2",
-        "typedoc": "^0.16.11",
+        "typedoc": "^0.17.3",
         "typescript": "^3.8.3",
         "web-cell": "^2.0.0-rc.20",
-        "web-utility": "^0.11.2"
+        "web-utility": "^0.13.0"
     },
     "scripts": {
         "lint": "lint-staged",
@@ -83,7 +85,7 @@
         "prepublishOnly": "npm test  &&  npm run build"
     },
     "lint-staged": {
-        "*.{html,md,less,json,yml,ts,tsx}": [
+        "*.{html,md,less,json,yml,js,ts,tsx}": [
             "prettier --write"
         ]
     },
@@ -95,14 +97,8 @@
     },
     "prettier": {
         "singleQuote": true,
+        "trailingComma": "none",
+        "arrowParens": "avoid",
         "tabWidth": 4
-    },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "node",
-        "transformIgnorePatterns": [],
-        "moduleNameMapper": {
-            "^.+\\.(css|less)$": "identity-obj-proxy"
-        }
     }
 }

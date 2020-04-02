@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Status, Theme, Color } from '../utility/constant';
 
 export interface IconProps extends HTMLProps, WebCellProps {
-    kind?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
+    group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
     name: string;
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     fixedWidth?: boolean;
@@ -21,7 +21,7 @@ export interface IconProps extends HTMLProps, WebCellProps {
 }
 
 export function Icon({
-    kind = 'solid',
+    group = 'solid',
     name,
     size,
     fixedWidth,
@@ -41,7 +41,7 @@ export function Icon({
     const icon = (
         <span
             className={classNames(
-                'fa' + kind[0],
+                'fa' + group[0],
                 'fa-' + name,
                 size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
                 fixedWidth && 'fa-fw',

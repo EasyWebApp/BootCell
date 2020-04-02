@@ -1,4 +1,5 @@
 .rts2_cache_*/
-docs/
 test/
+jest.config.js
+docs/
 .travis.yml
