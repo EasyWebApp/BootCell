@@ -12,23 +12,7 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { Theme, Status, Size } from '../utility/constant';
-
-interface NavLinkProps {
-    title: string;
-    href: string;
-    active?: boolean;
-}
-
-export function NavLink({ title, href, active }: NavLinkProps) {
-    return (
-        <li className={classNames('nav-item', active && 'active')}>
-            <a className="nav-link" href={href}>
-                {title}
-                {!active ? null : <span className="sr-only">(current)</span>}
-            </a>
-        </li>
-    );
-}
+import { NavProps, Nav } from './Nav';
 
 export interface NavBarProps extends WebCellProps {
     brand?: VNodeChildElement;
@@ -37,7 +21,8 @@ export interface NavBarProps extends WebCellProps {
     narrow?: boolean;
     expand?: keyof typeof Size;
     fixed?: string;
-    menu?: NavLinkProps[];
+    menu?: NavProps['list'];
+    activeIndex?: number;
     open?: boolean;
 }
 
@@ -75,6 +60,11 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     menu = [];
 
+    @attribute
+    @watch
+    activeIndex = 0;
+
+    @attribute
     @watch
     open = false;
 
@@ -114,7 +104,14 @@ export class NavBar extends mixin<NavBarProps>() {
         self.removeEventListener('keydown', this.escapeClose);
     }
 
-    renderContent({ brand, menu, open, expand, defaultSlot }: NavBarProps) {
+    renderContent({
+        brand,
+        menu,
+        activeIndex,
+        open,
+        expand,
+        defaultSlot
+    }: NavBarProps) {
         const { UID } = this;
 
         return (
@@ -146,14 +143,12 @@ export class NavBar extends mixin<NavBarProps>() {
                     )}
                     id={UID}
                 >
-                    <ul
+                    <Nav
                         className="navbar-nav"
+                        list={menu}
+                        activeIndex={activeIndex}
                         onClick={() => (this.open = false)}
-                    >
-                        {menu.map(item => (
-                            <NavLink {...item} />
-                        ))}
-                    </ul>
+                    />
                     {defaultSlot[0] && (
                         <div
                             className={classNames(

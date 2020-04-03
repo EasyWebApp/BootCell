@@ -44,8 +44,7 @@ describe('Navigator Bar', () => {
                 menu={[
                     {
                         title: 'Example',
-                        href: '/example',
-                        active: true
+                        href: '/example'
                     }
                 ]}
             >
@@ -70,14 +69,16 @@ describe('Navigator Bar', () => {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="test">
-                    <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/example">
-                                Example
-                                <span className="sr-only">(current)</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <nav className="nav navbar-nav">
+                        <a
+                            className="nav-item nav-link text-nowrap active"
+                            href="/example"
+                            aria-disabled="false"
+                        >
+                            Example
+                            <span className="sr-only">(current)</span>
+                        </a>
+                    </nav>
                     <div className="flex-grow-1 d-flex justify-content-end">
                         <a />
                     </div>

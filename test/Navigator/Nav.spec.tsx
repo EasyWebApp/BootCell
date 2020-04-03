@@ -3,6 +3,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { Nav } from '../../source/Navigator/Nav';
+import { DropMenu } from '../../source/Navigator/DropMenu';
 
 describe('Nav', () => {
     it('should render Nav Links with different states', () => {
@@ -10,7 +11,11 @@ describe('Nav', () => {
             <Nav
                 list={[
                     { title: 'Test', href: '#test' },
-                    { title: 'Example', href: '#example', disabled: true }
+                    { title: 'Example', href: '#example', disabled: true },
+                    {
+                        title: 'Nested',
+                        list: [{ title: 'Sample', href: '#sample' }]
+                    }
                 ]}
             />,
             <nav className="nav">
@@ -19,6 +24,7 @@ describe('Nav', () => {
                     href="#test"
                 >
                     Test
+                    <span className="sr-only">(current)</span>
                 </a>
                 <a
                     className="nav-item nav-link text-nowrap disabled"
@@ -28,6 +34,10 @@ describe('Nav', () => {
                 >
                     Example
                 </a>
+                <DropMenu
+                    title="Nested"
+                    list={[{ title: 'Sample', href: '#sample' }]}
+                />
             </nav>
         );
     });
