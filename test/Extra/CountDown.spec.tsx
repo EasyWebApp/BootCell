@@ -1,9 +1,9 @@
-import './polyfill';
+import '../polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { CountDown } from '../source/CountDown';
-import style from '../source/CountDown.less';
+import { CountDown } from '../../source/Extra/CountDown';
+import style from '../../source/Extra/CountDown/index.less';
 
 describe('CountDown', () => {
     it('should render Time sections', () => {

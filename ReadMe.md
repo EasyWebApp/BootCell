@@ -96,9 +96,10 @@ npm install boot-cell web-cell \
 6. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
 7. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
-### Advanced
+### Extra
 
 1. [CountDown](https://web-cell.dev/BootCell/interfaces/countdownprops.html)
+2. [CalendarView](https://web-cell.dev/BootCell/interfaces/calendarprops.html)
 
 ## Constants
 
