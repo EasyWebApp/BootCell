@@ -1,0 +1,28 @@
+.box {
+    display: block;
+    text-decoration: none;
+    padding: 0.25rem;
+    position: relative;
+    & > span {
+        width: 2rem;
+        height: 2rem;
+    }
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: white;
+    }
+    & > img {
+        border: 1px solid lightgray;
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &:hover > img {
+        display: block;
+    }
+}

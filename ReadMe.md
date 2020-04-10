@@ -14,7 +14,8 @@
 ```shell
 npm install boot-cell web-cell \
     classnames iterable-observer \
-    marked turndown turndown-plugin-gfm markdown-ime
+    marked turndown turndown-plugin-gfm markdown-ime \
+    @nuintun/qrcode
 ```
 
 `index.html`
@@ -100,6 +101,7 @@ npm install boot-cell web-cell \
 
 1. [CountDown](https://web-cell.dev/BootCell/interfaces/countdownprops.html)
 2. [CalendarView](https://web-cell.dev/BootCell/interfaces/calendarprops.html)
+3. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ## Constants
 
@@ -113,6 +115,7 @@ npm install boot-cell web-cell \
 ## Utilities
 
 1. [SafeTurnDown](https://web-cell.dev/BootCell/classes/safeturndown.html)
+2. [encodeQRC](https://web-cell.dev/BootCell/globals.html#encodeqrc)
 
 ## Theme
 
