@@ -1,7 +1,7 @@
 import { encodeQRC } from '../../utility/QRCode';
 
 export interface ContentMeta {
-    URL: string;
+    URL?: string;
     title?: string;
     description?: string;
     summary?: string;
@@ -115,11 +115,6 @@ export const URI_map = {
                 text: title,
                 via: source
             })
-    },
-    Google: {
-        color: 'red',
-        getURI: ({ URL }: ContentMeta) =>
-            'https://plus.google.com/share?url=' + URL
     }
 };
 

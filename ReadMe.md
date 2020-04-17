@@ -39,6 +39,7 @@ npm install boot-cell web-cell \
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.11/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
 ```
@@ -89,13 +90,14 @@ npm install boot-cell web-cell \
 
 ### Form
 
-1. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
-2. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
-3. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
-4. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-5. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-6. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-7. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+1. [Form](https://web-cell.dev/BootCell/interfaces/formprops.html)
+2. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
+3. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
+4. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
+5. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
+6. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+7. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+8. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Extra
 

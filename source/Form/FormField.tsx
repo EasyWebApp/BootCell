@@ -31,7 +31,9 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
         | 'url'
         | 'week';
     label?: string;
+    labelColumn?: number;
     labelFloat?: boolean;
+    tips?: string;
     fileButton?: string;
 }
 
@@ -41,14 +43,16 @@ export function FormField({
     type = 'text',
     id = uniqueID(),
     label,
+    labelColumn,
     labelFloat,
+    tips,
     fileButton = 'Browse',
     defaultSlot,
     ...rest
 }: FieldProps = {}) {
     if (labelFloat && !label) label = rest.placeholder;
 
-    if (!label) label = rest.name;
+    if ((tips = tips?.trim())) rest['aria-describedby'] = id + '-tips';
 
     if (type === 'file')
         return (
@@ -87,18 +91,42 @@ export function FormField({
     };
 
     defaultSlot = [
-        label && <label htmlFor={id}>{label}</label>,
+        label && (
+            <label
+                htmlFor={id}
+                className={
+                    labelColumn
+                        ? `col-sm-${labelColumn} col-form-label text-nowrap`
+                        : ''
+                }
+            >
+                {label}
+            </label>
+        ),
         !is && defaultSlot[0] ? defaultSlot : field[is || 'input']
     ];
+
+    if (labelColumn)
+        defaultSlot[1] = (
+            <div className={`col-sm-${12 - labelColumn}`}>{defaultSlot[1]}</div>
+        );
+    else if (labelFloat) defaultSlot.reverse();
 
     return (
         <div
             className={classNames(
                 labelFloat ? style['form-label-group'] : 'form-group',
+                labelColumn && 'row',
                 className
             )}
         >
-            {labelFloat ? defaultSlot.reverse() : defaultSlot}
+            {defaultSlot}
+
+            {tips && (
+                <small id={id + '-tips'} className="form-text text-muted">
+                    {tips}
+                </small>
+            )}
         </div>
     );
 }

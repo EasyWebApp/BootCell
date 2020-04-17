@@ -21,7 +21,7 @@ describe('Spinner', () => {
             <Button disabled>
                 <Spinner embed>Pending...</Spinner>
             </Button>,
-            <button class="btn btn-primary" type="button" disabled>
+            <button className="btn btn-primary" type="button" disabled>
                 <div
                     className="spinner-border"
                     role="status"

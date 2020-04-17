@@ -15,6 +15,23 @@ describe('Form Fields', () => {
         );
     });
 
+    it('should render an Input with Tips text', () => {
+        assertLooksLike(
+            <FormField id="test" tips="Example" />,
+            <div className="form-group">
+                <input
+                    type="text"
+                    className="form-control"
+                    id="test"
+                    aria-describedby="test-tips"
+                />
+                <small id="test-tips" className="form-text text-muted">
+                    Example
+                </small>
+            </div>
+        );
+    });
+
     it('should render a Custom Range Input with Label', () => {
         assertLooksLike(
             <FormField type="range" id="test" label="Number" min="0" />,
@@ -32,7 +49,7 @@ describe('Form Fields', () => {
 
     it('should render a Custom Select with Label', () => {
         assertLooksLike(
-            <FormField is="select" id="test" name="test" multiple>
+            <FormField is="select" id="test" name="test" label="test" multiple>
                 <option>Example</option>
             </FormField>,
             <div className="form-group">
@@ -72,6 +89,23 @@ describe('Form Fields', () => {
                     placeholder="Test"
                 />
                 <label htmlFor="test">Test</label>
+            </div>
+        );
+    });
+
+    it('should render a Form Field with Column layout', () => {
+        assertLooksLike(
+            <FormField id="test" labelColumn={2} label="Test" />,
+            <div className="form-group row">
+                <label
+                    htmlFor="test"
+                    className="col-sm-2 col-form-label text-nowrap"
+                >
+                    Test
+                </label>
+                <div className="col-sm-10">
+                    <input type="text" id="test" />
+                </div>
             </div>
         );
     });

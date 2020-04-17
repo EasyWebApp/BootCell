@@ -7,7 +7,7 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { TimeData, changeMonth } from 'web-utility/source/date';
+import { TimeData, Day, changeMonth } from 'web-utility/source/date';
 
 import { IconButton } from '../../Form/Button';
 import { Table } from '../../Content/Table';
@@ -22,8 +22,6 @@ export interface CalendarProps {
 interface CalendarState {
     dayGrid: number[][];
 }
-
-const Day = 1000 * 60 * 60 * 24;
 
 @component({
     tagName: 'calendar-view',

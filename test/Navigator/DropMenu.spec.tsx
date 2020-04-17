@@ -4,7 +4,7 @@ import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { DropMenu, DropMenuProps } from '../../source/Navigator/DropMenu';
 
-const { renderButton, renderList, render } = DropMenu.prototype;
+const { renderButton, renderItem, renderList, render } = DropMenu.prototype;
 
 function InlineDropMenu({
     buttonKind,
@@ -25,6 +25,7 @@ function InlineDropMenu({
                 props: { buttonKind, buttonSize, open, href, title, target }
             }),
             renderList: renderList.bind({
+                renderItem,
                 alignType,
                 alignSize,
                 open,
@@ -74,7 +75,7 @@ describe('Drop Menu', () => {
                     >
                         Example
                     </a>
-                    <div class="dropdown-divider" />
+                    <div className="dropdown-divider" />
                     <span className="dropdown-item-text">Sample</span>
                 </div>
             </Fragment>
@@ -147,12 +148,12 @@ describe('Drop Menu', () => {
                 </a>
                 <button
                     type="button"
-                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    className="btn btn-primary dropdown-toggle dropdown-toggle-split"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span className="sr-only">Toggle Dropdown</span>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="test" />
             </Fragment>
@@ -198,12 +199,12 @@ describe('Drop Menu', () => {
                     </a>
                     <button
                         type="button"
-                        class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                        className="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         id="test"
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <span class="sr-only">Toggle Dropdown</span>
+                        <span className="sr-only">Toggle Dropdown</span>
                     </button>
                 </div>
             </Fragment>
