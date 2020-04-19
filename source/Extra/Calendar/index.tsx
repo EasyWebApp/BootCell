@@ -12,6 +12,7 @@ import { TimeData, Day, changeMonth } from 'web-utility/source/date';
 import { IconButton } from '../../Form/Button';
 import { Table } from '../../Content/Table';
 
+import style from './index.less';
 import { WeekDay } from './meta.json';
 
 export interface CalendarProps {
@@ -119,7 +120,7 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
                         onClick={() => (this.date = changeMonth(this.date, 1))}
                     />
                 </header>
-                <Table border center>
+                <Table border center className={style.table}>
                     <thead>
                         <tr className="bg-primary">
                             {CalendarView.WeekDay.map(day => (

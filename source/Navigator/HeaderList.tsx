@@ -1,5 +1,4 @@
 import { component, mixin, watch, attribute, createCell } from 'web-cell';
-import { uniqueID } from 'web-utility/source/data';
 
 interface Header {
     level: number;
@@ -7,7 +6,7 @@ interface Header {
     id: string;
 }
 
-interface HeaderListProps {
+export interface HeaderListProps {
     list: Header[];
     activeIndex: number;
 }
@@ -46,7 +45,8 @@ export class HeaderList extends mixin<HeaderListProps>() {
             (header, index) => {
                 this.watch(header, index);
 
-                if (!header.id.trim()) header.id = 'header-' + uniqueID();
+                if (!header.id.trim())
+                    header.id = header.textContent.trim().replace(/\s+/g, '-');
 
                 return {
                     level: header.tagName[1],
@@ -68,7 +68,8 @@ export class HeaderList extends mixin<HeaderListProps>() {
             <a
                 className="d-block pl-2 text-nowrap"
                 style={{
-                    fontSize: 0.5 + (6 - level) / 10 + 'rem',
+                    fontSize: `${0.5 + (6 - level) / 10}rem`,
+                    textIndent: `${level - 1}rem`,
                     borderLeft: '2px solid',
                     borderLeftColor:
                         index === activeIndex ? 'lightblue' : 'transparent',

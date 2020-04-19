@@ -1,4 +1,4 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
@@ -10,12 +10,13 @@ import style from '../../source/Extra/ShareBar/index.less';
 
 describe('Share Bar', () => {
     it('should render Vendor Icons', () => {
-        self.location.href = 'https://web-cell.dev/WebCell/';
-
         document.title = 'Test';
 
         assertLooksLike(
-            <ShareBar targets={['Qzone', 'Weixin', 'Twitter']} />,
+            <ShareBar
+                targets={['Qzone', 'Weixin', 'Twitter']}
+                URL="https://web-cell.dev/WebCell/"
+            />,
             <aside className="d-inline-flex flex-row">
                 <a
                     target="_blank"

@@ -1,19 +1,29 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
-import { createCell, Fragment } from 'web-cell';
+import { createCell } from 'web-cell';
 
-import { ToastBox } from '../../source/Prompt/Toast';
+import { ToastBox, ToastProps } from '../../source/Prompt/Toast';
+
+const { render } = ToastBox.prototype;
+
+function Toast({ icon, title, time, defaultSlot }: ToastProps) {
+    return (
+        <div>
+            {render.call(
+                { close: () => {} },
+                { icon, title, time, defaultSlot }
+            )}
+        </div>
+    );
+}
 
 describe('Toast', () => {
     it('should render a Toast dialog', () => {
         assertLooksLike(
-            ToastBox.prototype.render({
-                icon: 'test.png',
-                title: 'Test',
-                time: 'just now',
-                defaultSlot: ['example']
-            }),
-            <Fragment>
+            <Toast icon="test.png" title="Test" time="just now">
+                example
+            </Toast>,
+            <div>
                 <div className="toast-header">
                     <img className="rounded mr-2" alt="Icon" src="test.png" />
 
@@ -28,7 +38,7 @@ describe('Toast', () => {
                     </button>
                 </div>
                 <div className="toast-body">example</div>
-            </Fragment>
+            </div>
         );
     });
 });

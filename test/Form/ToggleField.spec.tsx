@@ -1,4 +1,4 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
@@ -10,7 +10,7 @@ describe('Toggle Fields', () => {
             <ToggleField type="checkbox" switch inline id="test">
                 Enable
             </ToggleField>,
-            <div className="custom-control custom-switch custom-control-inline">
+            <div className="custom-control custom-switch custom-control-inline mb-3">
                 <input
                     type="checkbox"
                     className="custom-control-input"

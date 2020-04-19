@@ -1,35 +1,12 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import style from './FormField.less';
+import { FieldProps, Field } from './Field';
+import './FormField.less';
 
-export interface FieldProps extends BaseFieldProps, WebCellProps {
-    is?: 'input' | 'select' | 'textarea';
-    type?:
-        | 'button'
-        | 'checkbox'
-        | 'color'
-        | 'date'
-        | 'datetime-local'
-        | 'email'
-        | 'file'
-        | 'hidden'
-        | 'image'
-        | 'month'
-        | 'number'
-        | 'password'
-        | 'radio'
-        | 'range'
-        | 'reset'
-        | 'search'
-        | 'submit'
-        | 'tel'
-        | 'text'
-        | 'time'
-        | 'url'
-        | 'week';
+export interface FormFieldProps extends FieldProps {
     label?: string;
     labelColumn?: number;
     labelFloat?: boolean;
@@ -37,11 +14,25 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
     fileButton?: string;
 }
 
+function handleFile(more?: BaseFieldProps['onChange']) {
+    return function (event: Event) {
+        const {
+            nextElementSibling: label,
+            value
+        } = event.target as HTMLInputElement;
+
+        (label as HTMLLabelElement).dataset.file = value
+            .split(/\\|\//)
+            .slice(-1)[0];
+
+        more?.call(this, event);
+    };
+}
+
 export function FormField({
     className,
-    is,
-    type = 'text',
     id = uniqueID(),
+    size,
     label,
     labelColumn,
     labelFloat,
@@ -49,61 +40,53 @@ export function FormField({
     fileButton = 'Browse',
     defaultSlot,
     ...rest
-}: FieldProps = {}) {
+}: FormFieldProps = {}) {
     if (labelFloat && !label) label = rest.placeholder;
 
     if ((tips = tips?.trim())) rest['aria-describedby'] = id + '-tips';
 
-    if (type === 'file')
+    if (rest.type === 'file')
         return (
             <div className={classNames('custom-file', className)}>
-                <input
-                    {...rest}
-                    type="file"
-                    className="custom-file-input"
+                <Field
                     id={id}
-                />
+                    size={size}
+                    {...rest}
+                    onChange={handleFile(rest.onChange)}
+                >
+                    {defaultSlot}
+                </Field>
                 <label
                     className="custom-file-label"
                     for={id}
+                    data-file={label || 'Choose file'}
                     data-browse={fileButton}
-                >
-                    {label || 'Choose file'}
-                </label>
+                />
             </div>
         );
 
-    const field = {
-        input: (
-            <input
-                {...rest}
-                type={type}
-                className={type === 'range' ? 'custom-range' : 'form-control'}
-                id={id}
-            />
-        ),
-        select: (
-            <select {...rest} className="custom-select" id={id}>
-                {defaultSlot}
-            </select>
-        ),
-        textarea: <textarea {...rest} className="form-control" id={id} />
-    };
+    const labelClass =
+        labelColumn &&
+        classNames(
+            'col-form-label',
+            typeof size === 'string' && `col-form-label-${size}`,
+            `col-sm-${labelColumn}`,
+            'text-nowrap'
+        );
 
     defaultSlot = [
         label && (
-            <label
-                htmlFor={id}
-                className={
-                    labelColumn
-                        ? `col-sm-${labelColumn} col-form-label text-nowrap`
-                        : ''
-                }
-            >
+            <label htmlFor={id} className={labelClass || ''}>
                 {label}
             </label>
         ),
-        !is && defaultSlot[0] ? defaultSlot : field[is || 'input']
+        !rest.is && defaultSlot[0] ? (
+            defaultSlot
+        ) : (
+            <Field id={id} size={size} {...rest}>
+                {defaultSlot}
+            </Field>
+        )
     ];
 
     if (labelColumn)
@@ -115,7 +98,7 @@ export function FormField({
     return (
         <div
             className={classNames(
-                labelFloat ? style['form-label-group'] : 'form-group',
+                labelFloat ? 'form-label-group' : 'form-group',
                 labelColumn && 'row',
                 className
             )}

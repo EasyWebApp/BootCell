@@ -1,5 +1,5 @@
-import '../polyfill';
-import { createCell, Fragment } from 'web-cell';
+import 'web-cell/source/utility/polyfill';
+import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { TabList } from '../../source/Content/TabList';
@@ -9,18 +9,20 @@ const { render, renderHeader } = TabList.prototype;
 describe('Tab List', () => {
     it('should render a Tab List with "tabs" style', () => {
         assertLooksLike(
-            render.call({
-                UID: 'sample',
-                mode: 'tabs',
-                direction: 'row',
-                list: [
-                    { title: 'Test', content: 'test' },
-                    { title: 'Example', content: 'example', disabled: true }
-                ],
-                activeIndex: 0,
-                renderHeader
-            }),
-            <Fragment>
+            <div>
+                {render.call({
+                    UID: 'sample',
+                    mode: 'tabs',
+                    direction: 'row',
+                    list: [
+                        { title: 'Test', content: 'test' },
+                        { title: 'Example', content: 'example', disabled: true }
+                    ],
+                    activeIndex: 0,
+                    renderHeader
+                })}
+            </div>,
+            <div>
                 <nav
                     className="nav flex-row nav-tabs"
                     aria-orientation="horizontal"
@@ -61,24 +63,26 @@ describe('Tab List', () => {
                         test
                     </section>
                 </div>
-            </Fragment>
+            </div>
         );
     });
 
     it('should render a Tab List with horizontal "list" style', () => {
         assertLooksLike(
-            render.call({
-                UID: 'sample',
-                mode: 'list',
-                direction: 'row',
-                list: [
-                    { title: 'Test', content: 'test', disabled: true },
-                    { title: 'Example', content: 'example' }
-                ],
-                activeIndex: 1,
-                renderHeader
-            }),
-            <Fragment>
+            <div>
+                {render.call({
+                    UID: 'sample',
+                    mode: 'list',
+                    direction: 'row',
+                    list: [
+                        { title: 'Test', content: 'test', disabled: true },
+                        { title: 'Example', content: 'example' }
+                    ],
+                    activeIndex: 1,
+                    renderHeader
+                })}
+            </div>,
+            <div>
                 <div
                     className="list-group list-group-horizontal"
                     role="tablist"
@@ -119,7 +123,7 @@ describe('Tab List', () => {
                         example
                     </section>
                 </div>
-            </Fragment>
+            </div>
         );
     });
 });

@@ -1,22 +1,27 @@
-import '../polyfill';
-import { createCell, Fragment } from 'web-cell';
+import 'web-cell/source/utility/polyfill';
+import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { AccordionList } from '../../source/Content/Accordion';
+import { CollapseBox } from '../../source/Content/Collapse';
+
+const { render } = AccordionList.prototype;
 
 describe('Accordion', () => {
     it('should render Card list', () => {
         assertLooksLike(
-            AccordionList.prototype.render.call(
-                { UID: 'random' },
-                {
-                    list: [
-                        { title: 'Test', content: 'test', active: true },
-                        { title: 'Example', content: 'example' }
-                    ]
-                }
-            ),
-            <Fragment>
+            <div>
+                {render.call(
+                    { UID: 'random' },
+                    {
+                        list: [
+                            { title: 'Test', content: 'test', active: true },
+                            { title: 'Example', content: 'example' }
+                        ]
+                    }
+                )}
+            </div>,
+            <div>
                 <section className="card">
                     <header className="card-header" id="random_h_0">
                         <h2 className="mb-0">
@@ -31,13 +36,14 @@ describe('Accordion', () => {
                             </button>
                         </h2>
                     </header>
-                    <div
+                    <CollapseBox
                         id="random_b_0"
-                        className="collapse show"
-                        aria-labelledby={'random_h_0'}
+                        key="random_b_0"
+                        aria-labelledby="random_h_0"
+                        open
                     >
                         <div className="card-body">test</div>
-                    </div>
+                    </CollapseBox>
                 </section>
                 <section className="card">
                     <header className="card-header" id="random_h_1">
@@ -53,15 +59,15 @@ describe('Accordion', () => {
                             </button>
                         </h2>
                     </header>
-                    <div
+                    <CollapseBox
                         id="random_b_1"
-                        className="collapse"
-                        aria-labelledby={'random_h_1'}
+                        key="random_b_1"
+                        aria-labelledby="random_h_1"
                     >
                         <div className="card-body">example</div>
-                    </div>
+                    </CollapseBox>
                 </section>
-            </Fragment>
+            </div>
         );
     });
 });

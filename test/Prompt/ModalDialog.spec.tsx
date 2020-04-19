@@ -1,4 +1,4 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
@@ -6,10 +6,12 @@ import { ModalDialog } from '../../source/Prompt/ModalDialog';
 import style from '../../source/Prompt/ModalDialog.less';
 import { Button } from '../../source/Form/Button';
 
+const { render } = ModalDialog.prototype;
+
 describe('Modal Dialog', () => {
     it('should render a Modal within <dialog /> & <form />', () => {
         assertLooksLike(
-            ModalDialog.prototype.render({
+            render({
                 title: 'Test',
                 defaultSlot: ['test'],
                 closeSlot: 'Close',

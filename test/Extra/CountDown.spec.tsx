@@ -1,14 +1,16 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { CountDown } from '../../source/Extra/CountDown';
 import style from '../../source/Extra/CountDown/index.less';
 
+const { render } = CountDown.prototype;
+
 describe('CountDown', () => {
     it('should render Time sections', () => {
         assertLooksLike(
-            CountDown.prototype.render.call({
+            render.call({
                 timeSections: [
                     { value: 1, label: 'D' },
                     { value: 1, label: 'h' },

@@ -1,5 +1,5 @@
-import '../polyfill';
-import { createCell, Fragment } from 'web-cell';
+import 'web-cell/source/utility/polyfill';
+import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { DropMenu, DropMenuProps } from '../../source/Navigator/DropMenu';
@@ -18,22 +18,33 @@ function InlineDropMenu({
     direction = 'down',
     list
 }: DropMenuProps) {
-    return render.call(
-        {
-            renderButton: renderButton.bind({
-                UID: 'test',
-                props: { buttonKind, buttonSize, open, href, title, target }
-            }),
-            renderList: renderList.bind({
-                renderItem,
-                alignType,
-                alignSize,
-                open,
-                UID: 'test',
-                list
-            })
-        },
-        { href, direction }
+    return (
+        <div>
+            {render.call(
+                {
+                    renderButton: renderButton.bind({
+                        UID: 'test',
+                        props: {
+                            buttonKind,
+                            buttonSize,
+                            open,
+                            href,
+                            title,
+                            target
+                        }
+                    }),
+                    renderList: renderList.bind({
+                        renderItem,
+                        alignType,
+                        alignSize,
+                        open,
+                        UID: 'test',
+                        list
+                    })
+                },
+                { href, direction }
+            )}
+        </div>
     );
 }
 
@@ -49,7 +60,7 @@ describe('Drop Menu', () => {
                     { title: 'Sample' }
                 ]}
             />,
-            <Fragment>
+            <div>
                 <button
                     className="btn btn-primary dropdown-toggle"
                     type="button"
@@ -78,7 +89,7 @@ describe('Drop Menu', () => {
                     <div className="dropdown-divider" />
                     <span className="dropdown-item-text">Sample</span>
                 </div>
-            </Fragment>
+            </div>
         );
     });
 
@@ -90,7 +101,7 @@ describe('Drop Menu', () => {
                 alignSize="md"
                 list={[]}
             />,
-            <Fragment>
+            <div>
                 <button
                     className="btn btn-primary dropdown-toggle"
                     type="button"
@@ -104,7 +115,7 @@ describe('Drop Menu', () => {
                     className="dropdown-menu dropdown-menu-md-right"
                     aria-labelledby="test"
                 />
-            </Fragment>
+            </div>
         );
     });
 
@@ -116,7 +127,7 @@ describe('Drop Menu', () => {
                 alignSize="md"
                 list={[]}
             />,
-            <Fragment>
+            <div>
                 <button
                     className="btn btn-primary dropdown-toggle"
                     type="button"
@@ -130,14 +141,14 @@ describe('Drop Menu', () => {
                     className="dropdown-menu dropdown-menu-right dropdown-menu-md-left"
                     aria-labelledby="test"
                 />
-            </Fragment>
+            </div>
         );
     });
 
     it('should render a Split Button menu with URL', () => {
         assertLooksLike(
             <InlineDropMenu title="Demo" href="example" list={[]} />,
-            <Fragment>
+            <div>
                 <a
                     className="btn btn-primary"
                     href="example"
@@ -156,14 +167,14 @@ describe('Drop Menu', () => {
                     <span className="sr-only">Toggle Dropdown</span>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="test" />
-            </Fragment>
+            </div>
         );
     });
 
     it('should render a Single-layer Button group with Single Left direction', () => {
         assertLooksLike(
             <InlineDropMenu title="Demo" direction="left" list={[]} />,
-            <Fragment>
+            <div>
                 <button
                     className="btn btn-primary dropdown-toggle"
                     type="button"
@@ -174,7 +185,7 @@ describe('Drop Menu', () => {
                     Demo
                 </button>
                 <div className="dropdown-menu" aria-labelledby="test" />
-            </Fragment>
+            </div>
         );
     });
 
@@ -186,7 +197,7 @@ describe('Drop Menu', () => {
                 direction="left"
                 list={[]}
             />,
-            <Fragment>
+            <div>
                 <div className="dropdown-menu" aria-labelledby="test" />
                 <div className="btn-group">
                     <a
@@ -207,7 +218,7 @@ describe('Drop Menu', () => {
                         <span className="sr-only">Toggle Dropdown</span>
                     </button>
                 </div>
-            </Fragment>
+            </div>
         );
     });
 });

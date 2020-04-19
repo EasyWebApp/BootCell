@@ -3,7 +3,7 @@ import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { FieldProps } from './FormField';
+import { FormFieldProps } from './FormField';
 import { ButtonProps } from './Button';
 
 export interface ToggleFieldProps extends BaseFieldProps, WebCellProps {
@@ -31,6 +31,7 @@ export function ToggleField({
                 'custom-control',
                 `custom-${Switch ? 'switch' : type}`,
                 inline && 'custom-control-inline',
+                'mb-3',
                 className
             )}
         >
@@ -51,7 +52,7 @@ export function ToggleField({
     );
 }
 
-export interface ToggleGroupProps extends FieldProps {
+export interface ToggleGroupProps extends FormFieldProps {
     type: ToggleFieldProps['type'];
     kind?: ButtonProps['kind'];
     list: (BaseFieldProps & { checked?: boolean })[];

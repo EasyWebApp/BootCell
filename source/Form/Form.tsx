@@ -5,6 +5,7 @@ import classNames from 'classnames';
 export interface FormProps extends HTMLProps, WebCellProps {
     inline?: boolean;
     validate?: boolean;
+    validated?: boolean;
     onSubmit?: (event: Event) => any;
     onReset?: (event: Event) => any;
 }
@@ -12,20 +13,21 @@ export interface FormProps extends HTMLProps, WebCellProps {
 export function Form({
     inline,
     validate,
+    validated,
     className,
     defaultSlot,
     ...rest
 }: FormProps) {
     return (
         <form
+            {...rest}
             className={classNames(
                 inline && 'form-inline',
-                'was-validated',
                 validate && 'needs-validation',
+                validated && 'was-validated',
                 className
             )}
             novalidate={validate}
-            {...rest}
         >
             {defaultSlot}
         </form>

@@ -95,9 +95,10 @@ npm install boot-cell web-cell \
 3. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
 4. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 5. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-6. [FormField](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-7. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-8. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+6. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+7. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
+8. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+9. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Extra
 

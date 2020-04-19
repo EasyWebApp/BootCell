@@ -1,13 +1,15 @@
-import '../polyfill';
+import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
 import { CarouselView } from '../../source/Content/Carousel';
 
+const { render } = CarouselView.prototype;
+
 describe('Carousel View', () => {
     it('should render Image & Caption list', () => {
         assertLooksLike(
-            CarouselView.prototype.render.call(
+            render.call(
                 { UID: 'test' },
                 {
                     controls: true,
