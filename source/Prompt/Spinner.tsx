@@ -75,7 +75,7 @@ export function SpinnerBox({
             <div
                 className={classNames(
                     style['spinner-cover'],
-                    cover && style['active']
+                    cover && style.active
                 )}
             >
                 <Spinner {...rest} />

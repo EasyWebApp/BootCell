@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-rc.10",
+    "version": "1.0.0-rc.12",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -56,7 +56,7 @@
         "husky": "^4.2.5",
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.3",
-        "jest": "^25.3.0",
+        "jest": "^25.4.0",
         "jsdom": "^16.2.2",
         "less": "^3.11.1",
         "lint-staged": "^10.1.6",

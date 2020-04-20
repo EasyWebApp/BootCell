@@ -91,3 +91,16 @@ export function IconButton({
         </Button>
     );
 }
+
+export function CloseButton({ className, ...rest }: ButtonProps) {
+    return (
+        <button
+            type="reset"
+            aria-label="Close"
+            className={classNames('close', className)}
+            {...rest}
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    );
+}

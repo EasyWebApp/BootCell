@@ -46,8 +46,8 @@ describe('Icon', () => {
         assertLooksLike(
             <BGIcon type="square" name="github" size={2} color="dark" />,
             <span className="fa-stack fa-2x text-dark">
-                <span className="fas fa-square fa-stack-2x" />
-                <span className="fas fa-github fa-inverse fa-stack-1x" />
+                <Icon name="square" stack={2} />
+                <Icon name="github" inverse stack={1} />
             </span>
         );
     });

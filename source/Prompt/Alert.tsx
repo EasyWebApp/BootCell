@@ -4,6 +4,7 @@ import { transitOut } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
 import { Status, Theme } from '../utility/constant';
+import { CloseButton } from '../Form/Button';
 
 export interface AlertProps extends WebCellProps, HTMLProps {
     type?: keyof typeof Status | keyof typeof Theme;
@@ -34,10 +35,7 @@ export function Alert({
             {defaultSlot}
 
             {!closable ? null : (
-                <button
-                    type="button"
-                    className="close"
-                    aria-label="Close"
+                <CloseButton
                     onClick={({ currentTarget }) =>
                         transitOut(
                             (currentTarget as HTMLElement).parentElement,
@@ -45,9 +43,7 @@ export function Alert({
                             true
                         )
                     }
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                />
             )}
         </aside>
     );

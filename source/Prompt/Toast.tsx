@@ -11,6 +11,8 @@ import {
 import { HTMLProps } from 'web-utility/source/DOM-type';
 import { transitOut } from 'web-utility/source/animation';
 
+import { CloseButton } from '../Form/Button';
+
 export interface ToastProps extends HTMLProps, WebCellProps {
     icon: VNodeChildElement;
     time: string;
@@ -71,14 +73,7 @@ export class ToastBox extends mixin<ToastProps>() {
                     <small className="text-muted text-nowrap ml-2">
                         {time}
                     </small>
-                    <button
-                        type="button"
-                        className="ml-2 mb-1 close"
-                        aria-label="Close"
-                        onClick={this.close}
-                    >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <CloseButton className="ml-2 mb-1" onClick={this.close} />
                 </div>
                 <div className="toast-body">{defaultSlot}</div>
             </Fragment>

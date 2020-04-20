@@ -23,7 +23,7 @@ npm install boot-cell web-cell \
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.css"
+    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.css"
 />
 <link
     rel="stylesheet"
@@ -38,7 +38,7 @@ npm install boot-cell web-cell \
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@3.0.1/github-markdown.min.css"
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
-<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.0/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.11/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
@@ -50,7 +50,7 @@ npm install boot-cell web-cell \
 
 1. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
 2. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-3. [InputCell](https://web-cell.dev/BootCell/globals.html#inputcellprops)
+3. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
 4. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
 5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 6. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
@@ -93,12 +93,13 @@ npm install boot-cell web-cell \
 1. [Form](https://web-cell.dev/BootCell/interfaces/formprops.html)
 2. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
 3. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
-4. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
-5. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-6. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-7. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
-8. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-9. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+4. [CloseButton](https://web-cell.dev/BootCell/globals.html#closebutton)
+5. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
+6. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
+7. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+8. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
+9. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+10. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Extra
 

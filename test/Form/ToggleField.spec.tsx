@@ -10,7 +10,7 @@ describe('Toggle Fields', () => {
             <ToggleField type="checkbox" switch inline id="test">
                 Enable
             </ToggleField>,
-            <div className="custom-control custom-switch custom-control-inline mb-3">
+            <div className="custom-control custom-switch custom-control-inline">
                 <input
                     type="checkbox"
                     className="custom-control-input"

@@ -8,6 +8,8 @@ self.navigator.share = () => {};
 import { ShareBar } from '../../source/Extra/ShareBar';
 import style from '../../source/Extra/ShareBar/index.less';
 
+import { BGIcon } from '../../source/Reminder/Icon';
+
 describe('Share Bar', () => {
     it('should render Vendor Icons', () => {
         document.title = 'Test';
@@ -36,16 +38,7 @@ describe('Share Bar', () => {
                     className={style.box}
                     style={{ color: 'green' }}
                 >
-                    <span className="fa-stack">
-                        <span
-                            aria-hidden="true"
-                            className="fas fa-circle fa-stack-2x"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="fab fa-weixin fa-inverse fa-stack-1x"
-                        />
-                    </span>
+                    <BGIcon type="circle" group="brands" name="weixin" />
                     <img />
                 </a>
                 <a
@@ -54,28 +47,10 @@ describe('Share Bar', () => {
                     className={style.box}
                     style={{ color: 'deepskyblue' }}
                 >
-                    <span className="fa-stack">
-                        <span
-                            aria-hidden="true"
-                            className="fas fa-circle fa-stack-2x"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="fab fa-twitter fa-inverse fa-stack-1x"
-                        />
-                    </span>
+                    <BGIcon type="circle" group="brands" name="twitter" />
                 </a>
                 <button className={style.box}>
-                    <span className="fa-stack text-secondary">
-                        <span
-                            aria-hidden="true"
-                            className="fas fa-circle fa-stack-2x"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="fas fa-ellipsis-h fa-inverse fa-stack-1x"
-                        />
-                    </span>
+                    <BGIcon type="circle" name="ellipsis-h" color="secondary" />
                 </button>
             </aside>
         );

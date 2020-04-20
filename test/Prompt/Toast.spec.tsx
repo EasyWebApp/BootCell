@@ -3,6 +3,7 @@ import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
 import { ToastBox, ToastProps } from '../../source/Prompt/Toast';
+import { CloseButton } from '../../source/Form/Button';
 
 const { render } = ToastBox.prototype;
 
@@ -29,13 +30,7 @@ describe('Toast', () => {
 
                     <strong className="mr-auto">Test</strong>
                     <small className="text-muted">just now</small>
-                    <button
-                        type="button"
-                        className="ml-2 mb-1 close"
-                        aria-label="Close"
-                    >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <CloseButton className="ml-2 mb-1" />
                 </div>
                 <div className="toast-body">example</div>
             </div>

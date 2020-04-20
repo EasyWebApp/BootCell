@@ -31,7 +31,6 @@ export function ToggleField({
                 'custom-control',
                 `custom-${Switch ? 'switch' : type}`,
                 inline && 'custom-control-inline',
-                'mb-3',
                 className
             )}
         >

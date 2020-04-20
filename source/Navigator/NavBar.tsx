@@ -6,6 +6,7 @@ import {
     mixin,
     watch,
     attribute,
+    on,
     Fragment
 } from 'web-cell';
 import { uniqueID } from 'web-utility/source/data';
@@ -13,6 +14,7 @@ import classNames from 'classnames';
 
 import { Theme, Status, Size } from '../utility/constant';
 import { NavProps, Nav } from './Nav';
+import './NavBar.less';
 
 export interface NavBarProps extends WebCellProps {
     brand?: VNodeChildElement;
@@ -104,6 +106,11 @@ export class NavBar extends mixin<NavBarProps>() {
         self.removeEventListener('keydown', this.escapeClose);
     }
 
+    @on('click', '.nav-item:not(drop-menu), .dropdown-item')
+    clickClose() {
+        this.open = false;
+    }
+
     renderContent({
         brand,
         menu,
@@ -147,7 +154,6 @@ export class NavBar extends mixin<NavBarProps>() {
                         className="navbar-nav"
                         list={menu}
                         activeIndex={activeIndex}
-                        onClick={() => (this.open = false)}
                     />
                     {defaultSlot[0] && (
                         <div

@@ -23,9 +23,7 @@ describe('Form', () => {
                 <FormField id="test" />
             </Form>,
             <form className="form-inline">
-                <div className="form-group">
-                    <input type="text" className="form-control" id="test" />
-                </div>
+                <FormField id="test" />
             </form>
         );
     });

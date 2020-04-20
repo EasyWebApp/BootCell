@@ -21,14 +21,14 @@ describe('Spinner', () => {
             <Button disabled>
                 <Spinner embed>Pending...</Spinner>
             </Button>,
-            <button className="btn btn-primary" type="button" disabled>
+            <Button disabled>
                 <div
                     className="spinner-border"
                     role="status"
                     aria-hidden="true"
                 />
                 Pending...
-            </button>
+            </Button>
         );
     });
 
@@ -39,7 +39,7 @@ describe('Spinner', () => {
             </SpinnerBox>,
             <div className={`${style['spinner-box']} test`}>
                 test
-                <div className={`${style['spinner-cover']} ${style['active']}`}>
+                <div className={`${style['spinner-cover']} ${style.active}`}>
                     <Spinner />
                 </div>
             </div>

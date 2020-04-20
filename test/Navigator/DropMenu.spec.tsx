@@ -3,6 +3,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { DropMenu, DropMenuProps } from '../../source/Navigator/DropMenu';
+import { Button } from '../../source/Form/Button';
 
 const { renderButton, renderItem, renderList, render } = DropMenu.prototype;
 
@@ -61,15 +62,14 @@ describe('Drop Menu', () => {
                 ]}
             />,
             <div>
-                <button
-                    className="btn btn-primary dropdown-toggle"
-                    type="button"
+                <Button
+                    className="dropdown-toggle"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     Demo
-                </button>
+                </Button>
                 <div className="dropdown-menu" aria-labelledby="test">
                     <a
                         className="dropdown-item active"
@@ -102,15 +102,14 @@ describe('Drop Menu', () => {
                 list={[]}
             />,
             <div>
-                <button
-                    className="btn btn-primary dropdown-toggle"
-                    type="button"
+                <Button
+                    className="dropdown-toggle"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     Demo
-                </button>
+                </Button>
                 <div
                     className="dropdown-menu dropdown-menu-md-right"
                     aria-labelledby="test"
@@ -128,15 +127,14 @@ describe('Drop Menu', () => {
                 list={[]}
             />,
             <div>
-                <button
-                    className="btn btn-primary dropdown-toggle"
-                    type="button"
+                <Button
+                    className="dropdown-toggle"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     Demo
-                </button>
+                </Button>
                 <div
                     className="dropdown-menu dropdown-menu-right dropdown-menu-md-left"
                     aria-labelledby="test"
@@ -149,14 +147,7 @@ describe('Drop Menu', () => {
         assertLooksLike(
             <InlineDropMenu title="Demo" href="example" list={[]} />,
             <div>
-                <a
-                    className="btn btn-primary"
-                    href="example"
-                    role="button"
-                    aria-disabled="false"
-                >
-                    Demo
-                </a>
+                <Button href="example">Demo</Button>
                 <button
                     type="button"
                     className="btn btn-primary dropdown-toggle dropdown-toggle-split"
@@ -175,15 +166,14 @@ describe('Drop Menu', () => {
         assertLooksLike(
             <InlineDropMenu title="Demo" direction="left" list={[]} />,
             <div>
-                <button
-                    className="btn btn-primary dropdown-toggle"
-                    type="button"
+                <Button
+                    className="dropdown-toggle"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     Demo
-                </button>
+                </Button>
                 <div className="dropdown-menu" aria-labelledby="test" />
             </div>
         );
@@ -200,23 +190,15 @@ describe('Drop Menu', () => {
             <div>
                 <div className="dropdown-menu" aria-labelledby="test" />
                 <div className="btn-group">
-                    <a
-                        className="btn btn-primary"
-                        href="example"
-                        role="button"
-                        aria-disabled="false"
-                    >
-                        Demo
-                    </a>
-                    <button
-                        type="button"
-                        className="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    <Button href="example">Demo</Button>
+                    <Button
+                        className="dropdown-toggle dropdown-toggle-split"
                         id="test"
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
                         <span className="sr-only">Toggle Dropdown</span>
-                    </button>
+                    </Button>
                 </div>
             </div>
         );

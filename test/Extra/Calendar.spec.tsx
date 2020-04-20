@@ -7,6 +7,8 @@ import { CalendarView, CalendarProps } from '../../source/Extra/Calendar';
 import Calendar_style from '../../source/Extra/Calendar/index.less';
 import Table_style from '../../source/Content/Table.less';
 
+import { IconButton } from '../../source/Form/Button';
+
 const {
     prototype: { render, renderRow },
     createDayGrid
@@ -35,21 +37,11 @@ describe('Calendar', () => {
             />,
             <div>
                 <header className="d-flex justify-content-between align-items-center py-3">
-                    <button type="button" className="btn btn-primary p-1">
-                        <span
-                            className="fas fa-chevron-left"
-                            aria-hidden="true"
-                        />
-                    </button>
+                    <IconButton className="p-1" name="chevron-left" />
                     <time className="font-weight-bold">
                         <span>{1989}</span>-<span>{6}</span>
                     </time>
-                    <button type="button" className="btn btn-primary p-1">
-                        <span
-                            className="fas fa-chevron-right"
-                            aria-hidden="true"
-                        />
-                    </button>
+                    <IconButton className="p-1" name="chevron-right" />
                 </header>
                 <div className="table-responsive">
                     <table

@@ -3,6 +3,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { Alert } from '../../source/Prompt/Alert';
+import { CloseButton } from '../../source/Form/Button';
 
 describe('Alert', () => {
     it('should render a Simple Alert defaultly', () => {
@@ -25,9 +26,7 @@ describe('Alert', () => {
             >
                 <h4 className="alert-heading">Test</h4>
                 Example
-                <button type="button" className="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <CloseButton />
             </aside>
         );
     });
