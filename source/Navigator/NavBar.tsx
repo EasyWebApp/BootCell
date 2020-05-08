@@ -22,7 +22,7 @@ export interface NavBarProps extends WebCellProps {
     background?: keyof typeof Theme | keyof typeof Status;
     narrow?: boolean;
     expand?: keyof typeof Size;
-    fixed?: string;
+    fixed?: 'top' | 'bottom';
     menu?: NavProps['list'];
     activeIndex?: number;
     open?: boolean;
@@ -92,7 +92,7 @@ export class NavBar extends mixin<NavBarProps>() {
             `bg-${background}`,
             'shadow',
             'navbar-expand' + (expand === 'xs' ? '' : '-' + expand),
-            `fixed-${fixed}`
+            fixed === 'top' ? 'sticky-top' : 'fixed-bottom'
         );
 
         document.body.addEventListener('click', this.outClose);

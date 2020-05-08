@@ -46,7 +46,7 @@ export class HeaderList extends mixin<HeaderListProps>() {
                 this.watch(header, index);
 
                 if (!header.id.trim())
-                    header.id = header.textContent.trim().replace(/\s+/g, '-');
+                    header.id = header.textContent.trim().replace(/\W+/g, '-');
 
                 return {
                     level: header.tagName[1],

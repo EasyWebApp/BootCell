@@ -96,7 +96,9 @@ export class PopoverBox extends mixin<PopoverProps>() {
                     role="tooltip"
                 >
                     <div className="arrow" />
-                    {header && <h3 className="popover-header">{header}</h3>}
+                    {header && (
+                        <h3 className="popover-header text-nowrap">{header}</h3>
+                    )}
                     <div className="popover-body">{body}</div>
                 </div>
             </Fragment>

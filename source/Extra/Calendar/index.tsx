@@ -7,7 +7,12 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { TimeData, Day, changeMonth } from 'web-utility/source/date';
+import {
+    TimeData,
+    Day,
+    formatDate,
+    changeMonth
+} from 'web-utility/source/date';
 
 import { IconButton } from '../../Form/Button';
 import { Table } from '../../Content/Table';
@@ -17,6 +22,7 @@ import { WeekDay } from './meta.json';
 
 export interface CalendarProps {
     date?: Date;
+    dateTemplate?: string;
     renderCell?: (date: Date) => VNodeChildElement;
 }
 
@@ -43,6 +49,10 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
         this.setProps({ date });
         this.setState({ dayGrid: CalendarView.createDayGrid(date) });
     }
+
+    @attribute
+    @watch
+    dateTemplate = 'YYYY-MM';
 
     @watch
     renderCell: CalendarProps['renderCell'];
@@ -76,48 +86,50 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
     renderRow(row: number[], index: number) {
         const { date, renderCell } = this.props;
 
-        return (
-            <tr>
-                {row.map(day => {
-                    const prev = !index && day > 14,
-                        next = index > 3 && day < 14;
+        return row.map(day => {
+            const prev = !index && day > 14,
+                next = index > 3 && day < 14;
 
-                    const outer = prev || next;
+            const outer = prev || next,
+                today = new Date(
+                    date.getFullYear(),
+                    date.getMonth() + (prev ? -1 : next ? 1 : 0),
+                    day
+                );
+            const sameDay =
+                formatDate(date, 'YYYY-MM-DD') ===
+                formatDate(today, 'YYYY-MM-DD');
 
-                    return (
-                        <td className={outer ? 'text-secondary bg-light' : ''}>
-                            {!renderCell
-                                ? day
-                                : renderCell(
-                                      new Date(
-                                          date.getFullYear(),
-                                          date.getMonth() +
-                                              (prev ? -1 : next ? 1 : 0),
-                                          day
-                                      )
-                                  )}
-                        </td>
-                    );
-                })}
-            </tr>
-        );
+            return (
+                <td
+                    className={
+                        outer
+                            ? 'text-secondary bg-light'
+                            : sameDay
+                            ? 'bg-primary'
+                            : 'bg-white'
+                    }
+                >
+                    {!renderCell ? day : renderCell(today)}
+                </td>
+            );
+        });
     }
 
-    render({ date }: CalendarProps, { dayGrid }: CalendarState) {
+    render({ date, dateTemplate }: CalendarProps, { dayGrid }: CalendarState) {
         return (
             <Fragment>
                 <header className="d-flex justify-content-between align-items-center py-3">
                     <IconButton
                         name="chevron-left"
-                        onClick={() => (this.date = changeMonth(this.date, -1))}
+                        onClick={() => (this.date = changeMonth(date, -1))}
                     />
                     <time className="font-weight-bold">
-                        <span>{date?.getFullYear()}</span>-
-                        <span>{date?.getMonth() + 1}</span>
+                        {formatDate(date, dateTemplate)}
                     </time>
                     <IconButton
                         name="chevron-right"
-                        onClick={() => (this.date = changeMonth(this.date, 1))}
+                        onClick={() => (this.date = changeMonth(date, 1))}
                     />
                 </header>
                 <Table border center className={style.table}>
@@ -129,9 +141,9 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
                         </tr>
                     </thead>
                     <tbody>
-                        {dayGrid.map((row, index) =>
-                            this.renderRow(row, index)
-                        )}
+                        {dayGrid.map((row, index) => (
+                            <tr>{this.renderRow(row, index)}</tr>
+                        ))}
                     </tbody>
                 </Table>
             </Fragment>

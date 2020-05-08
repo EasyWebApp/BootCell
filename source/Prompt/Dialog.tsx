@@ -30,7 +30,7 @@ export async function openDialog(
         dialog
     );
 
-    dialog.showModal();
+    dialog.showModal(), dialog.scrollIntoView({ behavior: 'smooth' });
 
     document.body.style.overflow = 'hidden';
 

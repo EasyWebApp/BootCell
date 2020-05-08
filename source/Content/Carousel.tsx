@@ -1,4 +1,5 @@
 import {
+    VNodeChildElement,
     component,
     mixin,
     watch,
@@ -7,18 +8,20 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { uniqueID } from 'web-utility/source/data';
+import { HTMLProps } from 'web-utility/source/DOM-type';
+import { uniqueID, isEmpty } from 'web-utility/source/data';
 import { watchMotion } from 'web-utility/source/animation';
 import { watchVisible } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
 interface CarouselItem {
-    image: string | URL;
+    image?: string | URL;
     title?: string;
     detail?: string;
+    content?: VNodeChildElement;
 }
 
-export interface CarouselProps {
+export interface CarouselProps extends HTMLProps {
     mode?: 'slide' | 'fade';
     controls?: boolean;
     indicators?: boolean;
@@ -105,14 +108,14 @@ export class CarouselView extends mixin<CarouselProps>() {
     connectedCallback() {
         if (!this.list) this.list = [];
 
-        if (!this.controls && !this.indicators && !this.interval)
+        if (!this.controls && !this.indicators && isEmpty(this.interval))
             this.interval = 3;
 
         if (this.interval) {
             watchVisible(this, visible => (this.pause = !visible));
 
             this.timer = self.setInterval(
-                () => this.pause || this.turnTo(),
+                () => !this.list[1] || this.pause || this.turnTo(),
                 this.interval * 1000
             );
         }
@@ -167,21 +170,27 @@ export class CarouselView extends mixin<CarouselProps>() {
                     className="carousel-inner"
                     ref={(tag: HTMLElement) => (this.slideBox = tag)}
                 >
-                    {list.map(({ image, title, detail }) => (
+                    {list.map(({ content, image, title, detail }) => (
                         <section className="carousel-item">
-                            <img
-                                className="d-block w-100"
-                                src={image}
-                                alt={title}
-                            />
-                            {title && (
-                                <div
-                                    className="carousel-caption d-none d-md-block"
-                                    style={{ textShadow: '1px 2px 3px black' }}
-                                >
-                                    <h5>{title}</h5>
-                                    {detail && <p>{detail}</p>}
-                                </div>
+                            {content || (
+                                <Fragment>
+                                    <img
+                                        className="d-block w-100"
+                                        src={image}
+                                        alt={title}
+                                    />
+                                    {title && (
+                                        <div
+                                            className="carousel-caption d-none d-md-block"
+                                            style={{
+                                                textShadow: '1px 2px 3px black'
+                                            }}
+                                        >
+                                            <h5>{title}</h5>
+                                            {detail && <p>{detail}</p>}
+                                        </div>
+                                    )}
+                                </Fragment>
                             )}
                         </section>
                     ))}

@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
@@ -19,7 +18,7 @@ function Calendar({ date, renderCell }: CalendarProps) {
         <div>
             {render.call(
                 { renderRow: renderRow.bind({ props: { date, renderCell } }) },
-                { date },
+                { date, dateTemplate: 'YYYY-MM' },
                 { dayGrid: createDayGrid(date) }
             )}
         </div>
@@ -29,7 +28,7 @@ function Calendar({ date, renderCell }: CalendarProps) {
 describe('Calendar', () => {
     const date = new Date(1989, 5, 4);
 
-    it('should ', () => {
+    it('should render a Calendar Table based on the Date', () => {
         assertLooksLike(
             <Calendar
                 date={date}
@@ -38,9 +37,7 @@ describe('Calendar', () => {
             <div>
                 <header className="d-flex justify-content-between align-items-center py-3">
                     <IconButton className="p-1" name="chevron-left" />
-                    <time className="font-weight-bold">
-                        <span>{1989}</span>-<span>{6}</span>
-                    </time>
+                    <time className="font-weight-bold">1989-06</time>
                     <IconButton className="p-1" name="chevron-right" />
                 </header>
                 <div className="table-responsive">
@@ -84,7 +81,7 @@ describe('Calendar', () => {
                                 <td>
                                     <a>{3}</a>
                                 </td>
-                                <td>
+                                <td className="bg-primary">
                                     <a>{4}</a>
                                 </td>
                             </tr>

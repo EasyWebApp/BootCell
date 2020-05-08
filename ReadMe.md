@@ -12,8 +12,8 @@
 ## Usage
 
 ```shell
-npm install boot-cell web-cell \
-    classnames iterable-observer \
+npm install boot-cell \
+    iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
     @nuintun/qrcode
 ```
@@ -86,7 +86,8 @@ npm install boot-cell web-cell \
 4. [PopoverBox](https://web-cell.dev/BootCell/interfaces/popoverprops.html)
 5. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
 6. [ToastBox](https://web-cell.dev/BootCell/interfaces/toastprops.html)
-7. [ModalDialog](https://web-cell.dev/BootCell/interfaces/modaldialogprops.html)
+7. [`openDialog()`](https://web-cell.dev/BootCell/globals.html#opendialog)
+8. [`openModal()`](https://web-cell.dev/BootCell/globals.html#openmodal)
 
 ### Form
 

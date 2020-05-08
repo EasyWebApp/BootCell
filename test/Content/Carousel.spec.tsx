@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
@@ -21,10 +20,7 @@ describe('Carousel View', () => {
                             title: 'Test',
                             detail: 'test'
                         },
-                        {
-                            image: 'example.png',
-                            title: 'Example'
-                        }
+                        { content: <h3>Example</h3> }
                     ]
                 }
             ),
@@ -51,17 +47,7 @@ describe('Carousel View', () => {
                     </section>
 
                     <section className="carousel-item">
-                        <img
-                            className="d-block w-100"
-                            src="example.png"
-                            alt="Example"
-                        />
-                        <div
-                            className="carousel-caption d-none d-md-block"
-                            style={{ textShadow: '1px 2px 3px black' }}
-                        >
-                            <h5>Example</h5>
-                        </div>
+                        <h3>Example</h3>
                     </section>
                 </div>
 

@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { createCell, renderToStaticMarkup } from 'web-cell';
 
 import { openDialog, openModal } from '../../source/Prompt/Dialog';

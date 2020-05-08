@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 

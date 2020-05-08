@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
@@ -14,6 +13,18 @@ describe('Card', () => {
                     <h5 className="card-title">Test</h5>
                 </div>
             </div>
+        );
+    });
+
+    it('should render a Card with Link container', () => {
+        assertLooksLike(
+            <Card title="Test" image="test.png" href="test" />,
+            <a className="card text-decoration-none" href="test">
+                <img className="card-img-top" src="test.png" />
+                <div className="card-body">
+                    <h5 className="card-title">Test</h5>
+                </div>
+            </a>
         );
     });
 

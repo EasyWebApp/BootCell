@@ -1,4 +1,3 @@
-import 'web-cell/source/utility/polyfill';
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
@@ -22,7 +21,7 @@ describe('Popover', () => {
                 <Button>Test</Button>
                 <div className="popover bs-popover-top fade" role="tooltip">
                     <div className="arrow" />
-                    <h3 className="popover-header">Title</h3>
+                    <h3 className="popover-header text-nowrap">Title</h3>
                     <div className="popover-body">Content</div>
                 </div>
             </div>
