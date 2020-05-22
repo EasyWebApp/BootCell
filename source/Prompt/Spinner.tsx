@@ -64,12 +64,16 @@ export interface SpinnerBoxProps extends SpinnerProps {
 
 export function SpinnerBox({
     className,
+    style: styles,
     cover,
     defaultSlot,
     ...rest
 }: SpinnerBoxProps) {
     return (
-        <div className={classNames(style['spinner-box'], className)}>
+        <div
+            className={classNames(style['spinner-box'], className)}
+            style={styles}
+        >
             {defaultSlot}
 
             <div

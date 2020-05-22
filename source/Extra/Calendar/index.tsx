@@ -13,6 +13,7 @@ import {
     formatDate,
     changeMonth
 } from 'web-utility/source/date';
+import classNames from 'classnames';
 
 import { IconButton } from '../../Form/Button';
 import { Table } from '../../Content/Table';
@@ -102,13 +103,15 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
 
             return (
                 <td
-                    className={
+                    className={classNames(
+                        'p-3',
+                        'p-sm-4',
                         outer
                             ? 'text-secondary bg-light'
                             : sameDay
-                            ? 'bg-primary'
+                            ? 'bg-primary text-white'
                             : 'bg-white'
-                    }
+                    )}
                 >
                     {!renderCell ? day : renderCell(today)}
                 </td>
@@ -121,22 +124,22 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
             <Fragment>
                 <header className="d-flex justify-content-between align-items-center py-3">
                     <IconButton
-                        name="chevron-left"
+                        name="chevron-left px-2"
                         onClick={() => (this.date = changeMonth(date, -1))}
                     />
                     <time className="font-weight-bold">
                         {formatDate(date, dateTemplate)}
                     </time>
                     <IconButton
-                        name="chevron-right"
+                        name="chevron-right px-2"
                         onClick={() => (this.date = changeMonth(date, 1))}
                     />
                 </header>
                 <Table border center className={style.table}>
                     <thead>
-                        <tr className="bg-primary">
+                        <tr className="bg-primary text-white">
                             {CalendarView.WeekDay.map(day => (
-                                <th>{day}</th>
+                                <th className="text-truncate">{day}</th>
                             ))}
                         </tr>
                     </thead>

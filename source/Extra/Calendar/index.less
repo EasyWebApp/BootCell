@@ -1,8 +1,12 @@
-.table td {
-    width: calc(100% / 7);
-    padding: 0;
-    & > * {
-        display: block;
-        padding: 0.75rem;
+.table table {
+    table-layout: fixed;
+    th {
+        width: calc(100% / 7);
+        @media (max-width: 576px) {
+            width: calc(100vw / 7);
+        }
+    }
+    td {
+        position: relative;
     }
 }

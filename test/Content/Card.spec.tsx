@@ -16,18 +16,6 @@ describe('Card', () => {
         );
     });
 
-    it('should render a Card with Link container', () => {
-        assertLooksLike(
-            <Card title="Test" image="test.png" href="test" />,
-            <a className="card text-decoration-none" href="test">
-                <img className="card-img-top" src="test.png" />
-                <div className="card-body">
-                    <h5 className="card-title">Test</h5>
-                </div>
-            </a>
-        );
-    });
-
     it('should render Horizontal layout as "direction" set', () => {
         assertLooksLike(
             <Card title="Test" image="test.png" direction="horizontal" />,

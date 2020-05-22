@@ -22,7 +22,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item disabled">
                     <a className="page-link" aria-disabled="true">
-                        >
+                        &gt;
                     </a>
                 </li>
             </ul>
@@ -55,7 +55,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item">
                     <a className="page-link" aria-disabled="false">
-                        >
+                        &gt;
                     </a>
                 </li>
             </ul>
@@ -98,7 +98,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item">
                     <a className="page-link" aria-disabled="false">
-                        >
+                        &gt;
                     </a>
                 </li>
             </ul>

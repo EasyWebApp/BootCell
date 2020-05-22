@@ -27,19 +27,19 @@ npm install boot-cell \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/github-markdown-css@3.0.1/github-markdown.min.css"
+    href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.11/dist/share-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.13/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
 ```
@@ -55,12 +55,13 @@ npm install boot-cell \
 5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 6. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
 7. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-8. [IFrame](https://web-cell.dev/BootCell/interfaces/iframeprops.html)
-9. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-10. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-11. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-12. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-13. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+8. [BackImage](https://web-cell.dev/BootCell/interfaces/backimageprops.html)
+9. [IFrame](https://web-cell.dev/BootCell/interfaces/iframeprops.html)
+10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+11. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+12. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+13. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+14. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Reminder
 

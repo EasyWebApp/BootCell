@@ -101,7 +101,7 @@ export class Pagination extends mixin<PaginationProps>() {
                         className="page-link"
                         aria-disabled={(current === total) + ''}
                     >
-                        >
+                        &gt;
                     </a>
                 </li>
             </ul>

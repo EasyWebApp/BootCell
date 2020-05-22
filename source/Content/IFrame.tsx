@@ -11,7 +11,6 @@ export function IFrame({ className, style, ...props }: IFrameProps) {
         <iframe
             className={classNames('w-100', 'border-0', className)}
             style={{ height: '50vh', ...style }}
-            scrolling="no"
             lazyLoad="1"
             loading="lazy"
             {...props}

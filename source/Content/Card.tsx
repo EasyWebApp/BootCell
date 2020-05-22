@@ -4,10 +4,10 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-export interface CardProps extends HTMLHyperLinkProps, WebCellProps {
+export interface CardProps extends HTMLProps, WebCellProps {
     subtitle?: string;
     text?: string;
     image?: VNodeChildElement;
@@ -20,7 +20,6 @@ export interface CardProps extends HTMLHyperLinkProps, WebCellProps {
 export function Card({
     className,
     title,
-    href,
     subtitle,
     text,
     image,
@@ -54,37 +53,30 @@ export function Card({
             </div>
         );
 
-    defaultSlot = vertical ? (
-        <Fragment>
-            {header && <div className="card-header">{header}</div>}
-            {banner}
-            {body}
-            {footer && <div className="card-footer text-muted">{footer}</div>}
-        </Fragment>
-    ) : (
-        <div className="row no-gutters align-items-center">
-            <div className="col-sm-4">{banner}</div>
-            <div className="col-sm-8">{body}</div>
-        </div>
-    );
-
-    const Class = classNames(
-        'card',
-        !vertical && 'justify-content-center',
-        className
-    );
-
-    return href ? (
-        <a
+    return (
+        <div
             {...rest}
-            className={classNames(Class, 'text-decoration-none')}
-            href={href}
+            className={classNames(
+                'card',
+                !vertical && 'justify-content-center',
+                className
+            )}
         >
-            {defaultSlot}
-        </a>
-    ) : (
-        <div {...rest} className={Class}>
-            {defaultSlot}
+            {vertical ? (
+                <Fragment>
+                    {header && <div className="card-header">{header}</div>}
+                    {banner}
+                    {body}
+                    {footer && (
+                        <div className="card-footer text-muted">{footer}</div>
+                    )}
+                </Fragment>
+            ) : (
+                <div className="row no-gutters align-items-center">
+                    <div className="col-sm-4">{banner}</div>
+                    <div className="col-sm-8">{body}</div>
+                </div>
+            )}
         </div>
     );
 }
