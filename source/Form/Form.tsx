@@ -1,8 +1,7 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-export interface FormProps extends HTMLProps, WebCellProps {
+export interface FormProps extends WebCellProps {
     inline?: boolean;
     validate?: boolean;
     validated?: boolean;

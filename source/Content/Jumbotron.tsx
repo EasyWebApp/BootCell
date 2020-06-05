@@ -1,8 +1,7 @@
 import { WebCellProps, createCell, Fragment } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-export interface JumbotronProps extends WebCellProps, HTMLProps {
+export interface JumbotronProps extends WebCellProps {
     fluid?: boolean;
     title: string;
     description: string;

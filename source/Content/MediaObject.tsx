@@ -4,10 +4,9 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-export interface MediaObjectProps extends HTMLProps, WebCellProps {
+export interface MediaObjectProps extends WebCellProps {
     listItem?: boolean;
     title: string;
     image: string | URL | VNodeChildElement;

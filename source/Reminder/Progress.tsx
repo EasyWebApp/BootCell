@@ -1,10 +1,9 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status } from '../utility/constant';
 
-export interface ProgressProps extends HTMLProps, WebCellProps {
+export interface ProgressProps extends WebCellProps {
     striped?: boolean;
     animated?: boolean;
     status?: keyof typeof Status;

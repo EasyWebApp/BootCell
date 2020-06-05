@@ -1,10 +1,9 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status, Theme, Color } from '../utility/constant';
 
-export interface IconProps extends HTMLProps, WebCellProps {
+export interface IconProps extends WebCellProps {
     group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
     name: string;
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;

@@ -1,4 +1,11 @@
-import { component, mixin, watch, attribute, createCell } from 'web-cell';
+import {
+    WebCellProps,
+    component,
+    mixin,
+    watch,
+    attribute,
+    createCell
+} from 'web-cell';
 
 interface Header {
     level: number;
@@ -6,9 +13,9 @@ interface Header {
     id: string;
 }
 
-export interface HeaderListProps {
-    list: Header[];
-    activeIndex: number;
+export interface HeaderListProps extends WebCellProps {
+    list?: Header[];
+    activeIndex?: number;
 }
 
 const observer_map = new WeakMap();

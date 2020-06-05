@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-rc.21",
+    "version": "1.0.0-rc.22",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -25,7 +25,7 @@
     "module": "dist/index.js",
     "dependencies": {
         "classnames": "^2.2.6",
-        "web-cell": "^2.0.0",
+        "web-cell": "^2.0.1",
         "web-utility": "^1.5.2"
     },
     "peerDependencies": {
@@ -54,8 +54,8 @@
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.4",
         "jest": "^26.0.1",
-        "less": "^3.11.1",
-        "lint-staged": "^10.2.6",
+        "less": "^3.11.2",
+        "lint-staged": "^10.2.9",
         "markdown-ime": "^1.0.3",
         "marked": "^1.1.0",
         "microbundle": "^0.12.0",
@@ -65,11 +65,11 @@
         "prettier": "^2.0.5",
         "snabbdom": "^0.7.4",
         "snabbdom-looks-like": "^1.0.5",
-        "ts-jest": "^26.0.0",
+        "ts-jest": "^26.1.0",
         "turndown": "^6.0.0",
         "turndown-plugin-gfm": "^1.0.2",
         "typedoc": "^0.17.7",
-        "typescript": "^3.9.3"
+        "typescript": "^3.9.5"
     },
     "scripts": {
         "lint": "lint-staged",

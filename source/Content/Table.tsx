@@ -1,9 +1,5 @@
 import { WebCellProps, createCell } from 'web-cell';
-import {
-    HTMLProps,
-    TableCellProps,
-    BaseFieldProps
-} from 'web-utility/source/DOM-type';
+import { TableCellProps, BaseFieldProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status, Theme } from '../utility/constant';
@@ -11,7 +7,7 @@ import { FieldProps } from '../Form';
 
 import style from './Table.less';
 
-export interface TableProps extends HTMLProps, WebCellProps {
+export interface TableProps extends WebCellProps {
     theme?: keyof typeof Status | keyof typeof Theme;
     center?: boolean;
     border?: boolean;

@@ -4,10 +4,9 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-export interface CardProps extends HTMLProps, WebCellProps {
+export interface CardProps extends WebCellProps {
     subtitle?: string;
     text?: string;
     image?: VNodeChildElement;

@@ -1,5 +1,5 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLHyperLinkProps, HTMLProps } from 'web-utility/source/DOM-type';
+import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { DropMenu } from './DropMenu';
@@ -12,7 +12,7 @@ interface NavLink extends HTMLHyperLinkProps {
     list?: NavLink[];
 }
 
-export interface NavProps extends HTMLProps, WebCellProps {
+export interface NavProps extends WebCellProps {
     list: NavLink[];
     activeIndex?: number;
     direction?: 'row' | 'column';

@@ -1,7 +1,6 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 
-export interface BackImageProps extends HTMLProps, WebCellProps {
+export interface BackImageProps extends WebCellProps {
     src: string | URL;
     height?: number | string;
 }

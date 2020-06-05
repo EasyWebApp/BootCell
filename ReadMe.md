@@ -94,14 +94,16 @@ npm install boot-cell \
 
 1. [Form](https://web-cell.dev/BootCell/interfaces/formprops.html)
 2. [Button](https://web-cell.dev/BootCell/interfaces/buttonprops.html)
-3. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
-4. [CloseButton](https://web-cell.dev/BootCell/globals.html#closebutton)
-5. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
-6. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-7. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-8. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
-9. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-10. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+3. [ButtonGroup](https://web-cell.dev/BootCell/interfaces/buttongroupprops.html)
+4. [Toolbar](https://web-cell.dev/BootCell/interfaces/toolbarprops.html)
+5. [IconButton](https://web-cell.dev/BootCell/globals.html#iconbuttonprops)
+6. [CloseButton](https://web-cell.dev/BootCell/globals.html#closebutton)
+7. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
+8. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
+9. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+10. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
+11. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+12. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Extra
 

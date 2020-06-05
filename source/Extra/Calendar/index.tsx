@@ -22,7 +22,7 @@ import style from './index.less';
 import { WeekDay } from './meta.json';
 
 export interface CalendarProps {
-    date?: Date;
+    date?: TimeData;
     dateTemplate?: string;
     renderCell?: (date: Date) => VNodeChildElement;
 }
@@ -93,8 +93,8 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
 
             const outer = prev || next,
                 today = new Date(
-                    date.getFullYear(),
-                    date.getMonth() + (prev ? -1 : next ? 1 : 0),
+                    (date as Date).getFullYear(),
+                    (date as Date).getMonth() + (prev ? -1 : next ? 1 : 0),
                     day
                 );
             const sameDay =

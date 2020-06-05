@@ -1,5 +1,4 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 
 import { BGIcon } from '../../Reminder';
 
@@ -8,7 +7,7 @@ import style from './index.less';
 
 const shareAPI = 'share' in self.navigator;
 
-export interface ShareBarProps extends HTMLProps, WebCellProps, ContentMeta {
+export interface ShareBarProps extends WebCellProps, ContentMeta {
     targets?: VendorName[];
     direction?: 'row' | 'column';
 }

@@ -1,9 +1,18 @@
-import { createCell, component, mixin, watch, attribute, on } from 'web-cell';
+import {
+    WebCellProps,
+    createCell,
+    component,
+    mixin,
+    watch,
+    attribute,
+    on
+} from 'web-cell';
 import classNames from 'classnames';
 
-export interface PaginationProps {
+export interface PaginationProps extends WebCellProps {
     current?: number;
     total?: number;
+    onChange?: (event: CustomEvent<number>) => any;
 }
 
 @component({

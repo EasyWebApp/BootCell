@@ -1,5 +1,6 @@
 import {
     VNodeChildElement,
+    WebCellProps,
     component,
     mixin,
     watch,
@@ -20,8 +21,8 @@ export interface DropMenuItem extends HTMLHyperLinkProps {
     content?: VNodeChildElement;
 }
 
-export interface DropMenuProps {
-    title: VNodeChildElement;
+export interface DropMenuProps extends WebCellProps {
+    title: VNodeChildElement & string;
     buttonKind?: ButtonProps['kind'];
     buttonSize?: ButtonProps['size'];
     alignType?: 'left' | 'right';

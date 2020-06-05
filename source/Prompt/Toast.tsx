@@ -8,12 +8,11 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import { transitOut } from 'web-utility/source/animation';
 
 import { CloseButton } from '../Form/Button';
 
-export interface ToastProps extends HTMLProps, WebCellProps {
+export interface ToastProps extends WebCellProps {
     icon: VNodeChildElement;
     time: string;
     delay?: number;

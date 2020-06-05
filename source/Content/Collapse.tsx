@@ -1,8 +1,8 @@
-import { component, mixin, watch, attribute } from 'web-cell';
+import { WebCellProps, component, mixin, watch, attribute } from 'web-cell';
 import { watchMotion } from 'web-utility/source/animation';
 
-export interface CollapseProps {
-    open: boolean;
+export interface CollapseProps extends WebCellProps {
+    open?: boolean;
 }
 
 @component({

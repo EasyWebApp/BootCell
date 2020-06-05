@@ -1,16 +1,10 @@
-import {
-    WebCellProps,
-    createCell,
-    Fragment,
-    VNodeChildElement
-} from 'web-cell';
+import { WebCellProps, createCell, Fragment } from 'web-cell';
 import classNames from 'classnames';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 
 import { Status, Theme } from '../utility/constant';
 import style from './Spinner.less';
 
-export interface SpinnerProps extends HTMLProps, WebCellProps {
+export interface SpinnerProps extends WebCellProps {
     type?: 'border' | 'grow';
     color?: keyof typeof Status | keyof typeof Theme;
     small?: boolean;
@@ -32,7 +26,10 @@ export function Spinner({
         ? defaultSlot
         : [<span className="sr-only">Loading...</span>];
 
-    const body = (defaultSlot: VNodeChildElement[], hidden?: boolean) => (
+    const body = (
+        defaultSlot: WebCellProps['defaultSlot'],
+        hidden?: boolean
+    ) => (
         <div
             {...rest}
             className={classNames(
