@@ -87,19 +87,19 @@ export class CarouselView extends mixin<CarouselProps>() {
             direction = 'carousel-item-' + (forward ? 'left' : 'right'),
             order = 'carousel-item-' + (forward ? 'next' : 'prev');
 
-        next.classList.add(order);
+        next?.classList.add(order);
 
-        await new Promise(resolve => self.requestAnimationFrame(resolve));
+        await new Promise(self.requestAnimationFrame);
 
         const end = watchMotion('transition', next);
 
-        current.classList.add(direction), next.classList.add(direction);
+        current?.classList.add(direction), next?.classList.add(direction);
 
         await end;
 
-        next.classList.remove(order, direction), next.classList.add('active');
+        next?.classList.remove(order, direction), next?.classList.add('active');
 
-        current.classList.remove('active', direction);
+        current?.classList.remove('active', direction);
     }
 
     private timer: number;

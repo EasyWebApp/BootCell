@@ -3,6 +3,7 @@ export * from './Button';
 export * from './ButtonGroup';
 export * from './Field';
 export * from './FormField';
+export * from './InputGroup';
 export * from './ToggleField';
 export * from './FileInput';
 export * from './MarkdownEditor';

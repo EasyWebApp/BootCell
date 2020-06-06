@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0-rc.22",
+    "version": "1.0.0-rc.23",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4 & FontAwesome v5",
@@ -38,6 +38,7 @@
         "markdown-ime": "^1.0.3",
         "marked": "^1.1.0",
         "share-api-polyfill": "1.0.13",
+        "snabbdom-looks-like": "^1.0.5",
         "turndown": "^6.0.0",
         "turndown-plugin-gfm": "^1.0.2"
     },
@@ -54,7 +55,7 @@
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.4",
         "jest": "^26.0.1",
-        "less": "^3.11.2",
+        "less": "^3.11.3",
         "lint-staged": "^10.2.9",
         "markdown-ime": "^1.0.3",
         "marked": "^1.1.0",
