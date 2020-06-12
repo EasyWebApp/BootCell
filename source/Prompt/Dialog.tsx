@@ -1,4 +1,4 @@
-import { VNodeChildElement, render, createCell } from 'web-cell';
+import { VNodeChildElement, render, createCell, WebCellProps } from 'web-cell';
 import { formToJSON } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
@@ -43,8 +43,7 @@ export async function openDialog(
     return result;
 }
 
-export interface ModalProps {
-    title: string;
+export interface ModalProps extends WebCellProps {
     body: VNodeChildElement;
     cancelText?: VNodeChildElement;
     confirmText?: VNodeChildElement;
@@ -60,10 +59,12 @@ export function openModal({
     confirmText = 'Confirm',
     scrollable,
     centered,
-    size
+    size,
+    className,
+    ...rest
 }: ModalProps) {
     return openDialog(
-        <div className="modal-content">
+        <div className="modal-content" {...rest}>
             <header className="modal-header">
                 <h5 className="modal-title">{title}</h5>
                 <CloseButton
@@ -86,7 +87,8 @@ export function openModal({
             'modal-dialog',
             scrollable && 'modal-dialog-scrollable',
             centered && 'modal-dialog-centered',
-            size && `modal-${size}`
+            size && `modal-${size}`,
+            className
         )
     );
 }

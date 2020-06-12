@@ -6,7 +6,24 @@ import { Progress } from '../../source/Reminder/Progress';
 describe('Progress', () => {
     it('should render a Progress Bar with Primary status defaultly', () => {
         assertLooksLike(
-            <Progress>pending</Progress>,
+            <Progress />,
+
+            <div className="progress">
+                <div
+                    className="progress-bar"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    style={{ width: '0%' }}
+                />
+            </div>
+        );
+    });
+
+    it('should render a Progress Bar with a default Label', () => {
+        assertLooksLike(
+            <Progress label />,
 
             <div className="progress">
                 <div
@@ -17,7 +34,26 @@ describe('Progress', () => {
                     aria-valuenow="0"
                     style={{ width: '0%' }}
                 >
-                    pending
+                    0%
+                </div>
+            </div>
+        );
+    });
+
+    it('should render a Progress Bar with a custom Label', () => {
+        assertLooksLike(
+            <Progress label={percent => `${percent} percent`} />,
+
+            <div className="progress">
+                <div
+                    className="progress-bar"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    style={{ width: '0%' }}
+                >
+                    0 percent
                 </div>
             </div>
         );
@@ -35,9 +71,32 @@ describe('Progress', () => {
                     aria-valuemax="100"
                     aria-valuenow="64"
                     style={{ width: '64%' }}
-                >
-                    64%
-                </div>
+                />
+            </div>
+        );
+    });
+
+    it('should render a Progress with multiple Bars', () => {
+        assertLooksLike(
+            <Progress bars={[{}, { percent: 10, striped: true }]} />,
+
+            <div className="progress">
+                <div
+                    className="progress-bar"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    style={{ width: '0%' }}
+                />
+                <div
+                    className="progress-bar progress-bar-striped"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="10"
+                    style={{ width: '10%' }}
+                />
             </div>
         );
     });

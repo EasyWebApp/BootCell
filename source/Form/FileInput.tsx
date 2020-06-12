@@ -1,13 +1,11 @@
-import { createCell, mixin, attribute, watch, component } from 'web-cell';
+import { component, mixin, attribute, watch, createCell } from 'web-cell';
+import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import className from 'classnames';
 
 import style from './FileInput.less';
 
-export interface FileInputProps {
-    name?: string;
-    required?: boolean;
+export interface FileInputProps extends BaseFieldProps {
     accept?: string;
-    value?: string;
     fileName?: string;
 }
 

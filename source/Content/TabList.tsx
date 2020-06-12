@@ -1,5 +1,6 @@
 import {
     VNodeChildElement,
+    WebCellProps,
     component,
     mixin,
     watch,
@@ -20,7 +21,7 @@ interface TabItem {
     disabled?: boolean;
 }
 
-export interface TabListProps {
+export interface TabListProps extends WebCellProps {
     mode?: NavProps['itemMode'] | 'list';
     direction?: NavProps['direction'];
     tabAlign?: NavProps['align'];

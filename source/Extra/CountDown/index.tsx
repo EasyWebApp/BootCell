@@ -1,4 +1,11 @@
-import { component, mixin, attribute, watch, createCell } from 'web-cell';
+import {
+    WebCellProps,
+    component,
+    mixin,
+    attribute,
+    watch,
+    createCell
+} from 'web-cell';
 
 import { Status } from '../../utility/constant';
 import style from './index.less';
@@ -15,7 +22,7 @@ interface TimeSection {
 
 const colors = Object.keys(Status).slice(0, 4);
 
-export interface CountDownProps {
+export interface CountDownProps extends WebCellProps {
     endTime?: string | Date | number;
 }
 

@@ -1,4 +1,5 @@
 import {
+    WebCellProps,
     VNodeChildElement,
     component,
     mixin,
@@ -21,7 +22,7 @@ import { Table } from '../../Content/Table';
 import style from './index.less';
 import { WeekDay } from './meta.json';
 
-export interface CalendarProps {
+export interface CalendarProps extends WebCellProps {
     date?: TimeData;
     dateTemplate?: string;
     renderCell?: (date: Date) => VNodeChildElement;
