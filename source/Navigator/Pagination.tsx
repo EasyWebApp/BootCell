@@ -12,6 +12,7 @@ import classNames from 'classnames';
 export interface PaginationProps extends WebCellProps {
     current?: number;
     total?: number;
+    size?: 'sm' | 'lg';
     onChange?: (event: CustomEvent<number>) => any;
 }
 
@@ -27,6 +28,10 @@ export class Pagination extends mixin<PaginationProps>() {
     @attribute
     @watch
     total = 1;
+
+    @attribute
+    @watch
+    size: PaginationProps['size'];
 
     @on('click', '.page-link')
     onClick(event: MouseEvent) {
@@ -48,7 +53,7 @@ export class Pagination extends mixin<PaginationProps>() {
         this.emit('change', this.current, { bubbles: true, composed: true });
     }
 
-    render({ current, total }: PaginationProps) {
+    render({ current, total, size }: PaginationProps) {
         const list = Array.from(Array(total), (_, index) => {
             ++index;
 
@@ -60,7 +65,14 @@ export class Pagination extends mixin<PaginationProps>() {
         }).filter(Boolean);
 
         return (
-            <ul className="pagination justify-content-center">
+            <ul
+                className={classNames(
+                    'pagination',
+                    size && 'pagination-' + size,
+                    'justify-content-center',
+                    'user-select-none'
+                )}
+            >
                 <li
                     className={classNames(
                         'page-item',
