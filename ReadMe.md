@@ -120,8 +120,9 @@ npm install boot-cell \
 2. [Theme](https://web-cell.dev/BootCell/enums/theme.html)
 3. [Status](https://web-cell.dev/BootCell/enums/status.html)
 4. [ColorNames](https://web-cell.dev/BootCell/globals.html#colornames)
-5. [Size](https://web-cell.dev/BootCell/enums/size.html)
-6. [Position](https://web-cell.dev/BootCell/enums/position.html)
+5. [BackgroundColors](https://web-cell.dev/BootCell/globals.html#backgroundcolors)
+6. [Size](https://web-cell.dev/BootCell/enums/size.html)
+7. [Position](https://web-cell.dev/BootCell/enums/position.html)
 
 ## Utilities
 

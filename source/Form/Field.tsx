@@ -34,6 +34,7 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
 export function Field({
     is = 'input',
     type = 'text',
+    className,
     size,
     defaultValue,
     valid,
@@ -54,7 +55,8 @@ export function Field({
                     className={classNames(
                         type === 'range' ? 'custom-range' : 'form-control',
                         validClass,
-                        sizeClass
+                        sizeClass,
+                        className
                     )}
                 />
             ) : (
@@ -64,14 +66,19 @@ export function Field({
                     className={classNames(
                         'custom-file-input',
                         validClass,
-                        sizeClass
+                        sizeClass,
+                        className
                     )}
                 />
             ),
         output: (
             <output
                 {...rest}
-                className={classNames('form-control', 'form-control-plaintext')}
+                className={classNames(
+                    'form-control',
+                    'form-control-plaintext',
+                    className
+                )}
             >
                 {defaultValue}
             </output>
@@ -82,7 +89,8 @@ export function Field({
                 className={classNames(
                     'custom-select',
                     validClass,
-                    typeof size === 'string' && `custom-select-${size}`
+                    typeof size === 'string' && `custom-select-${size}`,
+                    className
                 )}
             >
                 {defaultSlot}
@@ -91,7 +99,12 @@ export function Field({
         textarea: (
             <textarea
                 {...rest}
-                className={classNames('form-control', validClass, sizeClass)}
+                className={classNames(
+                    'form-control',
+                    validClass,
+                    sizeClass,
+                    className
+                )}
             >
                 {defaultValue}
             </textarea>

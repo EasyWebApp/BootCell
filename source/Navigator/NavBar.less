@@ -5,4 +5,23 @@
             padding-right: 0;
         }
     }
+    // [Origin] https://getbootstrap.com/docs/4.5/examples/offcanvas/offcanvas.css
+
+    @media (max-width: 991.98px) {
+        .offcanvas-collapse {
+            position: fixed;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            overflow-y: auto;
+            visibility: hidden;
+            transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            .open {
+                visibility: visible;
+                transform: translateX(-100%);
+            }
+        }
+    }
 }

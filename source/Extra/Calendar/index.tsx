@@ -20,11 +20,11 @@ import { IconButton } from '../../Form/Button';
 import { Table } from '../../Content/Table';
 
 import style from './index.less';
-import { WeekDay } from './meta.json';
 
 export interface CalendarProps extends WebCellProps {
     date?: TimeData;
     dateTemplate?: string;
+    weekDays?: string[];
     renderCell?: (date: Date) => VNodeChildElement;
 }
 
@@ -32,13 +32,21 @@ interface CalendarState {
     dayGrid: number[][];
 }
 
+export const WeekDays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+];
+
 @component({
     tagName: 'calendar-view',
     renderTarget: 'children'
 })
 export class CalendarView extends mixin<CalendarProps, CalendarState>() {
-    static WeekDay = WeekDay;
-
     state = {
         dayGrid: []
     };
@@ -55,6 +63,9 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
     @attribute
     @watch
     dateTemplate = 'YYYY-MM';
+
+    @watch
+    weekDays = WeekDays;
 
     @watch
     renderCell: CalendarProps['renderCell'];
@@ -120,7 +131,10 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
         });
     }
 
-    render({ date, dateTemplate }: CalendarProps, { dayGrid }: CalendarState) {
+    render(
+        { date, dateTemplate, weekDays }: CalendarProps,
+        { dayGrid }: CalendarState
+    ) {
         return (
             <Fragment>
                 <header className="d-flex justify-content-between align-items-center py-3">
@@ -139,7 +153,7 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
                 <Table border center className={style.table}>
                     <thead>
                         <tr className="bg-primary text-white">
-                            {CalendarView.WeekDay.map(day => (
+                            {weekDays.map(day => (
                                 <th className="text-truncate">{day}</th>
                             ))}
                         </tr>

@@ -3,6 +3,7 @@ import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { DropMenu } from './DropMenu';
+import { BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
 interface NavLink extends HTMLHyperLinkProps {
@@ -19,6 +20,8 @@ export interface NavProps extends WebCellProps {
     align?: 'start' | 'center' | 'end';
     itemMode?: 'tabs' | 'pills';
     itemWidth?: 'fill' | 'justified';
+    scrollable?: boolean;
+    background?: BackgroundColors;
 }
 
 export function Nav({
@@ -30,18 +33,21 @@ export function Nav({
     list,
     activeIndex = 0,
     defaultSlot,
+    scrollable,
+    background = 'white',
     ...rest
 }: NavProps) {
-    return (
+    const nav = (
         <nav
-            {...rest}
+            {...(scrollable ? {} : rest)}
             className={classNames(
                 'nav',
                 direction && `flex-${direction}`,
                 align && `justify-content-${align}`,
                 itemMode && `nav-${itemMode}`,
                 itemWidth && `nav-${itemWidth}`,
-                className
+                scrollable && 'nav-underline',
+                !scrollable && className
             )}
         >
             {list.map(
@@ -78,5 +84,21 @@ export function Nav({
                 }
             )}
         </nav>
+    );
+
+    return scrollable ? (
+        <div
+            className={classNames(
+                'nav-scroller',
+                'bg-' + background,
+                'shadow-sm',
+                className
+            )}
+            {...rest}
+        >
+            {nav}
+        </div>
+    ) : (
+        nav
     );
 }

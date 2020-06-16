@@ -12,17 +12,19 @@ import {
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { Theme, Status, Size } from '../utility/constant';
+import { Size, Theme, BackgroundColors } from '../utility/constant';
 import { NavProps, Nav } from './Nav';
 import './NavBar.less';
 
 export interface NavBarProps extends WebCellProps {
-    brand?: VNodeChildElement;
-    theme?: keyof typeof Theme;
-    background?: keyof typeof Theme | keyof typeof Status;
     narrow?: boolean;
     expand?: keyof typeof Size;
     fixed?: 'top' | 'bottom';
+    direction?: 'left' | 'right';
+    offcanvas?: boolean;
+    theme?: keyof typeof Theme;
+    background?: BackgroundColors;
+    brand?: VNodeChildElement;
     menu?: NavProps['list'];
     activeIndex?: number;
     open?: boolean;
@@ -37,7 +39,23 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    brand = document.title;
+    narrow = false;
+
+    @attribute
+    @watch
+    expand = 'md';
+
+    @attribute
+    @watch
+    fixed = 'top';
+
+    @attribute
+    @watch
+    direction = 'left';
+
+    @attribute
+    @watch
+    offcanvas = false;
 
     @attribute
     @watch
@@ -49,15 +67,7 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    narrow = false;
-
-    @attribute
-    @watch
-    expand = 'md';
-
-    @attribute
-    @watch
-    fixed = 'top';
+    brand = document.title;
 
     @watch
     menu = [];
@@ -84,17 +94,6 @@ export class NavBar extends mixin<NavBarProps>() {
         code === 'Escape' && (this.open = false);
 
     connectedCallback() {
-        const { theme, background, expand, fixed } = this.props;
-
-        this.classList.add(
-            'navbar',
-            `navbar-${theme}`,
-            `bg-${background}`,
-            'shadow',
-            'navbar-expand' + (expand === 'xs' ? '' : '-' + expand),
-            fixed === 'top' ? 'sticky-top' : 'fixed-bottom'
-        );
-
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
 
@@ -104,6 +103,41 @@ export class NavBar extends mixin<NavBarProps>() {
     disconnectedCallback() {
         document.body.removeEventListener('click', this.outClose);
         self.removeEventListener('keydown', this.escapeClose);
+    }
+
+    updatedCallback() {
+        const {
+            theme,
+            background,
+            expand,
+            fixed,
+            narrow,
+            direction,
+            open
+        } = this.props;
+
+        this.className = classNames(
+            'navbar',
+            `navbar-${theme}`,
+            `bg-${background}`,
+            'shadow',
+            `navbar-expand${expand === 'xs' ? '' : '-' + expand}`,
+            fixed === 'top' ? 'sticky-top' : 'fixed-bottom',
+            !narrow && direction !== 'left' && 'flex-row-reverse',
+            this.className
+        );
+
+        if (open) return;
+
+        const offcanvas = this.querySelector<HTMLElement>(
+            '.offcanvas-collapse'
+        );
+        if (!offcanvas) return;
+
+        const { height, backgroundColor } = self.getComputedStyle(this);
+
+        offcanvas.style.top = height;
+        offcanvas.style.backgroundColor = backgroundColor;
     }
 
     @on('click', '.nav-item:not(drop-menu), .dropdown-item')
@@ -116,6 +150,7 @@ export class NavBar extends mixin<NavBarProps>() {
         menu,
         activeIndex,
         open,
+        offcanvas,
         expand,
         defaultSlot
     }: NavBarProps) {
@@ -144,9 +179,10 @@ export class NavBar extends mixin<NavBarProps>() {
                 )}
                 <div
                     className={classNames(
-                        'collapse',
+                        !offcanvas && 'collapse',
                         'navbar-collapse',
-                        open && 'show'
+                        offcanvas && 'offcanvas-collapse',
+                        open && (offcanvas ? 'open' : 'show')
                     )}
                     id={UID}
                 >
@@ -171,9 +207,20 @@ export class NavBar extends mixin<NavBarProps>() {
         );
     }
 
-    render({ narrow, ...rest }: NavBarProps) {
+    render({ narrow, direction, ...rest }: NavBarProps) {
         const content = this.renderContent(rest);
 
-        return narrow ? <div className="container">{content}</div> : content;
+        return narrow ? (
+            <div
+                className={classNames(
+                    'container',
+                    direction !== 'left' && 'flex-row-reverse'
+                )}
+            >
+                {content}
+            </div>
+        ) : (
+            content
+        );
     }
 }

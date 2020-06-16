@@ -1,8 +1,11 @@
 import { assertLooksLike } from 'snabbdom-looks-like';
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
-
-import { CalendarView, CalendarProps } from '../../source/Extra/Calendar';
+import {
+    CalendarView,
+    CalendarProps,
+    WeekDays
+} from '../../source/Extra/Calendar';
 import Calendar_style from '../../source/Extra/Calendar/index.less';
 import Table_style from '../../source/Content/Table.less';
 
@@ -18,8 +21,12 @@ function Calendar({ date, renderCell }: CalendarProps) {
         <div>
             {render.call(
                 { renderRow: renderRow.bind({ props: { date, renderCell } }) },
-                { date, dateTemplate: 'YYYY-MM' },
-                { dayGrid: createDayGrid(date) }
+                {
+                    date,
+                    dateTemplate: 'YYYY-MM',
+                    weekDays: WeekDays
+                },
+                { dayGrid: createDayGrid(new Date(date)) }
             )}
         </div>
     );

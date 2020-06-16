@@ -40,4 +40,22 @@ describe('Nav', () => {
             </nav>
         );
     });
+
+    it('should render a Nav wrapped by a Scroller', () => {
+        assertLooksLike(
+            <Nav scrollable list={[{ title: 'Test', href: '#test' }]} />,
+
+            <div className="nav-scroller bg-white shadow-sm">
+                <nav className="nav nav-underline">
+                    <a
+                        className="nav-item nav-link text-nowrap active"
+                        href="#test"
+                    >
+                        Test
+                        <span className="sr-only">(current)</span>
+                    </a>
+                </nav>
+            </div>
+        );
+    });
 });

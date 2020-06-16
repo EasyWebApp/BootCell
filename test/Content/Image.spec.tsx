@@ -7,7 +7,12 @@ describe('Image components', () => {
     it('should render a thumbnail Image', () => {
         assertLooksLike(
             <Image thumbnail src="test.png" />,
-            <img className="img-thumbnail" src="test.png" />
+            <img
+                className="img-thumbnail"
+                src="test.png"
+                lazyLoad="1"
+                loading="lazy"
+            />
         );
     });
 
@@ -17,13 +22,8 @@ describe('Image components', () => {
                 Test
             </Image>,
             <div
-                style={{
-                    backgroundImage: `url(test.png)`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    height: '50vh'
-                }}
+                className="back-image"
+                style={{ backgroundImage: `url(test.png)` }}
             >
                 Test
             </div>
@@ -38,6 +38,8 @@ describe('Image components', () => {
                     className="img-fluid figure-img"
                     alt="Test"
                     src="test.png"
+                    lazyLoad="1"
+                    loading="lazy"
                 />
                 <figcaption className="figure-caption text-center">
                     Test

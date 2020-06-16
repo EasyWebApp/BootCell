@@ -1,4 +1,4 @@
-import { createCell } from 'web-cell';
+import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
 import { NavBar, NavBarProps } from '../../source/Navigator/NavBar';
@@ -7,39 +7,38 @@ const { render, renderContent } = NavBar.prototype;
 
 function InlineNavBar({
     defaultSlot,
+    narrow,
+    expand = 'md',
+    fixed = 'top',
+    direction = 'left',
+    offcanvas = false,
+    theme = 'dark',
+    background = 'dark',
     brand,
-    menu,
-    theme,
-    background,
-    expand,
-    fixed,
-    narrow
+    menu
 }: NavBarProps) {
     return render.call(
         { renderContent: renderContent.bind({ UID: 'test' }) },
         {
-            brand,
-            menu,
-            theme,
-            background,
+            narrow,
             expand,
             fixed,
-            narrow,
+            direction,
+            offcanvas,
+            theme,
+            background,
+            brand,
+            menu,
             defaultSlot
         }
     );
 }
 
 describe('Navigator Bar', () => {
-    it('should render Narrow Bar', () => {
+    it('should render a top-sticky dark Narrow Bar defaultly', () => {
         assertLooksLike(
             <InlineNavBar
                 brand="Test"
-                theme="dark"
-                background="dark"
-                expand="xs"
-                fixed="top"
-                narrow={true}
                 menu={[
                     {
                         title: 'Example',
@@ -50,7 +49,7 @@ describe('Navigator Bar', () => {
                 <a />
             </InlineNavBar>,
 
-            <div className="container">
+            <Fragment>
                 <a
                     target="_top"
                     href="."
@@ -82,7 +81,103 @@ describe('Navigator Bar', () => {
                         <a />
                     </div>
                 </div>
+            </Fragment>
+        );
+    });
+
+    it('should render a reversed Narrow Bar wrapped by a container', () => {
+        assertLooksLike(
+            <InlineNavBar
+                narrow
+                direction="right"
+                brand="Test"
+                menu={[
+                    {
+                        title: 'Example',
+                        href: '/example'
+                    }
+                ]}
+            />,
+            <div className="container flex-row-reverse">
+                <a
+                    target="_top"
+                    href="."
+                    className="navbar-brand d-flex align-items-center"
+                >
+                    Test
+                </a>
+                <button
+                    type="button"
+                    className="navbar-toggler"
+                    aria-controls="test"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon" />
+                </button>
+                <div className="collapse navbar-collapse" id="test">
+                    <nav className="nav navbar-nav">
+                        <a
+                            className="nav-item nav-link text-nowrap active"
+                            href="/example"
+                            aria-disabled="false"
+                        >
+                            Example
+                            <span className="sr-only">(current)</span>
+                        </a>
+                    </nav>
+                </div>
             </div>
+        );
+    });
+
+    it('should render an open Offcanvas NavBar', () => {
+        assertLooksLike(
+            <InlineNavBar
+                brand="Test"
+                menu={[
+                    {
+                        title: 'Example',
+                        href: '/example'
+                    }
+                ]}
+            />,
+            <Fragment>
+                <a
+                    target="_top"
+                    href="."
+                    className="navbar-brand d-flex align-items-center"
+                >
+                    Test
+                </a>
+                <button
+                    type="button"
+                    className="navbar-toggler"
+                    aria-controls="test"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon" />
+                </button>
+                <div
+                    className="navbar-collapse offcanvas-collapse open"
+                    id="test"
+                >
+                    <nav className="nav navbar-nav">
+                        <a
+                            className="nav-item nav-link text-nowrap active"
+                            href="/example"
+                            aria-disabled="false"
+                        >
+                            Example
+                            <span className="sr-only">(current)</span>
+                        </a>
+                    </nav>
+                    <div className="flex-grow-1 d-flex justify-content-end">
+                        <a />
+                    </div>
+                </div>
+            </Fragment>
         );
     });
 });

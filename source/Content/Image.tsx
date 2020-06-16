@@ -1,6 +1,8 @@
 import { WebCellProps, createCell } from 'web-cell';
 import classNames from 'classnames';
 
+import './Image.less';
+
 export interface ImageProps extends WebCellProps {
     src: string | URL;
     alt?: string;
@@ -21,15 +23,8 @@ export function Image({
 }: ImageProps) {
     return background ? (
         <div
-            className={className}
-            style={{
-                backgroundImage: `url(${src})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                height: '50vh',
-                ...style
-            }}
+            className={classNames('back-image', className)}
+            style={{ backgroundImage: `url(${src})`, ...style }}
             {...rest}
         >
             {defaultSlot}
@@ -43,6 +38,8 @@ export function Image({
             )}
             style={style}
             src={src}
+            lazyLoad="1"
+            loading="lazy"
             {...rest}
         />
     );

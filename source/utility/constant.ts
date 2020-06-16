@@ -21,6 +21,12 @@ export enum Color {
 
 export type ColorNames = Status | Theme | Color;
 
+export type BackgroundColors =
+    | keyof typeof Status
+    | keyof typeof Theme
+    | 'white'
+    | 'transparent';
+
 export enum Size {
     xl = 'xl',
     lg = 'lg',
