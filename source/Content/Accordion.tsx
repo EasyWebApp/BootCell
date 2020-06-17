@@ -9,9 +9,9 @@ import {
 } from 'web-cell';
 import { HTMLProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
-import classNames from 'classnames';
 
-import { CollapseBox } from './Collapse';
+import { Button } from '../Form/Button';
+import './Collapse';
 
 interface AccordionItem {
     title: VNodeChildElement;
@@ -64,29 +64,25 @@ export class AccordionList extends mixin<AccordionProps>() {
                         <section className="card">
                             <header className="card-header" id={hID}>
                                 <h2 className="mb-0">
-                                    <button
-                                        type="button"
-                                        className={classNames(
-                                            'btn',
-                                            'btn-link',
-                                            !active && 'collapsed'
-                                        )}
+                                    <Button
+                                        kind="link"
+                                        className={active ? '' : 'collapsed'}
                                         data-index={index + ''}
                                         aria-expanded={Boolean(active) + ''}
                                         aria-controls={bID}
                                     >
                                         {title}
-                                    </button>
+                                    </Button>
                                 </h2>
                             </header>
-                            <CollapseBox
+                            <collapse-box
                                 id={bID}
                                 aria-labelledby={hID}
                                 key={bID}
                                 open={active}
                             >
                                 <div className="card-body">{content}</div>
-                            </CollapseBox>
+                            </collapse-box>
                         </section>
                     );
                 })}

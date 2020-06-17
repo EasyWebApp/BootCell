@@ -28,11 +28,11 @@ export type BackgroundColors =
     | 'transparent';
 
 export enum Size {
-    xl = 'xl',
-    lg = 'lg',
-    md = 'md',
-    sm = 'sm',
-    xs = 'xs'
+    xl = 1200,
+    lg = 992,
+    md = 768,
+    sm = 576,
+    xs = 0
 }
 
 export enum Position {

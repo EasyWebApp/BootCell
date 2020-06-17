@@ -80,6 +80,10 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     open = false;
 
+    get expanded() {
+        return Size[this.expand] <= self.innerWidth;
+    }
+
     outClose = ({ target }: MouseEvent) => {
         if (
             this.compareDocumentPosition(target as HTMLElement) &
@@ -93,9 +97,16 @@ export class NavBar extends mixin<NavBarProps>() {
     escapeClose = ({ code }: KeyboardEvent) =>
         code === 'Escape' && (this.open = false);
 
+    private resizer: ResizeObserver;
+
     connectedCallback() {
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
+
+        this.resizer = new ResizeObserver(() => {
+            if (this.direction !== 'left') this.update();
+        });
+        this.resizer.observe(this);
 
         super.connectedCallback();
     }
@@ -103,6 +114,8 @@ export class NavBar extends mixin<NavBarProps>() {
     disconnectedCallback() {
         document.body.removeEventListener('click', this.outClose);
         self.removeEventListener('keydown', this.escapeClose);
+
+        this.resizer.disconnect();
     }
 
     updatedCallback() {
@@ -116,15 +129,18 @@ export class NavBar extends mixin<NavBarProps>() {
             open
         } = this.props;
 
-        this.className = classNames(
+        this.classList.add(
             'navbar',
             `navbar-${theme}`,
             `bg-${background}`,
             'shadow',
             `navbar-expand${expand === 'xs' ? '' : '-' + expand}`,
-            fixed === 'top' ? 'sticky-top' : 'fixed-bottom',
-            !narrow && direction !== 'left' && 'flex-row-reverse',
-            this.className
+            fixed === 'top' ? 'sticky-top' : 'fixed-bottom'
+        );
+
+        this.classList.toggle(
+            'flex-row-reverse',
+            !narrow && direction !== 'left' && !this.expanded
         );
 
         if (open) return;
@@ -214,7 +230,7 @@ export class NavBar extends mixin<NavBarProps>() {
             <div
                 className={classNames(
                     'container',
-                    direction !== 'left' && 'flex-row-reverse'
+                    direction !== 'left' && !this.expand && 'flex-row-reverse'
                 )}
             >
                 {content}

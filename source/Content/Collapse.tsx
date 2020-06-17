@@ -1,4 +1,11 @@
-import { WebCellProps, component, mixin, watch, attribute } from 'web-cell';
+import {
+    WebCellProps,
+    component,
+    mixin,
+    watch,
+    attribute,
+    createCell
+} from 'web-cell';
 import { watchMotion } from 'web-utility/source/animation';
 
 export interface CollapseProps extends WebCellProps {
@@ -7,53 +14,64 @@ export interface CollapseProps extends WebCellProps {
 
 @component({
     tagName: 'collapse-box',
-    renderTarget: 'children'
+    style: {
+        ':host': {
+            display: 'block',
+            position: 'relative',
+            transition: '0.25s'
+        },
+        ':host > div': {
+            display: 'none',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0
+        }
+    }
 })
 export class CollapseBox extends mixin<CollapseProps>() {
-    naturalDisplay = '';
-    naturalHeight = 0;
-
     @attribute
     @watch
     set open(open: boolean) {
-        const end = watchMotion('transition', this);
-
         this.setProps({ open }).then(async () => {
-            if (!this.naturalHeight) return;
+            const end = watchMotion('transition', this),
+                box = this.shadowRoot.lastElementChild as HTMLElement;
 
             if (!open) {
                 this.style.height = '0px';
                 await end;
-                this.style.display = 'none';
+                box.style.display = 'none';
                 this.emit('close');
             } else {
-                this.style.display = this.naturalDisplay;
-
-                self.requestAnimationFrame(async () => {
-                    this.style.height = this.naturalHeight + 'px';
-                    await end;
-                    this.emit('open');
-                });
+                box.style.display = 'block';
+                this.style.height = self.getComputedStyle(box).height;
+                await end;
+                this.emit('open');
             }
         });
     }
 
+    private resizer: ResizeObserver;
+
     connectedCallback() {
-        this.style.transitionDuration = '0.25s';
-
-        new IntersectionObserver(([{ isIntersecting }], observer) => {
-            if (!isIntersecting) return;
-
-            observer.disconnect();
-
-            const { display, height } = getComputedStyle(this);
-
-            this.naturalDisplay = display;
-            this.naturalHeight = parseFloat(height);
-
-            if (!this.open) this.open = false;
-        }).observe(this);
-
         super.connectedCallback();
+
+        this.resizer = new ResizeObserver(([{ target }]) => {
+            if (this.open)
+                this.style.height = self.getComputedStyle(target).height;
+        });
+        this.resizer.observe(this.shadowRoot.lastElementChild);
+    }
+
+    disconnectedCallback() {
+        this.resizer.disconnect();
+    }
+
+    render() {
+        return (
+            <div>
+                <slot />
+            </div>
+        );
     }
 }

@@ -37,7 +37,7 @@ npm install boot-cell \
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
-<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry%2CResizeObserver"></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.13/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
