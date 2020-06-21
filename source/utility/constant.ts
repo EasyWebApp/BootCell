@@ -19,7 +19,7 @@ export enum Color {
     black = 'black'
 }
 
-export type ColorNames = Status | Theme | Color;
+export type ColorNames = Status & Theme & Color;
 
 export type BackgroundColors =
     | keyof typeof Status
@@ -40,4 +40,12 @@ export enum Position {
     right = 'right',
     top = 'top',
     bottom = 'bottom'
+}
+
+export enum JustityType {
+    start = 'start',
+    center = 'center',
+    end = 'end',
+    between = 'between',
+    around = 'around'
 }

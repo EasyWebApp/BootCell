@@ -3,7 +3,7 @@ import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { DropMenu } from './DropMenu';
-import { BackgroundColors } from '../utility/constant';
+import { JustityType, BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
 interface NavLink extends HTMLHyperLinkProps {
@@ -17,7 +17,7 @@ export interface NavProps extends WebCellProps {
     list: NavLink[];
     activeIndex?: number;
     direction?: 'row' | 'column';
-    align?: 'start' | 'center' | 'end';
+    align?: keyof typeof JustityType;
     itemMode?: 'tabs' | 'pills';
     itemWidth?: 'fill' | 'justified';
     scrollable?: boolean;

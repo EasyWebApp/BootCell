@@ -6,7 +6,7 @@ import { Status, Theme } from '../utility/constant';
 
 interface ListItem extends HTMLHyperLinkProps {
     content?: VNodeChildElement[];
-    color?: Status | Theme;
+    color?: keyof typeof Status | keyof typeof Theme;
     disabled?: boolean;
 }
 

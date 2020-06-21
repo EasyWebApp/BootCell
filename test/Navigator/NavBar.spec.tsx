@@ -14,6 +14,7 @@ function InlineNavBar({
     offcanvas = false,
     theme = 'dark',
     background = 'dark',
+    menuAlign = 'start',
     brand,
     menu
 }: NavBarProps) {
@@ -27,6 +28,7 @@ function InlineNavBar({
             offcanvas,
             theme,
             background,
+            menuAlign,
             brand,
             menu,
             defaultSlot
@@ -66,8 +68,8 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse" id="test">
-                    <nav className="nav navbar-nav">
+                <collapse-box className="navbar-collapse" id="test">
+                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
                             href="/example"
@@ -77,10 +79,10 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="flex-grow-1 d-flex justify-content-end">
+                    <div className="d-flex justify-content-end">
                         <a />
                     </div>
-                </div>
+                </collapse-box>
             </Fragment>
         );
     });
@@ -115,8 +117,8 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse" id="test">
-                    <nav className="nav navbar-nav">
+                <collapse-box className="navbar-collapse" id="test">
+                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
                             href="/example"
@@ -126,7 +128,7 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                </div>
+                </collapse-box>
             </div>
         );
     });
@@ -160,10 +162,10 @@ describe('Navigator Bar', () => {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div
-                    className="navbar-collapse offcanvas-collapse open"
+                    className="d-md-flex w-100 offcanvas-collapse open"
                     id="test"
                 >
-                    <nav className="nav navbar-nav">
+                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
                             href="/example"
@@ -173,7 +175,7 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="flex-grow-1 d-flex justify-content-end">
+                    <div className="d-flex justify-content-end">
                         <a />
                     </div>
                 </div>

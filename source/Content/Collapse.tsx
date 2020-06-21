@@ -16,8 +16,9 @@ export interface CollapseProps extends WebCellProps {
     tagName: 'collapse-box',
     style: {
         ':host': {
-            display: 'block',
             position: 'relative',
+            height: 0,
+            overflow: 'hidden',
             transition: '0.25s'
         },
         ':host > div': {
@@ -43,7 +44,7 @@ export class CollapseBox extends mixin<CollapseProps>() {
                 box.style.display = 'none';
                 this.emit('close');
             } else {
-                box.style.display = 'block';
+                box.style.display = self.getComputedStyle(this).display;
                 this.style.height = self.getComputedStyle(box).height;
                 await end;
                 this.emit('open');
@@ -57,6 +58,10 @@ export class CollapseBox extends mixin<CollapseProps>() {
         super.connectedCallback();
 
         this.resizer = new ResizeObserver(([{ target }]) => {
+            (target as HTMLElement).style.display = self.getComputedStyle(
+                this
+            ).display;
+
             if (this.open)
                 this.style.height = self.getComputedStyle(target).height;
         });

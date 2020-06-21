@@ -14,6 +14,7 @@ import classNames from 'classnames';
 
 import { Size, Theme, BackgroundColors } from '../utility/constant';
 import { NavProps, Nav } from './Nav';
+import '../Content/Collapse';
 import './NavBar.less';
 
 export interface NavBarProps extends WebCellProps {
@@ -24,6 +25,7 @@ export interface NavBarProps extends WebCellProps {
     offcanvas?: boolean;
     theme?: keyof typeof Theme;
     background?: BackgroundColors;
+    menuAlign?: NavProps['align'];
     brand?: VNodeChildElement;
     menu?: NavProps['list'];
     activeIndex?: number;
@@ -67,6 +69,10 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
+    menuAlign = 'start';
+
+    @attribute
+    @watch
     brand = document.title;
 
     @watch
@@ -103,9 +109,7 @@ export class NavBar extends mixin<NavBarProps>() {
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
 
-        this.resizer = new ResizeObserver(() => {
-            if (this.direction !== 'left') this.update();
-        });
+        this.resizer = new ResizeObserver(() => this.update());
         this.resizer.observe(this);
 
         super.connectedCallback();
@@ -162,15 +166,36 @@ export class NavBar extends mixin<NavBarProps>() {
     }
 
     renderContent({
-        brand,
+        menuAlign,
         menu,
         activeIndex,
-        open,
-        offcanvas,
+        defaultSlot,
         expand,
-        defaultSlot
+        brand,
+        open,
+        offcanvas
     }: NavBarProps) {
-        const { UID } = this;
+        const { UID } = this,
+            content = (
+                <Fragment>
+                    <Nav
+                        className="navbar-nav flex-grow-1"
+                        align={menuAlign}
+                        list={menu}
+                        activeIndex={activeIndex}
+                    />
+                    {defaultSlot[0] && (
+                        <div
+                            className={classNames(
+                                `d${expand === 'xs' ? '' : '-' + expand}-flex`,
+                                'justify-content-end'
+                            )}
+                        >
+                            {defaultSlot}
+                        </div>
+                    )}
+                </Fragment>
+            );
 
         return (
             <Fragment>
@@ -193,32 +218,27 @@ export class NavBar extends mixin<NavBarProps>() {
                         <span className="navbar-toggler-icon" />
                     </button>
                 )}
-                <div
-                    className={classNames(
-                        !offcanvas && 'collapse',
-                        'navbar-collapse',
-                        offcanvas && 'offcanvas-collapse',
-                        open && (offcanvas ? 'open' : 'show')
-                    )}
-                    id={UID}
-                >
-                    <Nav
-                        className="navbar-nav"
-                        list={menu}
-                        activeIndex={activeIndex}
-                    />
-                    {defaultSlot[0] && (
-                        <div
-                            className={classNames(
-                                'flex-grow-1',
-                                `d${expand === 'xs' ? '' : '-' + expand}-flex`,
-                                'justify-content-end'
-                            )}
-                        >
-                            {defaultSlot}
-                        </div>
-                    )}
-                </div>
+                {!offcanvas ? (
+                    <collapse-box
+                        className="navbar-collapse"
+                        id={UID}
+                        open={this.expanded || open}
+                    >
+                        {content}
+                    </collapse-box>
+                ) : (
+                    <div
+                        className={classNames(
+                            `d-${expand}-flex`,
+                            'w-100',
+                            'offcanvas-collapse',
+                            open && 'open'
+                        )}
+                        id={UID}
+                    >
+                        {content}
+                    </div>
+                )}
             </Fragment>
         );
     }
@@ -230,7 +250,7 @@ export class NavBar extends mixin<NavBarProps>() {
             <div
                 className={classNames(
                     'container',
-                    direction !== 'left' && !this.expand && 'flex-row-reverse'
+                    direction !== 'left' && !this.expanded && 'flex-row-reverse'
                 )}
             >
                 {content}
