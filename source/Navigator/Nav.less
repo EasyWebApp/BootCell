@@ -11,7 +11,23 @@
             box-shadow: none;
         }
     }
-    // [Origin]  https://getbootstrap.com/docs/4.5/examples/offcanvas/offcanvas.css
+    // [Origin] https://getbootstrap.com/docs/4.5/examples/cover/cover.css
+
+    .nav-masthead .nav-link {
+        padding: 0.25rem 0;
+        opacity: 0.5;
+        border-bottom: 2px solid transparent;
+        &:hover,
+        &:focus,
+        &.active {
+            opacity: 1;
+            border-bottom-color: inherit;
+        }
+        & + .nav-link {
+            margin-left: 1rem;
+        }
+    }
+    // [Origin] https://getbootstrap.com/docs/4.5/examples/offcanvas/offcanvas.css
 
     .nav-scroller {
         position: relative;

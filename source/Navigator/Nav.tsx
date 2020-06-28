@@ -18,7 +18,7 @@ export interface NavProps extends WebCellProps {
     activeIndex?: number;
     direction?: 'row' | 'column';
     align?: keyof typeof JustityType;
-    itemMode?: 'tabs' | 'pills';
+    itemMode?: 'tabs' | 'pills' | 'masthead';
     itemWidth?: 'fill' | 'justified';
     scrollable?: boolean;
     background?: BackgroundColors;

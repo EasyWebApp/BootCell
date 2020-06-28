@@ -41,6 +41,21 @@ describe('Nav', () => {
         );
     });
 
+    it('should render a Nav within multiple style items', () => {
+        assertLooksLike(
+            <Nav itemMode="tabs" list={[]} />,
+            <nav className="nav nav-tabs" />
+        );
+        assertLooksLike(
+            <Nav itemMode="pills" list={[]} />,
+            <nav className="nav nav-pills" />
+        );
+        assertLooksLike(
+            <Nav itemMode="masthead" list={[]} />,
+            <nav className="nav nav-masthead" />
+        );
+    });
+
     it('should render a Nav wrapped by a Scroller', () => {
         assertLooksLike(
             <Nav scrollable list={[{ title: 'Test', href: '#test' }]} />,
