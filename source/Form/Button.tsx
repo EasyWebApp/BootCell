@@ -3,7 +3,7 @@ import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status, Theme } from '../utility/constant';
-import { IconProps, Icon } from '../Reminder';
+import { IconProps, Icon } from '../Reminder/Icon';
 
 export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
@@ -92,7 +92,7 @@ export function IconButton({
     );
 }
 
-export function CloseButton({ className, ...rest }: ButtonProps) {
+export function CloseButton({ className, defaultSlot, ...rest }: ButtonProps) {
     return (
         <button
             type="reset"

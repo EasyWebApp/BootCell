@@ -1,6 +1,6 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
 
-import { MarkdownEditor } from '../source';
+import { MarkdownEditor } from '../source/Form/MarkdownEditor';
 
 documentReady.then(() =>
     render(

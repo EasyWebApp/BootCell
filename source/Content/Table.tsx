@@ -3,7 +3,7 @@ import { TableCellProps, BaseFieldProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 import { Status, Theme } from '../utility/constant';
-import { FieldProps } from '../Form';
+import { FieldProps } from '../Form/Field';
 
 import style from './Table.less';
 

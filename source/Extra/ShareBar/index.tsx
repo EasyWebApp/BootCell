@@ -1,6 +1,6 @@
 import { WebCellProps, createCell } from 'web-cell';
 
-import { BGIcon } from '../../Reminder';
+import { BGIcon } from '../../Reminder/Icon';
 
 import { ContentMeta, VendorName, URI_map } from './data';
 import style from './index.less';

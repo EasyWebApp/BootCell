@@ -19,6 +19,7 @@ export function Stepper({
     className,
     path,
     activeIndex = 0,
+    defaultSlot,
     ...rest
 }: StepperProps) {
     return (

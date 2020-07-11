@@ -9,4 +9,5 @@ export * from './Embed';
 export * from './Collapse';
 export * from './Accordion';
 export * from './TabList';
+export * from './StepTab';
 export * from './Carousel';

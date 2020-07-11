@@ -31,6 +31,10 @@ npm install boot-cell \
 />
 <link
     rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css"
+/>
+<link
+    rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"
 />
 <link
@@ -62,7 +66,8 @@ npm install boot-cell \
 12. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
 13. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
 14. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-15. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+15. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
+16. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Reminder
 
@@ -77,8 +82,9 @@ npm install boot-cell \
 2. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
 3. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
 4. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
-5. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-6. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
+5. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
+6. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+7. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
 
 ### Prompt
 

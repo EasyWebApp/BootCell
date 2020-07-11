@@ -12,7 +12,7 @@ import { uniqueID } from 'web-utility/source/data';
 import { transitOut, transitIn } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
-import { NavProps, Nav } from '../Navigator';
+import { NavProps, Nav } from '../Navigator/Nav';
 import { ListGroup } from './ListGroup';
 
 interface TabItem {
