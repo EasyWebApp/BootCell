@@ -1,8 +1,8 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from 'snabbdom-looks-like';
 
-import { CountDown } from '../../source/Extra/CountDown';
-import style from '../../source/Extra/CountDown/index.less';
+import { CountDown } from '../../source/Calendar/CountDown';
+import style from '../../source/Calendar/CountDown.less';
 
 const { render } = CountDown.prototype;
 

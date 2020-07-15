@@ -7,8 +7,8 @@ import {
     createCell
 } from 'web-cell';
 
-import { Status } from '../../utility/constant';
-import style from './index.less';
+import { Status } from '../utility/constant';
+import style from './CountDown.less';
 
 interface TimeUnit {
     scale: number;

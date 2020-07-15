@@ -16,37 +16,28 @@ import {
 } from 'web-utility/source/date';
 import classNames from 'classnames';
 
-import { IconButton } from '../../Form/Button';
-import { Table } from '../../Content/Table';
+import { IconButton } from '../Form/Button';
+import { CalendarTableProps, WeekDays, CalendarTable } from './CalendarTable';
 
-import style from './index.less';
-
-export interface CalendarProps extends WebCellProps {
+export interface MonthCalendarProps extends WebCellProps {
     date?: TimeData;
     dateTemplate?: string;
-    weekDays?: string[];
+    weekDays?: CalendarTableProps['weekDays'];
     renderCell?: (date: Date) => VNodeChildElement;
 }
 
-interface CalendarState {
+interface MonthCalendarState {
     dayGrid: number[][];
 }
 
-export const WeekDays = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-];
-
 @component({
-    tagName: 'calendar-view',
+    tagName: 'month-calendar',
     renderTarget: 'children'
 })
-export class CalendarView extends mixin<CalendarProps, CalendarState>() {
+export class MonthCalendar extends mixin<
+    MonthCalendarProps,
+    MonthCalendarState
+>() {
     state = {
         dayGrid: []
     };
@@ -57,7 +48,7 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
         if (!(date instanceof Date)) date = new Date(date);
 
         this.setProps({ date });
-        this.setState({ dayGrid: CalendarView.createDayGrid(date) });
+        this.setState({ dayGrid: MonthCalendar.createDayGrid(date) });
     }
 
     @attribute
@@ -68,7 +59,7 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
     weekDays = WeekDays;
 
     @watch
-    renderCell: CalendarProps['renderCell'];
+    renderCell: MonthCalendarProps['renderCell'];
 
     connectedCallback() {
         if (!this.date) this.date = new Date();
@@ -132,8 +123,8 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
     }
 
     render(
-        { date, dateTemplate, weekDays }: CalendarProps,
-        { dayGrid }: CalendarState
+        { date, dateTemplate, weekDays }: MonthCalendarProps,
+        { dayGrid }: MonthCalendarState
     ) {
         return (
             <Fragment>
@@ -150,20 +141,11 @@ export class CalendarView extends mixin<CalendarProps, CalendarState>() {
                         onClick={() => (this.date = changeMonth(date, 1))}
                     />
                 </header>
-                <Table border center className={style.table}>
-                    <thead>
-                        <tr className="bg-primary text-white">
-                            {weekDays.map(day => (
-                                <th className="text-truncate">{day}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dayGrid.map((row, index) => (
-                            <tr>{this.renderRow(row, index)}</tr>
-                        ))}
-                    </tbody>
-                </Table>
+                <CalendarTable weekDays={weekDays}>
+                    {dayGrid.map((row, index) => (
+                        <tr>{this.renderRow(row, index)}</tr>
+                    ))}
+                </CalendarTable>
             </Fragment>
         );
     }
