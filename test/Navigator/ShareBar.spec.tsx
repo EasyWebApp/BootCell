@@ -1,11 +1,10 @@
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-// @ts-ignore
-self.navigator.share = () => {};
+self.navigator.share = async () => {};
 
-import { ShareBar } from '../../source/Extra/ShareBar';
-import style from '../../source/Extra/ShareBar/index.less';
+import { ShareBar } from '../../source/Navigator/ShareBar';
+import style from '../../source/Navigator/ShareBar/index.less';
 
 import { BGIcon } from '../../source/Reminder/Icon';
 

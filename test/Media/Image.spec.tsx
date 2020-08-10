@@ -1,7 +1,7 @@
 import { createCell } from 'web-cell';
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { Image, Figure } from '../../source/Content/Image';
+import { Image, Figure } from '../../source/Media/Image';
 
 describe('Image components', () => {
     it('should render a thumbnail Image', () => {

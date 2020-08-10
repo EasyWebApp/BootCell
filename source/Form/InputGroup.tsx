@@ -1,5 +1,5 @@
 import { WebCellProps, VNode, createCell } from 'web-cell';
-import { looksLike } from 'snabbdom-looks-like';
+import { looksLike } from '@tech_query/snabbdom-looks-like';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 

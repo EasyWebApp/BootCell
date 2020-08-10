@@ -1,5 +1,4 @@
 import TurnDown from 'turndown';
-// @ts-ignore
 import { gfm } from 'turndown-plugin-gfm';
 
 const Empty_HREF = /^(#|javascript:\s*void\(0\);?\s*)$/;

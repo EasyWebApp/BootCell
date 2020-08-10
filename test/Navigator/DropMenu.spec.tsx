@@ -1,5 +1,5 @@
 import { createCell } from 'web-cell';
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { DropMenu, DropMenuProps } from '../../source/Navigator/DropMenu';
 import { Button } from '../../source/Form/Button';

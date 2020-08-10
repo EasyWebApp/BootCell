@@ -1,7 +1,7 @@
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { CarouselView } from '../../source/Content/Carousel';
+import { CarouselView } from '../../source/Media/Carousel';
 
 const { render } = CarouselView.prototype;
 

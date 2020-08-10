@@ -65,7 +65,6 @@ export function ShareBar({
                 <button
                     className={style.box}
                     onClick={() =>
-                        // @ts-ignore
                         navigator.share({
                             url: path,
                             title,

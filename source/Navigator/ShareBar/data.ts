@@ -87,20 +87,6 @@ export const URI_map = {
                 style: '11'
             })
     },
-    Linkedin: {
-        color: 'dodgerblue',
-        getURI: ({ URL, title = '', summary = '', source = '' }: ContentMeta) =>
-            'http://www.linkedin.com/shareArticle?' +
-            new URLSearchParams({
-                url: URL,
-                title,
-                summary,
-                source,
-                mini: 'true',
-                ro: 'true',
-                armin: 'armin'
-            })
-    },
     Facebook: {
         color: 'blue',
         getURI: ({ URL }: ContentMeta) =>

@@ -1,7 +1,7 @@
 import { createCell } from 'web-cell';
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { Embed } from '../../source/Content/Embed';
+import { Embed } from '../../source/Media/Embed';
 
 describe('Embed media', () => {
     it('should render a responsive iframe', () => {

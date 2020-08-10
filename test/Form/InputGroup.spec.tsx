@@ -1,5 +1,5 @@
 import { createCell, Fragment } from 'web-cell';
-import { assertLooksLike } from 'snabbdom-looks-like';
+import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { InputGroup } from '../../source/Form/InputGroup';
 import { Button } from '../../source/Form/Button';

@@ -6,14 +6,15 @@
 
 [![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][5]
 [![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][6]
+[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][7]
 
-[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][7]
+[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][8]
 
 ## Usage
 
 ```shell
 npm install boot-cell \
-    snabbdom-looks-like iterable-observer \
+    @tech_query/snabbdom-looks-like iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
     @nuintun/qrcode
 ```
@@ -23,11 +24,11 @@ npm install boot-cell \
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.css"
+    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.2/dist/dialog-polyfill.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
@@ -35,17 +36,17 @@ npm install boot-cell \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"
 />
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry%2CResizeObserver"></script>
-<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.1/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.13/dist/share-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.2/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.18/dist/share-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/webcomponents-bundle.js"></script>
 ```
 
 ## Components
@@ -59,15 +60,12 @@ npm install boot-cell \
 5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 6. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
 7. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-8. [Image](https://web-cell.dev/BootCell/interfaces/imageprops.html)
-9. [Figure](https://web-cell.dev/BootCell/globals.html#figure)
-10. [Embed](https://web-cell.dev/BootCell/interfaces/embedprops.html)
-11. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-12. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-13. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-14. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-15. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
-16. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+8. [Figure](https://web-cell.dev/BootCell/globals.html#figure)
+9. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+10. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+11. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+12. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+13. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
 
 ### Reminder
 
@@ -75,6 +73,12 @@ npm install boot-cell \
 2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
 3. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
 4. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
+
+### Media
+
+1. [Image](https://web-cell.dev/BootCell/interfaces/imageprops.html)
+2. [Embed](https://web-cell.dev/BootCell/interfaces/embedprops.html)
+3. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 
@@ -85,6 +89,7 @@ npm install boot-cell \
 5. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
 6. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
 7. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
+8. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 
@@ -114,11 +119,12 @@ npm install boot-cell \
 13. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
 14. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
-### Extra
+### Calendar
 
 1. [CountDown](https://web-cell.dev/BootCell/interfaces/countdownprops.html)
-2. [CalendarView](https://web-cell.dev/BootCell/interfaces/calendarprops.html)
-3. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+2. [CalendarTable](https://web-cell.dev/BootCell/interfaces/calendartableprops.html)
+3. [WeekCalendar](https://web-cell.dev/BootCell/interfaces/weekcalendarprops.html)
+4. [MonthCalendar](https://web-cell.dev/BootCell/interfaces/monthcalendarprops.html)
 
 ## Constants
 
@@ -150,4 +156,5 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [4]: https://fontawesome.com/
 [5]: https://david-dm.org/EasyWebApp/BootCell
 [6]: https://travis-ci.com/EasyWebApp/BootCell
-[7]: https://nodei.co/npm/boot-cell/
+[7]: https://github.com/jaywcjlove/awesome-uikit
+[8]: https://nodei.co/npm/boot-cell/
