@@ -87,7 +87,7 @@ describe('Tab List', () => {
                     role="tablist"
                 >
                     <a
-                        className="list-group-item list-group-item-action text-nowrap disabled"
+                        className="list-group-item list-group-item-action disabled"
                         id="sample_h_0"
                         href="#sample_b_0"
                         tabIndex={-1}
@@ -100,7 +100,7 @@ describe('Tab List', () => {
                         Test
                     </a>
                     <a
-                        className="list-group-item list-group-item-action text-nowrap active"
+                        className="list-group-item list-group-item-action active"
                         id="sample_h_1"
                         href="#sample_b_1"
                         aria-disabled="false"

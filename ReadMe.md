@@ -2,18 +2,18 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v4][3] & [FontAwesome v5][4]
+[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v4][3], [BootStrap Icon v1][4] & [FontAwesome v5][5]
 
-[![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][5]
-[![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][6]
-[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][7]
+[![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][6]
+[![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][7]
+[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][8]
 
-[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][8]
+[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][9]
 
 ## Usage
 
 ```shell
-npm install boot-cell \
+npm install boot-cell bootstrap-icons \
     @tech_query/snabbdom-looks-like iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
     @nuintun/qrcode
@@ -53,26 +53,28 @@ npm install boot-cell \
 
 ### Content
 
-1. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
-2. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-3. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
-4. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
-5. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-6. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
-7. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-8. [Figure](https://web-cell.dev/BootCell/globals.html#figure)
-9. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-10. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-11. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-12. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-13. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
+1. [ListItem](https://web-cell.dev/BootCell/interfaces/listitemprops.html)
+2. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
+3. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
+4. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
+5. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
+6. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
+7. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
+8. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
+9. [Figure](https://web-cell.dev/BootCell/globals.html#figure)
+10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+11. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+12. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+13. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
+14. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
 
 ### Reminder
 
 1. [Badge](https://web-cell.dev/BootCell/interfaces/badgeprops.html)
 2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
 3. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
-4. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
+4. [FAIcon](https://web-cell.dev/BootCell/interfaces/faiconprops.html)
+5. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
 
 ### Media
 
@@ -84,12 +86,13 @@ npm install boot-cell \
 
 1. [BreadCrumb](https://web-cell.dev/BootCell/interfaces/breadcrumbprops.html)
 2. [Pagination](https://web-cell.dev/BootCell/interfaces/paginationprops.html)
-3. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
-4. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
-5. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
-6. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-7. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
-8. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+3. [NavLink](https://web-cell.dev/BootCell/interfaces/navlinkprops.html)
+4. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
+5. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
+6. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
+7. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+8. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
+9. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 
@@ -153,8 +156,9 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [1]: https://www.webcomponents.org/
 [2]: https://web-cell.dev/
 [3]: https://getbootstrap.com/
-[4]: https://fontawesome.com/
-[5]: https://david-dm.org/EasyWebApp/BootCell
-[6]: https://travis-ci.com/EasyWebApp/BootCell
-[7]: https://github.com/jaywcjlove/awesome-uikit
-[8]: https://nodei.co/npm/boot-cell/
+[4]: https://icons.getbootstrap.com/
+[5]: https://fontawesome.com/
+[6]: https://david-dm.org/EasyWebApp/BootCell
+[7]: https://travis-ci.com/EasyWebApp/BootCell
+[8]: https://github.com/jaywcjlove/awesome-uikit
+[9]: https://nodei.co/npm/boot-cell/

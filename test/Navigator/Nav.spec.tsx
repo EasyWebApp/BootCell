@@ -1,22 +1,20 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { Nav } from '../../source/Navigator/Nav';
+import { Nav, NavLink } from '../../source/Navigator/Nav';
 import { DropMenu } from '../../source/Navigator/DropMenu';
 
 describe('Nav', () => {
     it('should render Nav Links with different states', () => {
         assertLooksLike(
-            <Nav
-                list={[
-                    { title: 'Test', href: '#test' },
-                    { title: 'Example', href: '#example', disabled: true },
-                    {
-                        title: 'Nested',
-                        list: [{ title: 'Sample', href: '#sample' }]
-                    }
-                ]}
-            />,
+            <Nav>
+                <NavLink title="Test" href="#test" active />
+                <NavLink title="Example" href="#example" disabled />
+                <NavLink
+                    title="Nested"
+                    list={[{ title: 'Sample', href: '#sample' }]}
+                />
+            </Nav>,
             <nav className="nav">
                 <a
                     className="nav-item nav-link text-nowrap active"
@@ -43,23 +41,24 @@ describe('Nav', () => {
 
     it('should render a Nav within multiple style items', () => {
         assertLooksLike(
-            <Nav itemMode="tabs" list={[]} />,
+            <Nav itemMode="tabs" />,
             <nav className="nav nav-tabs" />
         );
         assertLooksLike(
-            <Nav itemMode="pills" list={[]} />,
+            <Nav itemMode="pills" />,
             <nav className="nav nav-pills" />
         );
         assertLooksLike(
-            <Nav itemMode="masthead" list={[]} />,
+            <Nav itemMode="masthead" />,
             <nav className="nav nav-masthead" />
         );
     });
 
     it('should render a Nav wrapped by a Scroller', () => {
         assertLooksLike(
-            <Nav scrollable list={[{ title: 'Test', href: '#test' }]} />,
-
+            <Nav scrollable>
+                <NavLink title="Test" href="#test" active />
+            </Nav>,
             <div className="nav-scroller bg-white shadow-sm">
                 <nav className="nav nav-underline">
                     <a

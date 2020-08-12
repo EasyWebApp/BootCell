@@ -40,9 +40,9 @@ describe('Month Calendar', () => {
             />,
             <div>
                 <header className="d-flex justify-content-between align-items-center py-3">
-                    <IconButton className="p-1" name="chevron-left px-2" />
+                    <IconButton className="px-2" name="chevron-left" />
                     <time className="font-weight-bold">1989-06</time>
-                    <IconButton className="p-1" name="chevron-right px-2" />
+                    <IconButton className="px-2" name="chevron-right" />
                 </header>
                 <CalendarTable>
                     <tr>

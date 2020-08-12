@@ -12,8 +12,8 @@ import { uniqueID } from 'web-utility/source/data';
 import { transitOut, transitIn } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
-import { NavProps, Nav } from '../Navigator/Nav';
-import { ListGroup } from './ListGroup';
+import { NavProps, NavLink, Nav } from '../Navigator/Nav';
+import { ListItem, ListGroup } from './ListGroup';
 
 interface TabItem {
     title: string;
@@ -96,14 +96,14 @@ export class TabList extends mixin<TabListProps>() {
             activeIndex,
             UID
         } = this;
+        const listMode = mode === 'list';
 
         const tabList = list.map(({ title, disabled }, index) => {
             const bID = `${UID}_b_${index}`,
                 active = Boolean(!disabled && index === activeIndex);
-
-            return {
-                title,
+            const props = {
                 disabled,
+                active,
                 id: `${UID}_h_${index}`,
                 href: '#' + bID,
                 role: 'tab',
@@ -111,29 +111,34 @@ export class TabList extends mixin<TabListProps>() {
                 'aria-selected': active + '',
                 'data-index': index + ''
             };
+            return listMode ? (
+                <ListItem {...props}>{title}</ListItem>
+            ) : (
+                <NavLink {...props} title={title} />
+            );
         });
 
         return mode === 'list' ? (
             <ListGroup
-                list={tabList}
-                activeIndex={activeIndex}
                 horizontal={direction === 'row'}
                 role="tablist"
                 onClick={this.handleTabChange}
-            />
+            >
+                {tabList}
+            </ListGroup>
         ) : (
             <Nav
                 direction={direction}
                 align={tabAlign}
                 itemMode={mode}
                 itemWidth={tabWidth}
-                list={tabList}
-                activeIndex={activeIndex}
                 aria-orientation={
                     direction === 'row' ? 'horizontal' : 'vertical'
                 }
                 onClick={this.handleTabChange}
-            />
+            >
+                {tabList}
+            </Nav>
         );
     }
 

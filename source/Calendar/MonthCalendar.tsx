@@ -130,14 +130,16 @@ export class MonthCalendar extends mixin<
             <Fragment>
                 <header className="d-flex justify-content-between align-items-center py-3">
                     <IconButton
-                        name="chevron-left px-2"
+                        className="px-2"
+                        name="chevron-left"
                         onClick={() => (this.date = changeMonth(date, -1))}
                     />
                     <time className="font-weight-bold">
                         {formatDate(date, dateTemplate)}
                     </time>
                     <IconButton
-                        name="chevron-right px-2"
+                        className="px-2"
+                        name="chevron-right"
                         onClick={() => (this.date = changeMonth(date, 1))}
                     />
                 </header>

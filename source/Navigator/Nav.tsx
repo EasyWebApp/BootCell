@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, createCell, WebCellClass } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -6,16 +6,49 @@ import { DropMenu } from './DropMenu';
 import { JustityType, BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
-interface NavLink extends HTMLHyperLinkProps {
+export interface NavLinkProps extends WebCellProps, HTMLHyperLinkProps {
     title: string;
     href?: string | URL;
     disabled?: boolean;
-    list?: NavLink[];
+    active?: boolean;
+    list?: NavLinkProps[];
+}
+
+export function NavLink({
+    list,
+    title,
+    tabIndex,
+    disabled,
+    active,
+    className,
+    defaultSlot,
+    ...rest
+}: NavLinkProps) {
+    rest = {
+        ...rest,
+        className: classNames(
+            'nav-item',
+            'nav-link',
+            'text-nowrap',
+            list && 'p-0',
+            disabled ? 'disabled' : active && 'active',
+            className
+        ),
+        tabIndex: disabled ? -1 : tabIndex,
+        'aria-disabled': Boolean(disabled) + ''
+    };
+
+    return list ? (
+        <DropMenu {...rest} title={title} list={list} />
+    ) : (
+        <a {...rest}>
+            {title}
+            {!active ? null : <span className="sr-only">(current)</span>}
+        </a>
+    );
 }
 
 export interface NavProps extends WebCellProps {
-    list: NavLink[];
-    activeIndex?: number;
     direction?: 'row' | 'column';
     align?: keyof typeof JustityType;
     itemMode?: 'tabs' | 'pills' | 'masthead';
@@ -30,8 +63,6 @@ export function Nav({
     align,
     itemMode,
     itemWidth,
-    list,
-    activeIndex = 0,
     defaultSlot,
     scrollable,
     background = 'white',
@@ -50,39 +81,7 @@ export function Nav({
                 !scrollable && className
             )}
         >
-            {list.map(
-                (
-                    { list, title, tabIndex, disabled, className, ...rest },
-                    index
-                ) => {
-                    const active = index === activeIndex;
-
-                    rest = {
-                        ...rest,
-                        className: classNames(
-                            'nav-item',
-                            'nav-link',
-                            'text-nowrap',
-                            list && 'p-0',
-                            className,
-                            disabled ? 'disabled' : active && 'active'
-                        ),
-                        tabIndex: disabled ? -1 : tabIndex,
-                        'aria-disabled': Boolean(disabled) + ''
-                    };
-
-                    return list ? (
-                        <DropMenu {...rest} title={title} list={list} />
-                    ) : (
-                        <a {...rest}>
-                            {title}
-                            {!active ? null : (
-                                <span className="sr-only">(current)</span>
-                            )}
-                        </a>
-                    );
-                }
-            )}
+            {defaultSlot}
         </nav>
     );
 

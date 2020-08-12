@@ -1,5 +1,6 @@
 import {
     VNodeChildElement,
+    WebCellProps,
     component,
     mixin,
     watch,
@@ -7,7 +8,6 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 
 import { Button } from '../Form/Button';
@@ -19,7 +19,7 @@ interface AccordionItem {
     active?: boolean;
 }
 
-export interface AccordionProps extends HTMLProps {
+export interface AccordionProps extends WebCellProps {
     list: AccordionItem[];
 }
 

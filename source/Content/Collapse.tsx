@@ -34,22 +34,7 @@ export class CollapseBox extends mixin<CollapseProps>() {
     @attribute
     @watch
     set open(open: boolean) {
-        this.setProps({ open }).then(async () => {
-            const end = watchMotion('transition', this),
-                box = this.shadowRoot.lastElementChild as HTMLElement;
-
-            if (!open) {
-                this.style.height = '0px';
-                await end;
-                box.style.display = 'none';
-                this.emit('close');
-            } else {
-                box.style.display = self.getComputedStyle(this).display;
-                this.style.height = self.getComputedStyle(box).height;
-                await end;
-                this.emit('open');
-            }
-        });
+        this.setProps({ open }).then(() => this.toggle(open));
     }
 
     private resizer: ResizeObserver;
@@ -70,6 +55,25 @@ export class CollapseBox extends mixin<CollapseProps>() {
 
     disconnectedCallback() {
         this.resizer.disconnect();
+    }
+
+    async toggle(open = !this.open) {
+        const end = watchMotion('transition', this),
+            box = this.shadowRoot.lastElementChild as HTMLElement;
+
+        if (!open) {
+            this.style.overflow = 'hidden';
+            this.style.height = '0px';
+            await end;
+            box.style.display = 'none';
+            this.emit('close');
+        } else {
+            box.style.display = self.getComputedStyle(this).display;
+            this.style.height = self.getComputedStyle(box).height;
+            await end;
+            this.style.overflow = 'inherit';
+            this.emit('open');
+        }
     }
 
     render() {

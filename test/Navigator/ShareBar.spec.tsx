@@ -6,7 +6,7 @@ self.navigator.share = async () => {};
 import { ShareBar } from '../../source/Navigator/ShareBar';
 import style from '../../source/Navigator/ShareBar/index.less';
 
-import { BGIcon } from '../../source/Reminder/Icon';
+import { BGIcon } from '../../source/Reminder/FAIcon';
 
 describe('Share Bar', () => {
     it('should render Vendor Icons', () => {

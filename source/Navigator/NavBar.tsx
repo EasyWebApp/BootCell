@@ -13,7 +13,7 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { Size, Theme, BackgroundColors } from '../utility/constant';
-import { NavProps, Nav } from './Nav';
+import { NavProps, NavLinkProps, Nav, NavLink } from './Nav';
 import '../Content/Collapse';
 import './NavBar.less';
 
@@ -27,7 +27,7 @@ export interface NavBarProps extends WebCellProps {
     background?: BackgroundColors;
     menuAlign?: NavProps['align'];
     brand?: VNodeChildElement;
-    menu?: NavProps['list'];
+    menu?: NavLinkProps[];
     activeIndex?: number;
     open?: boolean;
 }
@@ -178,12 +178,11 @@ export class NavBar extends mixin<NavBarProps>() {
         const { UID } = this,
             content = (
                 <Fragment>
-                    <Nav
-                        className="navbar-nav flex-grow-1"
-                        align={menuAlign}
-                        list={menu}
-                        activeIndex={activeIndex}
-                    />
+                    <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
+                        {menu.map((item, index) => (
+                            <NavLink {...item} active={index === activeIndex} />
+                        ))}
+                    </Nav>
                     {defaultSlot[0] && (
                         <div
                             className={classNames(

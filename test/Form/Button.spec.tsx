@@ -2,6 +2,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Button, IconButton } from '../../source/Form/Button';
+import { Icon } from '../../source/Reminder/Icon';
 
 describe('Button', () => {
     it('should render a Button with outline', () => {
@@ -34,16 +35,16 @@ describe('Button', () => {
         assertLooksLike(
             <IconButton
                 className="m-1"
-                name="github"
-                href="https://github.com"
+                name="bootstrap"
+                href="https://getbootstrap.com"
             />,
             <a
                 className="btn btn-primary p-1 m-1"
-                href="https://github.com"
+                href="https://getbootstrap.com"
                 role="button"
                 aria-disabled="false"
             >
-                <span className="fas fa-github" aria-hidden="true" />
+                <Icon name="bootstrap" />
             </a>
         );
     });

@@ -1,5 +1,6 @@
 import {
     VNodeChildElement,
+    WebCellProps,
     component,
     mixin,
     watch,
@@ -8,7 +9,6 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
 import { uniqueID, isEmpty } from 'web-utility/source/data';
 import { watchMotion } from 'web-utility/source/animation';
 import { watchVisible } from 'web-utility/source/DOM';
@@ -21,7 +21,7 @@ interface CarouselItem {
     content?: VNodeChildElement;
 }
 
-export interface CarouselProps extends HTMLProps {
+export interface CarouselProps extends WebCellProps {
     mode?: 'slide' | 'fade';
     controls?: boolean;
     indicators?: boolean;

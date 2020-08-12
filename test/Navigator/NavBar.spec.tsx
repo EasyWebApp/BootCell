@@ -16,7 +16,8 @@ function InlineNavBar({
     background = 'dark',
     menuAlign = 'start',
     brand,
-    menu
+    menu,
+    activeIndex = 0
 }: NavBarProps) {
     return render.call(
         { renderContent: renderContent.bind({ UID: 'test' }) },
@@ -31,6 +32,7 @@ function InlineNavBar({
             menuAlign,
             brand,
             menu,
+            activeIndex,
             defaultSlot
         }
     );
