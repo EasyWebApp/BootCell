@@ -80,12 +80,23 @@ export function IconButton({
     outline,
     size,
     block,
+    onClick,
     ...icon
 }: IconButtonProps) {
     return (
         <Button
             className={classNames('p-1', className)}
-            {...{ type, disabled, href, target, kind, outline, size, block }}
+            {...{
+                type,
+                disabled,
+                href,
+                target,
+                kind,
+                outline,
+                size,
+                block,
+                onClick
+            }}
         >
             <Icon {...icon} />
         </Button>

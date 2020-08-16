@@ -1,6 +1,6 @@
 import {
-    VNodeChildElement,
     WebCellProps,
+    VNodeChildElement,
     component,
     mixin,
     watch,
@@ -14,11 +14,42 @@ import { watchMotion } from 'web-utility/source/animation';
 import { watchVisible } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
-interface CarouselItem {
+export interface CarouselItemProps extends WebCellProps {
     image?: string | URL;
     title?: string;
     detail?: string;
-    content?: VNodeChildElement;
+}
+
+export function CarouselItem({
+    className,
+    defaultSlot,
+    image,
+    title,
+    detail,
+    ...rest
+}: CarouselItemProps) {
+    return (
+        <section className={classNames('carousel-item', className)} {...rest}>
+            {defaultSlot[0] ? (
+                defaultSlot
+            ) : (
+                <Fragment>
+                    <img className="d-block w-100" src={image} alt={title} />
+                    {title && (
+                        <div
+                            className="carousel-caption d-none d-md-block"
+                            style={{
+                                textShadow: '1px 2px 3px black'
+                            }}
+                        >
+                            <h5>{title}</h5>
+                            {detail && <p>{detail}</p>}
+                        </div>
+                    )}
+                </Fragment>
+            )}
+        </section>
+    );
 }
 
 export interface CarouselProps extends WebCellProps {
@@ -27,7 +58,6 @@ export interface CarouselProps extends WebCellProps {
     indicators?: boolean;
     interval?: number;
     activeIndex?: number;
-    list?: CarouselItem[];
 }
 
 @component({
@@ -60,20 +90,18 @@ export class CarouselView extends mixin<CarouselProps>() {
     @watch
     activeIndex = 0;
 
+    private slideBox?: HTMLElement;
+
     @watch
-    set list(list: CarouselItem[]) {
-        this.setProps({ list }).then(() =>
-            this.slideBox.children[this.activeIndex]?.classList.add('active')
+    set defaultSlot(defaultSlot: VNodeChildElement[]) {
+        this.setProps({ defaultSlot }).then(() =>
+            this.slideBox?.children[this.activeIndex]?.classList.add('active')
         );
     }
 
-    private slideBox: HTMLElement;
-
     async turnTo(index = this.activeIndex + 1) {
-        const {
-            list: { length },
-            activeIndex
-        } = this;
+        const { length } = this.defaultSlot;
+        const { activeIndex } = this;
 
         if (!this.slideBox || !length) return;
 
@@ -102,12 +130,14 @@ export class CarouselView extends mixin<CarouselProps>() {
         current?.classList.remove('active', direction);
     }
 
+    turnBack() {
+        return this.turnTo(this.activeIndex - 1);
+    }
+
     private timer: number;
     private pause = false;
 
     connectedCallback() {
-        if (!this.list) this.list = [];
-
         if (!this.controls && !this.indicators && isEmpty(this.interval))
             this.interval = 3;
 
@@ -115,7 +145,7 @@ export class CarouselView extends mixin<CarouselProps>() {
             watchVisible(this, visible => (this.pause = !visible));
 
             this.timer = self.setInterval(
-                () => !this.list[1] || this.pause || this.turnTo(),
+                () => !this.defaultSlot[1] || this.pause || this.turnTo(),
                 this.interval * 1000
             );
         }
@@ -140,8 +170,15 @@ export class CarouselView extends mixin<CarouselProps>() {
         }
     );
 
-    render({ mode, indicators, activeIndex, list, controls }: CarouselProps) {
-        const { UID } = this;
+    render({
+        mode,
+        indicators,
+        activeIndex,
+        defaultSlot,
+        controls
+    }: CarouselProps) {
+        const { UID } = this,
+            { length } = defaultSlot as VNodeChildElement[];
 
         return (
             <div
@@ -154,9 +191,9 @@ export class CarouselView extends mixin<CarouselProps>() {
                 onMouseEnter={this.handlePause}
                 onMouseLeave={this.handlePause}
             >
-                {!indicators || !list[1] ? null : (
+                {!indicators || length < 2 ? null : (
                     <ol className="carousel-indicators">
-                        {list.map((_, index) => (
+                        {Array.from(new Array(length), (_, index) => (
                             <li
                                 className={
                                     index === activeIndex ? 'active' : null
@@ -170,32 +207,9 @@ export class CarouselView extends mixin<CarouselProps>() {
                     className="carousel-inner"
                     ref={(tag: HTMLElement) => (this.slideBox = tag)}
                 >
-                    {list.map(({ content, image, title, detail }) => (
-                        <section className="carousel-item">
-                            {content || (
-                                <Fragment>
-                                    <img
-                                        className="d-block w-100"
-                                        src={image}
-                                        alt={title}
-                                    />
-                                    {title && (
-                                        <div
-                                            className="carousel-caption d-none d-md-block"
-                                            style={{
-                                                textShadow: '1px 2px 3px black'
-                                            }}
-                                        >
-                                            <h5>{title}</h5>
-                                            {detail && <p>{detail}</p>}
-                                        </div>
-                                    )}
-                                </Fragment>
-                            )}
-                        </section>
-                    ))}
+                    {defaultSlot}
                 </div>
-                {!controls || !list[1] ? null : (
+                {!controls || length < 2 ? null : (
                     <Fragment>
                         <a
                             className="carousel-control-prev"

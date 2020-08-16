@@ -1,7 +1,7 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { createCell, Fragment } from 'web-cell';
 
-import { CarouselView } from '../../source/Media/Carousel';
+import { CarouselView, CarouselItem } from '../../source/Media/Carousel';
 
 const { render } = CarouselView.prototype;
 
@@ -14,14 +14,18 @@ describe('Carousel View', () => {
                     controls: true,
                     indicators: true,
                     activeIndex: 0,
-                    list: [
-                        {
-                            image: 'test.png',
-                            title: 'Test',
-                            detail: 'test'
-                        },
-                        { content: <h3>Example</h3> }
-                    ]
+                    defaultSlot: (
+                        <Fragment>
+                            <CarouselItem
+                                image="test.png"
+                                title="Test"
+                                detail="test"
+                            />
+                            <CarouselItem>
+                                <h3>Example</h3>
+                            </CarouselItem>
+                        </Fragment>
+                    )
                 }
             ),
             <div className="carousel slide" id="test">

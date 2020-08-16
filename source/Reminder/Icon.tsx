@@ -21,7 +21,8 @@ export function Icon({
     width = 16,
     height = width,
     viewBox = [0, 0, width, height],
-    name
+    name,
+    ...rest
 }: IconProps) {
     return (
         <svg
@@ -30,6 +31,7 @@ export function Icon({
             viewBox={viewBox.join(' ')}
             width={width}
             height={height}
+            {...rest}
         >
             <use {...{ 'xlink:href': `${icons}#${name}` }} />
         </svg>

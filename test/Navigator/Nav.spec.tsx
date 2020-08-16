@@ -2,23 +2,27 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Nav, NavLink } from '../../source/Navigator/Nav';
-import { DropMenu } from '../../source/Navigator/DropMenu';
+import { DropMenu, DropMenuItem } from '../../source/Navigator/DropMenu';
 
 describe('Nav', () => {
     it('should render Nav Links with different states', () => {
         assertLooksLike(
             <Nav>
-                <NavLink title="Test" href="#test" active />
-                <NavLink title="Example" href="#example" disabled />
-                <NavLink
-                    title="Nested"
-                    list={[{ title: 'Sample', href: '#sample' }]}
-                />
+                <NavLink href="#test" active>
+                    Test
+                </NavLink>
+                <NavLink href="#example" disabled>
+                    Example
+                </NavLink>
+                <NavLink list={[{ title: 'Sample', href: '#sample' }]}>
+                    Nested
+                </NavLink>
             </Nav>,
             <nav className="nav">
                 <a
                     className="nav-item nav-link text-nowrap active"
                     href="#test"
+                    aria-disabled="false"
                 >
                     Test
                     <span className="sr-only">(current)</span>
@@ -31,10 +35,7 @@ describe('Nav', () => {
                 >
                     Example
                 </a>
-                <DropMenu
-                    title="Nested"
-                    list={[{ title: 'Sample', href: '#sample' }]}
-                />
+                <DropMenu caption="Nested" aria-disabled="false" />
             </nav>
         );
     });
@@ -57,13 +58,16 @@ describe('Nav', () => {
     it('should render a Nav wrapped by a Scroller', () => {
         assertLooksLike(
             <Nav scrollable>
-                <NavLink title="Test" href="#test" active />
+                <NavLink href="#test" active>
+                    Test
+                </NavLink>
             </Nav>,
             <div className="nav-scroller bg-white shadow-sm">
                 <nav className="nav nav-underline">
                     <a
                         className="nav-item nav-link text-nowrap active"
                         href="#test"
+                        aria-disabled="false"
                     >
                         Test
                         <span className="sr-only">(current)</span>

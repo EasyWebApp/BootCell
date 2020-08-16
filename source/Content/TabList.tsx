@@ -96,7 +96,7 @@ export class TabList extends mixin<TabListProps>() {
             activeIndex,
             UID
         } = this;
-        const listMode = mode === 'list';
+        const Tab = mode === 'list' ? ListItem : NavLink;
 
         const tabList = list.map(({ title, disabled }, index) => {
             const bID = `${UID}_b_${index}`,
@@ -111,11 +111,7 @@ export class TabList extends mixin<TabListProps>() {
                 'aria-selected': active + '',
                 'data-index': index + ''
             };
-            return listMode ? (
-                <ListItem {...props}>{title}</ListItem>
-            ) : (
-                <NavLink {...props} title={title} />
-            );
+            return <Tab {...props}>{title}</Tab>;
         });
 
         return mode === 'list' ? (

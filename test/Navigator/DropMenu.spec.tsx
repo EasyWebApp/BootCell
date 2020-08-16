@@ -1,48 +1,45 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-
-import { DropMenu, DropMenuProps } from '../../source/Navigator/DropMenu';
+import {
+    DropMenu,
+    DropMenuProps,
+    DropMenuItem
+} from '../../source/Navigator/DropMenu';
 import { Button } from '../../source/Form/Button';
 
-const { renderButton, renderItem, renderList, render } = DropMenu.prototype;
+const { renderButton, render } = DropMenu.prototype;
 
 function InlineDropMenu({
     buttonKind,
     buttonSize,
     open,
     href,
-    title,
+    caption,
     target,
     alignType = 'left',
     alignSize = '',
     direction = 'down',
-    list
+    defaultSlot,
+    UID = 'test'
 }: DropMenuProps) {
     return (
         <div>
             {render.call(
                 {
+                    UID,
                     renderButton: renderButton.bind({
-                        UID: 'test',
+                        UID,
                         props: {
                             buttonKind,
                             buttonSize,
                             open,
                             href,
-                            title,
+                            caption,
                             target
                         }
-                    }),
-                    renderList: renderList.bind({
-                        renderItem,
-                        alignType,
-                        alignSize,
-                        open,
-                        UID: 'test',
-                        list
                     })
                 },
-                { href, direction }
+                { alignType, alignSize, open, defaultSlot, href, direction }
             )}
         </div>
     );
@@ -51,15 +48,16 @@ function InlineDropMenu({
 describe('Drop Menu', () => {
     it('should render a Single Button menu with Variants of Menu Items defaultly', () => {
         assertLooksLike(
-            <InlineDropMenu
-                title="Demo"
-                list={[
-                    { title: 'Test', href: 'test', active: true },
-                    { title: 'Example', href: 'example', disabled: true },
-                    {},
-                    { title: 'Sample' }
-                ]}
-            />,
+            <InlineDropMenu caption="Demo">
+                <DropMenuItem href="test" active>
+                    Test
+                </DropMenuItem>
+                <DropMenuItem href="example" disabled>
+                    Example
+                </DropMenuItem>
+                <DropMenuItem />
+                <DropMenuItem>Sample</DropMenuItem>
+            </InlineDropMenu>,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -94,12 +92,7 @@ describe('Drop Menu', () => {
 
     it('should render a Responsive Right-align Menu', () => {
         assertLooksLike(
-            <InlineDropMenu
-                title="Demo"
-                alignType="right"
-                alignSize="md"
-                list={[]}
-            />,
+            <InlineDropMenu caption="Demo" alignType="right" alignSize="md" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -119,12 +112,7 @@ describe('Drop Menu', () => {
 
     it('should render a Responsive Left-align Menu', () => {
         assertLooksLike(
-            <InlineDropMenu
-                title="Demo"
-                alignType="left"
-                alignSize="md"
-                list={[]}
-            />,
+            <InlineDropMenu caption="Demo" alignType="left" alignSize="md" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -144,7 +132,7 @@ describe('Drop Menu', () => {
 
     it('should render a Split Button menu with URL', () => {
         assertLooksLike(
-            <InlineDropMenu title="Demo" href="example" list={[]} />,
+            <InlineDropMenu caption="Demo" href="example" />,
             <div>
                 <Button href="example">Demo</Button>
                 <button
@@ -163,7 +151,7 @@ describe('Drop Menu', () => {
 
     it('should render a Single-layer Button group with Single Left direction', () => {
         assertLooksLike(
-            <InlineDropMenu title="Demo" direction="left" list={[]} />,
+            <InlineDropMenu caption="Demo" direction="left" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -180,12 +168,7 @@ describe('Drop Menu', () => {
 
     it('should render a Double-layer Button group with Split Left direction', () => {
         assertLooksLike(
-            <InlineDropMenu
-                title="Demo"
-                href="example"
-                direction="left"
-                list={[]}
-            />,
+            <InlineDropMenu caption="Demo" href="example" direction="left" />,
             <div>
                 <div className="dropdown-menu" aria-labelledby="test" />
                 <div className="btn-group">

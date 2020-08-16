@@ -80,7 +80,8 @@ npm install boot-cell bootstrap-icons \
 
 1. [Image](https://web-cell.dev/BootCell/interfaces/imageprops.html)
 2. [Embed](https://web-cell.dev/BootCell/interfaces/embedprops.html)
-3. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+3. [CarouselItem](https://web-cell.dev/BootCell/interfaces/carouselitemprops.html)
+4. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 
@@ -90,9 +91,10 @@ npm install boot-cell bootstrap-icons \
 4. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
 5. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
 6. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
-7. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-8. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
-9. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+7. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
+8. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+9. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
+10. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 

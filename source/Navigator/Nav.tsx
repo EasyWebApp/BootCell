@@ -1,22 +1,20 @@
-import { WebCellProps, createCell, WebCellClass } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { DropMenu } from './DropMenu';
+import { DropMenuItemProps, DropMenu, DropMenuItem } from './DropMenu';
 import { JustityType, BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
 export interface NavLinkProps extends WebCellProps, HTMLHyperLinkProps {
-    title: string;
     href?: string | URL;
     disabled?: boolean;
     active?: boolean;
-    list?: NavLinkProps[];
+    list?: DropMenuItemProps[];
 }
 
 export function NavLink({
     list,
-    title,
     tabIndex,
     disabled,
     active,
@@ -39,10 +37,17 @@ export function NavLink({
     };
 
     return list ? (
-        <DropMenu {...rest} title={title} list={list} />
+        <DropMenu
+            {...rest}
+            caption={defaultSlot[1] ? defaultSlot : defaultSlot[0]}
+        >
+            {list.map(({ title, ...props }) => (
+                <DropMenuItem {...props}>{title}</DropMenuItem>
+            ))}
+        </DropMenu>
     ) : (
         <a {...rest}>
-            {title}
+            {defaultSlot}
             {!active ? null : <span className="sr-only">(current)</span>}
         </a>
     );

@@ -1,6 +1,6 @@
 import {
-    VNodeChildElement,
     WebCellProps,
+    WebCellElement,
     component,
     mixin,
     watch,
@@ -15,14 +15,46 @@ import classNames from 'classnames';
 
 import { ButtonProps, Button } from '../Form/Button';
 
-export interface DropMenuItem extends HTMLHyperLinkProps {
+export interface DropMenuItemProps extends WebCellProps, HTMLHyperLinkProps {
     active?: boolean;
     disabled?: boolean;
-    content?: VNodeChildElement;
+}
+
+export function DropMenuItem({
+    href,
+    active,
+    disabled,
+    className,
+    tabIndex,
+    defaultSlot,
+    ...rest
+}: DropMenuItemProps) {
+    return href ? (
+        <a
+            {...rest}
+            className={classNames(
+                'dropdown-item',
+                active && 'active',
+                disabled && 'disabled',
+                className
+            )}
+            href={href}
+            tabIndex={disabled ? -1 : tabIndex}
+            aria-disabled={!!disabled + ''}
+        >
+            {defaultSlot}
+        </a>
+    ) : defaultSlot[0] ? (
+        <span {...rest} className={classNames('dropdown-item-text', className)}>
+            {defaultSlot}
+        </span>
+    ) : (
+        <div {...rest} className={classNames('dropdown-divider', className)} />
+    );
 }
 
 export interface DropMenuProps extends WebCellProps {
-    title: VNodeChildElement & string;
+    caption: WebCellElement;
     buttonKind?: ButtonProps['kind'];
     buttonSize?: ButtonProps['size'];
     alignType?: 'left' | 'right';
@@ -31,7 +63,6 @@ export interface DropMenuProps extends WebCellProps {
     href?: HTMLHyperLinkProps['href'];
     target?: HTMLHyperLinkProps['target'];
     open?: boolean;
-    list: DropMenuItem[];
 }
 
 @component({
@@ -43,7 +74,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
 
     @attribute
     @watch
-    title: ButtonProps['title'];
+    caption: ButtonProps['caption'];
 
     @attribute
     @watch
@@ -79,9 +110,6 @@ export class DropMenu extends mixin<DropMenuProps>() {
         this.setProps({ open }).then(() => this.classList.toggle('show', open));
     }
 
-    @watch
-    list: DropMenuItem[] = [];
-
     outClose = ({ target }: MouseEvent) => {
         if (
             this.compareDocumentPosition(target as HTMLElement) &
@@ -107,10 +135,27 @@ export class DropMenu extends mixin<DropMenuProps>() {
         self.removeEventListener('keydown', this.escapeClose);
     }
 
+    @on('click', '.dropdown-menu [class|="dropdown-item"]')
+    itemClose() {
+        this.open = false;
+    }
+
+    updatedCallback() {
+        const { href, direction } = this;
+
+        this.classList.add(
+            'd-inline-block',
+            href || direction !== 'down' ? 'btn-group' : 'dropdown'
+        );
+
+        if (href ? !['down', 'left'].includes(direction) : direction !== 'down')
+            this.classList.add(`drop${direction}`);
+    }
+
     renderButton() {
         const {
             UID,
-            props: { buttonKind, buttonSize, open, href, title, target }
+            props: { buttonKind, buttonSize, open, href, caption, target }
         } = this;
 
         const trigger = (
@@ -129,7 +174,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
                 {href ? (
                     <span className="sr-only">Toggle Dropdown</span>
                 ) : (
-                    title
+                    caption
                 )}
             </Button>
         );
@@ -142,7 +187,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
                     target={target}
                     href={href}
                 >
-                    {title}
+                    {caption}
                 </Button>
 
                 {trigger}
@@ -152,100 +197,44 @@ export class DropMenu extends mixin<DropMenuProps>() {
         );
     }
 
-    @on('click', '.dropdown-menu [class|="dropdown-item"]')
-    itemClose() {
-        this.open = false;
-    }
-
-    renderItem({
+    render({
+        alignType,
+        alignSize,
+        open,
+        defaultSlot,
         href,
-        active,
-        disabled,
-        className,
-        tabIndex,
-        title,
-        content,
-        ...rest
-    }: DropMenuItem) {
-        return href ? (
-            <a
-                {...rest}
-                className={classNames(
-                    'dropdown-item',
-                    active && 'active',
-                    disabled && 'disabled',
-                    className
-                )}
-                href={href}
-                tabIndex={disabled ? -1 : tabIndex}
-                aria-disabled={!!disabled + ''}
-            >
-                {title}
-            </a>
-        ) : title ? (
-            <span
-                {...rest}
-                className={classNames('dropdown-item-text', className)}
-            >
-                {title}
-            </span>
-        ) : (
-            content || (
-                <div
-                    {...rest}
-                    className={classNames('dropdown-divider', className)}
-                />
-            )
-        );
-    }
-
-    renderList() {
-        const { alignType, alignSize, open, UID, list } = this;
+        direction
+    }: DropMenuProps) {
         const alignment =
             alignType === 'right'
                 ? [`dropdown-menu${alignSize && '-' + alignSize}-right`]
                 : alignType === 'left' && alignSize
                 ? ['dropdown-menu-right', `dropdown-menu-${alignSize}-left`]
                 : [];
-
-        return (
+        const body = (
             <div
                 className={classNames(
                     'dropdown-menu',
                     ...alignment,
                     open && 'show'
                 )}
-                aria-labelledby={UID}
+                aria-labelledby={this.UID}
             >
-                {list.map(item => this.renderItem(item))}
+                {defaultSlot}
             </div>
         );
-    }
 
-    updatedCallback() {
-        const { href, direction } = this;
-
-        this.classList.add(
-            'd-inline-block',
-            href || direction !== 'down' ? 'btn-group' : 'dropdown'
-        );
-
-        if (href ? !['down', 'left'].includes(direction) : direction !== 'down')
-            this.classList.add(`drop${direction}`);
-    }
-
-    render({ href, direction }: DropMenuProps) {
         return href && direction === 'left' ? (
             <Fragment>
                 <div className="btn-group dropleft" role="group">
-                    {this.renderList()}
+                    {body}
                 </div>
                 {this.renderButton()}
             </Fragment>
         ) : (
             <Fragment>
                 {this.renderButton()}
-                {this.renderList()}
+                {body}
             </Fragment>
         );
     }

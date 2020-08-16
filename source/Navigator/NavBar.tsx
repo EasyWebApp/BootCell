@@ -179,8 +179,10 @@ export class NavBar extends mixin<NavBarProps>() {
             content = (
                 <Fragment>
                     <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
-                        {menu.map((item, index) => (
-                            <NavLink {...item} active={index === activeIndex} />
+                        {menu.map(({ title, ...props }, index) => (
+                            <NavLink {...props} active={index === activeIndex}>
+                                {title}
+                            </NavLink>
                         ))}
                     </Nav>
                     {defaultSlot[0] && (
