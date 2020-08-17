@@ -4,6 +4,7 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { FieldProps, Field } from './Field';
+import { ValidMessage, ValidableFieldProps } from './Form';
 
 type Label = string | VNode;
 
@@ -56,7 +57,10 @@ export function GroupLabel({
     );
 }
 
-export interface InputGroupProps extends WebCellProps, FieldProps {
+export interface InputGroupProps
+    extends WebCellProps,
+        FieldProps,
+        ValidableFieldProps {
     size?: 'sm' | 'lg';
     prepend?: Label | Label[];
     append?: Label | Label[];
@@ -69,6 +73,9 @@ export function InputGroup({
     prepend,
     append,
     defaultSlot,
+    validMode,
+    validMessage,
+    invalidMessage,
     ...rest
 }: InputGroupProps) {
     prepend = !prepend || prepend instanceof Array ? prepend : [prepend];
@@ -103,6 +110,7 @@ export function InputGroup({
                     list={append as Label[]}
                 />
             )}
+            <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
         </div>
     );
 }

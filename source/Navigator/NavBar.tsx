@@ -1,7 +1,8 @@
 import {
     WebCellProps,
-    createCell,
     VNodeChildElement,
+    VNode,
+    createCell,
     component,
     mixin,
     watch,
@@ -11,9 +12,10 @@ import {
 } from 'web-cell';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
+import { looksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Size, Theme, BackgroundColors } from '../utility/constant';
-import { NavProps, NavLinkProps, Nav, NavLink } from './Nav';
+import { NavProps, Nav, NavLink } from './Nav';
 import '../Content/Collapse';
 import './NavBar.less';
 
@@ -27,8 +29,6 @@ export interface NavBarProps extends WebCellProps {
     background?: BackgroundColors;
     menuAlign?: NavProps['align'];
     brand?: VNodeChildElement;
-    menu?: NavLinkProps[];
-    activeIndex?: number;
     open?: boolean;
 }
 
@@ -74,13 +74,6 @@ export class NavBar extends mixin<NavBarProps>() {
     @attribute
     @watch
     brand = document.title;
-
-    @watch
-    menu = [];
-
-    @attribute
-    @watch
-    activeIndex = 0;
 
     @attribute
     @watch
@@ -167,32 +160,36 @@ export class NavBar extends mixin<NavBarProps>() {
 
     renderContent({
         menuAlign,
-        menu,
-        activeIndex,
         defaultSlot,
         expand,
         brand,
         open,
         offcanvas
     }: NavBarProps) {
+        const [links, extra] = (defaultSlot as VNode[]).reduce(
+            ([links, extra], node) => {
+                if (looksLike(node, <NavLink />)) links.push(node);
+                else extra.push(node);
+
+                return [links, extra];
+            },
+            [[], []]
+        );
+
         const { UID } = this,
             content = (
                 <Fragment>
                     <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
-                        {menu.map(({ title, ...props }, index) => (
-                            <NavLink {...props} active={index === activeIndex}>
-                                {title}
-                            </NavLink>
-                        ))}
+                        {links}
                     </Nav>
-                    {defaultSlot[0] && (
+                    {extra[0] && (
                         <div
                             className={classNames(
                                 `d${expand === 'xs' ? '' : '-' + expand}-flex`,
                                 'justify-content-end'
                             )}
                         >
-                            {defaultSlot}
+                            {extra}
                         </div>
                     )}
                 </Fragment>
@@ -207,7 +204,7 @@ export class NavBar extends mixin<NavBarProps>() {
                 >
                     {brand}
                 </a>
-                {(menu[0] || defaultSlot[0]) && (
+                {(links[0] || extra[0]) && (
                     <button
                         type="button"
                         className="navbar-toggler"

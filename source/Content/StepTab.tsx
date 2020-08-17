@@ -1,11 +1,9 @@
 import {
-    WebCellElement,
     WebCellProps,
     component,
     mixin,
     attribute,
     watch,
-    delegate,
     on,
     createCell,
     Fragment
@@ -13,12 +11,12 @@ import {
 import { uniqueID } from 'web-utility/source/data';
 import { watchMotion } from 'web-utility/source/animation';
 
-import { Step, Stepper } from '../Navigator/Stepper';
+import { StepProps, Step, Stepper } from '../Navigator/Stepper';
 
 export interface StepTabProps extends WebCellProps {
     direction?: 'horizontal' | 'vertical';
     linear?: boolean;
-    path: (Step & { content: WebCellElement })[];
+    path: StepProps[];
     activeIndex?: number;
 }
 
@@ -58,12 +56,6 @@ export class StepTab extends mixin<StepTabProps>() {
         this.classList.toggle('linear', this.linear);
     }
 
-    watchButton = delegate(
-        'button.step-trigger',
-        (_, { dataset: { index } }: HTMLButtonElement) =>
-            (this.activeIndex = +index)
-    );
-
     @on('submit', '.bs-stepper-pane form')
     handleSubmit(event: Event, form: HTMLFormElement) {
         this.activeIndex++;
@@ -100,25 +92,28 @@ export class StepTab extends mixin<StepTabProps>() {
     render({ path, linear, activeIndex }: StepTabProps) {
         return (
             <Fragment>
-                <Stepper
-                    id={this.id + '-H'}
-                    path={path.map(({ icon, title }, index) => ({
-                        icon,
-                        title,
-                        disabled: linear,
-                        'aria-controls': `${this.id}-${index}`
-                    }))}
-                    activeIndex={activeIndex}
-                    onClick={this.watchButton}
-                    onFocusIn={this.watchButton}
-                />
+                <Stepper>
+                    {path.map(({ icon, title }, index) => (
+                        <Step
+                            id={`${this.id}-H-${index}`}
+                            icon={icon || index + 1}
+                            active={index === activeIndex}
+                            disabled={linear}
+                            aria-controls={`${this.id}-${index}`}
+                            onClick={() => (this.activeIndex = index)}
+                            onFocusIn={() => (this.activeIndex = index)}
+                        >
+                            {title}
+                        </Step>
+                    ))}
+                </Stepper>
                 <div className="bs-stepper-content">
                     {path.map(({ content }, index) => (
                         <div
                             id={`${this.id}-${index}`}
                             className="bs-stepper-pane"
                             role="tabpanel"
-                            aria-labelledby={'BST-H-' + index}
+                            aria-labelledby={`${this.id}-H-${index}`}
                         >
                             {content}
                         </div>

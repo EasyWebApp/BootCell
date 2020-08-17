@@ -5,8 +5,12 @@ import classNames from 'classnames';
 
 import { FormFieldProps } from './FormField';
 import { ButtonProps } from './Button';
+import { ValidableFieldProps, ValidMessage } from './Form';
 
-export interface ToggleFieldProps extends BaseFieldProps, WebCellProps {
+export interface ToggleFieldProps
+    extends WebCellProps,
+        BaseFieldProps,
+        ValidableFieldProps {
     type: 'radio' | 'checkbox';
     checked?: boolean;
     indeterminate?: boolean;
@@ -23,6 +27,9 @@ export function ToggleField({
     inline,
     id = uniqueID(),
     defaultSlot,
+    validMode,
+    validMessage,
+    invalidMessage,
     ...rest
 }: ToggleFieldProps) {
     return (
@@ -47,6 +54,7 @@ export function ToggleField({
                     {defaultSlot}
                 </label>
             )}
+            <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
         </div>
     );
 }

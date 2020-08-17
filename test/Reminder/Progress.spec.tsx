@@ -1,7 +1,7 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { Progress } from '../../source/Reminder/Progress';
+import { Progress, ProgressBar } from '../../source/Reminder/Progress';
 
 describe('Progress', () => {
     it('should render a Progress Bar with Primary status defaultly', () => {
@@ -78,8 +78,10 @@ describe('Progress', () => {
 
     it('should render a Progress with multiple Bars', () => {
         assertLooksLike(
-            <Progress bars={[{}, { percent: 10, striped: true }]} />,
-
+            <Progress>
+                <ProgressBar />
+                <ProgressBar percent={10} striped />
+            </Progress>,
             <div className="progress">
                 <div
                     className="progress-bar"

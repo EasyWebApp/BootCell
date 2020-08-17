@@ -19,7 +19,6 @@ describe('Step tab', () => {
                             role="tab"
                             aria-controls="test-0"
                             aria-selected="true"
-                            data-index="0"
                         >
                             <span className="bs-stepper-circle">{1}</span>
                         </button>
@@ -60,7 +59,6 @@ describe('Step tab', () => {
                             aria-controls="test-0"
                             aria-selected="false"
                             disabled
-                            data-index="0"
                         >
                             <span className="bs-stepper-circle">{1}</span>
                         </button>
@@ -74,7 +72,6 @@ describe('Step tab', () => {
                             aria-controls="test-1"
                             aria-selected="true"
                             disabled
-                            data-index="1"
                         >
                             <span className="bs-stepper-circle">{2}</span>
                         </button>

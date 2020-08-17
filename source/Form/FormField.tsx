@@ -4,9 +4,10 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { FieldProps, Field } from './Field';
+import { ValidableFieldProps, ValidMessage } from './Form';
 import './FormField.less';
 
-export interface FormFieldProps extends FieldProps {
+export interface FormFieldProps extends FieldProps, ValidableFieldProps {
     label?: string;
     labelColumn?: number;
     labelFloat?: boolean;
@@ -37,6 +38,9 @@ export function FormField({
     labelColumn,
     labelFloat,
     tips,
+    validMode,
+    validMessage,
+    invalidMessage,
     fileButton = 'Browse',
     defaultSlot,
     ...rest
@@ -44,6 +48,10 @@ export function FormField({
     if (labelFloat && !label) label = rest.placeholder;
 
     if ((tips = tips?.trim())) rest['aria-describedby'] = id + '-tips';
+
+    const message = (
+        <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
+    );
 
     if (rest.type === 'file')
         return (
@@ -62,6 +70,7 @@ export function FormField({
                     data-file={label || 'Choose file'}
                     data-browse={fileButton}
                 />
+                {message}
             </div>
         );
 
@@ -110,6 +119,7 @@ export function FormField({
                     {tips}
                 </small>
             )}
+            {message}
         </div>
     );
 }

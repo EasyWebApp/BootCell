@@ -2,6 +2,7 @@ import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { NavBar, NavBarProps } from '../../source/Navigator/NavBar';
+import { NavLink } from '../../source/Navigator/Nav';
 
 const { render, renderContent } = NavBar.prototype;
 
@@ -15,9 +16,7 @@ function InlineNavBar({
     theme = 'dark',
     background = 'dark',
     menuAlign = 'start',
-    brand,
-    menu,
-    activeIndex = 0
+    brand
 }: NavBarProps) {
     return render.call(
         { renderContent: renderContent.bind({ UID: 'test' }) },
@@ -31,8 +30,6 @@ function InlineNavBar({
             background,
             menuAlign,
             brand,
-            menu,
-            activeIndex,
             defaultSlot
         }
     );
@@ -41,15 +38,10 @@ function InlineNavBar({
 describe('Navigator Bar', () => {
     it('should render a top-sticky dark Narrow Bar defaultly', () => {
         assertLooksLike(
-            <InlineNavBar
-                brand="Test"
-                menu={[
-                    {
-                        title: 'Example',
-                        href: '/example'
-                    }
-                ]}
-            >
+            <InlineNavBar brand="Test">
+                <NavLink href="/example" active>
+                    Example
+                </NavLink>
                 <a />
             </InlineNavBar>,
 
@@ -91,17 +83,11 @@ describe('Navigator Bar', () => {
 
     it('should render a reversed Narrow Bar wrapped by a container', () => {
         assertLooksLike(
-            <InlineNavBar
-                narrow
-                direction="right"
-                brand="Test"
-                menu={[
-                    {
-                        title: 'Example',
-                        href: '/example'
-                    }
-                ]}
-            />,
+            <InlineNavBar narrow direction="right" brand="Test">
+                <NavLink href="/example" active>
+                    Example
+                </NavLink>
+            </InlineNavBar>,
             <div className="container flex-row-reverse">
                 <a
                     target="_top"
@@ -137,15 +123,12 @@ describe('Navigator Bar', () => {
 
     it('should render an open Offcanvas NavBar', () => {
         assertLooksLike(
-            <InlineNavBar
-                brand="Test"
-                menu={[
-                    {
-                        title: 'Example',
-                        href: '/example'
-                    }
-                ]}
-            />,
+            <InlineNavBar brand="Test">
+                <NavLink href="/example" active>
+                    Example
+                </NavLink>
+            </InlineNavBar>,
+
             <Fragment>
                 <a
                     target="_top"

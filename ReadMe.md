@@ -71,10 +71,11 @@ npm install boot-cell bootstrap-icons \
 ### Reminder
 
 1. [Badge](https://web-cell.dev/BootCell/interfaces/badgeprops.html)
-2. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
-3. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
-4. [FAIcon](https://web-cell.dev/BootCell/interfaces/faiconprops.html)
-5. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
+2. [ProgressBar](https://web-cell.dev/BootCell/interfaces/progressbarprops.html)
+3. [Progress](https://web-cell.dev/BootCell/interfaces/progressprops.html)
+4. [Icon](https://web-cell.dev/BootCell/interfaces/iconprops.html)
+5. [FAIcon](https://web-cell.dev/BootCell/interfaces/faiconprops.html)
+6. [BGIcon](https://web-cell.dev/BootCell/interfaces/bgiconprops.html)
 
 ### Media
 
@@ -90,11 +91,12 @@ npm install boot-cell bootstrap-icons \
 3. [NavLink](https://web-cell.dev/BootCell/interfaces/navlinkprops.html)
 4. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
 5. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
-6. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
-7. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
-8. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-9. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
-10. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+6. [Step](https://web-cell.dev/BootCell/interfaces/stepprops.html)
+7. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
+8. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
+9. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+10. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
+11. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 
