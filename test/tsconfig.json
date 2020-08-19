@@ -1,4 +1,8 @@
 {
     "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react",
+        "jsxFactory": "createCell"
+    },
     "include": ["./**/*", "../source/utility/**/*"]
 }

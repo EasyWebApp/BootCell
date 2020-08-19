@@ -12,7 +12,6 @@ export interface FormFieldProps extends FieldProps, ValidableFieldProps {
     labelColumn?: number;
     labelFloat?: boolean;
     tips?: string;
-    fileButton?: string;
 }
 
 function handleFile(more?: BaseFieldProps['onChange']) {
@@ -38,41 +37,37 @@ export function FormField({
     labelColumn,
     labelFloat,
     tips,
-    validMode,
+    validMode = 'feedback',
     validMessage,
     invalidMessage,
-    fileButton = 'Browse',
+    onChange,
     defaultSlot,
     ...rest
 }: FormFieldProps = {}) {
     if (labelFloat && !label) label = rest.placeholder;
 
-    if ((tips = tips?.trim())) rest['aria-describedby'] = id + '-tips';
+    const describedBy = [];
 
-    const message = (
-        <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
-    );
-
-    if (rest.type === 'file')
-        return (
-            <div className={classNames('custom-file', className)}>
-                <Field
-                    id={id}
-                    size={size}
-                    {...rest}
-                    onChange={handleFile(rest.onChange)}
-                >
-                    {defaultSlot}
-                </Field>
-                <label
-                    className="custom-file-label"
-                    for={id}
-                    data-file={label || 'Choose file'}
-                    data-browse={fileButton}
-                />
-                {message}
-            </div>
+    if ((tips = tips?.trim())) {
+        const textID = id + '-tips';
+        var text = (
+            <small id={textID} className="form-text text-muted">
+                {tips}
+            </small>
         );
+        describedBy.push(textID);
+    }
+
+    if (validMessage || invalidMessage) {
+        const messageID = id + '-message';
+        var message = (
+            <ValidMessage
+                id={messageID}
+                {...{ validMode, validMessage, invalidMessage }}
+            />
+        );
+        describedBy.push(messageID);
+    }
 
     const labelClass =
         labelColumn &&
@@ -92,7 +87,15 @@ export function FormField({
         !rest.is && defaultSlot[0] ? (
             defaultSlot
         ) : (
-            <Field id={id} size={size} {...rest}>
+            <Field
+                {...rest}
+                id={id}
+                size={size}
+                aria-describedby={describedBy.join(' ')}
+                onChange={
+                    rest.type === 'file' ? handleFile(onChange) : onChange
+                }
+            >
                 {defaultSlot}
             </Field>
         )
@@ -113,12 +116,7 @@ export function FormField({
             )}
         >
             {defaultSlot}
-
-            {tips && (
-                <small id={id + '-tips'} className="form-text text-muted">
-                    {tips}
-                </small>
-            )}
+            {text}
             {message}
         </div>
     );

@@ -1,4 +1,5 @@
 import { WebCellProps, WebCellElement, createCell, Fragment } from 'web-cell';
+import { HTMLProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
 export interface FormProps extends WebCellProps {
@@ -49,7 +50,7 @@ export function Form({
     );
 }
 
-export interface ValidableFieldProps {
+export interface ValidableFieldProps extends HTMLProps {
     validMode?: 'feedback' | 'tooltip';
     validMessage?: WebCellElement;
     invalidMessage?: WebCellElement;

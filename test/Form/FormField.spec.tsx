@@ -2,6 +2,7 @@ import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
 import { FormField } from '../../source/Form/FormField';
+import { Field } from '../../source/Form/Field';
 
 describe('Form Fields', () => {
     it('should render an Input with Tips text', () => {
@@ -23,7 +24,7 @@ describe('Form Fields', () => {
 
     it('should render a Custom File Field', () => {
         assertLooksLike(
-            <FormField type="file" id="test" label="Image" />,
+            <Field type="file" id="test" label="Image" />,
             <div className="custom-file">
                 <input type="file" className="custom-file-input" id="test" />
                 <label

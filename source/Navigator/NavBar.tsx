@@ -168,7 +168,11 @@ export class NavBar extends mixin<NavBarProps>() {
     }: NavBarProps) {
         const [links, extra] = (defaultSlot as VNode[]).reduce(
             ([links, extra], node) => {
-                if (looksLike(node, <NavLink />)) links.push(node);
+                if (
+                    looksLike(node, <NavLink />) ||
+                    looksLike(node, <NavLink list={[]} />)
+                )
+                    links.push(node);
                 else extra.push(node);
 
                 return [links, extra];

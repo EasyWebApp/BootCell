@@ -1,5 +1,6 @@
 import { WebCellProps, createCell } from 'web-cell';
 import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 export interface FieldProps extends BaseFieldProps, WebCellProps {
@@ -29,15 +30,20 @@ export interface FieldProps extends BaseFieldProps, WebCellProps {
         | 'week';
     size?: 'sm' | 'lg' | number;
     valid?: boolean;
+    label?: string;
+    fileButton?: string;
 }
 
 export function Field({
     is = 'input',
     type = 'text',
     className,
+    id = uniqueID(),
     size,
     defaultValue,
     valid,
+    label,
+    fileButton = 'Browse',
     defaultSlot,
     ...rest
 }: FieldProps) {
@@ -58,18 +64,28 @@ export function Field({
                         sizeClass,
                         className
                     )}
+                    id={id}
                 />
             ) : (
-                <input
-                    {...rest}
-                    type="file"
-                    className={classNames(
-                        'custom-file-input',
-                        validClass,
-                        sizeClass,
-                        className
-                    )}
-                />
+                <div className={classNames('custom-file', className)}>
+                    <input
+                        {...rest}
+                        type="file"
+                        className={classNames(
+                            'custom-file-input',
+                            validClass,
+                            sizeClass,
+                            className
+                        )}
+                        id={id}
+                    />
+                    <label
+                        className="custom-file-label"
+                        for={id}
+                        data-file={label || 'Choose file'}
+                        data-browse={fileButton}
+                    />
+                </div>
             ),
         output: (
             <output
@@ -79,6 +95,7 @@ export function Field({
                     'form-control-plaintext',
                     className
                 )}
+                id={id}
             >
                 {defaultValue}
             </output>
@@ -92,6 +109,7 @@ export function Field({
                     typeof size === 'string' && `custom-select-${size}`,
                     className
                 )}
+                id={id}
             >
                 {defaultSlot}
             </select>
@@ -105,6 +123,7 @@ export function Field({
                     sizeClass,
                     className
                 )}
+                id={id}
             >
                 {defaultValue}
             </textarea>

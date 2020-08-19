@@ -97,10 +97,12 @@ export function InputGroup({
                     list={prepend as Label[]}
                 />
             )}
-            {defaultSlot[0] ? (
+            {defaultSlot[0] && rest.is !== 'select' ? (
                 defaultSlot
             ) : (
-                <Field {...rest} id={id} aria-describedby={`${id}-label-0`} />
+                <Field {...rest} id={id} aria-describedby={`${id}-label-0`}>
+                    {defaultSlot}
+                </Field>
             )}
             {append && (
                 <GroupLabel

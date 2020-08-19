@@ -65,8 +65,8 @@ npm install boot-cell bootstrap-icons \
 10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
 11. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
 12. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-13. [TabList](https://web-cell.dev/BootCell/interfaces/tablistprops.html)
-14. [StepTab](https://web-cell.dev/BootCell/interfaces/steptabprops.html)
+13. [TabPanel](https://web-cell.dev/BootCell/interfaces/tabpanelprops.html)
+14. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
 
 ### Reminder
 

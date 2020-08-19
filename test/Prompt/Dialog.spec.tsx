@@ -8,13 +8,13 @@ import { Button, CloseButton } from '../../source/Form/Button';
 
 describe('Modal Dialog', () => {
     it('should render a pair of <dialog /> & <form /> in <body />', () => {
-        openDialog(<Field name="test" />);
+        openDialog(<Field name="test" id="test" />);
 
         expect(document.body.lastElementChild.outerHTML).toBe(
             renderToStaticMarkup(
                 <dialog className={style.dialog}>
                     <form method="dialog">
-                        <Field name="test" />
+                        <Field name="test" id="test" />
                     </form>
                 </dialog>
             )
@@ -25,7 +25,7 @@ describe('Modal Dialog', () => {
         openModal({
             size: 'sm',
             title: 'Test',
-            body: <Field name="test" />,
+            body: <Field name="test" id="test" />,
             cancelText: 'Cancel'
         });
 
@@ -39,7 +39,7 @@ describe('Modal Dialog', () => {
                                 <CloseButton aria-label="Cancel" />
                             </header>
                             <div className="modal-body">
-                                <Field name="test" />
+                                <Field name="test" id="test" />
                             </div>
                             <footer className="modal-footer">
                                 <Button type="reset" kind="secondary">
