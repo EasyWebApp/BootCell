@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -36,6 +36,10 @@ export function ListItem({
             {defaultSlot}
         </a>
     );
+}
+
+export function isListItem(node: VNode) {
+    return node.data?.class?.['list-group-item'];
 }
 
 export interface ListGroupProps extends WebCellProps {

@@ -10,7 +10,7 @@ import { Button } from '../../source/Form/Button';
 const { renderButton, render } = DropMenu.prototype;
 
 function InlineDropMenu({
-    buttonKind,
+    buttonColor,
     buttonSize,
     open,
     href,
@@ -30,7 +30,7 @@ function InlineDropMenu({
                     renderButton: renderButton.bind({
                         UID,
                         props: {
-                            buttonKind,
+                            buttonColor,
                             buttonSize,
                             open,
                             href,

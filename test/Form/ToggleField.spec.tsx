@@ -27,16 +27,17 @@ describe('Toggle Fields', () => {
             <ToggleGroup
                 type="radio"
                 name="test"
-                list={[
-                    { title: 'A', value: 'a', checked: true },
-                    { title: 'B', value: 'b' }
+                value="A"
+                options={[
+                    { title: 'A' },
+                    { title: 'B', value: 'b', color: 'danger' }
                 ]}
             />,
             <div className="btn-group btn-group-toggle">
                 <label className="btn btn-primary active">
-                    <input type="radio" name="test" value="a" checked />A
+                    <input type="radio" name="test" value="A" checked />A
                 </label>
-                <label className="btn btn-primary">
+                <label className="btn btn-danger">
                     <input type="radio" name="test" value="b" />B
                 </label>
             </div>

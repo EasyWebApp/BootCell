@@ -1,13 +1,14 @@
 import {
     WebCellProps,
     WebCellElement,
+    VNode,
     component,
     mixin,
     watch,
     attribute,
+    on,
     createCell,
-    Fragment,
-    on
+    Fragment
 } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
@@ -53,9 +54,19 @@ export function DropMenuItem({
     );
 }
 
+export function isDropMenuItem(node: VNode) {
+    const {
+        ['dropdown-item']: link,
+        ['dropdown-item-text']: text,
+        ['dropdown-divider']: divider
+    } = node.data?.class || {};
+
+    return link || text || divider;
+}
+
 export interface DropMenuProps extends WebCellProps {
     caption: WebCellElement;
-    buttonKind?: ButtonProps['kind'];
+    buttonColor?: ButtonProps['color'];
     buttonSize?: ButtonProps['size'];
     alignType?: 'left' | 'right';
     alignSize?: '' | 'sm' | 'md' | 'lg' | 'xl';
@@ -70,6 +81,10 @@ export interface DropMenuProps extends WebCellProps {
     renderTarget: 'children'
 })
 export class DropMenu extends mixin<DropMenuProps>() {
+    static is({ sel }: VNode) {
+        return sel?.startsWith(this.tagName);
+    }
+
     UID = uniqueID();
 
     @attribute
@@ -78,7 +93,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
 
     @attribute
     @watch
-    buttonKind: ButtonProps['kind'];
+    buttonColor: ButtonProps['color'];
 
     @attribute
     @watch
@@ -155,12 +170,12 @@ export class DropMenu extends mixin<DropMenuProps>() {
     renderButton() {
         const {
             UID,
-            props: { buttonKind, buttonSize, open, href, caption, target }
+            props: { buttonColor, buttonSize, open, href, caption, target }
         } = this;
 
         const trigger = (
             <Button
-                kind={buttonKind}
+                color={buttonColor}
                 size={buttonSize}
                 className={classNames(
                     'dropdown-toggle',
@@ -182,7 +197,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
         return href ? (
             <Fragment>
                 <Button
-                    kind={buttonKind}
+                    color={buttonColor}
                     size={buttonSize}
                     target={target}
                     href={href}

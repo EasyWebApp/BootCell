@@ -1,25 +1,22 @@
-import { WebCellProps, VNode, createCell } from 'web-cell';
-import { looksLike } from '@tech_query/snabbdom-looks-like';
+import {
+    WebCellProps,
+    VNodeChildElement,
+    VNode,
+    WebCellElement,
+    createCell
+} from 'web-cell';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
+import { isButton } from './Button';
+import { DropMenu } from '../Navigator';
 import { FieldProps, Field } from './Field';
 import { ValidMessage, ValidableFieldProps } from './Form';
-
-type Label = string | VNode;
-
-function isButton(node: VNode) {
-    return (
-        looksLike(node, <button className="btn" />) ||
-        looksLike(node, <input className="btn" />) ||
-        looksLike(node, <a className="btn" />)
-    );
-}
 
 export interface GroupLabelProps extends WebCellProps {
     htmlFor?: string;
     type: 'prepend' | 'append';
-    list: Label[];
+    list: VNodeChildElement[];
 }
 
 export function GroupLabel({
@@ -33,13 +30,13 @@ export function GroupLabel({
             {list.map((item, index) => {
                 const ID = `${id}-${index}`;
 
-                if (isButton(item as VNode)) {
+                if (isButton(item as VNode) || DropMenu.is(item as VNode)) {
                     (item as VNode).data.props.id = ID;
 
                     return item;
                 }
 
-                return typeof item === 'string' ? (
+                return typeof item !== 'object' ? (
                     <label
                         className="input-group-text"
                         id={ID}
@@ -62,8 +59,8 @@ export interface InputGroupProps
         FieldProps,
         ValidableFieldProps {
     size?: 'sm' | 'lg';
-    prepend?: Label | Label[];
-    append?: Label | Label[];
+    prepend?: WebCellElement;
+    append?: WebCellElement;
 }
 
 export function InputGroup({
@@ -94,22 +91,28 @@ export function InputGroup({
                     type="prepend"
                     id={`${id}-label`}
                     htmlFor={id}
-                    list={prepend as Label[]}
+                    list={prepend as VNodeChildElement[]}
                 />
             )}
             {defaultSlot[0] && rest.is !== 'select' ? (
                 defaultSlot
             ) : (
-                <Field {...rest} id={id} aria-describedby={`${id}-label-0`}>
+                <Field
+                    {...rest}
+                    className={classNames(!append && 'rounded-right')}
+                    id={id}
+                    aria-describedby={`${id}-label-0`}
+                >
                     {defaultSlot}
                 </Field>
             )}
             {append && (
                 <GroupLabel
+                    className="rounded-right"
                     type="append"
                     id={`${id}-label`}
                     htmlFor={id}
-                    list={append as Label[]}
+                    list={append as VNodeChildElement[]}
                 />
             )}
             <ValidMessage {...{ validMode, validMessage, invalidMessage }} />

@@ -6,14 +6,14 @@ import { Status, Theme } from '../utility/constant';
 import { CloseButton } from '../Form/Button';
 
 export interface AlertProps extends WebCellProps {
-    type?: keyof typeof Status | keyof typeof Theme;
+    color?: keyof typeof Status | keyof typeof Theme;
     title?: string;
     closable?: boolean;
 }
 
 export function Alert({
     className,
-    type = 'primary',
+    color = 'primary',
     title,
     defaultSlot,
     closable
@@ -22,7 +22,7 @@ export function Alert({
         <aside
             className={classNames(
                 'alert',
-                `alert-${type}`,
+                `alert-${color}`,
                 closable && 'alert-dismissible fade',
                 'show',
                 className
@@ -38,8 +38,7 @@ export function Alert({
                     onClick={({ currentTarget }) =>
                         transitOut(
                             (currentTarget as HTMLElement).parentElement,
-                            'show',
-                            true
+                            'show'
                         )
                     }
                 />

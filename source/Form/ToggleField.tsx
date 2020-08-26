@@ -59,10 +59,17 @@ export function ToggleField({
     );
 }
 
+export interface ToggleOption {
+    title: string;
+    value?: string;
+    color?: ButtonProps['color'];
+}
+
 export interface ToggleGroupProps extends FormFieldProps {
     type: ToggleFieldProps['type'];
-    kind?: ButtonProps['kind'];
-    list: (BaseFieldProps & { checked?: boolean })[];
+    options: ToggleOption[];
+    value?: string;
+    color?: ButtonProps['color'];
 }
 
 function toggleActive(event: MouseEvent) {
@@ -76,31 +83,42 @@ function toggleActive(event: MouseEvent) {
 
 export function ToggleGroup({
     className,
-    list,
+    options,
+    value,
+    color = 'primary',
     type,
     name,
-    kind = 'primary'
+    defaultSlot,
+    ...rest
 }: ToggleGroupProps) {
     return (
-        <div className={classNames('btn-group', 'btn-group-toggle', className)}>
-            {list.map(({ checked, title, ...rest }) => (
-                <label
-                    className={classNames(
-                        'btn',
-                        `btn-${kind}`,
-                        checked && 'active'
-                    )}
-                >
-                    <input
-                        {...rest}
-                        type={type}
-                        name={name}
-                        checked={checked}
-                        onClick={toggleActive}
-                    />
-                    {title}
-                </label>
-            ))}
+        <div
+            className={classNames('btn-group', 'btn-group-toggle', className)}
+            {...rest}
+        >
+            {options.map(({ title, ...option }) => {
+                option.value = option.value || title;
+                const checked = option.value === value;
+
+                return (
+                    <label
+                        className={classNames(
+                            'btn',
+                            `btn-${option.color || color}`,
+                            checked && 'active'
+                        )}
+                    >
+                        <input
+                            type={type}
+                            name={name}
+                            value={option.value}
+                            checked={checked}
+                            onClick={toggleActive}
+                        />
+                        {title}
+                    </label>
+                );
+            })}
         </div>
     );
 }

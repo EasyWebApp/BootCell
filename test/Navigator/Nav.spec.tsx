@@ -2,7 +2,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Nav, NavLink } from '../../source/Navigator/Nav';
-import { DropMenu, DropMenuItem } from '../../source/Navigator/DropMenu';
+import { DropMenuItem, DropMenu } from '../../source/Navigator/DropMenu';
 
 describe('Nav', () => {
     it('should render Nav Links with different states', () => {
@@ -14,8 +14,8 @@ describe('Nav', () => {
                 <NavLink href="#example" disabled>
                     Example
                 </NavLink>
-                <NavLink list={[{ title: 'Sample', href: '#sample' }]}>
-                    Nested
+                <NavLink title="Nested">
+                    <DropMenuItem href="#sample">Sample</DropMenuItem>
                 </NavLink>
             </Nav>,
             <nav className="nav">

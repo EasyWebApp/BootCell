@@ -18,13 +18,13 @@ describe('Card', () => {
 
     it('should render Horizontal layout as "direction" set', () => {
         assertLooksLike(
-            <Card title="Test" image="test.png" direction="horizontal" />,
+            <Card title="Test" image="test.png" direction="row" />,
             <div className="card justify-content-center">
                 <div className="row no-gutters align-items-center">
-                    <div className="col-sm-4">
+                    <div className="col-md-4">
                         <img className="card-img-top" src="test.png" />
                     </div>
-                    <div className="col-sm-8">
+                    <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">Test</h5>
                         </div>

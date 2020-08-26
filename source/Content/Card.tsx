@@ -13,7 +13,7 @@ export interface CardProps extends WebCellProps {
     header?: VNodeChildElement;
     footer?: VNodeChildElement;
     overlay?: boolean;
-    direction?: 'horizontal' | 'vertical';
+    direction?: 'row' | 'column';
 }
 
 export function Card({
@@ -25,11 +25,11 @@ export function Card({
     header,
     footer,
     overlay,
-    direction = 'vertical',
+    direction = 'column',
     defaultSlot,
     ...rest
 }: CardProps) {
-    const vertical = direction === 'vertical',
+    const column = direction !== 'row',
         banner =
             typeof image !== 'string' ? (
                 image
@@ -57,11 +57,11 @@ export function Card({
             {...rest}
             className={classNames(
                 'card',
-                !vertical && 'justify-content-center',
+                !column && 'justify-content-center',
                 className
             )}
         >
-            {vertical ? (
+            {column ? (
                 <Fragment>
                     {header && <div className="card-header">{header}</div>}
                     {banner}
@@ -72,8 +72,8 @@ export function Card({
                 </Fragment>
             ) : (
                 <div className="row no-gutters align-items-center">
-                    <div className="col-sm-4">{banner}</div>
-                    <div className="col-sm-8">{body}</div>
+                    <div className="col-md-4">{banner}</div>
+                    <div className="col-md-8">{body}</div>
                 </div>
             )}
         </div>

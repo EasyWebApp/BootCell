@@ -94,10 +94,10 @@ documentReady.then(() =>
                                     event.preventDefault()
                                 }
                             >
-                                <Button type="reset" kind="danger">
+                                <Button type="reset" color="danger">
                                     Previous
                                 </Button>
-                                <Button type="submit" kind="success">
+                                <Button type="submit" color="success">
                                     Submit
                                 </Button>
                             </form>

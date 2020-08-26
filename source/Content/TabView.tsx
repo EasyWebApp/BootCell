@@ -10,17 +10,14 @@ import {
     Fragment
 } from 'web-cell';
 import classNames from 'classnames';
-import { looksLike } from '@tech_query/snabbdom-looks-like';
 import { uniqueID } from 'web-utility/source/data';
 import { transitOut, transitIn } from 'web-utility/source/animation';
 
-import { NavProps, Nav, NavLink } from '../Navigator/Nav';
-import { ListGroup, ListItem } from './ListGroup';
-import { Stepper, Step } from '../Navigator/Stepper';
+import { NavProps, isNavLink, Nav } from '../Navigator/Nav';
+import { isListItem, ListGroup } from './ListGroup';
+import { Stepper, isStep } from '../Navigator/Stepper';
 
-export interface TabPanelProps extends WebCellProps {}
-
-export function TabPanel({ className, defaultSlot, ...rest }: TabPanelProps) {
+export function TabPanel({ className, defaultSlot, ...rest }: WebCellProps) {
     return (
         <div
             {...rest}
@@ -48,8 +45,7 @@ const HeaderSelector = {
     list: '.list-group-item',
     step: '.bs-stepper-header .step'
 };
-const AllTabs = `.nav-item, ${HeaderSelector.list}, ${HeaderSelector.step}`,
-    AllHeaders = Object.values(HeaderSelector) + '';
+const AllHeaders = Object.values(HeaderSelector) + '';
 
 @component({
     tagName: 'tab-view',
@@ -57,12 +53,7 @@ const AllTabs = `.nav-item, ${HeaderSelector.list}, ${HeaderSelector.step}`,
 })
 export class TabView extends mixin<TabViewProps>() {
     static isHeader(node: VNode) {
-        return (
-            looksLike(node, <ListItem />) ||
-            looksLike(node, <Step />) ||
-            looksLike(node, <NavLink />) ||
-            looksLike(node, <NavLink list={[]} />)
-        );
+        return isNavLink(node) || isListItem(node) || isStep(node);
     }
 
     @attribute
@@ -102,9 +93,9 @@ export class TabView extends mixin<TabViewProps>() {
     get type() {
         const firstTab = this.defaultSlot[0] as VNode;
 
-        return looksLike(firstTab, <ListItem />)
+        return isListItem(firstTab)
             ? 'list'
-            : looksLike(firstTab, <Step />)
+            : isStep(firstTab)
             ? 'step'
             : 'nav';
     }
@@ -142,24 +133,18 @@ export class TabView extends mixin<TabViewProps>() {
         }
     }
 
-    switchTo(tab: HTMLElement) {
+    @on('click', AllHeaders)
+    handleClick(event: MouseEvent) {
+        event.preventDefault(), event.stopPropagation();
+    }
+
+    @on('focusin', AllHeaders)
+    handleFocus(event: FocusEvent, target: HTMLElement) {
+        event.preventDefault(), event.stopPropagation();
+
         this.activeIndex = [
-            ...tab.parentElement.querySelectorAll(AllTabs)
-        ].indexOf(tab);
-    }
-
-    @on('click', AllTabs)
-    handleClick(event: MouseEvent, target: HTMLElement) {
-        event.preventDefault(), event.stopPropagation();
-
-        if (!target.querySelector('button').disabled) this.switchTo(target);
-    }
-
-    @on('focusin', AllTabs)
-    handleFocus(event: MouseEvent, target: HTMLElement) {
-        event.preventDefault(), event.stopPropagation();
-
-        this.switchTo(target);
+            ...target.parentElement.querySelectorAll(AllHeaders)
+        ].indexOf(target);
     }
 
     @on('submit', '.bs-stepper .bs-stepper-pane form')
@@ -270,7 +255,6 @@ export class TabView extends mixin<TabViewProps>() {
                         itemWidth={tabWidth}
                         scrollable={tabScroll}
                         background={tabColor}
-                        role="tablist"
                         aria-orientation={orientation}
                     >
                         {heads}

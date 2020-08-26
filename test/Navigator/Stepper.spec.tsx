@@ -11,7 +11,7 @@ describe('Stepper', () => {
                 <Step icon={2} />
                 <Step icon={3} disabled />
             </Stepper>,
-            <nav className="bs-stepper-header" role="tablist">
+            <nav className="bs-stepper-header">
                 <div className="step active">
                     <button
                         type="button"
@@ -58,7 +58,7 @@ describe('Stepper', () => {
                     A
                 </Step>
             </Stepper>,
-            <nav className="bs-stepper-header" role="tablist">
+            <nav className="bs-stepper-header">
                 <div className="step active">
                     <button
                         type="button"

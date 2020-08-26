@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -8,7 +8,7 @@ import { IconProps, Icon } from '../Reminder/Icon';
 export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
     disabled?: boolean;
-    kind?: keyof typeof Status | keyof typeof Theme | 'link';
+    color?: keyof typeof Status | keyof typeof Theme | 'link';
     outline?: boolean;
     size?: 'sm' | 'lg';
     block?: boolean;
@@ -21,14 +21,14 @@ export function Button({
     href,
     target,
     tabIndex,
-    kind = 'primary',
+    color = 'primary',
     outline,
     size,
     block,
     defaultSlot,
     ...rest
 }: ButtonProps) {
-    const Class = `btn${outline ? '-outline' : ''}-${kind}`;
+    const Class = `btn${outline ? '-outline' : ''}-${color}`;
 
     return href ? (
         <a
@@ -68,6 +68,12 @@ export function Button({
     );
 }
 
+export function isButton(node: VNode) {
+    const { sel, data } = node;
+
+    return /^(a|input|button)/.test(sel) && data?.class?.btn;
+}
+
 export type IconButtonProps = IconProps & ButtonProps;
 
 export function IconButton({
@@ -76,7 +82,7 @@ export function IconButton({
     disabled,
     href,
     target,
-    kind,
+    color,
     outline,
     size,
     block,
@@ -86,17 +92,15 @@ export function IconButton({
     return (
         <Button
             className={classNames('p-1', className)}
-            {...{
-                type,
-                disabled,
-                href,
-                target,
-                kind,
-                outline,
-                size,
-                block,
-                onClick
-            }}
+            type={type}
+            disabled={disabled}
+            href={href}
+            target={target}
+            color={color}
+            outline={outline}
+            size={size}
+            block={block}
+            onClick={onClick}
         >
             <Icon {...icon} />
         </Button>

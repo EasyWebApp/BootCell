@@ -46,7 +46,6 @@ describe('Tab List', () => {
             <div>
                 <nav
                     className="nav nav-tabs flex-row justify-content-start"
-                    role="tablist"
                     aria-orientation="horizontal"
                 >
                     <a
@@ -83,7 +82,6 @@ describe('Tab List', () => {
             <div>
                 <nav
                     className="nav nav-pills nav-fill flex-row justify-content-start"
-                    role="tablist"
                     aria-orientation="horizontal"
                 >
                     <a
@@ -112,7 +110,6 @@ describe('Tab List', () => {
             <div>
                 <nav
                     className="nav nav-masthead nav-justified flex-row justify-content-start"
-                    role="tablist"
                     aria-orientation="horizontal"
                 >
                     <a
@@ -189,10 +186,10 @@ describe('Tab List', () => {
                 <Step icon={2}>Second</Step>
                 <TabPanel>
                     <form className="d-flex justify-content-around">
-                        <Button type="reset" kind="danger">
+                        <Button type="reset" color="danger">
                             Previous
                         </Button>
-                        <Button type="submit" kind="success">
+                        <Button type="submit" color="success">
                             Submit
                         </Button>
                     </form>
@@ -201,7 +198,6 @@ describe('Tab List', () => {
             <div>
                 <nav
                     className="bs-stepper-header"
-                    role="tablist"
                     aria-orientation="horizontal"
                 >
                     <div className="step">
@@ -236,10 +232,10 @@ describe('Tab List', () => {
                     </div>
                     <div className="bs-stepper-pane" role="tabpanel">
                         <form className="d-flex justify-content-around">
-                            <Button type="reset" kind="danger">
+                            <Button type="reset" color="danger">
                                 Previous
                             </Button>
-                            <Button type="submit" kind="success">
+                            <Button type="submit" color="success">
                                 Submit
                             </Button>
                         </form>

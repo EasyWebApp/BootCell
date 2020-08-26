@@ -12,10 +12,9 @@ import {
 } from 'web-cell';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
-import { looksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Size, Theme, BackgroundColors } from '../utility/constant';
-import { NavProps, Nav, NavLink } from './Nav';
+import { NavProps, isNavLink, Nav } from './Nav';
 import '../Content/Collapse';
 import './NavBar.less';
 
@@ -45,7 +44,7 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    expand = 'md';
+    expand: NavBarProps['expand'];
 
     @attribute
     @watch
@@ -131,9 +130,12 @@ export class NavBar extends mixin<NavBarProps>() {
             `navbar-${theme}`,
             `bg-${background}`,
             'shadow',
-            `navbar-expand${expand === 'xs' ? '' : '-' + expand}`,
             fixed === 'top' ? 'sticky-top' : 'fixed-bottom'
         );
+        if (expand)
+            this.classList.add(
+                `navbar-expand${expand === 'xs' ? '' : '-' + expand}`
+            );
 
         this.classList.toggle(
             'flex-row-reverse',
@@ -167,37 +169,33 @@ export class NavBar extends mixin<NavBarProps>() {
         offcanvas
     }: NavBarProps) {
         const [links, extra] = (defaultSlot as VNode[]).reduce(
-            ([links, extra], node) => {
-                if (
-                    looksLike(node, <NavLink />) ||
-                    looksLike(node, <NavLink list={[]} />)
-                )
-                    links.push(node);
-                else extra.push(node);
+                ([links, extra], node) => {
+                    if (isNavLink(node)) links.push(node);
+                    else extra.push(node);
 
-                return [links, extra];
-            },
-            [[], []]
+                    return [links, extra];
+                },
+                [[], []]
+            ),
+            flexClass = `d${
+                !expand || expand === 'xs' ? '' : '-' + expand
+            }-flex`,
+            { UID } = this;
+
+        const content = (
+            <Fragment>
+                <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
+                    {links}
+                </Nav>
+                {extra[0] && (
+                    <div
+                        className={classNames(flexClass, 'justify-content-end')}
+                    >
+                        {extra}
+                    </div>
+                )}
+            </Fragment>
         );
-
-        const { UID } = this,
-            content = (
-                <Fragment>
-                    <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
-                        {links}
-                    </Nav>
-                    {extra[0] && (
-                        <div
-                            className={classNames(
-                                `d${expand === 'xs' ? '' : '-' + expand}-flex`,
-                                'justify-content-end'
-                            )}
-                        >
-                            {extra}
-                        </div>
-                    )}
-                </Fragment>
-            );
 
         return (
             <Fragment>
@@ -231,7 +229,7 @@ export class NavBar extends mixin<NavBarProps>() {
                 ) : (
                     <div
                         className={classNames(
-                            `d-${expand}-flex`,
+                            flexClass,
                             'w-100',
                             'offcanvas-collapse',
                             open && 'open'

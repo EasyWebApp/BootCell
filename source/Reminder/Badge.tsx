@@ -5,12 +5,12 @@ import classNames from 'classnames';
 import { Status, Theme } from '../utility/constant';
 
 interface BadgeProps extends HTMLHyperLinkProps, WebCellProps {
-    kind?: keyof typeof Status | keyof typeof Theme;
+    color?: keyof typeof Status | keyof typeof Theme;
     pill?: boolean;
 }
 
 export function Badge({
-    kind = 'secondary',
+    color = 'secondary',
     pill,
     className,
     href,
@@ -19,7 +19,7 @@ export function Badge({
 }: BadgeProps) {
     const Class = classNames(
         'badge',
-        `badge-${kind}`,
+        `badge-${color}`,
         pill && 'badge-pill',
         className
     );

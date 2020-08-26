@@ -1,8 +1,8 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { DropMenuItemProps, DropMenu, DropMenuItem } from './DropMenu';
+import { isDropMenuItem, DropMenu } from './DropMenu';
 import { JustityType, BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
@@ -10,47 +10,47 @@ export interface NavLinkProps extends WebCellProps, HTMLHyperLinkProps {
     href?: string | URL;
     disabled?: boolean;
     active?: boolean;
-    list?: DropMenuItemProps[];
 }
 
 export function NavLink({
-    list,
-    tabIndex,
+    defaultSlot,
     disabled,
     active,
     className,
-    defaultSlot,
+    tabIndex,
+    title,
     ...rest
 }: NavLinkProps) {
+    const isMenu = isDropMenuItem(defaultSlot[0]);
+
     rest = {
         ...rest,
         className: classNames(
             'nav-item',
             'nav-link',
             'text-nowrap',
-            list && 'p-0',
+            isMenu && 'p-0',
             disabled ? 'disabled' : active && 'active',
             className
         ),
         tabIndex: disabled ? -1 : tabIndex,
-        'aria-disabled': Boolean(disabled) + ''
+        'aria-disabled': !!disabled + ''
     };
 
-    return list ? (
-        <DropMenu
-            {...rest}
-            caption={defaultSlot[1] ? defaultSlot : defaultSlot[0]}
-        >
-            {list.map(({ title, ...props }) => (
-                <DropMenuItem {...props}>{title}</DropMenuItem>
-            ))}
+    return isMenu ? (
+        <DropMenu {...rest} caption={title}>
+            {defaultSlot}
         </DropMenu>
     ) : (
-        <a {...rest}>
+        <a {...rest} title={title}>
             {defaultSlot}
             {!active ? null : <span className="sr-only">(current)</span>}
         </a>
     );
+}
+
+export function isNavLink(node: VNode) {
+    return node.data?.class?.['nav-link'];
 }
 
 export interface NavProps extends WebCellProps {

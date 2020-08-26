@@ -38,15 +38,15 @@ export function Step({
     );
 }
 
+export function isStep(node: VNode) {
+    return node.data?.class?.['step'];
+}
+
 export interface StepperProps extends WebCellProps {}
 
 export function Stepper({ className, defaultSlot, ...rest }: StepperProps) {
     return (
-        <nav
-            {...rest}
-            className={classNames('bs-stepper-header', className)}
-            role="tablist"
-        >
+        <nav {...rest} className={classNames('bs-stepper-header', className)}>
             {(defaultSlot as VNode[]).map((node, index) => (
                 <Fragment>
                     {index ? <div className="line" /> : null}
