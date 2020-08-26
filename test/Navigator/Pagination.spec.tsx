@@ -8,8 +8,8 @@ const { render } = Pagination.prototype;
 describe('Pagination', () => {
     it('should render 1 Page Button & 2 disabled Direction Buttons defaultly', () => {
         assertLooksLike(
-            render({ current: 1, total: 1 }),
-            <ul className="pagination justify-content-center user-select-none">
+            render({ current: 1, total: 1, align: 'start' }),
+            <ul className="pagination justify-content-start user-select-none">
                 <li className="page-item disabled">
                     <a className="page-link" aria-disabled="true">
                         &lt;
@@ -31,7 +31,7 @@ describe('Pagination', () => {
 
     it('should render 3 Page Buttons & 2 Direction Buttons', () => {
         assertLooksLike(
-            render({ current: 2, total: 3 }),
+            render({ current: 2, total: 3, align: 'center' }),
             <ul className="pagination justify-content-center user-select-none">
                 <li className="page-item">
                     <a className="page-link" aria-disabled="false">
@@ -64,8 +64,8 @@ describe('Pagination', () => {
 
     it('should render 3 Page Buttons & 2 Direction Buttons & 2 Ellipsis Buttons', () => {
         assertLooksLike(
-            render({ current: 3, total: 5 }),
-            <ul className="pagination justify-content-center user-select-none">
+            render({ current: 3, total: 5, align: 'end' }),
+            <ul className="pagination justify-content-end user-select-none">
                 <li className="page-item">
                     <a className="page-link" aria-disabled="false">
                         &lt;

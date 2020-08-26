@@ -1,6 +1,6 @@
 import { createCell, renderToStaticMarkup } from 'web-cell';
 
-import { openDialog, openModal } from '../../source/Prompt/Dialog';
+import { openDialog, Modal } from '../../source/Prompt/Dialog';
 import style from '../../source/Prompt/Dialog.less';
 
 import { Field } from '../../source/Form/Field';
@@ -13,7 +13,7 @@ describe('Modal Dialog', () => {
         expect(document.body.lastElementChild.outerHTML).toBe(
             renderToStaticMarkup(
                 <dialog className={style.dialog}>
-                    <form method="dialog">
+                    <form method="dialog" className="h-100">
                         <Field name="test" id="test" />
                     </form>
                 </dialog>
@@ -22,33 +22,34 @@ describe('Modal Dialog', () => {
     });
 
     it('should render a Modal Dialog form', () => {
-        openModal({
-            size: 'sm',
-            title: 'Test',
-            body: <Field name="test" id="test" />,
-            cancelText: 'Cancel'
-        });
+        openDialog(
+            <Modal size="sm" title="Test" cancelText="Cancel">
+                <Field name="test" id="test" />
+            </Modal>
+        );
 
         expect(document.body.lastElementChild.outerHTML).toBe(
             renderToStaticMarkup(
                 <dialog className={style.dialog}>
-                    <form method="dialog" className="modal-dialog modal-sm">
-                        <div className="modal-content">
-                            <header className="modal-header">
-                                <h5 className="modal-title">Test</h5>
-                                <CloseButton aria-label="Cancel" />
-                            </header>
-                            <div className="modal-body">
-                                <Field name="test" id="test" />
+                    <form method="dialog" className="h-100">
+                        <div className="modal-dialog modal-sm">
+                            <div className="modal-content">
+                                <header className="modal-header">
+                                    <h5 className="modal-title">Test</h5>
+                                    <CloseButton aria-label="Cancel" />
+                                </header>
+                                <div className="modal-body">
+                                    <Field name="test" id="test" />
+                                </div>
+                                <footer className="modal-footer">
+                                    <Button type="reset" color="secondary">
+                                        Cancel
+                                    </Button>
+                                    <Button type="submit" color="primary">
+                                        Confirm
+                                    </Button>
+                                </footer>
                             </div>
-                            <footer className="modal-footer">
-                                <Button type="reset" kind="secondary">
-                                    Cancel
-                                </Button>
-                                <Button type="submit" kind="primary">
-                                    Confirm
-                                </Button>
-                            </footer>
                         </div>
                     </form>
                 </dialog>

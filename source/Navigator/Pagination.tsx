@@ -9,10 +9,13 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
+import { JustityType } from '../utility/constant';
+
 export interface PaginationProps extends WebCellProps {
     current?: number;
     total?: number;
     size?: 'sm' | 'lg';
+    align?: keyof typeof JustityType;
     onChange?: (event: CustomEvent<number>) => any;
 }
 
@@ -32,6 +35,10 @@ export class Pagination extends mixin<PaginationProps>() {
     @attribute
     @watch
     size: PaginationProps['size'];
+
+    @attribute
+    @watch
+    align = 'center';
 
     @on('click', '.page-link')
     onClick(event: MouseEvent) {
@@ -53,7 +60,7 @@ export class Pagination extends mixin<PaginationProps>() {
         this.emit('change', this.current, { bubbles: true, composed: true });
     }
 
-    render({ current, total, size }: PaginationProps) {
+    render({ current, total, size, align }: PaginationProps) {
         const list = Array.from(Array(total), (_, index) => {
             ++index;
 
@@ -68,8 +75,8 @@ export class Pagination extends mixin<PaginationProps>() {
             <ul
                 className={classNames(
                     'pagination',
-                    size && 'pagination-' + size,
-                    'justify-content-center',
+                    size && `pagination-${size}`,
+                    `justify-content-${align}`,
                     'user-select-none'
                 )}
             >

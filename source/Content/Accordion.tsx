@@ -1,92 +1,80 @@
-import {
-    VNodeChildElement,
-    WebCellProps,
-    component,
-    mixin,
-    watch,
-    on,
-    createCell,
-    Fragment
-} from 'web-cell';
+import { WebCellProps, createCell, delegate } from 'web-cell';
 import { uniqueID } from 'web-utility/source/data';
+import classNames from 'classnames';
 
 import { Button } from '../Form/Button';
 import './Collapse';
+import { CollapseBox } from './Collapse';
 
-interface AccordionItem {
-    title: VNodeChildElement;
-    content: VNodeChildElement[];
+export interface AccordionPanelProps extends WebCellProps {
     active?: boolean;
 }
 
-export interface AccordionProps extends WebCellProps {
-    list: AccordionItem[];
+export function AccordionPanel({
+    id = uniqueID(),
+    active,
+    title,
+    defaultSlot
+}: AccordionPanelProps) {
+    const hID = `accordion_h_${id}`,
+        bID = `accordion_b_${id}`;
+
+    return (
+        <section className="card">
+            <header className="card-header" id={hID}>
+                <h2 className="mb-0">
+                    <Button
+                        color="link"
+                        className={active ? '' : 'collapsed'}
+                        aria-expanded={!!active + ''}
+                        aria-controls={bID}
+                    >
+                        {title}
+                    </Button>
+                </h2>
+            </header>
+            <collapse-box
+                id={bID}
+                aria-labelledby={hID}
+                key={bID}
+                open={active}
+            >
+                <div className="card-body">{defaultSlot}</div>
+            </collapse-box>
+        </section>
+    );
 }
 
-@component({
-    tagName: 'accordion-list',
-    renderTarget: 'children'
-})
-export class AccordionList extends mixin<AccordionProps>() {
-    UID = uniqueID();
+export interface AccordionProps extends WebCellProps {}
 
-    @watch
-    list: AccordionItem[] = [];
+const AllHeaders = '.card-header .btn';
 
-    @on('click', '.card-header .btn-link')
-    toggle(event: MouseEvent) {
-        const {
-            dataset: { index }
-        } = event.target as HTMLElement;
+function switchAccordion(
+    { currentTarget }: FocusEvent,
+    target: HTMLButtonElement
+) {
+    for (const header of (currentTarget as HTMLDivElement).querySelectorAll(
+        AllHeaders
+    )) {
+        const active = header === target;
 
-        this.list = this.list.map((item, i) => ({
-            ...item,
-            active: i === +index
-        }));
+        if (active) header.classList.remove('collapsed');
+        else header.classList.add('collapsed');
+
+        header.setAttribute('aria-expanded', active + '');
+        (header.closest('.card-header')
+            .nextElementSibling as CollapseBox).open = active;
     }
+}
 
-    connectedCallback() {
-        this.classList.add('accordion');
-
-        super.connectedCallback();
-    }
-
-    render({ list }: AccordionProps) {
-        const { UID } = this;
-
-        return (
-            <Fragment>
-                {list.map(({ title, content, active }, index) => {
-                    const hID = `${UID}_h_${index}`,
-                        bID = `${UID}_b_${index}`;
-
-                    return (
-                        <section className="card">
-                            <header className="card-header" id={hID}>
-                                <h2 className="mb-0">
-                                    <Button
-                                        kind="link"
-                                        className={active ? '' : 'collapsed'}
-                                        data-index={index + ''}
-                                        aria-expanded={Boolean(active) + ''}
-                                        aria-controls={bID}
-                                    >
-                                        {title}
-                                    </Button>
-                                </h2>
-                            </header>
-                            <collapse-box
-                                id={bID}
-                                aria-labelledby={hID}
-                                key={bID}
-                                open={active}
-                            >
-                                <div className="card-body">{content}</div>
-                            </collapse-box>
-                        </section>
-                    );
-                })}
-            </Fragment>
-        );
-    }
+export function Accordion({ className, defaultSlot, ...rest }: AccordionProps) {
+    return (
+        <div
+            className={classNames('accordion', className)}
+            onFocusIn={delegate(AllHeaders, switchAccordion)}
+            {...rest}
+        >
+            {defaultSlot}
+        </div>
+    );
 }

@@ -1,7 +1,7 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { Image, Figure } from '../../source/Media/Image';
+import { Image } from '../../source/Media/Image';
 
 describe('Image components', () => {
     it('should render a thumbnail Image', () => {
@@ -32,7 +32,7 @@ describe('Image components', () => {
 
     it('should render an Image in a figure box', () => {
         assertLooksLike(
-            <Figure className="test" title="Test" alt="Test" src="test.png" />,
+            <Image className="test" caption="Test" alt="Test" src="test.png" />,
             <figure className="figure test">
                 <img
                     className="img-fluid figure-img"

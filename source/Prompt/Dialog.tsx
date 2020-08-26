@@ -1,15 +1,13 @@
-import { VNodeChildElement, render, createCell, WebCellProps } from 'web-cell';
+import { WebCellElement, WebCellProps, render, createCell } from 'web-cell';
 import { formToJSON } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
 import { Button, CloseButton } from '../Form/Button';
 import style from './Dialog.less';
 
-export async function openDialog(
-    content: VNodeChildElement,
-    boxClass?: string
-) {
-    const dialog = document.body.appendChild(document.createElement('dialog'));
+export async function openDialog(content: WebCellElement) {
+    const { body } = document;
+    const dialog = body.appendChild(document.createElement('dialog'));
 
     dialog.className = style.dialog;
 
@@ -20,11 +18,7 @@ export async function openDialog(
     });
 
     render(
-        <form
-            method="dialog"
-            className={boxClass}
-            onReset={() => dialog.close()}
-        >
+        <form method="dialog" className="h-100" onReset={() => dialog.close()}>
             {content}
         </form>,
         dialog
@@ -32,63 +26,75 @@ export async function openDialog(
 
     dialog.showModal(), dialog.scrollIntoView({ behavior: 'smooth' });
 
-    document.body.style.overflow = 'hidden';
+    const { overflow } = body.style;
+    body.style.overflow = 'hidden';
 
     result.finally(() => {
         dialog.remove();
-
-        document.body.style.overflow = 'auto';
+        body.style.overflow = overflow;
     });
 
     return result;
 }
 
 export interface ModalProps extends WebCellProps {
-    body: VNodeChildElement;
-    cancelText?: VNodeChildElement;
-    confirmText?: VNodeChildElement;
+    cancelText?: WebCellElement;
+    confirmText?: WebCellElement;
     scrollable?: boolean;
     centered?: boolean;
     size?: 'sm' | 'lg' | 'xl';
 }
 
-export function openModal({
-    title,
-    body,
-    cancelText = 'Close',
-    confirmText = 'Confirm',
+export function Modal({
     scrollable,
     centered,
     size,
     className,
+    title,
+    cancelText = 'Close',
+    confirmText = 'Confirm',
+    defaultSlot,
     ...rest
 }: ModalProps) {
-    return openDialog(
-        <div className="modal-content" {...rest}>
-            <header className="modal-header">
-                <h5 className="modal-title">{title}</h5>
-                <CloseButton
-                    aria-label={
-                        typeof cancelText === 'string' ? cancelText : 'Close'
-                    }
-                />
-            </header>
-            <div className="modal-body">{body}</div>
-            <footer className="modal-footer">
-                <Button type="reset" kind="secondary">
-                    {cancelText}
-                </Button>
-                <Button type="submit" kind="primary">
-                    {confirmText}
-                </Button>
-            </footer>
-        </div>,
-        classNames(
-            'modal-dialog',
-            scrollable && 'modal-dialog-scrollable',
-            centered && 'modal-dialog-centered',
-            size && `modal-${size}`,
-            className
-        )
+    return (
+        <div
+            className={classNames(
+                'modal-dialog',
+                scrollable && 'modal-dialog-scrollable',
+                centered && 'modal-dialog-centered',
+                size && `modal-${size}`,
+                className
+            )}
+            {...rest}
+        >
+            <div className="modal-content">
+                <header className="modal-header">
+                    <h5 className="modal-title">{title}</h5>
+                    <CloseButton
+                        aria-label={
+                            typeof cancelText === 'string'
+                                ? cancelText
+                                : 'Close'
+                        }
+                    />
+                </header>
+                <div className="modal-body">{defaultSlot}</div>
+
+                {(cancelText || confirmText) && (
+                    <footer className="modal-footer">
+                        {cancelText && (
+                            <Button type="reset" color="secondary">
+                                {cancelText}
+                            </Button>
+                        )}
+                        {confirmText && (
+                            <Button type="submit" color="primary">
+                                {confirmText}
+                            </Button>
+                        )}
+                    </footer>
+                )}
+            </div>
+        </div>
     );
 }

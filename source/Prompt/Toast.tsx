@@ -57,7 +57,7 @@ export class ToastBox extends mixin<ToastProps>() {
         if (this.timer) self.clearTimeout(this.timer);
     }
 
-    close = () => transitOut(this, 'show', true);
+    close = () => transitOut(this, 'show');
 
     render({ icon, title, time, defaultSlot }: ToastProps) {
         return (

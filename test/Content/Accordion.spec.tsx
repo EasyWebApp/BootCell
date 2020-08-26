@@ -1,66 +1,59 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { AccordionList } from '../../source/Content/Accordion';
-
-const { render } = AccordionList.prototype;
+import { Accordion, AccordionPanel } from '../../source/Content/Accordion';
 
 describe('Accordion', () => {
     it('should render Card list', () => {
         assertLooksLike(
-            <div>
-                {render.call(
-                    { UID: 'random' },
-                    {
-                        list: [
-                            { title: 'Test', content: 'test', active: true },
-                            { title: 'Example', content: 'example' }
-                        ]
-                    }
-                )}
-            </div>,
-            <div>
+            <Accordion>
+                <AccordionPanel id="random_0" title="Test" active>
+                    test
+                </AccordionPanel>
+                <AccordionPanel id="random_1" title="Example">
+                    example
+                </AccordionPanel>
+            </Accordion>,
+            <div className="accordion">
                 <section className="card">
-                    <header className="card-header" id="random_h_0">
+                    <header className="card-header" id="accordion_h_random_0">
                         <h2 className="mb-0">
                             <button
                                 type="button"
                                 className="btn btn-link"
-                                data-index="0"
                                 aria-expanded="true"
-                                aria-controls="random_b_0"
+                                aria-controls="accordion_b_random_0"
                             >
                                 Test
                             </button>
                         </h2>
                     </header>
                     <collapse-box
-                        id="random_b_0"
-                        key="random_b_0"
-                        aria-labelledby="random_h_0"
+                        id="accordion_b_random_0"
+                        key="accordion_b_random_0"
+                        aria-labelledby="accordion_h_random_0"
                         open
                     >
                         <div className="card-body">test</div>
                     </collapse-box>
                 </section>
                 <section className="card">
-                    <header className="card-header" id="random_h_1">
+                    <header className="card-header" id="accordion_h_random_1">
                         <h2 className="mb-0">
                             <button
                                 type="button"
                                 className="btn btn-link collapsed"
-                                data-index="1"
                                 aria-expanded="false"
-                                aria-controls="random_b_1"
+                                aria-controls="accordion_b_random_1"
                             >
                                 Example
                             </button>
                         </h2>
                     </header>
                     <collapse-box
-                        id="random_b_1"
-                        key="random_b_1"
-                        aria-labelledby="random_h_1"
+                        id="accordion_b_random_1"
+                        key="accordion_b_random_1"
+                        aria-labelledby="accordion_h_random_1"
                     >
                         <div className="card-body">example</div>
                     </collapse-box>

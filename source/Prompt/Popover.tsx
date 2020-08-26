@@ -74,8 +74,7 @@ export class PopoverBox extends mixin<PopoverProps>() {
     };
 
     connectedCallback() {
-        this.style.display = 'inline-block';
-        this.style.position = 'relative';
+        this.classList.add('d-inline-block', 'position-relative');
 
         self.addEventListener('click', this.toggleByClick);
 

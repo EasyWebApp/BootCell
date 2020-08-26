@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, WebCellElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 
 import './Image.less';
@@ -7,6 +7,7 @@ export interface ImageProps extends WebCellProps {
     src: string | URL;
     alt?: string;
     background?: boolean;
+    caption?: WebCellElement;
     fluid?: boolean;
     thumbnail?: boolean;
 }
@@ -14,6 +15,7 @@ export interface ImageProps extends WebCellProps {
 export function Image({
     className,
     background,
+    caption,
     src,
     style,
     defaultSlot,
@@ -21,9 +23,12 @@ export function Image({
     thumbnail,
     ...rest
 }: ImageProps) {
-    return background ? (
+    const image = background ? (
         <div
-            className={classNames('back-image', className)}
+            className={classNames(
+                'back-image',
+                caption ? 'figure-img' : className
+            )}
             style={{ backgroundImage: `url(${src})`, ...style }}
             {...rest}
         >
@@ -32,9 +37,9 @@ export function Image({
     ) : (
         <img
             className={classNames(
-                fluid && 'img-fluid',
+                (fluid || caption) && 'img-fluid',
                 thumbnail && 'img-thumbnail',
-                className
+                caption ? 'figure-img' : className
             )}
             style={style}
             src={src}
@@ -43,21 +48,15 @@ export function Image({
             {...rest}
         />
     );
-}
 
-export function Figure({
-    className,
-    title,
-    defaultSlot,
-    ...props
-}: ImageProps & WebCellProps) {
-    return (
+    return caption ? (
         <figure className={classNames('figure', className)}>
-            <Image className="figure-img" fluid {...props} />
-
+            {image}
             <figcaption className="figure-caption text-center">
-                {title}
+                {caption}
             </figcaption>
         </figure>
+    ) : (
+        image
     );
 }

@@ -14,7 +14,7 @@
 
 ```shell
 npm install boot-cell bootstrap-icons \
-    @tech_query/snabbdom-looks-like iterable-observer \
+    iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
     @nuintun/qrcode
 ```
@@ -24,7 +24,7 @@ npm install boot-cell bootstrap-icons \
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.2/dist/dialog-polyfill.css"
+    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.3/dist/dialog-polyfill.css"
 />
 <link
     rel="stylesheet"
@@ -61,11 +61,11 @@ npm install boot-cell bootstrap-icons \
 6. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
 7. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
 8. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-9. [Figure](https://web-cell.dev/BootCell/globals.html#figure)
-10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-11. [AccordionList](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+9. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+10. [AccordionPanel](https://web-cell.dev/BootCell/interfaces/accordionpanelprops.html)
+11. [Accordion](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
 12. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-13. [TabPanel](https://web-cell.dev/BootCell/interfaces/tabpanelprops.html)
+13. [TabPanel](https://web-cell.dev/BootCell/globals.html#tabpanel)
 14. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
 
 ### Reminder
@@ -95,8 +95,7 @@ npm install boot-cell bootstrap-icons \
 7. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
 8. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
 9. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-10. [HeaderList](https://web-cell.dev/BootCell/interfaces/headerlistprops.html)
-11. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+10. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 
@@ -106,8 +105,8 @@ npm install boot-cell bootstrap-icons \
 4. [PopoverBox](https://web-cell.dev/BootCell/interfaces/popoverprops.html)
 5. [AlertBox](https://web-cell.dev/BootCell/interfaces/alertprops.html)
 6. [ToastBox](https://web-cell.dev/BootCell/interfaces/toastprops.html)
-7. [`openDialog()`](https://web-cell.dev/BootCell/globals.html#opendialog)
-8. [`openModal()`](https://web-cell.dev/BootCell/globals.html#openmodal)
+7. [Modal](https://web-cell.dev/BootCell/interfaces/modalprops.html)
+8. [`openDialog()`](https://web-cell.dev/BootCell/globals.html#opendialog)
 
 ### Form
 
