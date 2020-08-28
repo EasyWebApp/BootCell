@@ -20,7 +20,7 @@ import './NavBar.less';
 
 export interface NavBarProps extends WebCellProps {
     narrow?: boolean;
-    expand?: keyof typeof Size;
+    expand?: false | keyof typeof Size;
     fixed?: 'top' | 'bottom';
     direction?: 'left' | 'right';
     offcanvas?: boolean;
@@ -44,7 +44,7 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    expand: NavBarProps['expand'];
+    expand = 'md';
 
     @attribute
     @watch
@@ -79,7 +79,9 @@ export class NavBar extends mixin<NavBarProps>() {
     open = false;
 
     get expanded() {
-        return Size[this.expand] <= self.innerWidth;
+        const { expand } = this;
+
+        return expand && Size[expand] <= self.innerWidth;
     }
 
     outClose = ({ target }: MouseEvent) => {

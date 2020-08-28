@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4, BootStrap Icon v1 & FontAwesome v5",
@@ -25,7 +25,7 @@
     "module": "dist/index.js",
     "dependencies": {
         "classnames": "^2.2.6",
-        "web-cell": "^2.1.4",
+        "web-cell": "^2.2.0",
         "web-utility": "^1.8.0"
     },
     "peerDependencies": {

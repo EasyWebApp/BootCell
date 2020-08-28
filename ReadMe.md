@@ -6,9 +6,11 @@
 
 [![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][6]
 [![Build Status](https://travis-ci.com/EasyWebApp/BootCell.svg?branch=master)][7]
-[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][8]
 
-[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][9]
+[![Anti 996 license](https://img.shields.io/badge/license-Anti%20996-blue.svg)][8]
+[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][9]
+
+[![NPM](https://nodei.co/npm/boot-cell.png?downloads=true&downloadRank=true&stars=true)][10]
 
 ## Usage
 
@@ -163,5 +165,6 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [5]: https://fontawesome.com/
 [6]: https://david-dm.org/EasyWebApp/BootCell
 [7]: https://travis-ci.com/EasyWebApp/BootCell
-[8]: https://github.com/jaywcjlove/awesome-uikit
-[9]: https://nodei.co/npm/boot-cell/
+[8]: https://github.com/996icu/996.ICU/blob/master/LICENSE
+[9]: https://github.com/jaywcjlove/awesome-uikit
+[10]: https://nodei.co/npm/boot-cell/
