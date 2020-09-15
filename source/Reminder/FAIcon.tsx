@@ -1,14 +1,14 @@
 import { WebCellProps, createCell } from 'web-cell';
 import classNames from 'classnames';
 
-import { Status, Theme, Color } from '../utility/constant';
+import { TextColors } from '../utility/constant';
 
 export interface FAIconProps extends WebCellProps {
     group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
     name: string;
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     fixedWidth?: boolean;
-    color?: keyof typeof Status | keyof typeof Theme | keyof typeof Color;
+    color?: TextColors;
     inverse?: boolean;
     border?: boolean;
     rotate?: 90 | 180 | 270;

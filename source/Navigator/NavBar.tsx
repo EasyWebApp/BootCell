@@ -191,7 +191,11 @@ export class NavBar extends mixin<NavBarProps>() {
                 </Nav>
                 {extra[0] && (
                     <div
-                        className={classNames(flexClass, 'justify-content-end')}
+                        className={classNames(
+                            flexClass,
+                            'justify-content-end',
+                            'align-items-center'
+                        )}
                     >
                         {extra}
                     </div>

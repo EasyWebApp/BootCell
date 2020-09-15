@@ -9,7 +9,7 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { isButton } from './Button';
-import { DropMenu } from '../Navigator';
+import { DropMenu } from '../Navigator/DropMenu';
 import { FieldProps, Field } from './Field';
 import { ValidMessage, ValidableFieldProps } from './Form';
 
@@ -65,6 +65,7 @@ export interface InputGroupProps
 
 export function InputGroup({
     className,
+    style,
     id = uniqueID(),
     size,
     prepend,
@@ -85,6 +86,7 @@ export function InputGroup({
                 size && `input-group-${size}`,
                 className
             )}
+            style={style}
         >
             {prepend && (
                 <GroupLabel

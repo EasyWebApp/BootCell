@@ -2,13 +2,13 @@ import { WebCellProps, createCell } from 'web-cell';
 import { TableCellProps, BaseFieldProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility/constant';
+import { CommonColors } from '../utility/constant';
 import { FieldProps } from '../Form/Field';
 
 import style from './Table.less';
 
 export interface TableProps extends WebCellProps {
-    theme?: keyof typeof Status | keyof typeof Theme;
+    theme?: CommonColors;
     center?: boolean;
     border?: boolean;
     striped?: boolean;

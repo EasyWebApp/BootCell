@@ -139,11 +139,12 @@ npm install boot-cell bootstrap-icons \
 1. [Color](https://web-cell.dev/BootCell/enums/color.html)
 2. [Theme](https://web-cell.dev/BootCell/enums/theme.html)
 3. [Status](https://web-cell.dev/BootCell/enums/status.html)
-4. [ColorNames](https://web-cell.dev/BootCell/globals.html#colornames)
-5. [BackgroundColors](https://web-cell.dev/BootCell/globals.html#backgroundcolors)
-6. [Size](https://web-cell.dev/BootCell/enums/size.html)
-7. [Position](https://web-cell.dev/BootCell/enums/position.html)
-8. [JustifyType](https://web-cell.dev/BootCell/enums/justifytype.html)
+4. [CommonColors](https://web-cell.dev/BootCell/globals.html#commoncolors)
+5. [TextColors](https://web-cell.dev/BootCell/globals.html#textcolors)
+6. [BackgroundColors](https://web-cell.dev/BootCell/globals.html#backgroundcolors)
+7. [Size](https://web-cell.dev/BootCell/enums/size.html)
+8. [Position](https://web-cell.dev/BootCell/enums/position.html)
+9. [JustifyType](https://web-cell.dev/BootCell/enums/justifytype.html)
 
 ## Utilities
 

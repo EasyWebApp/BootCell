@@ -3,13 +3,13 @@ import { createCell } from 'web-cell';
 import classNames from 'classnames';
 import icons from 'bootstrap-icons/bootstrap-icons.svg';
 
-import { ColorNames } from '../utility/constant';
+import { TextColors } from '../utility/constant';
 
 export interface IconProps extends HTMLProps {
     name: string;
     width?: number;
     height?: number;
-    color?: ColorNames;
+    color?: TextColors;
     fill?: string;
     viewBox?: number[];
 }

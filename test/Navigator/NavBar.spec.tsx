@@ -73,7 +73,7 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex justify-content-end align-items-center">
                         <a />
                     </div>
                 </collapse-box>
@@ -160,7 +160,7 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex justify-content-end align-items-center">
                         <a />
                     </div>
                 </div>

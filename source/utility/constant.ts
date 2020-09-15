@@ -19,13 +19,9 @@ export enum Color {
     black = 'black'
 }
 
-export type ColorNames = Status & Theme & Color;
-
-export type BackgroundColors =
-    | keyof typeof Status
-    | keyof typeof Theme
-    | 'white'
-    | 'transparent';
+export type CommonColors = keyof typeof Status | keyof typeof Theme;
+export type TextColors = CommonColors | keyof typeof Color;
+export type BackgroundColors = CommonColors | 'white' | 'transparent';
 
 export enum Size {
     xl = 1200,

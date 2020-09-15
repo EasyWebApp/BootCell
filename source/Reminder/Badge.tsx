@@ -2,10 +2,10 @@ import { WebCellProps, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility/constant';
+import { CommonColors } from '../utility/constant';
 
 interface BadgeProps extends HTMLHyperLinkProps, WebCellProps {
-    color?: keyof typeof Status | keyof typeof Theme;
+    color?: CommonColors;
     pill?: boolean;
 }
 

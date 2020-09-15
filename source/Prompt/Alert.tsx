@@ -2,11 +2,11 @@ import { WebCellProps, createCell } from 'web-cell';
 import { transitOut } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility/constant';
+import { CommonColors } from '../utility/constant';
 import { CloseButton } from '../Form/Button';
 
 export interface AlertProps extends WebCellProps {
-    color?: keyof typeof Status | keyof typeof Theme;
+    color?: CommonColors;
     title?: string;
     closable?: boolean;
 }

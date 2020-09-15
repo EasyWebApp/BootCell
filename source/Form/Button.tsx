@@ -2,13 +2,13 @@ import { WebCellProps, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility/constant';
+import { CommonColors } from '../utility/constant';
 import { IconProps, Icon } from '../Reminder/Icon';
 
 export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
     type?: 'button' | 'submit' | 'reset' | 'image';
     disabled?: boolean;
-    color?: keyof typeof Status | keyof typeof Theme | 'link';
+    color?: CommonColors | 'link';
     outline?: boolean;
     size?: 'sm' | 'lg';
     block?: boolean;

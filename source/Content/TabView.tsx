@@ -101,11 +101,13 @@ export class TabView extends mixin<TabViewProps>() {
     }
 
     get headers() {
-        return [...this.querySelectorAll<HTMLElement>(AllHeaders)];
+        return [
+            ...this.firstElementChild.querySelectorAll<HTMLElement>(AllHeaders)
+        ];
     }
 
     get bodies() {
-        return [...this.querySelectorAll<HTMLDivElement>('.bs-stepper-pane')];
+        return [...this.lastElementChild.children] as HTMLElement[];
     }
 
     async turnTo(index = 0) {

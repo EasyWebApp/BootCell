@@ -2,10 +2,10 @@ import { WebCellProps, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
-import { Status, Theme } from '../utility/constant';
+import { CommonColors } from '../utility/constant';
 
 export interface ListItemProps extends WebCellProps, HTMLHyperLinkProps {
-    color?: keyof typeof Status | keyof typeof Theme;
+    color?: CommonColors;
     disabled?: boolean;
     active?: boolean;
 }
