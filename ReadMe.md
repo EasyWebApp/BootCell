@@ -45,7 +45,7 @@ npm install boot-cell bootstrap-icons \
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
 <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry%2CResizeObserver"></script>
-<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.2/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.3/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.18/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/webcomponents-bundle.js"></script>
@@ -58,17 +58,18 @@ npm install boot-cell bootstrap-icons \
 1. [ListItem](https://web-cell.dev/BootCell/interfaces/listitemprops.html)
 2. [ListGroup](https://web-cell.dev/BootCell/interfaces/listgroupprops.html)
 3. [Table](https://web-cell.dev/BootCell/interfaces/tableprops.html)
-4. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
-5. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
-6. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-7. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
-8. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-9. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-10. [AccordionPanel](https://web-cell.dev/BootCell/interfaces/accordionpanelprops.html)
-11. [Accordion](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-12. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-13. [TabPanel](https://web-cell.dev/BootCell/globals.html#tabpanel)
-14. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
+4. [TableRow](https://web-cell.dev/BootCell/interfaces/tablerowprops.html)
+5. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
+6. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
+7. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
+8. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
+9. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
+10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+11. [AccordionPanel](https://web-cell.dev/BootCell/interfaces/accordionpanelprops.html)
+12. [Accordion](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+13. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+14. [TabPanel](https://web-cell.dev/BootCell/globals.html#tabpanel)
+15. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
 
 ### Reminder
 

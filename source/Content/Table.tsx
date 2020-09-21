@@ -1,9 +1,11 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNode, createCell } from 'web-cell';
 import { TableCellProps, BaseFieldProps } from 'web-utility/source/DOM-type';
+import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { CommonColors } from '../utility/constant';
-import { FieldProps } from '../Form/Field';
+import { ToggleFieldProps } from '../Form/ToggleField';
+import { Field, FieldProps } from '../Form/Field';
 
 import style from './Table.less';
 
@@ -29,6 +31,24 @@ export function Table({
     defaultSlot,
     ...rest
 }: TableProps) {
+    const [head, body, foot] = (defaultSlot as VNode[]).reduce(
+        ([head, body, foot], node) => {
+            if (typeof node === 'object')
+                switch (node?.data.dataset?.type) {
+                    case 'head':
+                        head.push(node);
+                        break;
+                    case 'foot':
+                        foot.push(node);
+                        break;
+                    default:
+                        body.push(node);
+                }
+            return [head, body, foot];
+        },
+        [[], [], []] as VNode[][]
+    );
+
     return (
         <div
             {...rest}
@@ -50,9 +70,57 @@ export function Table({
                     center && style['cell-center']
                 )}
             >
-                {defaultSlot}
+                {head[0] && <thead>{head}</thead>}
+                <tbody>{body}</tbody>
+                {foot[0] && <tfoot>{foot}</tfoot>}
             </table>
         </div>
+    );
+}
+
+export interface TableRowProps
+    extends WebCellProps,
+        Pick<ToggleFieldProps, 'name' | 'checked' | 'indeterminate'> {
+    type?: 'head' | 'body' | 'foot';
+    onCheck?: (event: CustomEvent) => any;
+}
+
+export function TableRow({
+    type = 'body',
+    checked,
+    indeterminate,
+    name = 'table-row',
+    defaultSlot,
+    ...rest
+}: TableRowProps) {
+    const Cell = type === 'head' ? 'th' : 'td',
+        checkable =
+            typeof checked === 'boolean' || typeof indeterminate === 'boolean';
+
+    if (checkable && !rest.id) rest.id = uniqueID();
+
+    return (
+        <tr {...rest} data-type={type}>
+            {!checkable ? null : (
+                <Cell>
+                    <Field
+                        className={style['row-check']}
+                        type="checkbox"
+                        id={rest.id + '-check'}
+                        name={name}
+                        value={rest.id}
+                        checked={checked}
+                        indeterminate={indeterminate}
+                        onClick={({ target }) =>
+                            target.dispatchEvent(
+                                new CustomEvent('check', { bubbles: true })
+                            )
+                        }
+                    />
+                </Cell>
+            )}
+            {defaultSlot}
+        </tr>
     );
 }
 

@@ -2,18 +2,80 @@ import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 import classNames from 'classnames';
 
-import { Table, InputCell } from '../../source/Content/Table';
+import { Table, TableRow, InputCell } from '../../source/Content/Table';
 import style from '../../source/Content/Table.module.less';
+import { Field } from '../../source/Form/Field';
 
 describe('Table', () => {
     it('should render a Responsive Table defaultly', () => {
         assertLooksLike(
             <Table>
-                <tbody />
+                <TableRow type="head">
+                    <th></th>
+                </TableRow>
+                <TableRow>
+                    <td></td>
+                </TableRow>
             </Table>,
             <div className="table-responsive">
                 <table className={`table ${style.table}`}>
-                    <tbody />
+                    <thead>
+                        <tr data-type="head">
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-type="body">
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+    });
+
+    it('should render a Checkable Table', () => {
+        assertLooksLike(
+            <Table>
+                <TableRow type="head" id="all" checked={false}>
+                    <th></th>
+                </TableRow>
+                <TableRow id="row-1" checked>
+                    <td></td>
+                </TableRow>
+            </Table>,
+            <div className="table-responsive">
+                <table className={`table ${style.table}`}>
+                    <thead>
+                        <tr data-type="head" id="all">
+                            <th>
+                                <Field
+                                    className={style['row-check']}
+                                    type="checkbox"
+                                    id="all-check"
+                                    name="table-row"
+                                    value="all"
+                                    checked={false}
+                                />
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-type="body" id="row-1">
+                            <td>
+                                <Field
+                                    className={style['row-check']}
+                                    type="checkbox"
+                                    id="row-1-check"
+                                    name="table-row"
+                                    value="row-1"
+                                    checked
+                                />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         );
