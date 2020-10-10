@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4, BootStrap Icon v1 & FontAwesome v5",
@@ -29,7 +29,7 @@
         "web-utility": "^1.8.0"
     },
     "peerDependencies": {
-        "@fortawesome/fontawesome-free": "^5.14.0",
+        "@fortawesome/fontawesome-free": "^5.15.1",
         "@nuintun/qrcode": "^3.0.1",
         "bootstrap": "^4.5.2",
         "bootstrap-icons": "^1.0.0",
@@ -38,9 +38,9 @@
         "github-markdown-css": "^4.0.0",
         "iterable-observer": "^1.0.0-beta.5",
         "markdown-ime": "^1.0.3",
-        "marked": "^1.1.1",
+        "marked": "^1.2.0",
         "share-api-polyfill": "1.0.18",
-        "turndown": "^6.0.0",
+        "turndown": "^7.0.0",
         "turndown-plugin-gfm": "^1.0.2"
     },
     "devDependencies": {
@@ -58,41 +58,40 @@
         "autoprefixer": "^9.8.6",
         "bootstrap-icons": "^1.0.0",
         "core-js": "^3.6.5",
+        "cross-env": "^7.0.2",
         "husky": "^4.3.0",
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.5",
-        "jest": "^26.4.2",
+        "jest": "^26.5.0",
         "jest-transform-stub": "^2.0.0",
         "less": "^3.12.2",
         "lint-staged": "^10.4.0",
         "markdown-ime": "^1.0.3",
-        "marked": "^1.1.1",
-        "microbundle": "^0.12.3",
+        "marked": "^1.2.0",
+        "microbundle": "^0.12.4",
         "open-cli": "^6.0.1",
         "parcel-bundler": "^1.12.4",
         "postcss-modules": "^3.2.2",
         "prettier": "^2.1.2",
         "snabbdom": "^1.0.1",
-        "ts-jest": "^26.4.0",
-        "turndown": "^6.0.0",
+        "ts-jest": "^26.4.1",
+        "turndown": "^7.0.0",
         "turndown-plugin-gfm": "^1.0.2",
-        "typedoc": "^0.19.1",
+        "typedoc": "^0.19.2",
         "typescript": "^3.9.7"
     },
     "scripts": {
         "lint": "lint-staged",
         "test": "lint-staged  &&  jest --forceExit",
         "start": "cd test/  &&  parcel index.html --open",
-        "pack-dist": "rm -rf dist/  &&  microbundle --external web-cell,web-utility,classnames,iterable-observer,marked,turndown,turndown-plugin-gfm,markdown-ime,@nuintun/qrcode --globals web-cell=WebCell,web-utility=WebUtility,classnames=classNames,iterable-observer=IterableObserver --name BootCell --css-modules true",
+        "pack-dist": "rm -rf dist/  &&  cross-env NODE_ENV=build  microbundle --external web-cell,web-utility,classnames,iterable-observer,marked,turndown,turndown-plugin-gfm,markdown-ime,@nuintun/qrcode --globals web-cell=WebCell,web-utility=WebUtility,classnames=classNames,iterable-observer=IterableObserver --name BootCell --css-modules true",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
         "build": "npm run pack-dist  &&  npm run pack-docs",
         "help": "npm run pack-docs  &&  open-cli docs/index.html",
         "prepublishOnly": "npm test  &&  npm run build"
     },
     "lint-staged": {
-        "*.{html,md,less,json,yml,js,ts,tsx}": [
-            "prettier --write"
-        ]
+        "*.{html,md,less,json,yml,js,ts,tsx}": "prettier --write"
     },
     "husky": {
         "hooks": {

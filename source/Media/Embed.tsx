@@ -11,6 +11,9 @@ export interface EmbedProps extends HTMLProps {
 export function Embed({
     ratio = '16/9',
     className,
+    style,
+    id,
+    title,
     is: Tag,
     ...props
 }: EmbedProps) {
@@ -30,6 +33,7 @@ export function Embed({
                 'embed-responsive-' + ratio.replace('/', 'by'),
                 className
             )}
+            {...{ style, id, title }}
         >
             <Tag className="embed-responsive-item" {...props} />
         </div>

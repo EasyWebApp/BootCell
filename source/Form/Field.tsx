@@ -3,7 +3,12 @@ import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-export interface FieldProps extends BaseFieldProps, WebCellProps {
+import { RangeProp, Range } from './Range';
+
+export interface FieldProps
+    extends Omit<RangeProp, 'size' | 'color'>,
+        BaseFieldProps,
+        WebCellProps {
     is?: 'input' | 'output' | 'select' | 'textarea';
     type?:
         | 'button'
@@ -54,19 +59,7 @@ export function Field({
 
     return {
         input:
-            type !== 'file' ? (
-                <input
-                    {...rest}
-                    type={type}
-                    className={classNames(
-                        type === 'range' ? 'custom-range' : 'form-control',
-                        validClass,
-                        sizeClass,
-                        className
-                    )}
-                    id={id}
-                />
-            ) : (
+            type === 'file' ? (
                 <div className={classNames('custom-file', className)}>
                     <input
                         {...rest}
@@ -86,6 +79,25 @@ export function Field({
                         data-browse={fileButton}
                     />
                 </div>
+            ) : type === 'range' ? (
+                <Range
+                    {...rest}
+                    className={classNames(validClass, className)}
+                    id={id}
+                    size={typeof size === 'string' ? size : undefined}
+                />
+            ) : (
+                <input
+                    {...rest}
+                    type={type}
+                    className={classNames(
+                        'form-control',
+                        validClass,
+                        sizeClass,
+                        className
+                    )}
+                    id={id}
+                />
             ),
         output: (
             <output

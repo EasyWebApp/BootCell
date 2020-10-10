@@ -38,7 +38,7 @@ npm install boot-cell bootstrap-icons \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css"
 />
 <link
     rel="stylesheet"
@@ -121,12 +121,13 @@ npm install boot-cell bootstrap-icons \
 6. [CloseButton](https://web-cell.dev/BootCell/globals.html#closebutton)
 7. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 8. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-9. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
-10. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
-11. [GroupLabel](https://web-cell.dev/BootCell/interfaces/grouplabelprops.html)
-12. [InputGroup](https://web-cell.dev/BootCell/interfaces/inputgroupprops.html)
-13. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-14. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+9. [Range](https://web-cell.dev/BootCell/interfaces/rangeprops.html)
+10. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
+11. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
+12. [GroupLabel](https://web-cell.dev/BootCell/interfaces/grouplabelprops.html)
+13. [InputGroup](https://web-cell.dev/BootCell/interfaces/inputgroupprops.html)
+14. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+15. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Calendar
 

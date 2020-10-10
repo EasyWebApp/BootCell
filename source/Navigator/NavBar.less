@@ -1,8 +1,26 @@
 :global {
-    @media (max-width: 767px) {
-        .navbar-nav > drop-menu > .dropdown-toggle {
-            padding-left: 0;
-            padding-right: 0;
+    .px-0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    @media (max-width: 576px) {
+        .navbar-expand-sm .navbar-nav > drop-menu > .dropdown-toggle {
+            .px-0;
+        }
+    }
+    @media (max-width: 768px) {
+        .navbar-expand-md .navbar-nav > drop-menu > .dropdown-toggle {
+            .px-0;
+        }
+    }
+    @media (max-width: 992px) {
+        .navbar-expand-lg .navbar-nav > drop-menu > .dropdown-toggle {
+            .px-0;
+        }
+    }
+    @media (max-width: 1200px) {
+        .navbar-expand-xl .navbar-nav > drop-menu > .dropdown-toggle {
+            .px-0;
         }
     }
     // [Origin] https://getbootstrap.com/docs/4.5/examples/offcanvas/offcanvas.css

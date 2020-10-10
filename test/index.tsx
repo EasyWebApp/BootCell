@@ -1,5 +1,6 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
 
+import { Range } from '../source/Form/Range';
 import { MarkdownEditor } from '../source/Form/MarkdownEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
@@ -12,6 +13,15 @@ documentReady.then(() =>
         <Fragment>
             <h1>BootCell test</h1>
             <main>
+                <section>
+                    <h2>Range Input</h2>
+
+                    <h3>Regular</h3>
+                    <Range />
+
+                    <h3>Star</h3>
+                    <Range max={5} emptyIcon="☆" fullIcon="★" size="lg" />
+                </section>
                 <section>
                     <h2>Markdown Editor</h2>
 

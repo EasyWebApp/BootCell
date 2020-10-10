@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { CommonColors } from '../utility/constant';
 
-interface BadgeProps extends HTMLHyperLinkProps, WebCellProps {
+export interface BadgeProps extends HTMLHyperLinkProps, WebCellProps {
     color?: CommonColors;
     pill?: boolean;
 }

@@ -13,8 +13,8 @@ describe('Field', () => {
 
     it('should render a Custom Range Input', () => {
         assertLooksLike(
-            <Field type="range" min={0} />,
-            <input type="range" className="custom-range" min={0} />
+            <Field type="range" />,
+            <input type="range" className="custom-range" defaultValue="0" />
         );
     });
 
