@@ -9,6 +9,7 @@ export interface AlertProps extends WebCellProps {
     color?: CommonColors;
     title?: string;
     closable?: boolean;
+    onClose?: (event: MouseEvent) => any;
 }
 
 export function Alert({
@@ -16,7 +17,8 @@ export function Alert({
     color = 'primary',
     title,
     defaultSlot,
-    closable
+    closable,
+    onClose
 }: AlertProps) {
     return (
         <aside
@@ -35,12 +37,13 @@ export function Alert({
 
             {!closable ? null : (
                 <CloseButton
-                    onClick={({ currentTarget }) =>
-                        transitOut(
-                            (currentTarget as HTMLElement).parentElement,
-                            'show'
-                        )
-                    }
+                    onClick={event => {
+                        const that = event.currentTarget as HTMLElement;
+
+                        transitOut(that.parentElement, 'show');
+
+                        onClose?.call(that, event);
+                    }}
                 />
             )}
         </aside>

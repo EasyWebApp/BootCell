@@ -92,7 +92,7 @@ export function IconButton({
     return (
         <Button
             className={classNames('p-1', className)}
-            style={{ lineHeight: 0.8 }}
+            style={{ lineHeight: '0.8' }}
             type={type}
             disabled={disabled}
             href={href}

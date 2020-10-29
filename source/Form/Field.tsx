@@ -3,10 +3,10 @@ import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { RangeProp, Range } from './Range';
+import { RangeProps, Range } from './Range';
 
 export interface FieldProps
-    extends Omit<RangeProp, 'size' | 'color'>,
+    extends Omit<RangeProps, 'size' | 'color'>,
         BaseFieldProps,
         WebCellProps {
     is?: 'input' | 'output' | 'select' | 'textarea';

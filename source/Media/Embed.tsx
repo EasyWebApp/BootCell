@@ -1,11 +1,11 @@
-import { createCell } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
+import { WebCellProps, createCell } from 'web-cell';
 import classNames from 'classnames';
 
-export interface EmbedProps extends HTMLProps {
+export interface EmbedProps extends WebCellProps {
     is: 'iframe' | 'video' | 'audio' | 'embed';
     src: string;
     ratio?: '21/9' | '16/9' | '4/3' | '1/1';
+    hoverPlay?: boolean;
 }
 
 export function Embed({
@@ -15,6 +15,9 @@ export function Embed({
     id,
     title,
     is: Tag,
+    hoverPlay,
+    key,
+    defaultSlot,
     ...props
 }: EmbedProps) {
     props =
@@ -22,6 +25,15 @@ export function Embed({
             ? {
                   lazyLoad: '1',
                   loading: 'lazy',
+                  ...props
+              }
+            : (Tag === 'video' || Tag === 'audio') && hoverPlay
+            ? {
+                  muted: true,
+                  onMouseEnter: ({ target }: MouseEvent) =>
+                      (target as HTMLVideoElement | HTMLAudioElement).play(),
+                  onMouseLeave: ({ target }: MouseEvent) =>
+                      (target as HTMLVideoElement | HTMLAudioElement).pause(),
                   ...props
               }
             : props;
@@ -33,7 +45,7 @@ export function Embed({
                 'embed-responsive-' + ratio.replace('/', 'by'),
                 className
             )}
-            {...{ style, id, title }}
+            {...{ style, id, title, key }}
         >
             <Tag className="embed-responsive-item" {...props} />
         </div>

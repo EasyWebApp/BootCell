@@ -30,7 +30,7 @@ npm install boot-cell bootstrap-icons \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
@@ -44,11 +44,14 @@ npm install boot-cell bootstrap-icons \
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
-<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Object.fromEntries%2CArray.prototype.flat%2CIntersectionObserver%2CIntersectionObserverEntry%2CResizeObserver"></script>
+<script
+    crossorigin
+    src="https://polyfill.app/api/polyfill?features=es.array.flat,es.object.from-entries,regenerator-runtime,intersection-observer,resize-observer"
+></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.3/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.18/dist/share-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.4/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.20/dist/share-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/webcomponents-bundle.js"></script>
 ```
 
 ## Components

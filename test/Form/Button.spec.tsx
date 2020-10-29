@@ -40,7 +40,7 @@ describe('Button', () => {
             />,
             <a
                 className="btn btn-primary p-1 m-1"
-                style={{ lineHeight: 0.8 }}
+                style={{ lineHeight: '0.8' }}
                 href="https://getbootstrap.com"
                 role="button"
                 aria-disabled="false"

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { TextColors } from '../utility/constant';
 import style from './Range.less';
 
-export interface RangeProp extends BaseFieldProps, WebCellProps {
+export interface RangeProps extends BaseFieldProps, WebCellProps {
     min?: number;
     step?: number;
     max?: number;
@@ -18,16 +18,19 @@ export interface RangeProp extends BaseFieldProps, WebCellProps {
 export function Range({
     className,
     name,
+    min,
+    step,
     max,
+    value,
     defaultValue = '0',
+    disabled,
     size,
     emptyIcon,
     fullIcon,
     color = 'primary',
-    onChange,
     defaultSlot,
     ...rest
-}: RangeProp) {
+}: RangeProps) {
     const iconMode = emptyIcon && fullIcon;
     const sizeClass =
         size &&
@@ -35,19 +38,12 @@ export function Range({
             ? `form-control-${size}`
             : style[size === 'lg' ? 'large' : 'small']);
 
-    function setRange({ parentElement: { dataset }, value }: HTMLInputElement) {
-        dataset.content = fullIcon.repeat(+value).padEnd(max, emptyIcon);
-    }
-
     return !iconMode ? (
         <input
-            {...rest}
             type="range"
-            name={name}
-            max={max}
-            defaultValue={defaultValue}
+            {...{ name, min, step, max, defaultValue, value, disabled }}
+            {...rest}
             className={classNames('custom-range', sizeClass, className)}
-            onChange={onChange}
         />
     ) : (
         <div
@@ -58,19 +54,13 @@ export function Range({
                 color && `text-${color}`,
                 className
             )}
+            data-content={fullIcon.repeat(+value).padEnd(max, emptyIcon)}
         >
             <input
                 type="range"
-                name={name}
                 min={0}
                 step={1}
-                max={max}
-                defaultValue={defaultValue}
-                ref={setRange}
-                onChange={(event: Event) => (
-                    setRange(event.target as HTMLInputElement),
-                    onChange?.call(event.target, event)
-                )}
+                {...{ name, max, defaultValue, value, disabled }}
             />
         </div>
     );

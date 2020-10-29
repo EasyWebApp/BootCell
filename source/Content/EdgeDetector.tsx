@@ -14,14 +14,14 @@ export interface EdgeEvent extends CustomEvent {
         },
         '.left, .right': {
             position: 'absolute',
-            top: 0,
+            top: '0',
             height: '100%'
         },
         '.left': {
-            left: 0
+            left: '0'
         },
         '.right': {
-            right: 0
+            right: '0'
         }
     }
 })

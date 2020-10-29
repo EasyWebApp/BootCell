@@ -125,15 +125,13 @@ export class DropMenu extends mixin<DropMenuProps>() {
         this.setProps({ open }).then(() => this.classList.toggle('show', open));
     }
 
-    outClose = ({ target }: MouseEvent) => {
-        if (
+    outClose = ({ target }: MouseEvent) =>
+        this.open &&
+        !(
             this.compareDocumentPosition(target as HTMLElement) &
             Node.DOCUMENT_POSITION_CONTAINED_BY
-        )
-            return;
-
-        this.open = false;
-    };
+        ) &&
+        (this.open = false);
 
     escapeClose = ({ code }: KeyboardEvent) =>
         code === 'Escape' && (this.open = false);

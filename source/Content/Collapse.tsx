@@ -17,16 +17,16 @@ export interface CollapseProps extends WebCellProps {
     style: {
         ':host': {
             position: 'relative',
-            height: 0,
+            height: '0',
             overflow: 'hidden',
             transition: '0.25s'
         },
         ':host > div': {
             display: 'none',
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0
+            top: '0',
+            left: '0',
+            right: '0'
         }
     }
 })

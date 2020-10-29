@@ -14,9 +14,11 @@ describe('Range', () => {
 
     it('should render a Positive-Integer Range Input with icons', () => {
         assertLooksLike(
-            <Range max={5} emptyIcon="☆" fullIcon="★" size="lg" />,
-
-            <div className={`${style.range} ${style.large}`}>
+            <Range max={5} emptyIcon="☆" fullIcon="★" size="lg" value="3" />,
+            <div
+                className={`${style.range} ${style.large}`}
+                data-content="★★★☆☆"
+            >
                 <input type="range" min={0} step={1} max={5} defaultValue="0" />
             </div>
         );
