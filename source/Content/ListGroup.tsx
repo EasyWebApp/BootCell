@@ -1,4 +1,4 @@
-import { WebCellProps, VNode, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -38,8 +38,8 @@ export function ListItem({
     );
 }
 
-export function isListItem(node: VNode) {
-    return node.data?.class?.['list-group-item'];
+export function isListItem(node: VNodeChildElement): node is VNode {
+    return (node as VNode).data?.class?.['list-group-item'];
 }
 
 export interface ListGroupProps extends WebCellProps {

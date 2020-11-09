@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -64,4 +64,11 @@ export function Range({
             />
         </div>
     );
+}
+
+export function isRange(node: VNodeChildElement): node is VNode {
+    const { 'custom-range': origin, [style.range]: custom } =
+        (node as VNode).data?.class || {};
+
+    return origin || custom;
 }

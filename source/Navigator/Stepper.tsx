@@ -1,6 +1,7 @@
 import {
     WebCellProps,
     WebCellElement,
+    VNodeChildElement,
     VNode,
     createCell,
     Fragment
@@ -38,8 +39,8 @@ export function Step({
     );
 }
 
-export function isStep(node: VNode) {
-    return node.data?.class?.['step'];
+export function isStep(node: VNodeChildElement): node is VNode {
+    return (node as VNode).data?.class?.['step'];
 }
 
 export interface StepperProps extends WebCellProps {}

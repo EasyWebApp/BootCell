@@ -1,4 +1,4 @@
-import { WebCellProps, VNode, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -49,8 +49,8 @@ export function NavLink({
     );
 }
 
-export function isNavLink(node: VNode) {
-    return node.data?.class?.['nav-link'];
+export function isNavLink(node: VNodeChildElement): node is VNode {
+    return (node as VNode).data?.class?.['nav-link'];
 }
 
 export interface NavProps extends WebCellProps {

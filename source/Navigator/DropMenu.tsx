@@ -1,6 +1,7 @@
 import {
     WebCellProps,
     WebCellElement,
+    VNodeChildElement,
     VNode,
     component,
     mixin,
@@ -54,12 +55,12 @@ export function DropMenuItem({
     );
 }
 
-export function isDropMenuItem(node: VNode) {
+export function isDropMenuItem(node: VNodeChildElement): node is VNode {
     const {
         ['dropdown-item']: link,
         ['dropdown-item-text']: text,
         ['dropdown-divider']: divider
-    } = node.data?.class || {};
+    } = (node as VNode).data?.class || {};
 
     return link || text || divider;
 }

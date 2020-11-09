@@ -1,9 +1,9 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { RangeProps, Range } from './Range';
+import { RangeProps, Range, isRange } from './Range';
 
 export interface FieldProps
     extends Omit<RangeProps, 'size' | 'color'>,
@@ -141,4 +141,14 @@ export function Field({
             </textarea>
         )
     }[is];
+}
+
+export function isField(node: VNodeChildElement): node is VNode {
+    const {
+        'form-control': origin,
+        'custom-select': select,
+        'custom-file': file
+    } = (node as VNode).data?.class || {};
+
+    return origin || select || file || isRange(node);
 }

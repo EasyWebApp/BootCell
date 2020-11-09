@@ -1,4 +1,4 @@
-import { WebCellProps, VNode, createCell } from 'web-cell';
+import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
 import classNames from 'classnames';
 
@@ -68,8 +68,8 @@ export function Button({
     );
 }
 
-export function isButton(node: VNode) {
-    const { sel, data } = node;
+export function isButton(node: VNodeChildElement): node is VNode {
+    const { sel, data } = node as VNode;
 
     return /^(a|input|button)/.test(sel) && data?.class?.btn;
 }
