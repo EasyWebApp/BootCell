@@ -26,7 +26,7 @@ npm install boot-cell bootstrap-icons \
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.3/dist/dialog-polyfill.css"
+    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.4/dist/dialog-polyfill.css"
 />
 <link
     rel="stylesheet"
@@ -48,7 +48,7 @@ npm install boot-cell bootstrap-icons \
     crossorigin
     src="https://polyfill.app/api/polyfill?features=es.array.flat,es.object.from-entries,regenerator-runtime,intersection-observer,resize-observer"
 ></script>
-<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.3/dist/dialog-polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.4/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.20/dist/share-min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/webcomponents-bundle.js"></script>
@@ -87,8 +87,9 @@ npm install boot-cell bootstrap-icons \
 
 1. [Image](https://web-cell.dev/BootCell/interfaces/imageprops.html)
 2. [Embed](https://web-cell.dev/BootCell/interfaces/embedprops.html)
-3. [CarouselItem](https://web-cell.dev/BootCell/interfaces/carouselitemprops.html)
-4. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
+3. [CarouselCaption](https://web-cell.dev/BootCell/interfaces/carouselcaptionprops.html)
+4. [CarouselItem](https://web-cell.dev/BootCell/interfaces/carouselitemprops.html)
+5. [CarouselView](https://web-cell.dev/BootCell/interfaces/carouselprops.html)
 
 ### Navigator
 

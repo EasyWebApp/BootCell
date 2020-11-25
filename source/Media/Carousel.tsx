@@ -10,14 +10,52 @@ import {
     Fragment
 } from 'web-cell';
 import { uniqueID, isEmpty } from 'web-utility/source/data';
-import { watchMotion } from 'web-utility/source/animation';
+import {
+    watchMotion,
+    CartesianCoordinate,
+    getSwipeVector
+} from 'web-utility/source/animation';
 import { watchVisible } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
-export interface CarouselItemProps extends WebCellProps {
-    image?: string | URL;
+export interface CarouselCaptionProps extends WebCellProps {
     title?: string;
     detail?: string;
+}
+
+export function CarouselCaption({
+    className,
+    style,
+    title,
+    detail,
+    defaultSlot,
+    ...rest
+}: CarouselCaptionProps) {
+    return (
+        <div
+            {...rest}
+            className={classNames(
+                'carousel-caption',
+                'd-none',
+                'd-md-block',
+                className
+            )}
+            style={{ textShadow: '1px 2px 3px black', ...style }}
+        >
+            {defaultSlot[0] ? (
+                defaultSlot
+            ) : (
+                <Fragment>
+                    <h5>{title}</h5>
+                    {detail && <p>{detail}</p>}
+                </Fragment>
+            )}
+        </div>
+    );
+}
+
+export interface CarouselItemProps extends CarouselCaptionProps {
+    image?: string | URL;
 }
 
 export function CarouselItem({
@@ -35,17 +73,7 @@ export function CarouselItem({
             ) : (
                 <Fragment>
                     <img className="d-block w-100" src={image} alt={title} />
-                    {title && (
-                        <div
-                            className="carousel-caption d-none d-md-block"
-                            style={{
-                                textShadow: '1px 2px 3px black'
-                            }}
-                        >
-                            <h5>{title}</h5>
-                            {detail && <p>{detail}</p>}
-                        </div>
-                    )}
+                    {title && <CarouselCaption title={title} detail={detail} />}
                 </Fragment>
             )}
         </section>
@@ -169,6 +197,25 @@ export class CarouselView extends mixin<CarouselProps>() {
             this.turnTo(+index);
         }
     );
+    private swipeStart: CartesianCoordinate;
+
+    handleSwipeStart = ({ touches: [touch] }: TouchEvent) =>
+        (this.swipeStart = { x: touch.pageX, y: touch.pageY });
+
+    handleSwipeEnd = ({ changedTouches: [touch] }: TouchEvent) => {
+        const vector = getSwipeVector(this.swipeStart, {
+            x: touch.pageX,
+            y: touch.pageY
+        });
+
+        if (vector)
+            switch (vector.direction) {
+                case 'left':
+                    return this.turnBack();
+                case 'right':
+                    return this.turnTo();
+            }
+    };
 
     render({
         mode,
@@ -190,6 +237,8 @@ export class CarouselView extends mixin<CarouselProps>() {
                 id={UID}
                 onMouseEnter={this.handlePause}
                 onMouseLeave={this.handlePause}
+                onTouchStart={this.handleSwipeStart}
+                onTouchEnd={this.handleSwipeEnd}
             >
                 {!indicators || length < 2 ? null : (
                     <ol className="carousel-indicators">

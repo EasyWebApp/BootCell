@@ -5,13 +5,17 @@ import marked from 'marked';
 
 import { SafeTurnDown } from '../utility/TurnDown';
 
+export interface MarkdownEditorProps {
+    value?: string;
+}
+
 const parser = new SafeTurnDown();
 
 @component({
     tagName: 'markdown-editor',
     renderTarget: 'children'
 })
-export class MarkdownEditor extends mixin() {
+export class MarkdownEditor extends mixin<MarkdownEditorProps>() {
     private core: any;
 
     connectedCallback() {
