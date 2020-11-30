@@ -49,9 +49,6 @@ export class FileInput extends mixin<FileInputProps>() {
                 style={{ backgroundImage: value && `url(${value})` }}
                 title={fileName}
             >
-                {empty ? null : (
-                    <input type="hidden" name={name} value={value} />
-                )}
                 <input
                     type="file"
                     name={empty ? name : undefined}
@@ -59,6 +56,9 @@ export class FileInput extends mixin<FileInputProps>() {
                     accept={accept}
                     onChange={this.handleChange}
                 />
+                {empty ? null : (
+                    <input type="hidden" name={name} value={value} />
+                )}
             </div>
         );
     }

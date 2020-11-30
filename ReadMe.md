@@ -65,14 +65,16 @@ npm install boot-cell bootstrap-icons \
 5. [InputCell](https://web-cell.dev/BootCell/interfaces/inputcellprops.html)
 6. [Jumbotron](https://web-cell.dev/BootCell/interfaces/jumbotronprops.html)
 7. [Card](https://web-cell.dev/BootCell/interfaces/cardprops.html)
-8. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
-9. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
-10. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
-11. [AccordionPanel](https://web-cell.dev/BootCell/interfaces/accordionpanelprops.html)
-12. [Accordion](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
-13. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
-14. [TabPanel](https://web-cell.dev/BootCell/globals.html#tabpanel)
-15. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
+8. [CardHeader](https://web-cell.dev/BootCell/interfaces/cardheaderprops.html)
+9. [CardFooter](https://web-cell.dev/BootCell/interfaces/cardfooterprops.html)
+10. [MediaObject](https://web-cell.dev/BootCell/interfaces/mediaobjectprops.html)
+11. [EdgeDetector](https://web-cell.dev/BootCell/classes/edgedetector.html)
+12. [SplitView](https://web-cell.dev/BootCell/classes/splitview.html)
+13. [AccordionPanel](https://web-cell.dev/BootCell/interfaces/accordionpanelprops.html)
+14. [Accordion](https://web-cell.dev/BootCell/interfaces/accordionprops.html)
+15. [CollapseBox](https://web-cell.dev/BootCell/interfaces/collapseprops.html)
+16. [TabPanel](https://web-cell.dev/BootCell/globals.html#tabpanel)
+17. [TabView](https://web-cell.dev/BootCell/interfaces/tabviewprops.html)
 
 ### Reminder
 
@@ -162,7 +164,7 @@ npm install boot-cell bootstrap-icons \
 Replace **BootStrap official CSS** file with these 3th-party libraries's directly:
 
 -   https://bootswatch.com/
--   https://fezvrasta.github.io/bootstrap-material-design/
+-   https://mdbootstrap.github.io/bootstrap-material-design/
 -   https://daemonite.github.io/material/
 
 [1]: https://www.webcomponents.org/

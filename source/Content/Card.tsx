@@ -6,12 +6,67 @@ import {
 } from 'web-cell';
 import classNames from 'classnames';
 
+import { NavProps, Nav, isNavLink } from '../Navigator/Nav';
+
+export interface CardHeaderProps extends NavProps {}
+
+export function CardHeader({
+    className,
+    direction,
+    align,
+    itemMode,
+    itemWidth,
+    scrollable,
+    background,
+    defaultSlot,
+    ...rest
+}: CardHeaderProps) {
+    const tabMode = isNavLink(defaultSlot[0]);
+
+    return (
+        <div {...rest} className={classNames('card-header', className)}>
+            {!tabMode ? (
+                defaultSlot
+            ) : (
+                <Nav
+                    className={`card-header-${itemMode}`}
+                    {...{
+                        direction,
+                        align,
+                        itemMode,
+                        itemWidth,
+                        scrollable,
+                        background
+                    }}
+                >
+                    {defaultSlot}
+                </Nav>
+            )}
+        </div>
+    );
+}
+
+export interface CardFooterProps extends WebCellProps {}
+
+export function CardFooter({
+    className,
+    defaultSlot,
+    ...rest
+}: CardFooterProps) {
+    return (
+        <div
+            {...rest}
+            className={classNames('card-footer', 'text-muted', className)}
+        >
+            {defaultSlot}
+        </div>
+    );
+}
+
 export interface CardProps extends WebCellProps {
     subtitle?: string;
     text?: string;
     image?: VNodeChildElement;
-    header?: VNodeChildElement;
-    footer?: VNodeChildElement;
     overlay?: boolean;
     direction?: 'row' | 'column';
 }
@@ -22,13 +77,27 @@ export function Card({
     subtitle,
     text,
     image,
-    header,
-    footer,
     overlay,
     direction = 'column',
     defaultSlot,
     ...rest
 }: CardProps) {
+    var [header, body, footer] = (defaultSlot as VNodeChildElement[]).reduce(
+        ([header, body, footer], node) => {
+            if (typeof node === 'object') {
+                const { ['card-header']: head, ['card-footer']: foot } =
+                    node.data.class || {};
+
+                if (head) header.push(node);
+                else if (foot) footer.push(node);
+                else body.push(node);
+            } else body.push(node);
+
+            return [header, body, footer];
+        },
+        [[], [], []] as VNodeChildElement[][]
+    );
+
     const column = direction !== 'row',
         banner =
             typeof image !== 'string' ? (
@@ -38,19 +107,17 @@ export function Card({
                     className={'card-img' + (overlay ? '' : '-top')}
                     src={image}
                 />
-            ),
-        body = (
-            <div className={'card-' + (overlay ? 'img-overlay' : 'body')}>
-                {title && <h5 className="card-title">{title}</h5>}
-                {subtitle && (
-                    <h6 className="card-subtitle mb-2 text-muted">
-                        {subtitle}
-                    </h6>
-                )}
-                {text && <p className="card-text">{text}</p>}
-                {defaultSlot}
-            </div>
-        );
+            );
+    body = (
+        <div className={'card-' + (overlay ? 'img-overlay' : 'body')}>
+            {title && <h5 className="card-title">{title}</h5>}
+            {subtitle && (
+                <h6 className="card-subtitle mb-2 text-muted">{subtitle}</h6>
+            )}
+            {text && <p className="card-text">{text}</p>}
+            {body}
+        </div>
+    );
 
     return (
         <div
@@ -63,12 +130,10 @@ export function Card({
         >
             {column ? (
                 <Fragment>
-                    {header && <div className="card-header">{header}</div>}
+                    {header}
                     {banner}
                     {body}
-                    {footer && (
-                        <div className="card-footer text-muted">{footer}</div>
-                    )}
+                    {footer}
                 </Fragment>
             ) : (
                 <div className="row no-gutters align-items-center">

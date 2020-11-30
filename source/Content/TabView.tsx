@@ -151,6 +151,8 @@ export class TabView extends mixin<TabViewProps>() {
 
     @on('submit', '.bs-stepper .bs-stepper-pane form')
     handleSubmit(event: Event, form: HTMLFormElement) {
+        event.stopPropagation();
+
         this.activeIndex++;
     }
 

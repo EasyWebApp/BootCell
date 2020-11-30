@@ -211,9 +211,9 @@ export class CarouselView extends mixin<CarouselProps>() {
         if (vector)
             switch (vector.direction) {
                 case 'left':
-                    return this.turnBack();
-                case 'right':
                     return this.turnTo();
+                case 'right':
+                    return this.turnBack();
             }
     };
 

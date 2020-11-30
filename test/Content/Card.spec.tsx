@@ -1,7 +1,8 @@
 import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
-import { Card } from '../../source/Content/Card';
+import { Card, CardHeader, CardFooter } from '../../source/Content/Card';
+import { NavLink, Nav } from '../../source/Navigator/Nav';
 
 describe('Card', () => {
     it('should render Vertical layout by default', () => {
@@ -11,6 +12,40 @@ describe('Card', () => {
                 <img className="card-img-top" src="test.png" />
                 <div className="card-body">
                     <h5 className="card-title">Test</h5>
+                </div>
+            </div>
+        );
+    });
+
+    it('should render a Card with a Header & a Footer', () => {
+        assertLooksLike(
+            <Card>
+                <CardHeader>head</CardHeader>
+                text<div>content</div>
+                <CardFooter>foot</CardFooter>
+            </Card>,
+            <div className="card">
+                <div className="card-header">head</div>
+                <div className="card-body">
+                    text<div>content</div>
+                </div>
+                <div className="card-footer">foot</div>
+            </div>
+        );
+    });
+
+    it('should render a Card with a Navigator Header', () => {
+        assertLooksLike(
+            <Card>
+                <CardHeader itemMode="tabs">
+                    <NavLink>Link</NavLink>
+                </CardHeader>
+            </Card>,
+            <div className="card">
+                <div className="card-header">
+                    <Nav className="card-header-tabs" itemMode="tabs">
+                        <NavLink>Link</NavLink>
+                    </Nav>
                 </div>
             </div>
         );
