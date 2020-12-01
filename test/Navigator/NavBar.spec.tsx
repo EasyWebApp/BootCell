@@ -1,8 +1,42 @@
 import { createCell, Fragment } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-
-import { NavBar, NavBarProps } from '../../source/Navigator/NavBar';
+import {
+    BannerNavBar,
+    BannerNavBarProps,
+    NavBar,
+    NavBarProps,
+    NavBarToggler
+} from '../../source/Navigator/NavBar';
 import { NavLink } from '../../source/Navigator/Nav';
+
+const { render: renderBanner } = BannerNavBar.prototype;
+
+function InlineBanner({
+    defaultSlot,
+    narrow,
+    expand = 'md',
+    fixed = 'top',
+    direction = 'left',
+    theme = 'dark',
+    background = 'dark',
+    brand,
+    open = false
+}: BannerNavBarProps) {
+    return renderBanner.call(
+        { UID: 'test' },
+        {
+            narrow,
+            expand,
+            fixed,
+            direction,
+            theme,
+            background,
+            brand,
+            open,
+            defaultSlot
+        }
+    );
+}
 
 const { render, renderContent } = NavBar.prototype;
 
@@ -16,7 +50,8 @@ function InlineNavBar({
     theme = 'dark',
     background = 'dark',
     menuAlign = 'start',
-    brand
+    brand,
+    open = false
 }: NavBarProps) {
     return render.call(
         { renderContent: renderContent.bind({ UID: 'test' }) },
@@ -30,12 +65,69 @@ function InlineNavBar({
             background,
             menuAlign,
             brand,
+            open,
             defaultSlot
         }
     );
 }
 
 describe('Navigator Bar', () => {
+    it('should render a Toggle Button with ARIA properties', () => {
+        assertLooksLike(
+            <NavBarToggler aria-controls="test" aria-expanded="true" />,
+            <button
+                type="button"
+                className="navbar-toggler"
+                aria-controls="test"
+                aria-expanded="true"
+                aria-label="Toggle navigation"
+            >
+                <span className="navbar-toggler-icon" />
+            </button>
+        );
+    });
+
+    it('should render a simple NavBar with extra content on the top', () => {
+        assertLooksLike(
+            <InlineBanner brand="Test">text</InlineBanner>,
+            <Fragment>
+                <collapse-box id="test" open={false}>
+                    test
+                </collapse-box>
+                <div class="navbar navbar-dark">
+                    <a class="navbar-brand" href=".">
+                        Test
+                    </a>
+                    <NavBarToggler aria-controls="test" aria-expanded="false" />
+                </div>
+            </Fragment>
+        );
+    });
+
+    it('should render a narrow NavBar with extra content on the top', () => {
+        assertLooksLike(
+            <InlineBanner narrow brand="Test">
+                text
+            </InlineBanner>,
+            <Fragment>
+                <collapse-box id="test" open={false}>
+                    <div className="container">test</div>
+                </collapse-box>
+                <div class="navbar navbar-dark">
+                    <div className="container">
+                        <a class="navbar-brand" href=".">
+                            Test
+                        </a>
+                        <NavBarToggler
+                            aria-controls="test"
+                            aria-expanded="false"
+                        />
+                    </div>
+                </div>
+            </Fragment>
+        );
+    });
+
     it('should render a top-sticky dark Narrow Bar defaultly', () => {
         assertLooksLike(
             <InlineNavBar brand="Test">

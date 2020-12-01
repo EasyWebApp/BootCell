@@ -1,6 +1,4 @@
 import {
-    WebCellProps,
-    VNodeChildElement,
     VNode,
     createCell,
     component,
@@ -13,22 +11,16 @@ import {
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { Size, Theme, BackgroundColors } from '../utility/constant';
-import { NavProps, isNavLink, Nav } from './Nav';
-import '../Content/Collapse';
+import { Size } from '../../utility/constant';
+import { NavProps, isNavLink, Nav } from '../Nav';
+import { BannerNavBarProps } from './BannerNavBar';
+import { NavBarToggler } from './Toggler';
+import '../../Content/Collapse';
 import './NavBar.less';
 
-export interface NavBarProps extends WebCellProps {
-    narrow?: boolean;
-    expand?: false | keyof typeof Size;
-    fixed?: 'top' | 'bottom';
-    direction?: 'left' | 'right';
+export interface NavBarProps extends BannerNavBarProps {
     offcanvas?: boolean;
-    theme?: keyof typeof Theme;
-    background?: BackgroundColors;
     menuAlign?: NavProps['align'];
-    brand?: VNodeChildElement;
-    open?: boolean;
 }
 
 @component({
@@ -84,17 +76,20 @@ export class NavBar extends mixin<NavBarProps>() {
         return expand && Size[expand] <= self.innerWidth;
     }
 
-    outClose = ({ target }: MouseEvent) =>
-        this.open &&
-        !(
-            this.compareDocumentPosition(target as HTMLElement) &
-            Node.DOCUMENT_POSITION_CONTAINED_BY
-        ) &&
-        (this.open = false);
+    outClose = ({ target }: MouseEvent) => {
+        if (
+            this.open &&
+            !(
+                this.compareDocumentPosition(target as HTMLElement) &
+                Node.DOCUMENT_POSITION_CONTAINED_BY
+            )
+        )
+            this.open = false;
+    };
 
-    escapeClose = ({ code }: KeyboardEvent) =>
-        code === 'Escape' && (this.open = false);
-
+    escapeClose = ({ code }: KeyboardEvent) => {
+        if (this.open && code === 'Escape') this.open = false;
+    };
     private resizer: ResizeObserver;
 
     connectedCallback() {
@@ -180,7 +175,8 @@ export class NavBar extends mixin<NavBarProps>() {
             flexClass = `d${
                 !expand || expand === 'xs' ? '' : '-' + expand
             }-flex`,
-            { UID } = this;
+            { UID } = this,
+            expanded = this.expanded || open;
 
         const content = (
             <Fragment>
@@ -211,22 +207,17 @@ export class NavBar extends mixin<NavBarProps>() {
                     {brand}
                 </a>
                 {(links[0] || extra[0]) && (
-                    <button
-                        type="button"
-                        className="navbar-toggler"
+                    <NavBarToggler
                         aria-controls={UID}
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
+                        aria-expanded={expanded + ''}
                         onClick={() => (this.open = !open)}
-                    >
-                        <span className="navbar-toggler-icon" />
-                    </button>
+                    />
                 )}
                 {!offcanvas ? (
                     <collapse-box
                         className="navbar-collapse"
                         id={UID}
-                        open={this.expanded || open}
+                        open={expanded}
                     >
                         {content}
                     </collapse-box>

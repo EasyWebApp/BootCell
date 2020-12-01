@@ -100,11 +100,13 @@ npm install boot-cell bootstrap-icons \
 3. [NavLink](https://web-cell.dev/BootCell/interfaces/navlinkprops.html)
 4. [Nav](https://web-cell.dev/BootCell/interfaces/navprops.html)
 5. [NavBar](https://web-cell.dev/BootCell/interfaces/navbarprops.html)
-6. [Step](https://web-cell.dev/BootCell/interfaces/stepprops.html)
-7. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
-8. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
-9. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
-10. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
+6. [BannerNavBar](https://web-cell.dev/BootCell/interfaces/bannernavbarprops.html)
+7. [NavBarToggler](https://web-cell.dev/BootCell/interfaces/navbartogglerprops.html)
+8. [Step](https://web-cell.dev/BootCell/interfaces/stepprops.html)
+9. [Stepper](https://web-cell.dev/BootCell/interfaces/stepperprops.html)
+10. [DropMenuItem](https://web-cell.dev/BootCell/interfaces/dropmenuitemprops.html)
+11. [DropMenu](https://web-cell.dev/BootCell/interfaces/dropmenuprops.html)
+12. [ShareBar](https://web-cell.dev/BootCell/interfaces/sharebarprops.html)
 
 ### Prompt
 

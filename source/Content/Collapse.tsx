@@ -16,6 +16,7 @@ export interface CollapseProps extends WebCellProps {
     tagName: 'collapse-box',
     style: {
         ':host': {
+            display: 'block',
             position: 'relative',
             height: '0',
             overflow: 'hidden',
