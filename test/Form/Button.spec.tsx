@@ -7,7 +7,9 @@ import { Icon } from '../../source/Reminder/Icon';
 describe('Button', () => {
     it('should render a Button with outline', () => {
         assertLooksLike(
-            <Button outline>Test</Button>,
+            <Button outline color="primary">
+                Test
+            </Button>,
             <button type="button" className="btn btn-outline-primary">
                 Test
             </button>
@@ -20,7 +22,7 @@ describe('Button', () => {
                 Test
             </Button>,
             <a
-                className="btn btn-primary disabled"
+                className="btn disabled"
                 href="/test"
                 tabIndex={-1}
                 role="button"
@@ -39,7 +41,7 @@ describe('Button', () => {
                 href="https://getbootstrap.com"
             />,
             <a
-                className="btn btn-primary p-1 m-1"
+                className="btn p-1 m-1"
                 style={{ lineHeight: '0.8' }}
                 href="https://getbootstrap.com"
                 role="button"

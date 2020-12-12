@@ -3,7 +3,6 @@ import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
 import { Button } from '../Form/Button';
-import './Collapse';
 import { CollapseBox } from './Collapse';
 
 export interface AccordionPanelProps extends WebCellProps {
@@ -33,14 +32,9 @@ export function AccordionPanel({
                     </Button>
                 </h2>
             </header>
-            <collapse-box
-                id={bID}
-                aria-labelledby={hID}
-                key={bID}
-                open={active}
-            >
+            <CollapseBox id={bID} aria-labelledby={hID} key={bID} open={active}>
                 <div className="card-body">{defaultSlot}</div>
-            </collapse-box>
+            </CollapseBox>
         </section>
     );
 }

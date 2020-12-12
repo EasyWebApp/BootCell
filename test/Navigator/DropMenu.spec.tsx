@@ -137,7 +137,7 @@ describe('Drop Menu', () => {
                 <Button href="example">Demo</Button>
                 <button
                     type="button"
-                    className="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    className="btn dropdown-toggle dropdown-toggle-split"
                     id="test"
                     aria-haspopup="true"
                     aria-expanded="false"

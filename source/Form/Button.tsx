@@ -21,21 +21,21 @@ export function Button({
     href,
     target,
     tabIndex,
-    color = 'primary',
+    color,
     outline,
     size,
     block,
     defaultSlot,
     ...rest
 }: ButtonProps) {
-    const Class = `btn${outline ? '-outline' : ''}-${color}`;
+    const colorClass = color && `btn${outline ? '-outline' : ''}-${color}`;
 
     return href ? (
         <a
             {...rest}
             className={classNames(
                 'btn',
-                Class,
+                colorClass,
                 size && `btn-${size}`,
                 block && 'btn-block',
                 disabled && 'disabled',
@@ -55,7 +55,7 @@ export function Button({
             type={type}
             className={classNames(
                 'btn',
-                Class,
+                colorClass,
                 size && `btn-${size}`,
                 block && 'btn-block',
                 className

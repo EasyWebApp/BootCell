@@ -113,16 +113,10 @@ describe('Input Group', () => {
                     aria-describedby="test-label-append-0"
                 />
                 <div className="input-group-append">
-                    <button
-                        className="btn btn-primary"
-                        id="test-label-append-0"
-                    >
+                    <button className="btn" id="test-label-append-0">
                         1
                     </button>
-                    <button
-                        className="btn btn-primary"
-                        id="test-label-append-1"
-                    >
+                    <button className="btn" id="test-label-append-1">
                         2
                     </button>
                 </div>

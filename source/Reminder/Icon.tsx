@@ -1,39 +1,35 @@
-import { HTMLProps } from 'web-utility/source/DOM-type';
-import { createCell } from 'web-cell';
+import { WebCellProps, createCell } from 'web-cell';
 import classNames from 'classnames';
-import icons from 'bootstrap-icons/bootstrap-icons.svg';
 
 import { TextColors } from '../utility/constant';
 
-export interface IconProps extends HTMLProps {
+export interface IconProps extends WebCellProps {
     name: string;
-    width?: number;
-    height?: number;
     color?: TextColors;
-    fill?: string;
-    viewBox?: number[];
+    size?: number;
 }
 
 export function Icon({
     className,
+    style,
     color,
-    fill = 'currentColor',
-    width = 16,
-    height = width,
-    viewBox = [0, 0, width, height],
     name,
+    size,
+    defaultSlot,
     ...rest
 }: IconProps) {
     return (
-        <svg
-            className={classNames(color && `text-${color}`, className)}
-            fill={fill}
-            viewBox={viewBox.join(' ')}
-            width={width}
-            height={height}
+        <i
+            className={classNames(
+                `bi-${name}`,
+                color && `text-${color}`,
+                className
+            )}
+            style={{
+                ...style,
+                fontSize: size ? `${size}rem` : undefined
+            }}
             {...rest}
-        >
-            <use {...{ 'xlink:href': `${icons}#${name}` }} />
-        </svg>
+        />
     );
 }

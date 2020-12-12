@@ -15,7 +15,7 @@ import { Size } from '../../utility/constant';
 import { NavProps, isNavLink, Nav } from '../Nav';
 import { BannerNavBarProps } from './BannerNavBar';
 import { NavBarToggler } from './Toggler';
-import '../../Content/Collapse';
+import { CollapseBox } from '../../Content/Collapse';
 import './NavBar.less';
 
 export interface NavBarProps extends BannerNavBarProps {
@@ -214,13 +214,13 @@ export class NavBar extends mixin<NavBarProps>() {
                     />
                 )}
                 {!offcanvas ? (
-                    <collapse-box
+                    <CollapseBox
                         className="navbar-collapse"
                         id={UID}
                         open={expanded}
                     >
                         {content}
-                    </collapse-box>
+                    </CollapseBox>
                 ) : (
                     <div
                         className={classNames(

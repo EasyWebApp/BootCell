@@ -4,9 +4,6 @@ module.exports = {
     moduleNameMapper: {
         '^.+\\.(css|less)$': 'identity-obj-proxy'
     },
-    transform: {
-        '^.+\\.svg$': 'jest-transform-stub'
-    },
     globals: {
         'ts-jest': { isolatedModules: true }
     }

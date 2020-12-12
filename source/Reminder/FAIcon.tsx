@@ -1,11 +1,11 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import classNames from 'classnames';
 
 import { TextColors } from '../utility/constant';
+import { IconProps } from './Icon';
 
-export interface FAIconProps extends WebCellProps {
+export interface FAIconProps extends Omit<IconProps, 'size'> {
     group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
-    name: string;
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     fixedWidth?: boolean;
     color?: TextColors;

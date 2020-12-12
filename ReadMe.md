@@ -15,7 +15,7 @@
 ## Usage
 
 ```shell
-npm install boot-cell bootstrap-icons \
+npm install boot-cell \
     iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
     @nuintun/qrcode
@@ -35,6 +35,10 @@ npm install boot-cell bootstrap-icons \
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.1/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"

@@ -3,5 +3,5 @@
 test/
 jest.config.js
 docs/
-.travis.yml
+.github/
 .vscode/

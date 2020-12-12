@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 import { Size, Theme, BackgroundColors } from '../../utility/constant';
 import { NavBarToggler } from './Toggler';
-import '../../Content/Collapse';
+import { CollapseBox } from '../../Content/Collapse';
 
 export interface BannerNavBarProps extends WebCellProps {
     narrow?: boolean;
@@ -123,13 +123,13 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
 
         return (
             <Fragment>
-                <collapse-box id={UID} open={open}>
+                <CollapseBox id={UID} open={open}>
                     {narrow ? (
                         <div className="container">{defaultSlot}</div>
                     ) : (
                         defaultSlot
                     )}
-                </collapse-box>
+                </CollapseBox>
                 <div class={`navbar navbar-${theme}`}>
                     {narrow ? (
                         <div
