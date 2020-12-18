@@ -1,4 +1,5 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
+import { formToJSON } from 'web-utility/source/DOM';
 
 import { Range } from '../source/Form/Range';
 import { MarkdownEditor } from '../source/Form/MarkdownEditor';
@@ -7,26 +8,49 @@ import { NavLink } from '../source/Navigator/Nav';
 import { ListItem } from '../source/Content/ListGroup';
 import { Step } from '../source/Navigator/Stepper';
 import { Button } from '../source/Form/Button';
+import { FileInput } from '../source/Form/FileInput';
 
 documentReady.then(() =>
     render(
         <Fragment>
             <h1>BootCell test</h1>
             <main>
-                <section>
-                    <h2>Range Input</h2>
+                <form
+                    onSubmit={(event: Event) => {
+                        event.preventDefault();
+                        console.log(
+                            formToJSON(event.target as HTMLFormElement)
+                        );
+                    }}
+                >
+                    <section>
+                        <h2>Range Input</h2>
 
-                    <h3>Regular</h3>
-                    <Range />
+                        <h3>Regular</h3>
+                        <Range />
 
-                    <h3>Star</h3>
-                    <Range max={5} emptyIcon="☆" fullIcon="★" size="lg" />
-                </section>
-                <section>
-                    <h2>Markdown Editor</h2>
+                        <h3>Star</h3>
+                        <Range
+                            name="range"
+                            max={5}
+                            emptyIcon="☆"
+                            fullIcon="★"
+                            size="lg"
+                        />
+                    </section>
+                    <section>
+                        <h2>File Input</h2>
 
-                    <MarkdownEditor />
-                </section>
+                        <FileInput name="file" />
+                    </section>
+                    <section>
+                        <h2>Markdown Editor</h2>
+                        <MarkdownEditor name="rich_text" />
+                    </section>
+                    <Button type="submit" color="success" className="my-3">
+                        Submit
+                    </Button>
+                </form>
                 <section>
                     <h2>Tab View</h2>
 

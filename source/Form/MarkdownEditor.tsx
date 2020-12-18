@@ -1,13 +1,11 @@
-import { component, mixin } from 'web-cell';
+import { component, mixinForm, WebFieldProps } from 'web-cell';
 import { parseDOM, insertToCursor } from 'web-utility/source/DOM';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
 
 import { SafeTurnDown } from '../utility/TurnDown';
 
-export interface MarkdownEditorProps {
-    value?: string;
-}
+export interface MarkdownEditorProps extends WebFieldProps {}
 
 const parser = new SafeTurnDown();
 
@@ -15,7 +13,7 @@ const parser = new SafeTurnDown();
     tagName: 'markdown-editor',
     renderTarget: 'children'
 })
-export class MarkdownEditor extends mixin<MarkdownEditorProps>() {
+export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
     private core: any;
 
     connectedCallback() {

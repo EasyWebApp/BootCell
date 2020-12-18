@@ -1,65 +1,64 @@
-import { component, mixin, attribute, watch, createCell } from 'web-cell';
-import { BaseFieldProps } from 'web-utility/source/DOM-type';
-import className from 'classnames';
+import {
+    WebFieldProps,
+    component,
+    mixinForm,
+    attribute,
+    watch,
+    createCell
+} from 'web-cell';
 
 import style from './FileInput.less';
 
-export interface FileInputProps extends BaseFieldProps {
+export interface FileInputProps extends WebFieldProps {
     accept?: string;
-    fileName?: string;
 }
 
 @component({
     tagName: 'file-input',
-    renderTarget: 'children'
+    style: {
+        'input[type="file"]': {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            opacity: '0'
+        }
+    }
 })
-export class FileInput extends mixin<FileInputProps>() {
-    @attribute
-    @watch
-    name = '';
-
-    @attribute
-    @watch
-    required = false;
+export class FileInput extends mixinForm<FileInputProps>() {
+    get type() {
+        return 'file';
+    }
 
     @attribute
     @watch
     accept = '*/*';
 
-    @watch
-    value = '';
-
-    @watch
-    fileName = '';
+    get files() {
+        return (this.shadowRoot.lastElementChild as HTMLInputElement).files;
+    }
 
     handleChange = (event: Event) => {
         const { files } = event.target as HTMLInputElement;
 
         if (files && files[0])
             (this.value = URL.createObjectURL(files[0])),
-                (this.fileName = files[0].name);
+                (this.title = files[0].name);
     };
 
-    render({ name, required, accept, value, fileName }: FileInputProps) {
-        const empty = !value || value.startsWith('blob:');
+    connectedCallback() {
+        this.classList.add(style.fileBox);
+    }
 
+    updatedCallback() {
+        const { value } = this.props;
+
+        this.classList.toggle(style.active, !!value);
+        this.style.backgroundImage = value && `url(${value})`;
+    }
+
+    render({ accept }: FileInputProps) {
         return (
-            <div
-                className={className(style.fileBox, value && style.active)}
-                style={{ backgroundImage: value && `url(${value})` }}
-                title={fileName}
-            >
-                <input
-                    type="file"
-                    name={empty ? name : undefined}
-                    required={!value && required}
-                    accept={accept}
-                    onChange={this.handleChange}
-                />
-                {empty ? null : (
-                    <input type="hidden" name={name} value={value} />
-                )}
-            </div>
+            <input type="file" accept={accept} onChange={this.handleChange} />
         );
     }
 }

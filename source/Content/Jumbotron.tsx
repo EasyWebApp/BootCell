@@ -12,7 +12,8 @@ export function Jumbotron({
     fluid,
     title,
     description,
-    defaultSlot
+    defaultSlot,
+    ...rest
 }: JumbotronProps) {
     const content = (
         <Fragment>
@@ -35,6 +36,7 @@ export function Jumbotron({
                 fluid && 'jumbotron-fluid',
                 className
             )}
+            {...rest}
         >
             {fluid ? <div className="container">{content}</div> : content}
         </header>
