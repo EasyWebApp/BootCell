@@ -1,4 +1,4 @@
-import { component, mixinForm, WebFieldProps } from 'web-cell';
+import { WebFieldProps, component, mixinForm } from 'web-cell';
 import { parseDOM, insertToCursor } from 'web-utility/source/DOM';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
@@ -11,7 +11,14 @@ const parser = new SafeTurnDown();
 
 @component({
     tagName: 'markdown-editor',
-    renderTarget: 'children'
+    style: {
+        ':host': {
+            minHeight: '2.3rem'
+        },
+        ':host(:disabled)': {
+            cursor: 'not-allowed'
+        }
+    }
 })
 export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
     private core: any;
@@ -24,15 +31,22 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
             'clearfix',
             'overflow-hidden'
         );
-        this.style.minHeight = '2.3rem';
-
         this.contentEditable = 'true';
         // @ts-ignore
         this.core = MarkdownIME.Enhance(this);
 
-        this.addEventListener('paste', this.handleOuterData),
-            this.addEventListener('drop', this.handleOuterData);
+        this.addEventListener('input', this.handleInput);
+        this.addEventListener('paste', this.handleOuterData);
+        this.addEventListener('drop', this.handleOuterData);
     }
+
+    updatedCallback() {
+        const { disabled } = this.state;
+
+        this.contentEditable = !disabled + '';
+    }
+
+    handleInput = () => this.internals.setFormValue(this.value);
 
     static filterData(...items: DataTransferItem[]) {
         items = items
@@ -96,8 +110,9 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
             paragraph.replaceWith(...paragraph.childNodes);
     };
 
-    set value(raw: string) {
-        this.innerHTML = marked(raw);
+    set value(value: string) {
+        this.internals.setFormValue(value);
+        this.innerHTML = marked(value);
     }
 
     get value() {

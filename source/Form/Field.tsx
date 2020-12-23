@@ -3,12 +3,7 @@ import { BaseFieldProps } from 'web-utility/source/DOM-type';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { RangeProps, Range, isRange } from './Range';
-
-export interface FieldProps
-    extends Omit<RangeProps, 'size' | 'color'>,
-        BaseFieldProps,
-        WebCellProps {
+export interface FieldProps extends BaseFieldProps, WebCellProps {
     is?: 'input' | 'output' | 'select' | 'textarea';
     type?:
         | 'button'
@@ -79,19 +74,12 @@ export function Field({
                         data-browse={fileButton}
                     />
                 </div>
-            ) : type === 'range' ? (
-                <Range
-                    {...rest}
-                    className={classNames(validClass, className)}
-                    id={id}
-                    size={typeof size === 'string' ? size : undefined}
-                />
             ) : (
                 <input
                     {...rest}
                     type={type}
                     className={classNames(
-                        'form-control',
+                        type === 'range' ? 'custom-range' : 'form-control',
                         validClass,
                         sizeClass,
                         className
@@ -147,8 +135,9 @@ export function isField(node: VNodeChildElement): node is VNode {
     const {
         'form-control': origin,
         'custom-select': select,
-        'custom-file': file
+        'custom-file': file,
+        'custom-range': range
     } = (node as VNode).data?.class || {};
 
-    return origin || select || file || isRange(node);
+    return origin || select || file || range;
 }

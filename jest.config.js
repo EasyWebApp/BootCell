@@ -6,5 +6,6 @@ module.exports = {
     },
     globals: {
         'ts-jest': { isolatedModules: true }
-    }
+    },
+    setupFiles: ['<rootDir>/test/polyfill.ts']
 };

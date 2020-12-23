@@ -1,7 +1,8 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
 import { formToJSON } from 'web-utility/source/DOM';
 
-import { Range } from '../source/Form/Range';
+import { Field } from '../source/Form/Field';
+import { ScoreRange } from '../source/Form/ScoreRange';
 import { MarkdownEditor } from '../source/Form/MarkdownEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
@@ -27,16 +28,10 @@ documentReady.then(() =>
                         <h2>Range Input</h2>
 
                         <h3>Regular</h3>
-                        <Range />
+                        <Field type="range" name="count" />
 
                         <h3>Star</h3>
-                        <Range
-                            name="range"
-                            max={5}
-                            emptyIcon="☆"
-                            fullIcon="★"
-                            size="lg"
-                        />
+                        <ScoreRange className="text-warning" name="score" />
                     </section>
                     <section>
                         <h2>File Input</h2>

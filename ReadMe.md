@@ -133,7 +133,7 @@ npm install boot-cell \
 6. [CloseButton](https://web-cell.dev/BootCell/globals.html#closebutton)
 7. [ToggleField](https://web-cell.dev/BootCell/interfaces/togglefieldprops.html)
 8. [ToggleGroup](https://web-cell.dev/BootCell/interfaces/togglegroupprops.html)
-9. [Range](https://web-cell.dev/BootCell/interfaces/rangeprops.html)
+9. [ScoreRange](https://web-cell.dev/BootCell/interfaces/scorerangeprops.html)
 10. [Field](https://web-cell.dev/BootCell/interfaces/fieldprops.html)
 11. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
 12. [GroupLabel](https://web-cell.dev/BootCell/interfaces/grouplabelprops.html)

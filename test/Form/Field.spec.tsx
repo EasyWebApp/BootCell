@@ -6,22 +6,22 @@ import { Field } from '../../source/Form/Field';
 describe('Field', () => {
     it('should render a Text Input defaultly', () => {
         assertLooksLike(
-            <Field />,
-            <input type="text" className="form-control" />
+            <Field id="test" />,
+            <input type="text" id="test" className="form-control" />
         );
     });
 
     it('should render a Custom Range Input', () => {
         assertLooksLike(
-            <Field type="range" />,
-            <input type="range" className="custom-range" defaultValue="0" />
+            <Field type="range" id="test" />,
+            <input type="range" className="custom-range" id="test" />
         );
     });
 
     it('should render a Text Output', () => {
         assertLooksLike(
-            <Field is="output" defaultValue="Test" />,
-            <output className="form-control form-control-plaintext">
+            <Field is="output" id="test" defaultValue="Test" />,
+            <output className="form-control form-control-plaintext" id="test">
                 Test
             </output>
         );
@@ -29,10 +29,10 @@ describe('Field', () => {
 
     it('should render a Custom Select with Multiple lines', () => {
         assertLooksLike(
-            <Field is="select" multiple size={3}>
+            <Field is="select" id="test" multiple size={3}>
                 <option>Example</option>
             </Field>,
-            <select className="custom-select" multiple size={3}>
+            <select className="custom-select" id="test" multiple size={3}>
                 <option>Example</option>
             </select>
         );
@@ -40,12 +40,16 @@ describe('Field', () => {
 
     it('should render Specific Sizes of Fields', () => {
         assertLooksLike(
-            <Field size="sm" />,
-            <input type="text" className="form-control form-control-sm" />
+            <Field size="sm" id="test" />,
+            <input
+                type="text"
+                className="form-control form-control-sm"
+                id="test"
+            />
         );
         assertLooksLike(
-            <Field is="select" size="lg" />,
-            <select className="custom-select custom-select-lg" />
+            <Field is="select" id="test" size="lg" />,
+            <select className="custom-select custom-select-lg" id="test" />
         );
     });
 });

@@ -1,5 +1,6 @@
 import {
     WebFieldProps,
+    WebFieldState,
     component,
     mixinForm,
     attribute,
@@ -16,11 +17,14 @@ export interface FileInputProps extends WebFieldProps {
 @component({
     tagName: 'file-input',
     style: {
-        'input[type="file"]': {
+        ':host input[type="file"]': {
             position: 'absolute',
             width: '100%',
             height: '100%',
             opacity: '0'
+        },
+        ':host input[type="file"]:disabled': {
+            cursor: 'not-allowed'
         }
     }
 })
@@ -33,16 +37,21 @@ export class FileInput extends mixinForm<FileInputProps>() {
     @watch
     accept = '*/*';
 
+    @watch
+    value: string;
+
     get files() {
         return (this.shadowRoot.lastElementChild as HTMLInputElement).files;
     }
 
     handleChange = (event: Event) => {
-        const { files } = event.target as HTMLInputElement;
+        const { files: [file] = [] } = event.target as HTMLInputElement;
 
-        if (files && files[0])
-            (this.value = URL.createObjectURL(files[0])),
-                (this.title = files[0].name);
+        if (!file) return;
+        // @ts-ignore
+        this.internals.setFormValue(file);
+        this.value = URL.createObjectURL(file);
+        this.title = file.name;
     };
 
     connectedCallback() {
@@ -56,9 +65,13 @@ export class FileInput extends mixinForm<FileInputProps>() {
         this.style.backgroundImage = value && `url(${value})`;
     }
 
-    render({ accept }: FileInputProps) {
+    render({ accept }: FileInputProps, { disabled }: WebFieldState) {
         return (
-            <input type="file" accept={accept} onChange={this.handleChange} />
+            <input
+                type="file"
+                {...{ accept, disabled }}
+                onChange={this.handleChange}
+            />
         );
     }
 }
