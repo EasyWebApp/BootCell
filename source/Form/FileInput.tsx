@@ -8,6 +8,7 @@ import {
     createCell
 } from 'web-cell';
 
+import { FileUploader, UploadEvent } from './FileUploader';
 import style from './FileInput.less';
 
 export interface FileInputProps extends WebFieldProps {
@@ -56,6 +57,14 @@ export class FileInput extends mixinForm<FileInputProps>() {
 
     connectedCallback() {
         this.classList.add(style.fileBox);
+
+        this.closest<FileUploader>('file-uploader').addEventListener(
+            'upload',
+            ({ detail: { file, path } }: UploadEvent) => {
+                if (file === this.files[0]) this.value = path;
+            }
+        );
+        super.connectedCallback();
     }
 
     updatedCallback() {

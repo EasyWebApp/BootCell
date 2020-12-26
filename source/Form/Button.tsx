@@ -76,34 +76,14 @@ export function isButton(node: VNodeChildElement): node is VNode {
 
 export type IconButtonProps = IconProps & ButtonProps;
 
-export function IconButton({
-    className,
-    type,
-    disabled,
-    href,
-    target,
-    color,
-    outline,
-    size,
-    block,
-    onClick,
-    ...icon
-}: IconButtonProps) {
+export function IconButton({ className, name, ...button }: IconButtonProps) {
     return (
         <Button
             className={classNames('p-1', className)}
             style={{ lineHeight: '0.8' }}
-            type={type}
-            disabled={disabled}
-            href={href}
-            target={target}
-            color={color}
-            outline={outline}
-            size={size}
-            block={block}
-            onClick={onClick}
+            {...button}
         >
-            <Icon {...icon} />
+            <Icon name={name} />
         </Button>
     );
 }

@@ -138,8 +138,9 @@ npm install boot-cell \
 11. [FormField](https://web-cell.dev/BootCell/interfaces/formfieldprops.html)
 12. [GroupLabel](https://web-cell.dev/BootCell/interfaces/grouplabelprops.html)
 13. [InputGroup](https://web-cell.dev/BootCell/interfaces/inputgroupprops.html)
-14. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
-15. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+14. [FileUploader](https://web-cell.dev/BootCell/interfaces/fileuploaderprops.html)
+15. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
+16. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
 
 ### Calendar
 

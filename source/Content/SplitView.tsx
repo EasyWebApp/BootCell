@@ -23,14 +23,13 @@ export class SplitView extends mixin() {
                 element,
                 'pointermove'
             ),
-            {
-                style,
-                offsetLeft
-            } = element.previousElementSibling as HTMLElement;
+            left = element.previousElementSibling as HTMLElement;
+        const { style } = left,
+            { x } = left.getBoundingClientRect();
 
         for await (const { pointerId, clientX } of moving)
             if (element.hasPointerCapture(pointerId))
-                style.width = clientX - offsetLeft + 'px';
+                style.width = clientX - x + 'px';
     }
 
     render() {

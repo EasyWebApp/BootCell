@@ -4,10 +4,12 @@ import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
 
 import { SafeTurnDown } from '../utility/TurnDown';
+import { FileUploader, UploadEvent } from './FileUploader';
 
 export interface MarkdownEditorProps extends WebFieldProps {}
 
-const parser = new SafeTurnDown();
+const parser = new SafeTurnDown(),
+    fileMap = new WeakMap<HTMLElement, Map<File, string>>();
 
 @component({
     tagName: 'markdown-editor',
@@ -34,10 +36,17 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
         this.contentEditable = 'true';
         // @ts-ignore
         this.core = MarkdownIME.Enhance(this);
+        fileMap.set(this, new Map());
 
         this.addEventListener('input', this.handleInput);
         this.addEventListener('paste', this.handleOuterData);
         this.addEventListener('drop', this.handleOuterData);
+
+        this.closest<FileUploader>('file-uploader')?.addEventListener(
+            'upload',
+            this.handleUpload
+        );
+        super.connectedCallback();
     }
 
     updatedCallback() {
@@ -47,6 +56,13 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
     }
 
     handleInput = () => this.internals.setFormValue(this.value);
+
+    handleUpload = ({ detail: { file, path } }: UploadEvent) => {
+        const URI = fileMap.get(this).get(file);
+        const media = this.querySelector<HTMLImageElement>(`[src="${URI}"]`);
+
+        if (media) media.src = path;
+    };
 
     static filterData(...items: DataTransferItem[]) {
         items = items
@@ -65,7 +81,7 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
             : items.filter(({ type }) => !type.startsWith('text/'));
     }
 
-    static loadData(item: DataTransferItem) {
+    loadData = (item: DataTransferItem) => {
         const { kind, type } = item;
 
         if (kind === 'string')
@@ -74,11 +90,12 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
                     resolve(type === 'text/plain' ? marked(raw) : raw)
                 )
             );
-
         const file = item.getAsFile();
 
         if (file) {
             const src = URL.createObjectURL(file);
+            fileMap.get(this).set(file, src);
+
             const data = `title="${file.name}" src="${src}"`;
 
             switch (type.split('/')[0]) {
@@ -91,7 +108,7 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
             }
         }
         return '';
-    }
+    };
 
     handleOuterData = async (event: DragEvent & ClipboardEvent) => {
         const { items } = event.dataTransfer || event.clipboardData;
@@ -102,7 +119,7 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
 
         const list = MarkdownEditor.filterData(...items);
 
-        const parts = await Promise.all(list.map(MarkdownEditor.loadData));
+        const parts = await Promise.all(list.map(this.loadData));
 
         insertToCursor(...parseDOM(parts.filter(Boolean).join('\n')));
 
@@ -120,10 +137,6 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
     }
 
     get files() {
-        return Array.from(
-            this.querySelectorAll('img[src], audio[src], video[src]'),
-            ({ src, title }: HTMLImageElement) =>
-                src.startsWith('blob:') && { name: title, URI: src }
-        ).filter(Boolean);
+        return [...fileMap.get(this).keys()];
     }
 }

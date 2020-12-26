@@ -3,13 +3,14 @@ import { formToJSON } from 'web-utility/source/DOM';
 
 import { Field } from '../source/Form/Field';
 import { ScoreRange } from '../source/Form/ScoreRange';
+import { FileUploader } from '../source/Form/FileUploader';
+import { FileInput } from '../source/Form/FileInput';
 import { MarkdownEditor } from '../source/Form/MarkdownEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
 import { ListItem } from '../source/Content/ListGroup';
 import { Step } from '../source/Navigator/Stepper';
 import { Button } from '../source/Form/Button';
-import { FileInput } from '../source/Form/FileInput';
 
 documentReady.then(() =>
     render(
@@ -33,15 +34,23 @@ documentReady.then(() =>
                         <h3>Star</h3>
                         <ScoreRange className="text-warning" name="score" />
                     </section>
-                    <section>
-                        <h2>File Input</h2>
+                    <h2>File Uploader</h2>
+                    <FileUploader
+                        transport={() => ({
+                            path: Promise.resolve('test')
+                        })}
+                    >
+                        <section>
+                            <h3>File Input</h3>
 
-                        <FileInput name="file" />
-                    </section>
-                    <section>
-                        <h2>Markdown Editor</h2>
-                        <MarkdownEditor name="rich_text" />
-                    </section>
+                            <FileInput name="file" />
+                        </section>
+                        <section>
+                            <h3>Markdown Editor</h3>
+
+                            <MarkdownEditor name="markdown" />
+                        </section>
+                    </FileUploader>
                     <Button type="submit" color="success" className="my-3">
                         Submit
                     </Button>
