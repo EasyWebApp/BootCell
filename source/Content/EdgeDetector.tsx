@@ -1,9 +1,13 @@
 import { component, mixin, createCell, Fragment } from 'web-cell';
 
-export type EdgeSide = 'top' | 'bottom' | 'left' | 'right';
+type EdgeSide = 'top' | 'bottom' | 'left' | 'right';
 
-export interface EdgeEvent extends CustomEvent {
-    detail: EdgeSide;
+export type EdgeEvent = CustomEvent<EdgeSide>;
+
+declare global {
+    interface HTMLElementEventMap {
+        touchedge: EdgeEvent;
+    }
 }
 
 @component({

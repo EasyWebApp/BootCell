@@ -3,9 +3,9 @@ import {
     WebFieldState,
     component,
     mixinForm,
+    watch,
     createCell,
-    Fragment,
-    watch
+    Fragment
 } from 'web-cell';
 
 import { Progress } from '../Reminder';
@@ -21,6 +21,12 @@ export type UploadEvent = CustomEvent<{
     file: File;
     path: string;
 }>;
+
+declare global {
+    interface HTMLElementEventMap {
+        upload: UploadEvent;
+    }
+}
 
 export interface FileUploaderProps extends WebFieldProps {
     transport(file: File): UploadHandler;

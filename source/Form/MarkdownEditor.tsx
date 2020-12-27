@@ -1,5 +1,5 @@
-import { WebFieldProps, component, mixinForm } from 'web-cell';
-import { parseDOM, insertToCursor } from 'web-utility/source/DOM';
+import { WebFieldProps, component, mixinForm, watch } from 'web-cell';
+import { importCSS, parseDOM, insertToCursor } from 'web-utility/source/DOM';
 import * as MarkdownIME from 'markdown-ime';
 import marked from 'marked';
 
@@ -25,7 +25,30 @@ const parser = new SafeTurnDown(),
 export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
     private core: any;
 
+    @watch
+    // @ts-ignore
+    set defaultValue(defaultValue: string) {
+        this.setProps({ defaultValue }).then(
+            () => (this.innerHTML = defaultValue)
+        );
+    }
+    // @ts-ignore
+    set value(value: string) {
+        this.internals.setFormValue(value);
+        this.innerHTML = marked(value);
+    }
+    get value() {
+        return parser.turndown(this.innerHTML);
+    }
+
+    get files() {
+        return [...fileMap.get(this).keys()];
+    }
+
     connectedCallback() {
+        importCSS(
+            'https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css'
+        );
         this.classList.add(
             'form-control',
             'markdown-body',
@@ -38,6 +61,9 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
         this.core = MarkdownIME.Enhance(this);
         fileMap.set(this, new Map());
 
+        this.root.addEventListener('slotchange', () =>
+            this.setProps({ defaultValue: this.innerHTML })
+        );
         this.addEventListener('input', this.handleInput);
         this.addEventListener('paste', this.handleOuterData);
         this.addEventListener('drop', this.handleOuterData);
@@ -126,17 +152,4 @@ export class MarkdownEditor extends mixinForm<MarkdownEditorProps>() {
         for (const paragraph of this.querySelectorAll('p p'))
             paragraph.replaceWith(...paragraph.childNodes);
     };
-
-    set value(value: string) {
-        this.internals.setFormValue(value);
-        this.innerHTML = marked(value);
-    }
-
-    get value() {
-        return parser.turndown(this.innerHTML);
-    }
-
-    get files() {
-        return [...fileMap.get(this).keys()];
-    }
 }

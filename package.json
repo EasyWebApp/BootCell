@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4, BootStrap Icon v1 & FontAwesome v5",
@@ -26,7 +26,7 @@
     "dependencies": {
         "classnames": "^2.2.6",
         "web-cell": "^2.3.0-beta.4",
-        "web-utility": "^2.2.1"
+        "web-utility": "^2.2.2"
     },
     "peerDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
@@ -39,6 +39,8 @@
         "iterable-observer": "^1.0.0-beta.5",
         "markdown-ime": "^1.0.3",
         "marked": "^1.2.7",
+        "quill": "^1.3.7",
+        "quill-image-uploader": "^1.2.2",
         "share-api-polyfill": "1.0.20",
         "turndown": "^7.0.0",
         "turndown-plugin-gfm": "^1.0.2"
@@ -54,6 +56,7 @@
         "@types/core-js": "^2.5.4",
         "@types/jest": "^26.0.19",
         "@types/marked": "^1.2.1",
+        "@types/quill": "^2.0.4",
         "@types/resize-observer-browser": "^0.1.4",
         "@types/turndown": "^5.0.0",
         "autoprefixer": "^9.8.6",
@@ -73,6 +76,8 @@
         "parcel-bundler": "^1.12.4",
         "postcss-modules": "^3.2.2",
         "prettier": "^2.2.1",
+        "quill": "^1.3.7",
+        "quill-image-uploader": "^1.2.2",
         "snabbdom": "^1.0.1",
         "ts-jest": "^26.4.4",
         "turndown": "^7.0.0",
@@ -84,7 +89,7 @@
         "lint": "lint-staged",
         "test": "lint-staged  &&  jest --forceExit",
         "start": "cd test/  &&  parcel index.html --open",
-        "pack-dist": "rm -rf dist/  &&  cross-env NODE_ENV=build  microbundle --external web-cell,web-utility,classnames,iterable-observer,marked,turndown,turndown-plugin-gfm,markdown-ime,@nuintun/qrcode --globals web-cell=WebCell,web-utility=WebUtility,classnames=classNames,iterable-observer=IterableObserver --name BootCell --css-modules true",
+        "pack-dist": "rm -rf dist/  &&  cross-env NODE_ENV=build  microbundle --external web-cell,web-utility,classnames,iterable-observer,marked,turndown,turndown-plugin-gfm,markdown-ime,quill,quill-image-uploader,@nuintun/qrcode --globals web-cell=WebCell,web-utility=WebUtility,classnames=classNames,iterable-observer=IterableObserver,quill=Quill --name BootCell --css-modules true",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
         "build": "npm run pack-dist  &&  npm run pack-docs",
         "help": "npm run pack-docs  &&  open-cli docs/index.html",

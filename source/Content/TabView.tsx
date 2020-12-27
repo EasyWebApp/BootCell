@@ -10,6 +10,7 @@ import {
     Fragment
 } from 'web-cell';
 import classNames from 'classnames';
+import { importCSS } from 'web-utility/source/DOM';
 import { uniqueID } from 'web-utility/source/data';
 import { transitOut, transitIn } from 'web-utility/source/animation';
 
@@ -110,6 +111,15 @@ export class TabView extends mixin<TabViewProps>() {
         return [...this.lastElementChild.children] as HTMLElement[];
     }
 
+    async connectedCallback() {
+        if (!this.id.trim()) this.id = uniqueID();
+
+        await importCSS(
+            'https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css'
+        );
+        super.connectedCallback();
+    }
+
     async turnTo(index = 0) {
         const { headers, bodies, linear } = this;
 
@@ -159,12 +169,6 @@ export class TabView extends mixin<TabViewProps>() {
     @on('reset', '.bs-stepper .bs-stepper-pane form')
     handleReset(event: Event, form: HTMLFormElement) {
         this.activeIndex--;
-    }
-
-    connectedCallback() {
-        if (!this.id.trim()) this.id = uniqueID();
-
-        super.connectedCallback();
     }
 
     updatedCallback() {

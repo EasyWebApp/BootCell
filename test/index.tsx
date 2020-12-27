@@ -6,11 +6,14 @@ import { ScoreRange } from '../source/Form/ScoreRange';
 import { FileUploader } from '../source/Form/FileUploader';
 import { FileInput } from '../source/Form/FileInput';
 import { MarkdownEditor } from '../source/Form/MarkdownEditor';
+import { HTMLEditor } from '../source/Form/HTMLEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
 import { ListItem } from '../source/Content/ListGroup';
 import { Step } from '../source/Navigator/Stepper';
 import { Button } from '../source/Form/Button';
+
+const test_image = 'https://web-cell.dev/WebCell-1.fb612fdb.png';
 
 documentReady.then(() =>
     render(
@@ -37,7 +40,7 @@ documentReady.then(() =>
                     <h2>File Uploader</h2>
                     <FileUploader
                         transport={() => ({
-                            path: Promise.resolve('test')
+                            path: Promise.resolve(test_image)
                         })}
                     >
                         <section>
@@ -48,9 +51,31 @@ documentReady.then(() =>
                         <section>
                             <h3>Markdown Editor</h3>
 
-                            <MarkdownEditor name="markdown" />
+                            <MarkdownEditor name="markdown">
+                                default text
+                            </MarkdownEditor>
                         </section>
                     </FileUploader>
+                    <section>
+                        <h2>HTML Editor</h2>
+
+                        <h3>Bubble theme</h3>
+                        <HTMLEditor name="html-lite">
+                            Operate after selecting
+                        </HTMLEditor>
+
+                        <h3>Snow theme</h3>
+                        <HTMLEditor
+                            theme="snow"
+                            name="html-full"
+                            placeholder="type here..."
+                            upload={() =>
+                                new Promise(resolve =>
+                                    setTimeout(() => resolve(test_image), 1000)
+                                )
+                            }
+                        />
+                    </section>
                     <Button type="submit" color="success" className="my-3">
                         Submit
                     </Button>

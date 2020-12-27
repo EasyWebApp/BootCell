@@ -11,12 +11,14 @@ import classNames from 'classnames';
 
 import { JustityType } from '../utility/constant';
 
+export type PageChangeEvent = CustomEvent<number>;
+
 export interface PaginationProps extends WebCellProps {
     current?: number;
     total?: number;
     size?: 'sm' | 'lg';
     align?: keyof typeof JustityType;
-    onChange?: (event: CustomEvent<number>) => any;
+    onChange?: (event: PageChangeEvent) => any;
 }
 
 @component({

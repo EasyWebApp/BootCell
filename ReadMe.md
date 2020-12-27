@@ -18,6 +18,7 @@
 npm install boot-cell \
     iterable-observer \
     marked turndown turndown-plugin-gfm markdown-ime \
+    quill quill-image-uploader \
     @nuintun/qrcode
 ```
 
@@ -34,19 +35,11 @@ npm install boot-cell \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.1/font/bootstrap-icons.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.2/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"
 />
 <script
     crossorigin
@@ -141,6 +134,7 @@ npm install boot-cell \
 14. [FileUploader](https://web-cell.dev/BootCell/interfaces/fileuploaderprops.html)
 15. [FileInput](https://web-cell.dev/BootCell/interfaces/fileinputprops.html)
 16. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/markdowneditorprops.html)
+17. [HTMLEditor](https://web-cell.dev/BootCell/interfaces/htmleditorprops.html)
 
 ### Calendar
 

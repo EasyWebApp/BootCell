@@ -78,6 +78,12 @@ export function Table({
     );
 }
 
+declare global {
+    interface HTMLElementEventMap {
+        check: CustomEvent;
+    }
+}
+
 export interface TableRowProps
     extends WebCellProps,
         Pick<ToggleFieldProps, 'name' | 'checked' | 'indeterminate'> {
