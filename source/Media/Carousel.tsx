@@ -199,14 +199,11 @@ export class CarouselView extends mixin<CarouselProps>() {
     );
     private swipeStart: CartesianCoordinate;
 
-    handleSwipeStart = ({ touches: [touch] }: TouchEvent) =>
-        (this.swipeStart = { x: touch.pageX, y: touch.pageY });
+    handleSwipeStart = ({ touches: [{ pageX, pageY }] }: TouchEvent) =>
+        (this.swipeStart = { x: pageX, y: pageY });
 
-    handleSwipeEnd = ({ changedTouches: [touch] }: TouchEvent) => {
-        const vector = getSwipeVector(this.swipeStart, {
-            x: touch.pageX,
-            y: touch.pageY
-        });
+    handleSwipeEnd = ({ changedTouches: [{ pageX, pageY }] }: TouchEvent) => {
+        const vector = getSwipeVector(this.swipeStart, { x: pageX, y: pageY });
 
         if (vector)
             switch (vector.direction) {

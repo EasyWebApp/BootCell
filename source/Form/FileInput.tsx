@@ -58,7 +58,7 @@ export class FileInput extends mixinForm<FileInputProps>() {
     connectedCallback() {
         this.classList.add(style.fileBox);
 
-        this.closest<FileUploader>('file-uploader').addEventListener(
+        this.closest<FileUploader>('file-uploader')?.addEventListener(
             'upload',
             ({ detail: { file, path } }) => {
                 if (file === this.files[0]) this.value = path;

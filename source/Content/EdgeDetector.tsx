@@ -1,4 +1,4 @@
-import { component, mixin, createCell, Fragment } from 'web-cell';
+import { WebCellProps, component, mixin, createCell, Fragment } from 'web-cell';
 
 type EdgeSide = 'top' | 'bottom' | 'left' | 'right';
 
@@ -8,6 +8,10 @@ declare global {
     interface HTMLElementEventMap {
         touchedge: EdgeEvent;
     }
+}
+
+export interface EdgeDetectorProps extends WebCellProps {
+    onTouchEdge?(event: EdgeEvent): any;
 }
 
 @component({
@@ -29,7 +33,7 @@ declare global {
         }
     }
 })
-export class EdgeDetector extends mixin() {
+export class EdgeDetector extends mixin<EdgeDetectorProps>() {
     watch(side: EdgeSide, node: HTMLElement) {
         new IntersectionObserver(([{ isIntersecting }]) => {
             if (isIntersecting) this.emit('touchedge', side);

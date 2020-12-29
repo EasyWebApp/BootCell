@@ -58,6 +58,8 @@ export class HTMLEditor extends mixinForm<HTMLEditorProps>() {
     set value(value: string) {
         const { box } = this;
 
+        this.setProps({ value });
+
         if (!box) return;
 
         this.internals.setFormValue(value);
@@ -65,7 +67,7 @@ export class HTMLEditor extends mixinForm<HTMLEditorProps>() {
     }
 
     get value() {
-        return this.box?.root.innerHTML;
+        return this.box?.root.innerHTML || this.props.value;
     }
 
     async connectedCallback() {
@@ -79,7 +81,12 @@ export class HTMLEditor extends mixinForm<HTMLEditorProps>() {
      * @see https://quilljs.com/docs/modules/toolbar/#container
      */
     protected boot = async (node: HTMLElement) => {
-        const { theme, readOnly, placeholder, upload, options } = this;
+        const { theme, readOnly, placeholder, upload, options, value } = this;
+
+        const SizeStyle = Quill.import('attributors/style/size');
+        SizeStyle.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+
+        Quill.register(SizeStyle, true);
 
         if (theme === 'snow')
             Quill.register(
@@ -102,7 +109,7 @@ export class HTMLEditor extends mixinForm<HTMLEditorProps>() {
                     [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
                     [{ direction: 'rtl' }], // text direction
 
-                    [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+                    [{ size: SizeStyle.whitelist }], // custom dropdown
                     [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
                     [{ color: [] }, { background: [] }], // dropdown with defaults from theme
@@ -117,6 +124,8 @@ export class HTMLEditor extends mixinForm<HTMLEditorProps>() {
             },
             ...options
         });
+
+        this.box.root.innerHTML = value;
 
         node.addEventListener('input', () =>
             this.internals.setFormValue(this.value)
