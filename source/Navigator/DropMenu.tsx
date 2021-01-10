@@ -11,7 +11,7 @@ import {
     createCell,
     Fragment
 } from 'web-cell';
-import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import type { HTMLHyperLinkProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
@@ -90,7 +90,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
 
     @attribute
     @watch
-    caption: ButtonProps['caption'];
+    caption: WebCellElement;
 
     @attribute
     @watch

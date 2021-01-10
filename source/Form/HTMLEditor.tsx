@@ -6,13 +6,13 @@ import {
     attribute,
     createCell
 } from 'web-cell';
-import { HTMLTextFieldProps } from 'web-utility/source/DOM-type';
+import type { TextFieldProps } from 'web-utility';
 import { importCSS } from 'web-utility/source/DOM';
 import Quill, { QuillOptionsStatic } from 'quill';
 
 import './HTMLEditor.less';
 
-export interface HTMLEditorProps extends HTMLTextFieldProps, WebFieldProps {
+export interface HTMLEditorProps extends TextFieldProps, WebFieldProps {
     theme?: 'bubble' | 'snow';
     options?: QuillOptionsStatic;
     upload?(file: File): Promise<string>;

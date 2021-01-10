@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "1.9.1",
+    "version": "1.9.4",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v2, BootStrap v4, BootStrap Icon v1 & FontAwesome v5",
@@ -25,8 +25,8 @@
     "module": "dist/index.js",
     "dependencies": {
         "classnames": "^2.2.6",
-        "web-cell": "^2.3.0-beta.4",
-        "web-utility": "^2.2.2"
+        "web-cell": "^2.3.0-rc.1",
+        "web-utility": "^2.4.3"
     },
     "peerDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
@@ -51,19 +51,19 @@
         "@peculiar/webcrypto": "^1.1.4",
         "@tech_query/snabbdom-looks-like": "^2.0.1",
         "@types/classnames": "^2.2.11",
-        "@types/jest": "^26.0.19",
+        "@types/jest": "^26.0.20",
         "@types/marked": "^1.2.1",
         "@types/quill": "^2.0.4",
-        "@types/resize-observer-browser": "^0.1.4",
+        "@types/resize-observer-browser": "^0.1.5",
         "@types/turndown": "^5.0.0",
         "autoprefixer": "^9.8.6",
         "cross-env": "^7.0.3",
         "element-internals-polyfill": "^0.1.1",
-        "husky": "^4.3.6",
+        "husky": "^4.3.7",
         "identity-obj-proxy": "^3.0.0",
         "iterable-observer": "^1.0.0-beta.5",
         "jest": "^26.6.3",
-        "less": "^4.0.0",
+        "less": "^4.1.0",
         "lint-staged": "^10.5.3",
         "markdown-ime": "^1.0.3",
         "marked": "^1.2.7",
@@ -78,7 +78,7 @@
         "ts-jest": "^26.4.4",
         "turndown": "^7.0.0",
         "turndown-plugin-gfm": "^1.0.2",
-        "typedoc": "^0.20.1",
+        "typedoc": "^0.20.14",
         "typescript": "^3.9.7"
     },
     "scripts": {

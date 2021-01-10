@@ -55,7 +55,7 @@ export function CarouselCaption({
 }
 
 export interface CarouselItemProps extends CarouselCaptionProps {
-    image?: string | URL;
+    image?: string;
 }
 
 export function CarouselItem({

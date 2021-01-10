@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import './Image.less';
 
 export interface ImageProps extends WebCellProps {
-    src: string | URL;
+    src: string;
     alt?: string;
     background?: boolean;
     caption?: WebCellElement;
@@ -43,6 +43,7 @@ export function Image({
             )}
             style={style}
             src={src}
+            // @ts-ignore
             lazyLoad="1"
             loading="lazy"
             {...rest}

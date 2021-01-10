@@ -1,5 +1,5 @@
 import { WebCellProps, VNode, createCell } from 'web-cell';
-import { TableCellProps, BaseFieldProps } from 'web-utility/source/DOM-type';
+import type { HTMLTableCellProps, BaseFieldProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
@@ -130,15 +130,19 @@ export function TableRow({
     );
 }
 
-export interface InputCellProps extends TableCellProps, BaseFieldProps {
+export interface InputCellProps
+    extends WebCellProps,
+        HTMLTableCellProps,
+        BaseFieldProps {
     is?: FieldProps['is'];
     type?: FieldProps['type'];
 }
 
 export function InputCell({
     className,
+    style,
     colSpan,
-    rowspan,
+    rowSpan,
     is = 'input',
     type,
     defaultSlot,
@@ -148,7 +152,7 @@ export function InputCell({
         'form-control border-left-0 border-right-0 border-top-0 rounded-0';
 
     return (
-        <td colSpan={colSpan} rowspan={rowspan} className={className}>
+        <td {...{ className, style, colSpan, rowSpan }}>
             {is === 'input' ? (
                 <input {...rest} type={type} className={Class} />
             ) : is === 'select' ? (

@@ -110,7 +110,7 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
         const { UID } = this,
             nav = (
                 <Fragment>
-                    <a class="navbar-brand" href=".">
+                    <a className="navbar-brand" href=".">
                         {brand}
                     </a>
                     <NavBarToggler
@@ -130,7 +130,7 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
                         defaultSlot
                     )}
                 </CollapseBox>
-                <div class={`navbar navbar-${theme}`}>
+                <div className={`navbar navbar-${theme}`}>
                     {narrow ? (
                         <div
                             className={classNames(

@@ -1,4 +1,5 @@
 import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
+import type { HTMLContainerProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
@@ -49,7 +50,10 @@ export function GroupLabel({
     );
 }
 
-export interface InputGroupProps extends WebCellProps, ValidableFieldProps {
+export interface InputGroupProps
+    extends WebCellProps,
+        HTMLContainerProps,
+        ValidableFieldProps {
     size?: 'sm' | 'lg';
 }
 

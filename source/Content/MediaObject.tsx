@@ -9,7 +9,7 @@ import classNames from 'classnames';
 export interface MediaObjectProps extends WebCellProps {
     listItem?: boolean;
     title: string;
-    image: string | URL | VNodeChildElement;
+    image: string | VNodeChildElement;
     imageRow?: 'start' | 'center' | 'end';
     imageColumn?: 'left' | 'right';
 }
@@ -29,7 +29,7 @@ export function MediaObject({
     const Class = classNames('media', !left && 'flex-row-reverse', className),
         body = (
             <Fragment>
-                {typeof image === 'string' || image instanceof URL ? (
+                {typeof image === 'string' ? (
                     <img
                         className={`align-self-${imageRow} ${
                             left ? 'mr-3' : 'ml-3'

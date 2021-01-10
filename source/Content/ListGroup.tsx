@@ -1,5 +1,5 @@
 import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
-import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import type { HTMLHyperLinkProps } from 'web-utility';
 import classNames from 'classnames';
 
 import { CommonColors } from '../utility/constant';

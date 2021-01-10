@@ -8,6 +8,7 @@ import {
     NavBarToggler
 } from '../../source/Navigator/NavBar';
 import { NavLink } from '../../source/Navigator/Nav';
+import { CollapseBox } from '../../source/Content/Collapse';
 
 const { render: renderBanner } = BannerNavBar.prototype;
 
@@ -91,11 +92,11 @@ describe('Navigator Bar', () => {
         assertLooksLike(
             <InlineBanner brand="Test">text</InlineBanner>,
             <Fragment>
-                <collapse-box id="test" open={false}>
+                <CollapseBox id="test" open={false}>
                     test
-                </collapse-box>
-                <div class="navbar navbar-dark">
-                    <a class="navbar-brand" href=".">
+                </CollapseBox>
+                <div className="navbar navbar-dark">
+                    <a className="navbar-brand" href=".">
                         Test
                     </a>
                     <NavBarToggler aria-controls="test" aria-expanded="false" />
@@ -110,12 +111,12 @@ describe('Navigator Bar', () => {
                 text
             </InlineBanner>,
             <Fragment>
-                <collapse-box id="test" open={false}>
+                <CollapseBox id="test" open={false}>
                     <div className="container">test</div>
-                </collapse-box>
-                <div class="navbar navbar-dark">
+                </CollapseBox>
+                <div className="navbar navbar-dark">
                     <div className="container">
-                        <a class="navbar-brand" href=".">
+                        <a className="navbar-brand" href=".">
                             Test
                         </a>
                         <NavBarToggler
@@ -154,7 +155,7 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <collapse-box className="navbar-collapse" id="test">
+                <CollapseBox className="navbar-collapse" id="test">
                     <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
@@ -168,7 +169,7 @@ describe('Navigator Bar', () => {
                     <div className="d-flex justify-content-end align-items-center">
                         <a />
                     </div>
-                </collapse-box>
+                </CollapseBox>
             </Fragment>
         );
     });
@@ -197,7 +198,7 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <collapse-box className="navbar-collapse" id="test">
+                <CollapseBox className="navbar-collapse" id="test">
                     <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
@@ -208,7 +209,7 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                </collapse-box>
+                </CollapseBox>
             </div>
         );
     });

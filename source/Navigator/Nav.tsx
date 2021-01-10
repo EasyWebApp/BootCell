@@ -1,5 +1,5 @@
 import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
-import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import type { HTMLHyperLinkProps } from 'web-utility';
 import classNames from 'classnames';
 
 import { isDropMenuItem, DropMenu } from './DropMenu';
@@ -7,7 +7,6 @@ import { JustityType, BackgroundColors } from '../utility/constant';
 import './Nav.less';
 
 export interface NavLinkProps extends WebCellProps, HTMLHyperLinkProps {
-    href?: string | URL;
     disabled?: boolean;
     active?: boolean;
 }
@@ -23,19 +22,16 @@ export function NavLink({
 }: NavLinkProps) {
     const isMenu = isDropMenuItem(defaultSlot[0]);
 
-    rest = {
-        ...rest,
-        className: classNames(
-            'nav-item',
-            'nav-link',
-            'text-nowrap',
-            isMenu && 'p-0',
-            disabled ? 'disabled' : active && 'active',
-            className
-        ),
-        tabIndex: disabled ? -1 : tabIndex,
-        'aria-disabled': !!disabled + ''
-    };
+    rest['aria-disabled'] = !!disabled + '';
+    rest['className'] = classNames(
+        'nav-item',
+        'nav-link',
+        'text-nowrap',
+        isMenu && 'p-0',
+        disabled ? 'disabled' : active && 'active',
+        className
+    );
+    rest['tabIndex'] = disabled ? -1 : tabIndex;
 
     return isMenu ? (
         <DropMenu {...rest} caption={title}>
@@ -43,7 +39,7 @@ export function NavLink({
         </DropMenu>
     ) : (
         <a {...rest} title={title}>
-            {defaultSlot}
+            {defaultSlot as VNodeChildElement}
             {!active ? null : <span className="sr-only">(current)</span>}
         </a>
     );

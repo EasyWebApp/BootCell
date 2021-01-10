@@ -2,6 +2,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Accordion, AccordionPanel } from '../../source/Content/Accordion';
+import { CollapseBox } from '../../source/Content/Collapse';
 
 describe('Accordion', () => {
     it('should render Card list', () => {
@@ -28,14 +29,14 @@ describe('Accordion', () => {
                             </button>
                         </h2>
                     </header>
-                    <collapse-box
+                    <CollapseBox
                         id="accordion_b_random_0"
                         key="accordion_b_random_0"
                         aria-labelledby="accordion_h_random_0"
                         open
                     >
                         <div className="card-body">test</div>
-                    </collapse-box>
+                    </CollapseBox>
                 </section>
                 <section className="card">
                     <header className="card-header" id="accordion_h_random_1">
@@ -50,13 +51,13 @@ describe('Accordion', () => {
                             </button>
                         </h2>
                     </header>
-                    <collapse-box
+                    <CollapseBox
                         id="accordion_b_random_1"
                         key="accordion_b_random_1"
                         aria-labelledby="accordion_h_random_1"
                     >
                         <div className="card-body">example</div>
-                    </collapse-box>
+                    </CollapseBox>
                 </section>
             </div>
         );

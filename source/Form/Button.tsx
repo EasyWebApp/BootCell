@@ -1,13 +1,14 @@
 import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
-import { HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import type { HTMLButtonProps, HTMLHyperLinkProps } from 'web-utility';
 import classNames from 'classnames';
 
 import { CommonColors } from '../utility/constant';
 import { IconProps, Icon } from '../Reminder/Icon';
 
-export interface ButtonProps extends HTMLHyperLinkProps, WebCellProps {
-    type?: 'button' | 'submit' | 'reset' | 'image';
-    disabled?: boolean;
+export interface ButtonProps
+    extends HTMLButtonProps,
+        HTMLHyperLinkProps,
+        WebCellProps {
     color?: CommonColors | 'link';
     outline?: boolean;
     size?: 'sm' | 'lg';
@@ -41,8 +42,7 @@ export function Button({
                 disabled && 'disabled',
                 className
             )}
-            href={href}
-            target={target}
+            {...{ href, target }}
             tabIndex={disabled ? -1 : tabIndex}
             role="button"
             aria-disabled={Boolean(disabled) + ''}

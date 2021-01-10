@@ -1,4 +1,4 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { WebCellProps, createCell, VNodeChildElement } from 'web-cell';
 import { transitOut } from 'web-utility/source/animation';
 import classNames from 'classnames';
 
@@ -33,7 +33,7 @@ export function Alert({
         >
             {title && <h4 className="alert-heading">{title}</h4>}
 
-            {defaultSlot}
+            {defaultSlot as VNodeChildElement}
 
             {!closable ? null : (
                 <CloseButton

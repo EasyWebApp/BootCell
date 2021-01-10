@@ -1,5 +1,5 @@
 import { createCell } from 'web-cell';
-import { HTMLProps, HTMLHyperLinkProps } from 'web-utility/source/DOM-type';
+import type { HTMLProps, HTMLHyperLinkProps } from 'web-utility';
 
 export interface BreadcrumbProps extends HTMLProps {
     path: HTMLHyperLinkProps[];

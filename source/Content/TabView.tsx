@@ -10,6 +10,7 @@ import {
     Fragment
 } from 'web-cell';
 import classNames from 'classnames';
+import type { HTMLContainerProps } from 'web-utility';
 import { importCSS } from 'web-utility/source/DOM';
 import { uniqueID } from 'web-utility/source/data';
 import { transitOut, transitIn } from 'web-utility/source/animation';
@@ -18,7 +19,11 @@ import { NavProps, isNavLink, Nav } from '../Navigator/Nav';
 import { isListItem, ListGroup } from './ListGroup';
 import { Stepper, isStep } from '../Navigator/Stepper';
 
-export function TabPanel({ className, defaultSlot, ...rest }: WebCellProps) {
+export function TabPanel({
+    className,
+    defaultSlot,
+    ...rest
+}: HTMLContainerProps & WebCellProps) {
     return (
         <div
             {...rest}

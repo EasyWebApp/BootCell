@@ -1,13 +1,13 @@
-import { WebCellProps, WebCellElement, createCell, Fragment } from 'web-cell';
-import { HTMLProps } from 'web-utility/source/DOM-type';
+import { WebCellElement, createCell, Fragment } from 'web-cell';
+import type { HTMLProps } from 'web-utility';
 import classNames from 'classnames';
 
-export interface FormProps extends WebCellProps {
+type HTMLFormProps = JSX.IntrinsicElements['form'];
+
+export interface FormProps extends HTMLFormProps {
     inline?: boolean;
     validate?: boolean;
     validated?: boolean;
-    onSubmit?: (event: Event) => any;
-    onReset?: (event: Event) => any;
 }
 
 export function Form({
@@ -64,10 +64,10 @@ export function ValidMessage({
     return (
         <Fragment>
             {validMessage && (
-                <div class={'valid-' + validMode}>{validMessage}</div>
+                <div className={'valid-' + validMode}>{validMessage}</div>
             )}
             {invalidMessage && (
-                <div class={'invalid-' + validMode}>{invalidMessage}</div>
+                <div className={'invalid-' + validMode}>{invalidMessage}</div>
             )}
         </Fragment>
     );

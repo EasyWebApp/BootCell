@@ -10,6 +10,7 @@ describe('Embed media', () => {
             <div className="embed-responsive embed-responsive-16by9">
                 <iframe
                     className="embed-responsive-item"
+                    // @ts-ignore
                     lazyLoad="1"
                     loading="lazy"
                     src="test.html"

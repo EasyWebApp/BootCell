@@ -1,5 +1,5 @@
 import { WebCellProps, createCell } from 'web-cell';
-import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import type { BaseFieldProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 

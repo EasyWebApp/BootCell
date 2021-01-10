@@ -10,6 +10,7 @@ describe('Image components', () => {
             <img
                 className="img-thumbnail"
                 src="test.png"
+                // @ts-ignore
                 lazyLoad="1"
                 loading="lazy"
             />
@@ -38,6 +39,7 @@ describe('Image components', () => {
                     className="img-fluid figure-img"
                     alt="Test"
                     src="test.png"
+                    // @ts-ignore
                     lazyLoad="1"
                     loading="lazy"
                 />

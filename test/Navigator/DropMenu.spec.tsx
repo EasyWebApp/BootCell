@@ -19,9 +19,10 @@ function InlineDropMenu({
     alignType = 'left',
     alignSize = '',
     direction = 'down',
-    defaultSlot,
-    UID = 'test'
+    defaultSlot
 }: DropMenuProps) {
+    const UID = 'test';
+
     return (
         <div>
             {render.call(

@@ -1,34 +1,23 @@
 import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
-import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import type {
+    HTMLInputProps,
+    NumberFieldProps,
+    TextFieldProps
+} from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-export interface FieldProps extends BaseFieldProps, WebCellProps {
+import type { ToggleFieldProps } from './ToggleField';
+
+export interface FieldProps
+    extends WebCellProps,
+        HTMLInputProps,
+        Omit<TextFieldProps, 'size'>,
+        NumberFieldProps,
+        Pick<ToggleFieldProps, 'checked' | 'indeterminate'> {
     is?: 'input' | 'output' | 'select' | 'textarea';
-    type?:
-        | 'button'
-        | 'checkbox'
-        | 'color'
-        | 'date'
-        | 'datetime-local'
-        | 'email'
-        | 'file'
-        | 'hidden'
-        | 'image'
-        | 'month'
-        | 'number'
-        | 'password'
-        | 'radio'
-        | 'range'
-        | 'reset'
-        | 'search'
-        | 'submit'
-        | 'tel'
-        | 'text'
-        | 'time'
-        | 'url'
-        | 'week';
     size?: 'sm' | 'lg' | number;
+    multiple?: boolean;
     valid?: boolean;
     label?: string;
     fileButton?: string;
@@ -50,7 +39,7 @@ export function Field({
     const sizeClass = typeof size === 'string' && `form-control-${size}`,
         validClass = valid ? 'is-valid' : valid === false && 'is-invalid';
 
-    if (typeof size === 'number') rest.size = size;
+    if (typeof size === 'number') rest['size'] = size;
 
     return {
         input:
@@ -69,7 +58,7 @@ export function Field({
                     />
                     <label
                         className="custom-file-label"
-                        for={id}
+                        htmlFor={id}
                         data-file={label || 'Choose file'}
                         data-browse={fileButton}
                     />

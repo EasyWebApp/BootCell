@@ -1,5 +1,5 @@
 import { createCell } from 'web-cell';
-import { BaseFieldProps } from 'web-utility/source/DOM-type';
+import type { InputEventHandlers } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
@@ -14,7 +14,7 @@ export interface FormFieldProps extends FieldProps, ValidableFieldProps {
     tips?: string;
 }
 
-function handleFile(more?: BaseFieldProps['onChange']) {
+function handleFile(more?: InputEventHandlers['onChange']) {
     return function (event: Event) {
         const {
             nextElementSibling: label,

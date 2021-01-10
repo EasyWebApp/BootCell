@@ -1,7 +1,13 @@
-import { WebCellProps, createCell } from 'web-cell';
+import { createCell } from 'web-cell';
 import classNames from 'classnames';
 
-export interface EmbedProps extends WebCellProps {
+type Elements = JSX.IntrinsicElements;
+type MediaProps = Elements['iframe'] &
+    Elements['embed'] &
+    Elements['audio'] &
+    Elements['video'];
+
+export interface EmbedProps extends MediaProps {
     is: 'iframe' | 'video' | 'audio' | 'embed';
     src: string;
     ratio?: '21/9' | '16/9' | '4/3' | '1/1';
@@ -23,6 +29,7 @@ export function Embed({
     props =
         Tag === 'iframe'
             ? {
+                  // @ts-ignore
                   lazyLoad: '1',
                   loading: 'lazy',
                   ...props

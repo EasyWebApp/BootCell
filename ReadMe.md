@@ -5,7 +5,7 @@
 [Web Components][1] UI library based on [WebCell v2][2], [BootStrap v4][3], [BootStrap Icon v1][4] & [FontAwesome v5][5]
 
 [![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][6]
-[![CI & CD](https://github.com/EasyWebApp/boot-cell/workflows/CI%20&%20CD/badge.svg)][7]
+[![CI & CD](https://github.com/EasyWebApp/BootCell/workflows/CI%20&%20CD/badge.svg)][7]
 
 [![Anti 996 license](https://img.shields.io/badge/license-Anti%20996-blue.svg)][8]
 [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][9]
@@ -174,7 +174,7 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [4]: https://icons.getbootstrap.com/
 [5]: https://fontawesome.com/
 [6]: https://david-dm.org/EasyWebApp/BootCell
-[7]: https://github.com/EasyWebApp/boot-cell/actions
+[7]: https://github.com/EasyWebApp/BootCell/actions
 [8]: https://github.com/996icu/996.ICU/blob/master/LICENSE
 [9]: https://github.com/jaywcjlove/awesome-uikit
 [10]: https://nodei.co/npm/boot-cell/

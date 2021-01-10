@@ -29,7 +29,7 @@ describe('Form Fields', () => {
                 <input type="file" className="custom-file-input" id="test" />
                 <label
                     className="custom-file-label"
-                    for="test"
+                    htmlFor="test"
                     data-file="Image"
                     data-browse="Browse"
                 />
