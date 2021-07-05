@@ -48,9 +48,8 @@ describe('Table', () => {
                 <table className={`table ${style.table}`}>
                     <thead>
                         <tr data-type="head" id="all">
-                            <th>
+                            <th className={style['row-checker']}>
                                 <Field
-                                    className={style['row-check']}
                                     type="checkbox"
                                     id="all-check"
                                     name="table-row"
@@ -63,9 +62,8 @@ describe('Table', () => {
                     </thead>
                     <tbody>
                         <tr data-type="body" id="row-1">
-                            <td>
+                            <td className={style['row-checker']}>
                                 <Field
-                                    className={style['row-check']}
                                     type="checkbox"
                                     id="row-1-check"
                                     name="table-row"

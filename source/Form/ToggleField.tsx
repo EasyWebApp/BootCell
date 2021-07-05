@@ -1,5 +1,5 @@
 import { WebCellProps, createCell } from 'web-cell';
-import type { BaseFieldProps } from 'web-utility';
+import type { HTMLFieldProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
@@ -9,7 +9,7 @@ import { ValidableFieldProps, ValidMessage } from './Form';
 
 export interface ToggleFieldProps
     extends WebCellProps,
-        BaseFieldProps,
+        HTMLFieldProps,
         ValidableFieldProps {
     type: 'radio' | 'checkbox';
     checked?: boolean;

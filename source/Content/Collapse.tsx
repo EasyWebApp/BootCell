@@ -43,14 +43,16 @@ export class CollapseBox extends mixin<CollapseProps>() {
     connectedCallback() {
         super.connectedCallback();
 
-        this.resizer = new ResizeObserver(([{ target }]) => {
-            (target as HTMLElement).style.display = self.getComputedStyle(
-                this
-            ).display;
+        this.resizer = new ResizeObserver(
+            ([{ target }]: ResizeObserverEntry[]) => {
+                (target as HTMLElement).style.display = self.getComputedStyle(
+                    this
+                ).display;
 
-            if (this.open)
-                this.style.height = self.getComputedStyle(target).height;
-        });
+                if (this.open)
+                    this.style.height = self.getComputedStyle(target).height;
+            }
+        );
         this.resizer.observe(this.shadowRoot.lastElementChild);
     }
 

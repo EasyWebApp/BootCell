@@ -11,7 +11,7 @@ import {
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { Size } from '../../utility/constant';
+import { Theme, BackgroundColors, Size } from '../../utility/constant';
 import { NavProps, isNavLink, Nav } from '../Nav';
 import { BannerNavBarProps } from './BannerNavBar';
 import { NavBarToggler } from './Toggler';
@@ -34,13 +34,43 @@ export class NavBar extends mixin<NavBarProps>() {
     @watch
     narrow = false;
 
-    @attribute
-    @watch
-    expand = 'md';
+    toggleClass<T>(
+        classResolver: (value: T) => string,
+        newValue: T,
+        oldValue?: T
+    ) {
+        if (oldValue) this.classList.remove(classResolver(oldValue));
+
+        this.classList.add(classResolver(newValue));
+    }
 
     @attribute
     @watch
-    fixed = 'top';
+    set expand(expand: BannerNavBarProps['expand']) {
+        const { expand: old } = this.props;
+
+        this.setProps({ expand }).then(() =>
+            this.toggleClass(
+                value => `navbar-expand${value === 'xs' ? '' : '-' + value}`,
+                expand,
+                old
+            )
+        );
+    }
+
+    @attribute
+    @watch
+    set fixed(fixed: BannerNavBarProps['fixed']) {
+        const { fixed: old } = this.props;
+
+        this.setProps({ fixed }).then(() =>
+            this.toggleClass(
+                value => (value === 'top' ? 'sticky-top' : 'fixed-bottom'),
+                fixed,
+                old
+            )
+        );
+    }
 
     @attribute
     @watch
@@ -52,11 +82,23 @@ export class NavBar extends mixin<NavBarProps>() {
 
     @attribute
     @watch
-    theme = 'dark';
+    set theme(theme: keyof typeof Theme) {
+        const { theme: old } = this.props;
+
+        this.setProps({ theme }).then(() =>
+            this.toggleClass(value => `navbar-${value}`, theme, old)
+        );
+    }
 
     @attribute
     @watch
-    background = 'dark';
+    set background(background: BackgroundColors) {
+        const { background: old } = this.props;
+
+        this.setProps({ background }).then(() =>
+            this.toggleClass(value => `bg-${value}`, background, old)
+        );
+    }
 
     @attribute
     @watch
@@ -93,6 +135,8 @@ export class NavBar extends mixin<NavBarProps>() {
     private resizer: ResizeObserver;
 
     connectedCallback() {
+        this.classList.add('navbar', 'shadow');
+
         document.body.addEventListener('click', this.outClose);
         self.addEventListener('keydown', this.escapeClose);
 
@@ -110,33 +154,12 @@ export class NavBar extends mixin<NavBarProps>() {
     }
 
     updatedCallback() {
-        const {
-            theme,
-            background,
-            expand,
-            fixed,
-            narrow,
-            direction,
-            open
-        } = this.props;
-
-        this.classList.add(
-            'navbar',
-            `navbar-${theme}`,
-            `bg-${background}`,
-            'shadow',
-            fixed === 'top' ? 'sticky-top' : 'fixed-bottom'
-        );
-        if (expand)
-            this.classList.add(
-                `navbar-expand${expand === 'xs' ? '' : '-' + expand}`
-            );
+        const { narrow, direction, open } = this.props;
 
         this.classList.toggle(
             'flex-row-reverse',
             !narrow && direction !== 'left' && !this.expanded
         );
-
         if (open) return;
 
         const offcanvas = this.querySelector<HTMLElement>(

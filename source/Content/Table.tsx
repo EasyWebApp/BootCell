@@ -108,9 +108,8 @@ export function TableRow({
     return (
         <tr {...rest} data-type={type}>
             {!checkable ? null : (
-                <Cell>
+                <Cell className={style['row-checker']}>
                     <Field
-                        className={style['row-check']}
                         type="checkbox"
                         id={rest.id + '-check'}
                         name={name}
