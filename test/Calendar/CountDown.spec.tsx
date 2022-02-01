@@ -2,7 +2,7 @@ import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { CountDown } from '../../source/Calendar/CountDown';
-import style from '../../source/Calendar/CountDown.less';
+import style from '../../source/Calendar/CountDown/index.less';
 
 const { render } = CountDown.prototype;
 

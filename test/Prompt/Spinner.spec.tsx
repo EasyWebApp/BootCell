@@ -3,7 +3,7 @@ import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { Spinner, SpinnerBox } from '../../source/Prompt/Spinner';
 import { Button } from '../../source/Form/Button';
-import style from '../../source/Prompt/Spinner.less';
+import style from '../../source/Prompt/Spinner/index.less';
 
 describe('Spinner', () => {
     it('should render a single Border Spinner by default', () => {

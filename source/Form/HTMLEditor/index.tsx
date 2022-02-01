@@ -10,7 +10,7 @@ import type { TextFieldProps } from 'web-utility';
 import { importCSS } from 'web-utility/source/DOM';
 import Quill, { QuillOptionsStatic } from 'quill';
 
-import './HTMLEditor.less';
+import './index.less';
 
 export interface HTMLEditorProps extends TextFieldProps, WebFieldProps {
     theme?: 'bubble' | 'snow';

@@ -1,7 +1,7 @@
 import { createCell, renderToStaticMarkup } from 'web-cell';
 
 import { openDialog, Modal } from '../../source/Prompt/Dialog';
-import style from '../../source/Prompt/Dialog.less';
+import style from '../../source/Prompt/Dialog/index.less';
 
 import { Field } from '../../source/Form/Field';
 import { Button, CloseButton } from '../../source/Form/Button';

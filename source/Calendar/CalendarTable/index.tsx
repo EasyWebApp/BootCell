@@ -1,7 +1,7 @@
 import { createCell, WebCellProps } from 'web-cell';
 
-import { Table, TableRow } from '../Content/Table';
-import style from './CalendarTable.less';
+import { Table, TableRow } from '../../Content/Table';
+import style from './index.less';
 
 export const WeekDays = [
     'Monday',

@@ -11,12 +11,12 @@ import {
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { Theme, BackgroundColors, Size } from '../../utility/constant';
-import { NavProps, isNavLink, Nav } from '../Nav';
-import { BannerNavBarProps } from './BannerNavBar';
-import { NavBarToggler } from './Toggler';
-import { CollapseBox } from '../../Content/Collapse';
-import './NavBar.less';
+import { Theme, BackgroundColors, Size } from '../../../utility/constant';
+import { NavProps, isNavLink, Nav } from '../../Nav';
+import { BannerNavBarProps } from '../BannerNavBar';
+import { NavBarToggler } from '../Toggler';
+import { CollapseBox } from '../../../Content/Collapse';
+import './index.less';
 
 export interface NavBarProps extends BannerNavBarProps {
     offcanvas?: boolean;

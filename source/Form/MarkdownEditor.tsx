@@ -1,7 +1,7 @@
 import { WebFieldProps, component, mixinForm, watch } from 'web-cell';
 import { importCSS, parseDOM, insertToCursor } from 'web-utility/source/DOM';
-import * as MarkdownIME from 'markdown-ime';
-import marked from 'marked';
+import MarkdownIME from 'markdown-ime';
+import { marked } from 'marked';
 
 import { SafeTurnDown } from '../utility/TurnDown';
 import { FileUploader, UploadEvent } from './FileUploader';

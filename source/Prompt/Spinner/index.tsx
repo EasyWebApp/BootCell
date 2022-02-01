@@ -1,8 +1,8 @@
 import { WebCellProps, createCell, Fragment } from 'web-cell';
 import classNames from 'classnames';
 
-import { CommonColors } from '../utility/constant';
-import style from './Spinner.less';
+import { CommonColors } from '../../utility/constant';
+import style from './index.less';
 
 export interface SpinnerProps extends WebCellProps {
     type?: 'border' | 'grow';

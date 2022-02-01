@@ -3,11 +3,11 @@ import type { HTMLTableCellProps, BaseFieldProps } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { CommonColors } from '../utility/constant';
-import { ToggleFieldProps } from '../Form/ToggleField';
-import { Field, FieldProps } from '../Form/Field';
+import { CommonColors } from '../../utility/constant';
+import { ToggleFieldProps } from '../../Form/ToggleField';
+import { Field, FieldProps } from '../../Form/Field';
 
-import style from './Table.less';
+import style from './index.less';
 
 export interface TableProps extends WebCellProps {
     theme?: CommonColors;

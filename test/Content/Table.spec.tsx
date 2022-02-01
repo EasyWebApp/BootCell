@@ -3,7 +3,7 @@ import { createCell } from 'web-cell';
 import classNames from 'classnames';
 
 import { Table, TableRow, InputCell } from '../../source/Content/Table';
-import style from '../../source/Content/Table.module.less';
+import style from '../../source/Content/Table/index.less';
 import { Field } from '../../source/Form/Field';
 
 describe('Table', () => {

@@ -28,6 +28,7 @@ export function Form({
                 validated && 'was-validated',
                 className
             )}
+            // @ts-ignore
             novalidate={validate}
             onSubmit={
                 !validate

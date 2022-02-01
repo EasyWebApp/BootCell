@@ -2,8 +2,8 @@ import { WebCellElement, WebCellProps, render, createCell } from 'web-cell';
 import { formToJSON } from 'web-utility/source/DOM';
 import classNames from 'classnames';
 
-import { Button, CloseButton } from '../Form/Button';
-import style from './Dialog.less';
+import { Button, CloseButton } from '../../Form/Button';
+import style from './index.less';
 
 export async function openDialog(content: WebCellElement) {
     const { body } = document;
@@ -18,6 +18,7 @@ export async function openDialog(content: WebCellElement) {
     });
 
     render(
+        // @ts-ignore
         <form method="dialog" className="h-100" onReset={() => dialog.close()}>
             {content}
         </form>,

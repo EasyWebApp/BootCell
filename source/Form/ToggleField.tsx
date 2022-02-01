@@ -38,6 +38,8 @@ export function ToggleField({
                 'custom-control',
                 `custom-${Switch ? 'switch' : type}`,
                 inline && 'custom-control-inline',
+                inline && 'h-100',
+                inline && 'align-items-center',
                 className
             )}
         >

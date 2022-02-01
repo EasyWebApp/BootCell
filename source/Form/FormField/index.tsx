@@ -3,9 +3,9 @@ import type { InputEventHandlers } from 'web-utility';
 import { uniqueID } from 'web-utility/source/data';
 import classNames from 'classnames';
 
-import { FieldProps, Field } from './Field';
-import { ValidableFieldProps, ValidMessage } from './Form';
-import './FormField.less';
+import { FieldProps, Field } from '../Field';
+import { ValidableFieldProps, ValidMessage } from '../Form';
+import './index.less';
 
 export interface FormFieldProps extends FieldProps, ValidableFieldProps {
     label?: string;
@@ -16,10 +16,8 @@ export interface FormFieldProps extends FieldProps, ValidableFieldProps {
 
 function handleFile(more?: InputEventHandlers['onChange']) {
     return function (event: Event) {
-        const {
-            nextElementSibling: label,
-            value
-        } = event.target as HTMLInputElement;
+        const { nextElementSibling: label, value } =
+            event.target as HTMLInputElement;
 
         (label as HTMLLabelElement).dataset.file = value
             .split(/\\|\//)

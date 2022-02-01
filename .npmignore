@@ -1,4 +1,4 @@
-.rts2_cache_*/
+.parcel-cache/
 .prettierrc.yml
 test/
 jest.config.js

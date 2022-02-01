@@ -2,9 +2,9 @@ import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
 import type { HTMLHyperLinkProps } from 'web-utility';
 import classNames from 'classnames';
 
-import { isDropMenuItem, DropMenu } from './DropMenu';
-import { JustityType, BackgroundColors } from '../utility/constant';
-import './Nav.less';
+import { isDropMenuItem, DropMenu } from '../DropMenu';
+import { JustityType, BackgroundColors } from '../../utility/constant';
+import './index.less';
 
 export interface NavLinkProps extends WebCellProps, HTMLHyperLinkProps {
     disabled?: boolean;

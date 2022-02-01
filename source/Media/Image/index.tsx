@@ -1,7 +1,7 @@
 import { WebCellProps, WebCellElement, createCell } from 'web-cell';
 import classNames from 'classnames';
 
-import './Image.less';
+import './index.less';
 
 export interface ImageProps extends WebCellProps {
     src: string;

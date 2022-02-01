@@ -12,7 +12,7 @@ import { transitIn, transitOut } from 'web-utility/source/animation';
 
 import { Position } from '../utility/constant';
 
-import './Tooltip.less';
+import './Tooltip/index.less';
 
 export interface PopoverProps extends WebCellProps {
     header?: VNodeChildElement;

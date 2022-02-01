@@ -8,8 +8,8 @@ import {
     createCell
 } from 'web-cell';
 
-import { FileUploader } from './FileUploader';
-import style from './FileInput.less';
+import { FileUploader } from '../FileUploader';
+import style from './index.less';
 
 export interface FileInputProps extends WebFieldProps {
     accept?: string;
