@@ -69,9 +69,9 @@ export interface DropMenuProps extends WebCellProps {
     caption: WebCellElement;
     buttonColor?: ButtonProps['color'];
     buttonSize?: ButtonProps['size'];
-    alignType?: 'left' | 'right';
+    alignType?: 'start' | 'end';
     alignSize?: '' | 'sm' | 'md' | 'lg' | 'xl';
-    direction?: 'up' | 'down' | 'left' | 'right';
+    direction?: 'up' | 'down' | 'start' | 'end';
     href?: HTMLHyperLinkProps['href'];
     target?: HTMLHyperLinkProps['target'];
     open?: boolean;
@@ -102,7 +102,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
 
     @attribute
     @watch
-    alignType: DropMenuProps['alignType'] = 'left';
+    alignType: DropMenuProps['alignType'] = 'start';
 
     @attribute
     @watch
@@ -162,7 +162,9 @@ export class DropMenu extends mixin<DropMenuProps>() {
             href || direction !== 'down' ? 'btn-group' : 'dropdown'
         );
 
-        if (href ? !['down', 'left'].includes(direction) : direction !== 'down')
+        if (
+            href ? !['down', 'start'].includes(direction) : direction !== 'down'
+        )
             this.classList.add(`drop${direction}`);
     }
 
@@ -220,10 +222,10 @@ export class DropMenu extends mixin<DropMenuProps>() {
         direction
     }: DropMenuProps) {
         const alignment =
-            alignType === 'right'
-                ? [`dropdown-menu${alignSize && '-' + alignSize}-right`]
-                : alignType === 'left' && alignSize
-                ? ['dropdown-menu-right', `dropdown-menu-${alignSize}-left`]
+            alignType === 'end'
+                ? [`dropdown-menu${alignSize && '-' + alignSize}-end`]
+                : alignType === 'start' && alignSize
+                ? ['dropdown-menu-end', `dropdown-menu-${alignSize}-start`]
                 : [];
         const body = (
             <div
@@ -238,9 +240,9 @@ export class DropMenu extends mixin<DropMenuProps>() {
             </div>
         );
 
-        return href && direction === 'left' ? (
+        return href && direction === 'start' ? (
             <Fragment>
-                <div className="btn-group dropleft" role="group">
+                <div className="btn-group dropstart" role="group">
                     {body}
                 </div>
                 {this.renderButton()}

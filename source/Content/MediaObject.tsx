@@ -11,7 +11,7 @@ export interface MediaObjectProps extends WebCellProps {
     title: string;
     image: string | VNodeChildElement;
     imageRow?: 'start' | 'center' | 'end';
-    imageColumn?: 'left' | 'right';
+    imageColumn?: 'start' | 'end';
 }
 
 export function MediaObject({
@@ -20,20 +20,19 @@ export function MediaObject({
     title,
     image,
     imageRow = 'start',
-    imageColumn = 'left',
+    imageColumn = 'start',
     defaultSlot,
     ...rest
 }: MediaObjectProps) {
-    const left = imageColumn === 'left';
-
-    const Class = classNames('media', !left && 'flex-row-reverse', className),
-        body = (
-            <Fragment>
+    const start = imageColumn === 'start';
+    const Tag = listItem ? 'li' : 'div',
+        Class = classNames('d-flex', !start && 'flex-row-reverse', className);
+    const body = (
+        <Fragment>
+            <div className="flex-shrink-0">
                 {typeof image === 'string' ? (
                     <img
-                        className={`align-self-${imageRow} ${
-                            left ? 'me-3' : 'ms-3'
-                        }`}
+                        className={`align-self-${imageRow}`}
                         style={{ width: '4rem' }}
                         src={image}
                         alt={title}
@@ -41,20 +40,17 @@ export function MediaObject({
                 ) : (
                     image
                 )}
-                <div className="media-body">
-                    <h5 className="mt-0">{title}</h5>
-                    {defaultSlot}
-                </div>
-            </Fragment>
-        );
+            </div>
+            <div className={`flex-grow-1 ${start ? 'ms-3' : 'me-3'}`}>
+                <h5 className="mt-0">{title}</h5>
+                {defaultSlot}
+            </div>
+        </Fragment>
+    );
 
-    return listItem ? (
-        <li {...rest} className={Class}>
+    return (
+        <Tag {...rest} className={Class}>
             {body}
-        </li>
-    ) : (
-        <div {...rest} className={Class}>
-            {body}
-        </div>
+        </Tag>
     );
 }

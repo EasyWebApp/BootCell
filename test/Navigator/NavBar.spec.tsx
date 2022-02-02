@@ -96,10 +96,15 @@ describe('Navigator Bar', () => {
                     test
                 </CollapseBox>
                 <div className="navbar navbar-dark">
-                    <a className="navbar-brand" href=".">
-                        Test
-                    </a>
-                    <NavBarToggler aria-controls="test" aria-expanded="false" />
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href=".">
+                            Test
+                        </a>
+                        <NavBarToggler
+                            aria-controls="test"
+                            aria-expanded="false"
+                        />
+                    </div>
                 </div>
             </Fragment>
         );

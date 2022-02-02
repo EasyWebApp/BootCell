@@ -131,18 +131,14 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
                     )}
                 </CollapseBox>
                 <div className={`navbar navbar-${theme}`}>
-                    {narrow ? (
-                        <div
-                            className={classNames(
-                                'container',
-                                direction !== 'left' && 'flex-row-reverse'
-                            )}
-                        >
-                            {nav}
-                        </div>
-                    ) : (
-                        nav
-                    )}
+                    <div
+                        className={classNames(
+                            narrow ? 'container' : 'container-fluid',
+                            direction !== 'left' && 'flex-row-reverse'
+                        )}
+                    >
+                        {nav}
+                    </div>
                 </div>
             </Fragment>
         );

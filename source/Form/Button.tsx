@@ -29,16 +29,18 @@ export function Button({
     defaultSlot,
     ...rest
 }: ButtonProps) {
-    const colorClass = color && `btn${outline ? '-outline' : ''}-${color}`;
+    const classList = [
+        'btn',
+        color && `btn${outline ? '-outline' : ''}-${color}`,
+        size && `btn-${size}`,
+        block && 'd-block w-100'
+    ];
 
     return href ? (
         <a
             {...rest}
             className={classNames(
-                'btn',
-                colorClass,
-                size && `btn-${size}`,
-                block && 'd-block',
+                ...classList,
                 disabled && 'disabled',
                 className
             )}
@@ -53,13 +55,7 @@ export function Button({
         <button
             {...rest}
             type={type}
-            className={classNames(
-                'btn',
-                colorClass,
-                size && `btn-${size}`,
-                block && 'd-block',
-                className
-            )}
+            className={classNames(...classList, className)}
             disabled={disabled}
             tabIndex={tabIndex}
         >
