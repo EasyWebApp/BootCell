@@ -7,9 +7,8 @@ describe('Embed media', () => {
     it('should render a responsive iframe', () => {
         assertLooksLike(
             <Embed is="iframe" src="test.html" />,
-            <div className="embed-responsive embed-responsive-16by9">
+            <div className="ratio ratio-16x9">
                 <iframe
-                    className="embed-responsive-item"
                     // @ts-ignore
                     lazyLoad="1"
                     loading="lazy"
@@ -22,8 +21,8 @@ describe('Embed media', () => {
     it('should render a responsive video/audio', () => {
         assertLooksLike(
             <Embed is="video" ratio="4/3" src="test.mp4" />,
-            <div className="embed-responsive embed-responsive-4by3">
-                <video className="embed-responsive-item" src="test.mp4" />
+            <div className="ratio ratio-4x3">
+                <video src="test.mp4" />
             </div>
         );
     });

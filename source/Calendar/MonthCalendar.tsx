@@ -134,7 +134,7 @@ export class MonthCalendar extends mixin<
                         name="chevron-left"
                         onClick={() => (this.date = changeMonth(date, -1))}
                     />
-                    <time className="font-weight-bold">
+                    <time className="fw-bold">
                         {formatDate(date, dateTemplate)}
                     </time>
                     <IconButton

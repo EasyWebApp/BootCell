@@ -20,7 +20,7 @@ describe('Popover', () => {
             <div>
                 <Button>Test</Button>
                 <div className="popover bs-popover-top fade" role="tooltip">
-                    <div className="arrow" />
+                    <div className="popover-arrow" />
                     <h3 className="popover-header text-nowrap">Title</h3>
                     <div className="popover-body">Content</div>
                 </div>

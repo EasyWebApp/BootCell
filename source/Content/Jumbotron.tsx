@@ -32,8 +32,8 @@ export function Jumbotron({
     return (
         <header
             className={classNames(
-                'jumbotron',
-                fluid && 'jumbotron-fluid',
+                'bg-light mb-4 py-5',
+                fluid ? 'rounded-0' : 'px-5 rounded-3',
                 className
             )}
             {...rest}

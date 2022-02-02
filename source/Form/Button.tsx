@@ -38,7 +38,7 @@ export function Button({
                 'btn',
                 colorClass,
                 size && `btn-${size}`,
-                block && 'btn-block',
+                block && 'd-block',
                 disabled && 'disabled',
                 className
             )}
@@ -57,7 +57,7 @@ export function Button({
                 'btn',
                 colorClass,
                 size && `btn-${size}`,
-                block && 'btn-block',
+                block && 'd-block',
                 className
             )}
             disabled={disabled}
@@ -93,7 +93,7 @@ export function CloseButton({ className, defaultSlot, ...rest }: ButtonProps) {
         <button
             type="reset"
             aria-label="Close"
-            className={classNames('close', className)}
+            className={classNames('btn-close', className)}
             {...rest}
         >
             <span aria-hidden="true">&times;</span>

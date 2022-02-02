@@ -64,15 +64,15 @@ export class ToastBox extends mixin<ToastProps>() {
             <Fragment>
                 <div className="toast-header">
                     {typeof icon === 'string' ? (
-                        <img className="rounded mr-2" alt="Icon" src={icon} />
+                        <img className="rounded me-2" alt="Icon" src={icon} />
                     ) : (
                         icon
                     )}
-                    <strong className="mr-auto">{title}</strong>
-                    <small className="text-muted text-nowrap ml-2">
+                    <strong className="me-auto">{title}</strong>
+                    <small className="text-muted text-nowrap ms-2">
                         {time}
                     </small>
-                    <CloseButton className="ml-2 mb-1" onClick={this.close} />
+                    <CloseButton className="ms-2 mb-1" onClick={this.close} />
                 </div>
                 <div className="toast-body">{defaultSlot}</div>
             </Fragment>

@@ -25,11 +25,11 @@ describe('Toast', () => {
             </Toast>,
             <div>
                 <div className="toast-header">
-                    <img className="rounded mr-2" alt="Icon" src="test.png" />
+                    <img className="rounded me-2" alt="Icon" src="test.png" />
 
-                    <strong className="mr-auto">Test</strong>
+                    <strong className="me-auto">Test</strong>
                     <small className="text-muted">just now</small>
-                    <CloseButton className="ml-2 mb-1" />
+                    <CloseButton className="ms-2 mb-1" />
                 </div>
                 <div className="toast-body">example</div>
             </div>

@@ -48,13 +48,13 @@ export function Embed({
     return (
         <div
             className={classNames(
-                'embed-responsive',
-                'embed-responsive-' + ratio.replace('/', 'by'),
+                'ratio',
+                'ratio-' + ratio.replace('/', 'x'),
                 className
             )}
             {...{ style, id, title, key }}
         >
-            <Tag className="embed-responsive-item" {...props} />
+            <Tag {...props} />
         </div>
     );
 }

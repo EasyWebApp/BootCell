@@ -2,7 +2,7 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v4][3], [BootStrap Icon v1][4] & [FontAwesome v5][5]
+[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v5][3], [BootStrap Icon v1][4] & [FontAwesome v5][5]
 
 [![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][6]
 [![CI & CD](https://github.com/EasyWebApp/BootCell/workflows/CI%20&%20CD/badge.svg)][7]
@@ -31,15 +31,15 @@ npm install boot-cell \
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
 />
 <script
     crossorigin
@@ -47,8 +47,8 @@ npm install boot-cell \
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.21/dist/share-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/webcomponents-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.6.0/custom-elements-es5-adapter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.6.0/webcomponents-bundle.js"></script>
 ```
 
 ## Components

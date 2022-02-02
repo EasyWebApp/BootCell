@@ -19,8 +19,8 @@ export function Badge({
 }: BadgeProps) {
     const Class = classNames(
         'badge',
-        `badge-${color}`,
-        pill && 'badge-pill',
+        `bg-${color}`,
+        pill && 'rounded-pill',
         className
     );
 

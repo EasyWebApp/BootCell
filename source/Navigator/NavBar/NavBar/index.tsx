@@ -264,17 +264,15 @@ export class NavBar extends mixin<NavBarProps>() {
     render({ narrow, direction, ...rest }: NavBarProps) {
         const content = this.renderContent(rest);
 
-        return narrow ? (
+        return (
             <div
                 className={classNames(
-                    'container',
+                    narrow ? 'container' : 'container-fluid',
                     direction !== 'left' && !this.expanded && 'flex-row-reverse'
                 )}
             >
                 {content}
             </div>
-        ) : (
-            content
         );
     }
 }

@@ -9,13 +9,13 @@ describe('Toggle Fields', () => {
             <ToggleField type="checkbox" switch inline id="test">
                 Enable
             </ToggleField>,
-            <div className="custom-control custom-switch custom-control-inline">
+            <div className="form-control form-switch form-control-inline">
                 <input
                     type="checkbox"
-                    className="custom-control-input"
+                    className="form-control-input"
                     id="test"
                 />
-                <label className="custom-control-label" htmlFor="test">
+                <label className="form-control-label" htmlFor="test">
                     Enable
                 </label>
             </div>

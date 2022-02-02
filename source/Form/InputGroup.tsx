@@ -69,11 +69,9 @@ export function InputGroup({
 }: InputGroupProps) {
     var field_id = `${id}-field-0`;
 
-    const [
-        fields,
-        prepends,
-        appends
-    ] = (defaultSlot as VNodeChildElement[]).reduce(
+    const [fields, prepends, appends] = (
+        defaultSlot as VNodeChildElement[]
+    ).reduce(
         ([fields, prepends, appends], node) => {
             if (isField(node)) {
                 fields.push(node);
@@ -97,9 +95,8 @@ export function InputGroup({
     if (!appends[0]) {
         const [last_field] = fields.slice(-1);
 
-        (last_field.data.class = last_field.data.class || {})[
-            'rounded-right'
-        ] = true;
+        (last_field.data.class = last_field.data.class || {})['rounded-end'] =
+            true;
     }
 
     return (
@@ -123,7 +120,7 @@ export function InputGroup({
 
             {appends[0] && (
                 <GroupLabel
-                    className="rounded-right"
+                    className="rounded-end"
                     type="append"
                     id={`${id}-label`}
                     htmlFor={field_id}

@@ -1448,10 +1448,10 @@
     parchment "^1.1.2"
     quill-delta "^4.0.1"
 
-"@types/resize-observer-browser@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@types/resize-observer-browser/-/resize-observer-browser-0.1.6.tgz#d8e6c2f830e2650dc06fe74464472ff64b54a302"
-  integrity sha512-61IfTac0s9jvNtBCpyo86QeaN8qqpMGHdK0uGKCCIy2dt5/Yk84VduHIdWAcmkC5QvdkPL0p5eWYgUZtHKKUVg==
+"@types/resize-observer-browser@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@types/resize-observer-browser/-/resize-observer-browser-0.1.7.tgz#294aaadf24ac6580b8fbd1fe3ab7b59fe85f9ef3"
+  integrity sha512-G9eN0Sn0ii9PWQ3Vl72jDPgeJwRWhv2Qk/nQkJuWmRmOB4HX3/BhD5SE1dZs/hzPZL/WKnvF0RHdTSG54QJFyg==
 
 "@types/stack-utils@^2.0.0":
   version "2.0.1"
@@ -4203,10 +4203,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lint-staged@^12.3.2:
-  version "12.3.2"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.2.tgz#c87fe59dca475b7d1cb56863c5faa03c145e1446"
-  integrity sha512-gtw4Cbj01SuVSfAOXC6ivd/7VKHTj51yj5xV8TgktFmYNMsZzXuSd5/brqJEA93v63wL7R6iDlunMANOechC0A==
+lint-staged@^12.3.3:
+  version "12.3.3"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.3.tgz#0a465962fe53baa2b4b9da50801ead49a910e03b"
+  integrity sha512-OqcLsqcPOqzvsfkxjeBpZylgJ3SRG1RYqc9LxC6tkt6tNsq1bNVkAixBwX09f6CobcHswzqVOCBpFR1Fck0+ag==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
@@ -6375,10 +6375,10 @@ weak-lru-cache@^1.2.1:
   resolved "https://registry.yarnpkg.com/weak-lru-cache/-/weak-lru-cache-1.2.1.tgz#6b4f2da7e1701f845e71522417f1df1e39503df8"
   integrity sha512-O5ag1F0Xk6ui+Fg5LlosTcVAyHs6DeyiDDbOapNtFCx/KjZ82B3U9stM9hvzbVclKWn9ABPjaINX/nQkGkJkKg==
 
-web-cell@^2.4.0-rc.2:
-  version "2.4.0-rc.2"
-  resolved "https://registry.yarnpkg.com/web-cell/-/web-cell-2.4.0-rc.2.tgz#b149d3f586c4cf5d41bdbb42bd9ab2a57e3d1209"
-  integrity sha512-vBQxvJ5KLhVWGn+aV6AguLWRPmXcL9JzcLvihLopFqOiUzh6DR2+DoY2LAXiTvvXKwtK22QmHjyQx2Uzh/Y2Og==
+web-cell@^2.4.0-rc.6:
+  version "2.4.0-rc.6"
+  resolved "https://registry.yarnpkg.com/web-cell/-/web-cell-2.4.0-rc.6.tgz#5f55d46de28183a5b316c5dd33b43d3370b97029"
+  integrity sha512-DqPv9etkWq2e6MroTaQCS9F2P/Vr0n6vNdRF4MaVObNWkqLuUtEZnm2GtwCnDT/9zCS2TcIazhR2Hs3PIQpJ0g==
   dependencies:
     "@swc/helpers" "^0.3.2"
     snabbdom "^3.3.1"

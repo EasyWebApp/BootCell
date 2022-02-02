@@ -19,7 +19,7 @@ describe('Tooltip', () => {
             <div>
                 <Button>Test</Button>
                 <div className="tooltip bs-tooltip-top fade" role="tooltip">
-                    <div className="arrow" />
+                    <div className="tooltip-arrow" />
                     <div className="tooltip-inner">notice</div>
                 </div>
             </div>
