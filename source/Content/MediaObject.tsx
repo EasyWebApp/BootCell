@@ -32,7 +32,7 @@ export function MediaObject({
                 {typeof image === 'string' ? (
                     <img
                         className={`align-self-${imageRow} ${
-                            left ? 'mr-3' : 'ml-3'
+                            left ? 'me-3' : 'ms-3'
                         }`}
                         style={{ width: '4rem' }}
                         src={image}

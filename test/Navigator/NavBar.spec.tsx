@@ -138,7 +138,7 @@ describe('Navigator Bar', () => {
                 <a />
             </InlineNavBar>,
 
-            <Fragment>
+            <div className="container-fluid">
                 <a
                     target="_top"
                     href="."
@@ -166,11 +166,11 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="d-flex justify-content-end align-items-center">
+                    <div className="d-md-flex justify-content-end align-items-center">
                         <a />
                     </div>
                 </CollapseBox>
-            </Fragment>
+            </div>
         );
     });
 
@@ -216,13 +216,13 @@ describe('Navigator Bar', () => {
 
     it('should render an open Offcanvas NavBar', () => {
         assertLooksLike(
-            <InlineNavBar brand="Test">
+            <InlineNavBar brand="Test" offcanvas open>
                 <NavLink href="/example" active>
                     Example
                 </NavLink>
             </InlineNavBar>,
 
-            <Fragment>
+            <div className="container-fluid">
                 <a
                     target="_top"
                     href="."
@@ -234,7 +234,7 @@ describe('Navigator Bar', () => {
                     type="button"
                     className="navbar-toggler"
                     aria-controls="test"
-                    aria-expanded="false"
+                    aria-expanded="true"
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />
@@ -253,11 +253,8 @@ describe('Navigator Bar', () => {
                             <span className="sr-only">(current)</span>
                         </a>
                     </nav>
-                    <div className="d-flex justify-content-end align-items-center">
-                        <a />
-                    </div>
                 </div>
-            </Fragment>
+            </div>
         );
     });
 });

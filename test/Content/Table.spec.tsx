@@ -112,7 +112,7 @@ describe('Table', () => {
             <InputCell colSpan={2} name="test" required />,
             <td colSpan={2}>
                 <input
-                    className="form-control border-left-0 border-right-0 border-top-0 rounded-0"
+                    className="form-control border-start-0 border-end-0 border-top-0 rounded-0"
                     name="test"
                     required
                 />

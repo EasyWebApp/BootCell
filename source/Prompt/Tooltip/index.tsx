@@ -54,7 +54,7 @@ export class TooltipBox extends mixin<TooltipProps>() {
                     className={`tooltip bs-tooltip-${position} fade`}
                     role="tooltip"
                 >
-                    <div className="arrow" />
+                    <div className="tooltip-arrow" />
                     <div className="tooltip-inner">{text}</div>
                 </div>
             </Fragment>

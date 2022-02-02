@@ -14,7 +14,7 @@ describe('Field', () => {
     it('should render a Custom Range Input', () => {
         assertLooksLike(
             <Field type="range" id="test" />,
-            <input type="range" className="custom-range" id="test" />
+            <input type="range" className="form-range" id="test" />
         );
     });
 
@@ -32,7 +32,7 @@ describe('Field', () => {
             <Field is="select" id="test" multiple size={3}>
                 <option>Example</option>
             </Field>,
-            <select className="custom-select" id="test" multiple size={3}>
+            <select className="form-select" id="test" multiple size={3}>
                 <option>Example</option>
             </select>
         );
@@ -49,7 +49,7 @@ describe('Field', () => {
         );
         assertLooksLike(
             <Field is="select" id="test" size="lg" />,
-            <select className="custom-select custom-select-lg" id="test" />
+            <select className="form-select form-select-lg" id="test" />
         );
     });
 });

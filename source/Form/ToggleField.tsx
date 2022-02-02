@@ -35,9 +35,9 @@ export function ToggleField({
     return (
         <div
             className={classNames(
-                'custom-control',
-                `custom-${Switch ? 'switch' : type}`,
-                inline && 'custom-control-inline',
+                'form-control',
+                `form-${Switch ? 'switch' : type}`,
+                inline && 'form-control-inline',
                 inline && 'h-100',
                 inline && 'align-items-center',
                 className
@@ -45,14 +45,14 @@ export function ToggleField({
         >
             <input
                 {...rest}
-                className="custom-control-input"
+                className="form-control-input"
                 type={type}
                 id={id}
                 checked={checked}
                 indeterminate={indeterminate}
             />
             {defaultSlot[0] && (
-                <label className="custom-control-label" htmlFor={id}>
+                <label className="form-control-label" htmlFor={id}>
                     {defaultSlot}
                 </label>
             )}

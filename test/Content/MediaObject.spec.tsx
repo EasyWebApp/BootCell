@@ -9,7 +9,7 @@ describe('Media Item', () => {
             <MediaObject title="Test" image="test.png" />,
             <div className="media">
                 <img
-                    className="align-self-start mr-3"
+                    className="align-self-start me-3"
                     style={{ width: '4rem' }}
                     src="test.png"
                     alt="Test"
@@ -26,7 +26,7 @@ describe('Media Item', () => {
             <MediaObject title="Test" image="test.png" imageColumn="right" />,
             <div className="media flex-row-reverse">
                 <img
-                    className="align-self-start ml-3"
+                    className="align-self-start ms-3"
                     style={{ width: '4rem' }}
                     src="test.png"
                     alt="Test"

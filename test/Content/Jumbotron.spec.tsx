@@ -9,7 +9,7 @@ describe('Jumbotron', () => {
             <Jumbotron title="Test" description="test">
                 <p>Example</p>
             </Jumbotron>,
-            <header className="jumbotron">
+            <header className="bg-light mb-4 py-5 px-5 rounded-3">
                 <h1 className="display-4">Test</h1>
                 <p className="lead">test</p>
                 <hr className="my-4" />
@@ -21,7 +21,7 @@ describe('Jumbotron', () => {
     it('should render a Fluid Jumbotron with an Inner Container', () => {
         assertLooksLike(
             <Jumbotron title="Test" description="test" fluid />,
-            <header className="jumbotron jumbotron-fluid">
+            <header className="bg-light mb-4 py-5 rounded-0">
                 <div className="container">
                     <h1 className="display-4">Test</h1>
                     <p className="lead">test</p>

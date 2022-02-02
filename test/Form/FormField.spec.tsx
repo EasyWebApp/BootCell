@@ -25,10 +25,10 @@ describe('Form Fields', () => {
     it('should render a Custom File Field', () => {
         assertLooksLike(
             <Field type="file" id="test" label="Image" />,
-            <div className="custom-file">
-                <input type="file" className="custom-file-input" id="test" />
+            <div className="form-file">
+                <input type="file" className="form-file-input" id="test" />
                 <label
-                    className="custom-file-label"
+                    className="form-file-label"
                     htmlFor="test"
                     data-file="Image"
                     data-browse="Browse"

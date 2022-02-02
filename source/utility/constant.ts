@@ -24,6 +24,7 @@ export type TextColors = CommonColors | keyof typeof Color;
 export type BackgroundColors = CommonColors | 'white' | 'transparent';
 
 export enum Size {
+    xxl = 1400,
     xl = 1200,
     lg = 992,
     md = 768,

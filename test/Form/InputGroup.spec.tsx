@@ -24,7 +24,7 @@ describe('Input Group', () => {
                 </div>
                 <input
                     type="text"
-                    className="form-control rounded-right"
+                    className="form-control rounded-end"
                     id="sample"
                     aria-describedby="test-label-prepend-0"
                 />
@@ -40,7 +40,7 @@ describe('Input Group', () => {
             <div className="input-group input-group-lg" id="test">
                 <input
                     type="text"
-                    className="form-control rounded-right"
+                    className="form-control rounded-end"
                     id="sample"
                     aria-describedby="test-label-append-0"
                 />
@@ -61,7 +61,7 @@ describe('Input Group', () => {
                     id="sample"
                     aria-describedby="test-label-append-0"
                 />
-                <div className="input-group-append rounded-right">
+                <div className="input-group-append rounded-end">
                     <div className="input-group-text" id="test-label-append-0">
                         <input />
                     </div>

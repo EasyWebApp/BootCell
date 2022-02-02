@@ -1,9 +1,9 @@
 {
     "name": "boot-cell",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0-alpha.1",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
-    "description": "Web Components UI library based on WebCell v2, BootStrap v4, BootStrap Icon v1 & FontAwesome v5",
+    "description": "Web Components UI library based on WebCell v2, BootStrap v5, BootStrap Icon v1 & FontAwesome v5",
     "keywords": [
         "web",
         "component",
@@ -27,7 +27,7 @@
         "@swc/helpers": "^0.3.2",
         "classnames": "^2.3.1",
         "regenerator-runtime": "^0.13.9",
-        "web-cell": "^2.4.0-rc.2",
+        "web-cell": "^2.4.0-rc.6",
         "web-utility": "^3.0.0"
     },
     "peerDependencies": {
@@ -57,7 +57,7 @@
         "@types/jest": "^27.4.0",
         "@types/marked": "^4.0.2",
         "@types/quill": "^2.0.9",
-        "@types/resize-observer-browser": "^0.1.6",
+        "@types/resize-observer-browser": "^0.1.7",
         "@types/turndown": "^5.0.1",
         "autoprefixer": "^10.4.2",
         "cross-env": "^7.0.3",
@@ -67,7 +67,7 @@
         "iterable-observer": "1.0.0-rc.0",
         "jest": "^27.4.7",
         "less": "^4.1.2",
-        "lint-staged": "^12.3.2",
+        "lint-staged": "^12.3.3",
         "markdown-ime": "^1.0.3",
         "marked": "^4.0.12",
         "open-cli": "^7.0.1",

@@ -243,7 +243,7 @@ export class TabView extends mixin<TabViewProps>() {
                     ? classNames(
                           'tab-content',
                           'flex-fill',
-                          row ? 'pt-2' : 'ml-3'
+                          row ? 'pt-2' : 'ms-3'
                       )
                     : 'bs-stepper-content',
             orientation = row ? 'horizontal' : 'vertical';

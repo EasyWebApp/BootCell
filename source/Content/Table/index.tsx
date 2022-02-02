@@ -148,7 +148,7 @@ export function InputCell({
     ...rest
 }: InputCellProps) {
     const Class =
-        'form-control border-left-0 border-right-0 border-top-0 rounded-0';
+        'form-control border-start-0 border-end-0 border-top-0 rounded-0';
 
     return (
         <td {...{ className, style, colSpan, rowSpan }}>

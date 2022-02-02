@@ -44,12 +44,12 @@ export function Field({
     return {
         input:
             type === 'file' ? (
-                <div className={classNames('custom-file', className)}>
+                <div className={classNames('form-file', className)}>
                     <input
                         {...rest}
                         type="file"
                         className={classNames(
-                            'custom-file-input',
+                            'form-file-input',
                             validClass,
                             sizeClass,
                             className
@@ -57,7 +57,7 @@ export function Field({
                         id={id}
                     />
                     <label
-                        className="custom-file-label"
+                        className="form-file-label"
                         htmlFor={id}
                         data-file={label || 'Choose file'}
                         data-browse={fileButton}
@@ -68,7 +68,7 @@ export function Field({
                     {...rest}
                     type={type}
                     className={classNames(
-                        type === 'range' ? 'custom-range' : 'form-control',
+                        type === 'range' ? 'form-range' : 'form-control',
                         validClass,
                         sizeClass,
                         className
@@ -93,9 +93,9 @@ export function Field({
             <select
                 {...rest}
                 className={classNames(
-                    'custom-select',
+                    'form-select',
                     validClass,
-                    typeof size === 'string' && `custom-select-${size}`,
+                    typeof size === 'string' && `form-select-${size}`,
                     className
                 )}
                 id={id}
@@ -123,9 +123,9 @@ export function Field({
 export function isField(node: VNodeChildElement): node is VNode {
     const {
         'form-control': origin,
-        'custom-select': select,
-        'custom-file': file,
-        'custom-range': range
+        'form-select': select,
+        'form-file': file,
+        'form-range': range
     } = (node as VNode).data?.class || {};
 
     return origin || select || file || range;
