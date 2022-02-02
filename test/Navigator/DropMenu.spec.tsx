@@ -16,7 +16,7 @@ function InlineDropMenu({
     href,
     caption,
     target,
-    alignType = 'left',
+    alignType = 'start',
     alignSize = '',
     direction = 'down',
     defaultSlot
@@ -91,9 +91,9 @@ describe('Drop Menu', () => {
         );
     });
 
-    it('should render a Responsive Right-align Menu', () => {
+    it('should render a Responsive End-align Menu', () => {
         assertLooksLike(
-            <InlineDropMenu caption="Demo" alignType="right" alignSize="md" />,
+            <InlineDropMenu caption="Demo" alignType="end" alignSize="md" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -104,16 +104,16 @@ describe('Drop Menu', () => {
                     Demo
                 </Button>
                 <div
-                    className="dropdown-menu dropdown-menu-md-right"
+                    className="dropdown-menu dropdown-menu-md-end"
                     aria-labelledby="test"
                 />
             </div>
         );
     });
 
-    it('should render a Responsive Left-align Menu', () => {
+    it('should render a Responsive Start-align Menu', () => {
         assertLooksLike(
-            <InlineDropMenu caption="Demo" alignType="left" alignSize="md" />,
+            <InlineDropMenu caption="Demo" alignType="start" alignSize="md" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -124,7 +124,7 @@ describe('Drop Menu', () => {
                     Demo
                 </Button>
                 <div
-                    className="dropdown-menu dropdown-menu-right dropdown-menu-md-left"
+                    className="dropdown-menu dropdown-menu-end dropdown-menu-md-start"
                     aria-labelledby="test"
                 />
             </div>
@@ -150,9 +150,9 @@ describe('Drop Menu', () => {
         );
     });
 
-    it('should render a Single-layer Button group with Single Left direction', () => {
+    it('should render a Single-layer Button group with Single Start direction', () => {
         assertLooksLike(
-            <InlineDropMenu caption="Demo" direction="left" />,
+            <InlineDropMenu caption="Demo" direction="start" />,
             <div>
                 <Button
                     className="dropdown-toggle"
@@ -167,9 +167,9 @@ describe('Drop Menu', () => {
         );
     });
 
-    it('should render a Double-layer Button group with Split Left direction', () => {
+    it('should render a Double-layer Button group with Split Start direction', () => {
         assertLooksLike(
-            <InlineDropMenu caption="Demo" href="example" direction="left" />,
+            <InlineDropMenu caption="Demo" href="example" direction="start" />,
             <div>
                 <div className="dropdown-menu" aria-labelledby="test" />
                 <div className="btn-group">

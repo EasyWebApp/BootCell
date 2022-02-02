@@ -16,6 +16,17 @@ describe('Button', () => {
         );
     });
 
+    it('should render a Button as block', () => {
+        assertLooksLike(
+            <Button color="primary" block>
+                Test
+            </Button>,
+            <button type="button" className="btn btn-primary d-block w-100">
+                Test
+            </button>
+        );
+    });
+
     it('should render a disabled Anchor', () => {
         assertLooksLike(
             <Button href="/test" disabled>
