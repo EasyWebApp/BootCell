@@ -45,9 +45,8 @@ export class CollapseBox extends mixin<CollapseProps>() {
 
         this.resizer = new ResizeObserver(
             ([{ target }]: ResizeObserverEntry[]) => {
-                (target as HTMLElement).style.display = self.getComputedStyle(
-                    this
-                ).display;
+                (target as HTMLElement).style.display =
+                    self.getComputedStyle(this).display;
 
                 if (this.open)
                     this.style.height = self.getComputedStyle(target).height;
@@ -60,7 +59,7 @@ export class CollapseBox extends mixin<CollapseProps>() {
         this.resizer.disconnect();
     }
 
-    async toggle(open = !this.open) {
+    async toggle(open?: boolean) {
         const end = watchMotion('transition', this),
             box = this.shadowRoot.lastElementChild as HTMLElement;
 

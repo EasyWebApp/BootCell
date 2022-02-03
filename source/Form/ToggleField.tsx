@@ -1,20 +1,26 @@
-import { WebCellProps, createCell } from 'web-cell';
-import type { HTMLFieldProps } from 'web-utility';
-import { uniqueID } from 'web-utility/source/data';
+import {
+    VNode,
+    VNodeChildElement,
+    WebCellProps,
+    createCell,
+    Fragment
+} from 'web-cell';
+import { HTMLFieldProps, uniqueID } from 'web-utility';
 import classNames from 'classnames';
 
-import { FormFieldProps } from './FormField';
 import { ButtonProps } from './Button';
 import { ValidableFieldProps, ValidMessage } from './Form';
 
 export interface ToggleFieldProps
     extends WebCellProps,
         HTMLFieldProps,
+        Pick<ButtonProps, 'color' | 'outline'>,
         ValidableFieldProps {
-    type: 'radio' | 'checkbox';
+    type?: 'radio' | 'checkbox';
     checked?: boolean;
     indeterminate?: boolean;
-    switch?: boolean;
+    mode?: 'normal' | 'button' | 'switch';
+    labelHidden?: boolean;
     inline?: boolean;
 }
 
@@ -22,9 +28,15 @@ export function ToggleField({
     className,
     type,
     checked,
+    name,
+    value,
+    disabled,
     indeterminate,
-    switch: Switch,
+    mode = 'normal',
+    labelHidden,
     inline,
+    color,
+    outline,
     id = uniqueID(),
     defaultSlot,
     validMode,
@@ -32,95 +44,68 @@ export function ToggleField({
     invalidMessage,
     ...rest
 }: ToggleFieldProps) {
-    return (
+    const isSwitch = mode === 'switch',
+        props = { id, type, name, value, disabled, indeterminate, checked };
+
+    return mode !== 'button' ? (
         <div
             className={classNames(
-                'form-control',
-                `form-${Switch ? 'switch' : type}`,
-                inline && 'form-control-inline',
-                inline && 'h-100',
-                inline && 'align-items-center',
+                !labelHidden && 'form-check',
+                inline && 'form-check-inline',
+                isSwitch && 'form-switch',
                 className
             )}
+            {...rest}
         >
             <input
-                {...rest}
-                className="form-control-input"
-                type={type}
-                id={id}
-                checked={checked}
-                indeterminate={indeterminate}
+                className="form-check-input"
+                {...props}
+                type={isSwitch ? 'checkbox' : type}
+                role={isSwitch ? mode : undefined}
+                aria-label={defaultSlot}
             />
-            {defaultSlot[0] && (
-                <label className="form-control-label" htmlFor={id}>
+            {!labelHidden && (
+                <label className="form-check-label" htmlFor={id}>
                     {defaultSlot}
                 </label>
             )}
             <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
         </div>
+    ) : (
+        <>
+            <input className="btn-check" {...props} autocomplete="off" />
+            <label
+                className={classNames(
+                    'btn',
+                    `btn${outline ? '-outline' : ''}-${color}`,
+                    className
+                )}
+                {...rest}
+                htmlFor={id}
+            >
+                {defaultSlot}
+            </label>
+        </>
     );
 }
 
-export interface ToggleOption {
-    title: string;
-    value?: string;
-    color?: ButtonProps['color'];
-}
+export function isToggleField(
+    node: VNodeChildElement | VNodeChildElement[]
+): node is VNode | VNode[] {
+    if (
+        node instanceof Array &&
+        node.some(
+            item =>
+                item &&
+                typeof item === 'object' &&
+                item.data.class?.['btn-check']
+        )
+    )
+        return true;
 
-export interface ToggleGroupProps extends FormFieldProps {
-    type: ToggleFieldProps['type'];
-    options: ToggleOption[];
-    value?: string;
-    color?: ButtonProps['color'];
-}
+    if (typeof node !== 'object') return false;
 
-function toggleActive(event: MouseEvent) {
-    const {
-        parentElement: { classList },
-        checked
-    } = event.target as HTMLInputElement;
+    const { children } = node as VNode;
 
-    classList.toggle('active', checked);
-}
-
-export function ToggleGroup({
-    className,
-    options,
-    value,
-    color = 'primary',
-    type,
-    name,
-    defaultSlot,
-    ...rest
-}: ToggleGroupProps) {
-    return (
-        <div
-            className={classNames('btn-group', 'btn-group-toggle', className)}
-            {...rest}
-        >
-            {options.map(({ title, ...option }) => {
-                option.value = option.value || title;
-                const checked = option.value === value;
-
-                return (
-                    <label
-                        className={classNames(
-                            'btn',
-                            `btn-${option.color || color}`,
-                            checked && 'active'
-                        )}
-                    >
-                        <input
-                            type={type}
-                            name={name}
-                            value={option.value}
-                            checked={checked}
-                            onClick={toggleActive}
-                        />
-                        {title}
-                    </label>
-                );
-            })}
-        </div>
-    );
+    return !!(children[0] as VNode)?.data?.class?.['form-check-input'];
 }

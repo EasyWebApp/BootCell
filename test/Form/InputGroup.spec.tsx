@@ -1,8 +1,9 @@
-import { createCell, Fragment } from 'web-cell';
+import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 
 import { InputGroup } from '../../source/Form/InputGroup';
 import { Field } from '../../source/Form/Field';
+import { ToggleField } from '../../source/Form/ToggleField';
 import { Button } from '../../source/Form/Button';
 
 describe('Input Group', () => {
@@ -13,21 +14,10 @@ describe('Input Group', () => {
                 <Field id="sample" />
             </InputGroup>,
             <div className="input-group" id="test">
-                <div className="input-group-prepend">
-                    <label
-                        className="input-group-text"
-                        id="test-label-prepend-0"
-                        htmlFor="sample"
-                    >
-                        Test
-                    </label>
-                </div>
-                <input
-                    type="text"
-                    className="form-control rounded-end"
-                    id="sample"
-                    aria-describedby="test-label-prepend-0"
-                />
+                <label className="input-group-text" htmlFor="sample">
+                    Test
+                </label>
+                <input type="text" className="form-control" id="sample" />
             </div>
         );
     });
@@ -38,34 +28,28 @@ describe('Input Group', () => {
                 <Field id="sample" />
             </InputGroup>,
             <div className="input-group input-group-lg" id="test">
-                <input
-                    type="text"
-                    className="form-control rounded-end"
-                    id="sample"
-                    aria-describedby="test-label-append-0"
-                />
+                <input type="text" className="form-control" id="sample" />
             </div>
         );
     });
 
-    it('should render a Sub DOM-tree as a label', () => {
+    it('should render a Radio/Checkbox as a label', () => {
         assertLooksLike(
             <InputGroup id="test">
+                <ToggleField type="radio" labelHidden>
+                    test
+                </ToggleField>
                 <Field id="sample" />
-                <input />
             </InputGroup>,
             <div className="input-group" id="test">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="sample"
-                    aria-describedby="test-label-append-0"
-                />
-                <div className="input-group-append rounded-end">
-                    <div className="input-group-text" id="test-label-append-0">
-                        <input />
-                    </div>
+                <div className="input-group-text">
+                    <input
+                        className="form-check-input"
+                        type="radio"
+                        aria-label="test"
+                    />
                 </div>
+                <input type="text" className="form-control" id="sample" />
             </div>
         );
     });
@@ -73,27 +57,18 @@ describe('Input Group', () => {
     it('should render Multiple Labels', () => {
         assertLooksLike(
             <InputGroup id="test">
-                <Field id="sample" />1<i>2</i>
+                1
+                <Field id="sample" />
+                <i>2</i>
             </InputGroup>,
             <div className="input-group" id="test">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="sample"
-                    aria-describedby="test-label-append-0"
-                />
-                <div className="input-group-append">
-                    <label
-                        className="input-group-text"
-                        id="test-label-append-0"
-                        htmlFor="sample"
-                    >
-                        1
-                    </label>
-                    <div className="input-group-text" id="test-label-append-1">
-                        <i>2</i>
-                    </div>
-                </div>
+                <label className="input-group-text" htmlFor="sample">
+                    1
+                </label>
+                <input type="text" className="form-control" id="sample" />
+                <label className="input-group-text">
+                    <i>2</i>
+                </label>
             </div>
         );
     });
@@ -106,20 +81,9 @@ describe('Input Group', () => {
                 <Button>2</Button>
             </InputGroup>,
             <div className="input-group">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="sample"
-                    aria-describedby="test-label-append-0"
-                />
-                <div className="input-group-append">
-                    <button className="btn" id="test-label-append-0">
-                        1
-                    </button>
-                    <button className="btn" id="test-label-append-1">
-                        2
-                    </button>
-                </div>
+                <input type="text" className="form-control" id="sample" />
+                <button className="btn">1</button>
+                <button className="btn">2</button>
             </div>
         );
     });
