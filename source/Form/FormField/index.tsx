@@ -67,18 +67,20 @@ export function FormField({
         describedBy.push(messageID);
     }
 
-    const labelClass =
-        labelColumn &&
-        classNames(
-            'col-form-label',
-            typeof size === 'string' && `col-form-label-${size}`,
-            `col-sm-${labelColumn}`,
-            'text-nowrap'
-        );
+    const labelClass = labelColumn
+        ? classNames(
+              'col-form-label',
+              typeof size === 'string' && `col-form-label-${size}`,
+              `col-sm-${labelColumn}`,
+              'text-nowrap'
+          )
+        : labelFloat
+        ? undefined
+        : 'form-label';
 
     defaultSlot = [
         label && (
-            <label htmlFor={id} className={labelClass || ''}>
+            <label htmlFor={id} className={labelClass}>
                 {label}
             </label>
         ),
@@ -108,7 +110,7 @@ export function FormField({
     return (
         <div
             className={classNames(
-                labelFloat ? 'form-label-group' : 'form-group',
+                labelFloat ? 'form-floating' : 'form-group',
                 labelColumn && 'row',
                 className
             )}

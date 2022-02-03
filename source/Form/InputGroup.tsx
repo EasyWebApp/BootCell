@@ -1,60 +1,37 @@
-import { WebCellProps, VNodeChildElement, VNode, createCell } from 'web-cell';
-import type { HTMLContainerProps } from 'web-utility';
-import { uniqueID } from 'web-utility/source/data';
+import { VNode, VNodeChildElement, WebCellProps, createCell } from 'web-cell';
+import { HTMLContainerProps, uniqueID } from 'web-utility';
 import classNames from 'classnames';
 
 import { isButton } from './Button';
 import { DropMenu } from '../Navigator/DropMenu';
-import { isField } from './Field';
+import { isToggleField } from './ToggleField';
 import { ValidMessage, ValidableFieldProps } from './Form';
-
-export interface GroupLabelProps extends WebCellProps {
-    htmlFor?: string;
-    type: 'prepend' | 'append';
-    list: VNodeChildElement[];
-}
-
-export function GroupLabel({
-    className,
-    type,
-    list,
-    id = uniqueID(),
-    htmlFor
-}: GroupLabelProps) {
-    return (
-        <div className={classNames(`input-group-${type}`, className)}>
-            {list.map((item, index) => {
-                const ID = `${id}-${type}-${index}`;
-
-                if (isButton(item as VNode) || DropMenu.is(item as VNode)) {
-                    (item as VNode).data.props.id = ID;
-
-                    return item;
-                }
-
-                return typeof item !== 'object' ? (
-                    <label
-                        className="input-group-text"
-                        id={ID}
-                        htmlFor={htmlFor}
-                    >
-                        {item}
-                    </label>
-                ) : (
-                    <div className="input-group-text" id={ID}>
-                        {item}
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
 
 export interface InputGroupProps
     extends WebCellProps,
         HTMLContainerProps,
         ValidableFieldProps {
     size?: 'sm' | 'lg';
+}
+
+function toLabelNode(node: VNodeChildElement) {
+    if (isToggleField(node))
+        node.data.class = {
+            ...node.data.class,
+            'input-group-text': true
+        };
+    else if (
+        typeof node === 'string' ||
+        typeof node === 'number' ||
+        !(
+            /^(input|textarea|select|label)/.test((node as VNode).sel) ||
+            isButton(node) ||
+            DropMenu.is(node)
+        )
+    )
+        node = <label className="input-group-text">{node}</label>;
+
+    return node as VNode;
 }
 
 export function InputGroup({
@@ -67,37 +44,31 @@ export function InputGroup({
     invalidMessage,
     ...rest
 }: InputGroupProps) {
-    var field_id = `${id}-field-0`;
+    var lastID = '',
+        count = 0;
 
-    const [fields, prepends, appends] = (
-        defaultSlot as VNodeChildElement[]
-    ).reduce(
-        ([fields, prepends, appends], node) => {
-            if (isField(node)) {
-                fields.push(node);
+    const nodes = (defaultSlot as VNodeChildElement[])
+        .flat(Infinity)
+        .reverse()
+        .map(node => {
+            node = toLabelNode(node);
 
-                if (fields.length === 1) {
-                    if (node.data.props?.id) field_id = node.data.props.id;
-                    else
-                        (node.data.props = node.data.props || {}).id = field_id;
-                }
-                (node.data.attrs = node.data.attrs || {})[
-                    'aria-describedby'
-                ] = `${id}-label-${prepends[0] ? 'prepend' : 'append'}-0`;
-            } else if (fields[0]) appends.push(node);
-            else prepends.push(node);
+            const [tag] = node.sel.split(/[^\w-]/);
 
-            return [fields, prepends, appends];
-        },
-        [[], [], []] as [VNode[], VNodeChildElement[], VNodeChildElement[]]
-    );
-
-    if (!appends[0]) {
-        const [last_field] = fields.slice(-1);
-
-        (last_field.data.class = last_field.data.class || {})['rounded-end'] =
-            true;
-    }
+            switch (tag) {
+                case 'input':
+                case 'textarea':
+                case 'select':
+                    lastID = (node.data.props ||= {}).id =
+                        node.data.props?.id || `${id}-${count++}`;
+                    break;
+                case 'label':
+                    if (node.data.class?.['input-group-text'])
+                        (node.data.props ||= {}).htmlFor = lastID;
+            }
+            return node;
+        })
+        .reverse();
 
     return (
         <div
@@ -108,25 +79,7 @@ export function InputGroup({
             )}
             {...{ id, ...rest }}
         >
-            {prepends[0] && (
-                <GroupLabel
-                    type="prepend"
-                    id={`${id}-label`}
-                    htmlFor={field_id}
-                    list={prepends}
-                />
-            )}
-            {fields}
-
-            {appends[0] && (
-                <GroupLabel
-                    className="rounded-end"
-                    type="append"
-                    id={`${id}-label`}
-                    htmlFor={field_id}
-                    list={appends}
-                />
-            )}
+            {nodes}
             <ValidMessage {...{ validMode, validMessage, invalidMessage }} />
         </div>
     );

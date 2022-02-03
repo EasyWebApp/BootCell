@@ -9,6 +9,7 @@
         "experimentalDecorators": true,
         "jsx": "react",
         "jsxFactory": "createCell",
+        "jsxFragmentFactory": "Fragment",
         "lib": ["ES2020", "DOM", "DOM.Iterable"]
     },
     "include": ["./source/**/*"],

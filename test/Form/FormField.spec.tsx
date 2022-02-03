@@ -40,7 +40,7 @@ describe('Form Fields', () => {
     it('should render a Form Field with a Floating Label', () => {
         assertLooksLike(
             <FormField id="test" labelFloat placeholder="Test" />,
-            <div className="form-label-group">
+            <div className="form-floating">
                 <input
                     type="text"
                     className="form-control"
@@ -75,7 +75,9 @@ describe('Form Fields', () => {
                 <input type="image" />
             </FormField>,
             <div className="form-group">
-                <label htmlFor="test">Avatar</label>
+                <label className="form-label" htmlFor="test">
+                    Avatar
+                </label>
                 <input type="image" />
             </div>
         );
