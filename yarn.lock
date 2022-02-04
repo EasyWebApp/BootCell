@@ -1435,14 +1435,6 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.4.3.tgz#a3c65525b91fca7da00ab1a3ac2b5a2a4afbffbf"
   integrity sha512-QzSuZMBuG5u8HqYz01qtMdg/Jfctlnvj1z/lYnIDXs/golxw0fxtRAHd9KrzjR7Yxz1qVeI00o0kiO3PmVdJ9w==
 
-"@types/quill@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@types/quill/-/quill-2.0.9.tgz#71e2cd9069690eeb01b0c7318ff7eb2bb9e2044a"
-  integrity sha512-/n40Ypp+jF3GDLqB/5z1P+Odq1K98txXbBgRDkG6Z90LGC1AwQPtZWNeOdDg0yUlgBSUASmpeDn3eBPUuPXtuw==
-  dependencies:
-    parchment "^1.1.2"
-    quill-delta "^4.0.1"
-
 "@types/resize-observer-browser@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@types/resize-observer-browser/-/resize-observer-browser-0.1.7.tgz#294aaadf24ac6580b8fbd1fe3ab7b59fe85f9ef3"
@@ -2845,11 +2837,6 @@ fast-diff@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
   integrity sha512-KaJUt+M9t1qaIteSvjc6P3RbMdXsNhK61GRftR6SNxqmhthcd9MGIi4T+o0jD8LUSpSnSKXE20nLtJ3fOHxQig==
-
-fast-diff@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
-  integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
 fast-glob@3.1.1:
   version "3.1.1"
@@ -4280,16 +4267,6 @@ lodash.clone@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
   integrity sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y=
 
-lodash.clonedeep@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
-  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
-
 lodash.memoize@4.x, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -4857,7 +4834,7 @@ parcel@^2.2.1:
     get-port "^4.2.0"
     v8-compile-cache "^2.0.0"
 
-parchment@^1.1.2, parchment@^1.1.4:
+parchment@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/parchment/-/parchment-1.1.4.tgz#aeded7ab938fe921d4c34bc339ce1168bc2ffde5"
   integrity sha512-J5FBQt/pM2inLzg4hEWmzQx/8h8D0CiDxaG3vyp9rKrQRSDgBlhjdP5jQGgosEajXPSQouXGHOmVdgo7QmJuOg==
@@ -5381,6 +5358,18 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
+quill-cell@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/quill-cell/-/quill-cell-0.1.0.tgz#3c564ce81365020bdc490e69fe9a5036f2e1ae2b"
+  integrity sha512-2gSKlUqzpqgo0RYl17MlXxLZP2sv56YreAyaRGRgOyY2Z3SgyEjunfHCsbWcXp5THRntxdCyxLURIsDuuZbbFA==
+  dependencies:
+    "@swc/helpers" "^0.3.2"
+    quill "^1.3.7"
+    quill-image-uploader "^1.2.2"
+    regenerator-runtime "^0.13.9"
+    web-cell "^2.4.0-rc.6"
+    web-utility "^3.0.0"
+
 quill-delta@^3.6.2:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/quill-delta/-/quill-delta-3.6.3.tgz#b19fd2b89412301c60e1ff213d8d860eac0f1032"
@@ -5389,15 +5378,6 @@ quill-delta@^3.6.2:
     deep-equal "^1.0.1"
     extend "^3.0.2"
     fast-diff "1.1.2"
-
-quill-delta@^4.0.1:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/quill-delta/-/quill-delta-4.2.2.tgz#015397d046e0a3bed087cd8a51f98c11a1b8f351"
-  integrity sha512-qjbn82b/yJzOjstBgkhtBjN2TNK+ZHP/BgUQO+j6bRhWQQdmj2lH6hXG7+nwwLF41Xgn//7/83lxs9n2BkTtTg==
-  dependencies:
-    fast-diff "1.2.0"
-    lodash.clonedeep "^4.5.0"
-    lodash.isequal "^4.5.0"
 
 quill-image-uploader@^1.2.2:
   version "1.2.2"
