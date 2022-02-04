@@ -1,19 +1,19 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
-import { formToJSON } from 'web-utility';
+import { sleep, formToJSON } from 'web-utility';
 import { FileCell } from 'file-cell';
 import { MarkdownAreaElement } from 'markdown-area-element';
+import { QuillCell } from 'quill-cell';
 
 import { Field } from '../source/Form/Field';
 import { ScoreRange } from '../source/Form/ScoreRange';
 import { FileInput } from '../source/Form/FileInput';
-import { HTMLEditor } from '../source/Form/HTMLEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
 import { ListItem } from '../source/Content/ListGroup';
 import { Step } from '../source/Navigator/Stepper';
 import { Button } from '../source/Form/Button';
 
-const test_image = 'https://web-cell.dev/WebCell-1.fb612fdb.png';
+const test_image = 'https://github.com/EasyWebApp.png';
 
 documentReady.then(() =>
     render(
@@ -60,20 +60,19 @@ documentReady.then(() =>
                         <h2>HTML Editor</h2>
 
                         <h3>Bubble theme</h3>
-                        <HTMLEditor name="html-lite">
+                        <QuillCell theme="bubble" name="html-lite">
                             Operate after selecting
-                        </HTMLEditor>
+                        </QuillCell>
 
                         <h3>Snow theme</h3>
-                        <HTMLEditor
+                        <QuillCell
                             theme="snow"
                             name="html-full"
                             placeholder="type here..."
-                            upload={() =>
-                                new Promise(resolve =>
-                                    setTimeout(() => resolve(test_image), 1000)
-                                )
-                            }
+                            upload={async () => {
+                                await sleep();
+                                return test_image;
+                            }}
                         />
                     </section>
                     <Button type="submit" color="success" className="my-3">

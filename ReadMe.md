@@ -15,10 +15,7 @@
 ## Usage
 
 ```shell
-npm install boot-cell \
-    iterable-observer \
-    quill quill-image-uploader \
-    @nuintun/qrcode
+npm install boot-cell iterable-observer @nuintun/qrcode
 ```
 
 `index.html`
@@ -129,7 +126,6 @@ npm install boot-cell \
 10. [FormField](https://web-cell.dev/BootCell/interfaces/form_formfield.formfieldprops.html)
 11. [InputGroup](https://web-cell.dev/BootCell/interfaces/form_inputgroup.inputgroupprops.html)
 12. [FileInput](https://web-cell.dev/BootCell/interfaces/form_fileinput.fileinputprops.html)
-13. [HTMLEditor](https://web-cell.dev/BootCell/interfaces/form_htmleditor.htmleditorprops.html)
 
 ### Calendar
 
