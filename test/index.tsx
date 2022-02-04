@@ -1,11 +1,11 @@
 import { documentReady, render, createCell, Fragment } from 'web-cell';
-import { formToJSON } from 'web-utility/source/DOM';
+import { formToJSON } from 'web-utility';
+import { FileCell } from 'file-cell';
+import { MarkdownAreaElement } from 'markdown-area-element';
 
 import { Field } from '../source/Form/Field';
 import { ScoreRange } from '../source/Form/ScoreRange';
-import { FileUploader } from '../source/Form/FileUploader';
 import { FileInput } from '../source/Form/FileInput';
-import { MarkdownEditor } from '../source/Form/MarkdownEditor';
 import { HTMLEditor } from '../source/Form/HTMLEditor';
 import { TabView, TabPanel } from '../source/Content/TabView';
 import { NavLink } from '../source/Navigator/Nav';
@@ -17,7 +17,7 @@ const test_image = 'https://web-cell.dev/WebCell-1.fb612fdb.png';
 
 documentReady.then(() =>
     render(
-        <Fragment>
+        <>
             <h1>BootCell test</h1>
             <main>
                 <form
@@ -38,7 +38,7 @@ documentReady.then(() =>
                         <ScoreRange className="text-warning" name="score" />
                     </section>
                     <h2>File Uploader</h2>
-                    <FileUploader
+                    <FileCell
                         transport={() => ({
                             path: Promise.resolve(test_image)
                         })}
@@ -51,11 +51,11 @@ documentReady.then(() =>
                         <section>
                             <h3>Markdown Editor</h3>
 
-                            <MarkdownEditor name="markdown">
+                            <MarkdownAreaElement name="markdown">
                                 default text
-                            </MarkdownEditor>
+                            </MarkdownAreaElement>
                         </section>
-                    </FileUploader>
+                    </FileCell>
                     <section>
                         <h2>HTML Editor</h2>
 
@@ -168,6 +168,6 @@ documentReady.then(() =>
                     </TabView>
                 </section>
             </main>
-        </Fragment>
+        </>
     )
 );

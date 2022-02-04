@@ -259,7 +259,7 @@ export class TabView extends mixin<TabViewProps>() {
         );
 
         return (
-            <Fragment>
+            <>
                 {type === 'nav' ? (
                     <Nav
                         direction={direction}
@@ -285,7 +285,7 @@ export class TabView extends mixin<TabViewProps>() {
                 )}
 
                 <div className={bodyClass}>{bodies}</div>
-            </Fragment>
+            </>
         );
     }
 }

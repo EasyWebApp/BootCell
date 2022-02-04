@@ -36,7 +36,7 @@ export class SplitView extends mixin() {
         const [left, right] = this.defaultSlot;
 
         return (
-            <Fragment>
+            <>
                 <div style={{ width: '25%' }}>{left}</div>
                 <div
                     className="border border-secondary m-1"
@@ -46,7 +46,7 @@ export class SplitView extends mixin() {
                     ref={this.watchLine}
                 />
                 <div className="flex-fill">{right}</div>
-            </Fragment>
+            </>
         );
     }
 }

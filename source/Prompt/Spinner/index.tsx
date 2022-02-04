@@ -48,10 +48,10 @@ export function Spinner({
     return !embed ? (
         body(defaultSlot)
     ) : (
-        <Fragment>
+        <>
             {body([], true)}
             {defaultSlot}
-        </Fragment>
+        </>
     );
 }
 

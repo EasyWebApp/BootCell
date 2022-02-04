@@ -129,12 +129,12 @@ export function Card({
             )}
         >
             {column ? (
-                <Fragment>
+                <>
                     {header}
                     {banner}
                     {body}
                     {footer}
-                </Fragment>
+                </>
             ) : (
                 <div className="row no-gutters align-items-center">
                     <div className="col-md-4">{banner}</div>

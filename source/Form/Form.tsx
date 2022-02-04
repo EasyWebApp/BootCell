@@ -63,13 +63,13 @@ export function ValidMessage({
     invalidMessage
 }: ValidableFieldProps) {
     return (
-        <Fragment>
+        <>
             {validMessage && (
                 <div className={'valid-' + validMode}>{validMessage}</div>
             )}
             {invalidMessage && (
                 <div className={'invalid-' + validMode}>{invalidMessage}</div>
             )}
-        </Fragment>
+        </>
     );
 }

@@ -49,10 +49,10 @@ export function Stepper({ className, defaultSlot, ...rest }: StepperProps) {
     return (
         <nav {...rest} className={classNames('bs-stepper-header', className)}>
             {(defaultSlot as VNode[]).map((node, index) => (
-                <Fragment>
+                <>
                     {index ? <div className="line" /> : null}
                     {node}
-                </Fragment>
+                </>
             ))}
         </nav>
     );

@@ -16,17 +16,17 @@ export function Jumbotron({
     ...rest
 }: JumbotronProps) {
     const content = (
-        <Fragment>
+        <>
             <h1 className="display-4">{title}</h1>
             <p className="lead">{description}</p>
 
             {defaultSlot[0] && (
-                <Fragment>
+                <>
                     <hr className="my-4" />
                     {defaultSlot}
-                </Fragment>
+                </>
             )}
-        </Fragment>
+        </>
     );
 
     return (

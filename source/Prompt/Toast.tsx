@@ -61,7 +61,7 @@ export class ToastBox extends mixin<ToastProps>() {
 
     render({ icon, title, time, defaultSlot }: ToastProps) {
         return (
-            <Fragment>
+            <>
                 <div className="toast-header">
                     {typeof icon === 'string' ? (
                         <img className="rounded me-2" alt="Icon" src={icon} />
@@ -75,7 +75,7 @@ export class ToastBox extends mixin<ToastProps>() {
                     <CloseButton className="ms-2 mb-1" onClick={this.close} />
                 </div>
                 <div className="toast-body">{defaultSlot}</div>
-            </Fragment>
+            </>
         );
     }
 }

@@ -91,7 +91,7 @@ describe('Navigator Bar', () => {
     it('should render a simple NavBar with extra content on the top', () => {
         assertLooksLike(
             <InlineBanner brand="Test">text</InlineBanner>,
-            <Fragment>
+            <>
                 <CollapseBox id="test" open={false}>
                     test
                 </CollapseBox>
@@ -106,7 +106,7 @@ describe('Navigator Bar', () => {
                         />
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     });
 
@@ -115,7 +115,7 @@ describe('Navigator Bar', () => {
             <InlineBanner narrow brand="Test">
                 text
             </InlineBanner>,
-            <Fragment>
+            <>
                 <CollapseBox id="test" open={false}>
                     <div className="container">test</div>
                 </CollapseBox>
@@ -130,7 +130,7 @@ describe('Navigator Bar', () => {
                         />
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     });
 
