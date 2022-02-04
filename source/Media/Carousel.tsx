@@ -45,10 +45,10 @@ export function CarouselCaption({
             {defaultSlot[0] ? (
                 defaultSlot
             ) : (
-                <Fragment>
+                <>
                     <h5>{title}</h5>
                     {detail && <p>{detail}</p>}
-                </Fragment>
+                </>
             )}
         </div>
     );
@@ -71,10 +71,10 @@ export function CarouselItem({
             {defaultSlot[0] ? (
                 defaultSlot
             ) : (
-                <Fragment>
+                <>
                     <img className="d-block w-100" src={image} alt={title} />
                     {title && <CarouselCaption title={title} detail={detail} />}
-                </Fragment>
+                </>
             )}
         </section>
     );
@@ -256,7 +256,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                     {defaultSlot}
                 </div>
                 {!controls || length < 2 ? null : (
-                    <Fragment>
+                    <>
                         <a
                             className="carousel-control-prev"
                             href={'#' + UID}
@@ -281,7 +281,7 @@ export class CarouselView extends mixin<CarouselProps>() {
                             />
                             <span className="sr-only">Next</span>
                         </a>
-                    </Fragment>
+                    </>
                 )}
             </div>
         );

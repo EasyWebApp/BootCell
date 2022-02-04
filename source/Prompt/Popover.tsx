@@ -87,7 +87,7 @@ export class PopoverBox extends mixin<PopoverProps>() {
 
     render({ defaultSlot, header, body, position }: PopoverProps) {
         return (
-            <Fragment>
+            <>
                 {defaultSlot}
 
                 <div
@@ -100,7 +100,7 @@ export class PopoverBox extends mixin<PopoverProps>() {
                     )}
                     <div className="popover-body">{body}</div>
                 </div>
-            </Fragment>
+            </>
         );
     }
 }

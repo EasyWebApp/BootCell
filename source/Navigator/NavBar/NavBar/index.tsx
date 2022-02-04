@@ -202,7 +202,7 @@ export class NavBar extends mixin<NavBarProps>() {
             expanded = this.expanded || open;
 
         const content = (
-            <Fragment>
+            <>
                 <Nav className="navbar-nav flex-grow-1" align={menuAlign}>
                     {links}
                 </Nav>
@@ -217,11 +217,11 @@ export class NavBar extends mixin<NavBarProps>() {
                         {extra}
                     </div>
                 )}
-            </Fragment>
+            </>
         );
 
         return (
-            <Fragment>
+            <>
                 <a
                     target="_top"
                     href="."
@@ -257,7 +257,7 @@ export class NavBar extends mixin<NavBarProps>() {
                         {content}
                     </div>
                 )}
-            </Fragment>
+            </>
         );
     }
 

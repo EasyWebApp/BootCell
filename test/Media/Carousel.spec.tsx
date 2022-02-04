@@ -13,7 +13,7 @@ describe('Carousel View', () => {
 
     it('should render variants of Carousel Items', () => {
         items_input = (
-            <Fragment>
+            <>
                 <CarouselItem image="test.png" title="Test" detail="test" />
                 <CarouselItem>
                     <img src="test.png" />
@@ -29,11 +29,11 @@ describe('Carousel View', () => {
                     <img src="test.png" />
                     <h3>Example</h3>
                 </CarouselItem>
-            </Fragment>
+            </>
         );
 
         items_output = (
-            <Fragment>
+            <>
                 <section className="carousel-item">
                     <img className="d-block w-100" src="test.png" alt="Test" />
                     <div
@@ -67,7 +67,7 @@ describe('Carousel View', () => {
                     <img src="test.png" />
                     <h3>Example</h3>
                 </section>
-            </Fragment>
+            </>
         );
 
         assertLooksLike(<div>{items_input}</div>, <div>{items_output}</div>);

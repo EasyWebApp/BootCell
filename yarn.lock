@@ -1410,11 +1410,6 @@
     jest-diff "^27.0.0"
     pretty-format "^27.0.0"
 
-"@types/marked@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-4.0.2.tgz#cb2dbf10da2f41cf20bd91fb5f89b67540c282f7"
-  integrity sha512-auNrZ/c0w6wsM9DccwVxWHssrMDezHUAXNesdp2RQrCVCyrQbOiSq7yqdJKrUQQpw9VTm7CGYJH2A/YG7jjrjQ==
-
 "@types/minimist@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
@@ -2921,6 +2916,15 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+file-cell@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/file-cell/-/file-cell-0.1.0.tgz#095549502fa210bed732827564f6158ea6620732"
+  integrity sha512-s9SUc7SwqZEsef4cDEK9p1h2eMFEga+ChP/+m+YOltbCeI9hLZ2r8JUpPPS0XijgT1VMhpYDrXyQ3AATeNJWfQ==
+  dependencies:
+    "@swc/helpers" "^0.3.2"
+    regenerator-runtime "^0.13.9"
+    web-cell "^2.4.0-rc.6"
+
 file-type@^16.5.0:
   version "16.5.3"
   resolved "https://registry.yarnpkg.com/file-type/-/file-type-16.5.3.tgz#474b7e88c74724046abb505e9b8ed4db30c4fc06"
@@ -4375,6 +4379,21 @@ map-obj@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
+
+markdown-area-element@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/markdown-area-element/-/markdown-area-element-0.2.3.tgz#e599369ab4c388f8ee37e2bd54ff13ddebc4ba10"
+  integrity sha512-SIPXxmpNa4c1yI4RU7lSuh9+tUqc7oSlSBfjqAazYAcBygE1GvvQr+PVsFTcENVetZRME2lNQzOJF1W+xgLKug==
+  dependencies:
+    "@swc/helpers" "^0.3.2"
+    file-cell "^0.1.0"
+    markdown-ime "^1.0.3"
+    marked "^4.0.12"
+    regenerator-runtime "^0.13.9"
+    turndown "^7.1.1"
+    turndown-plugin-gfm "^1.0.2"
+    web-cell "^2.4.0-rc.6"
+    web-utility "^3.0.0"
 
 markdown-ime@^1.0.3:
   version "1.0.3"
@@ -6226,6 +6245,11 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
+
+typedoc-plugin-mdn-links@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-mdn-links/-/typedoc-plugin-mdn-links-1.0.5.tgz#4445f1b26fb3796f86584ff558df0ab43511dde7"
+  integrity sha512-zAw2XBJx4i3aWBz/BkKNLsKpYzFcJYRM2GGafFmPvUTPi3yOXvCW4IjeiSvjEk17kSiYHspKSZ486zS5lCPkqQ==
 
 typedoc@^0.22.11:
   version "0.22.11"

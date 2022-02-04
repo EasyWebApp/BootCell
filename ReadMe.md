@@ -17,7 +17,6 @@
 ```shell
 npm install boot-cell \
     iterable-observer \
-    marked turndown turndown-plugin-gfm markdown-ime \
     quill quill-image-uploader \
     @nuintun/qrcode
 ```
@@ -129,10 +128,8 @@ npm install boot-cell \
 9. [Field](https://web-cell.dev/BootCell/interfaces/form_field.fieldprops.html)
 10. [FormField](https://web-cell.dev/BootCell/interfaces/form_formfield.formfieldprops.html)
 11. [InputGroup](https://web-cell.dev/BootCell/interfaces/form_inputgroup.inputgroupprops.html)
-12. [FileUploader](https://web-cell.dev/BootCell/interfaces/form_fileuploader.fileuploaderprops.html)
-13. [FileInput](https://web-cell.dev/BootCell/interfaces/form_fileinput.fileinputprops.html)
-14. [MarkdownEditor](https://web-cell.dev/BootCell/interfaces/form_markdowneditor.markdowneditorprops.html)
-15. [HTMLEditor](https://web-cell.dev/BootCell/interfaces/form_htmleditor.htmleditorprops.html)
+12. [FileInput](https://web-cell.dev/BootCell/interfaces/form_fileinput.fileinputprops.html)
+13. [HTMLEditor](https://web-cell.dev/BootCell/interfaces/form_htmleditor.htmleditorprops.html)
 
 ### Calendar
 
@@ -155,8 +152,7 @@ npm install boot-cell \
 
 ## Utilities
 
-1. [SafeTurnDown](https://web-cell.dev/BootCell/classes/utility_turndown.safeturndown.html)
-2. [encodeQRC](https://web-cell.dev/BootCell/modules/utility_qrcode.html#encodeqrc)
+1. [encodeQRC](https://web-cell.dev/BootCell/modules/utility_qrcode.html#encodeqrc)
 
 ## Theme
 

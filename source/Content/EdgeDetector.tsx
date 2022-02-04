@@ -42,7 +42,7 @@ export class EdgeDetector extends mixin<EdgeDetectorProps>() {
 
     render() {
         return (
-            <Fragment>
+            <>
                 <div ref={this.watch.bind(this, 'top')}>
                     <slot name="top" />
                 </div>
@@ -60,7 +60,7 @@ export class EdgeDetector extends mixin<EdgeDetectorProps>() {
                 <div ref={this.watch.bind(this, 'bottom')}>
                     <slot name="bottom" />
                 </div>
-            </Fragment>
+            </>
         );
     }
 }

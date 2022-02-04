@@ -196,7 +196,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
         );
 
         return href ? (
-            <Fragment>
+            <>
                 <Button
                     color={buttonColor}
                     size={buttonSize}
@@ -207,7 +207,7 @@ export class DropMenu extends mixin<DropMenuProps>() {
                 </Button>
 
                 {trigger}
-            </Fragment>
+            </>
         ) : (
             trigger
         );
@@ -241,17 +241,17 @@ export class DropMenu extends mixin<DropMenuProps>() {
         );
 
         return href && direction === 'start' ? (
-            <Fragment>
+            <>
                 <div className="btn-group dropstart" role="group">
                     {body}
                 </div>
                 {this.renderButton()}
-            </Fragment>
+            </>
         ) : (
-            <Fragment>
+            <>
                 {this.renderButton()}
                 {body}
-            </Fragment>
+            </>
         );
     }
 }

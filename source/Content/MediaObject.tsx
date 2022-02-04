@@ -28,7 +28,7 @@ export function MediaObject({
     const Tag = listItem ? 'li' : 'div',
         Class = classNames('d-flex', !start && 'flex-row-reverse', className);
     const body = (
-        <Fragment>
+        <>
             <div className="flex-shrink-0">
                 {typeof image === 'string' ? (
                     <img
@@ -45,7 +45,7 @@ export function MediaObject({
                 <h5 className="mt-0">{title}</h5>
                 {defaultSlot}
             </div>
-        </Fragment>
+        </>
     );
 
     return (

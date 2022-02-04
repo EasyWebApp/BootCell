@@ -47,7 +47,7 @@ export class TooltipBox extends mixin<TooltipProps>() {
 
     render({ defaultSlot, text, position }: TooltipProps) {
         return (
-            <Fragment>
+            <>
                 {defaultSlot}
 
                 <div
@@ -57,7 +57,7 @@ export class TooltipBox extends mixin<TooltipProps>() {
                     <div className="tooltip-arrow" />
                     <div className="tooltip-inner">{text}</div>
                 </div>
-            </Fragment>
+            </>
         );
     }
 }

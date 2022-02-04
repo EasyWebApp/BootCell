@@ -109,7 +109,7 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
     }: BannerNavBarProps) {
         const { UID } = this,
             nav = (
-                <Fragment>
+                <>
                     <a className="navbar-brand" href=".">
                         {brand}
                     </a>
@@ -118,11 +118,11 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
                         aria-expanded={open + ''}
                         onClick={() => (this.open = !open)}
                     />
-                </Fragment>
+                </>
             );
 
         return (
-            <Fragment>
+            <>
                 <CollapseBox id={UID} open={open}>
                     {narrow ? (
                         <div className="container">{defaultSlot}</div>
@@ -140,7 +140,7 @@ export class BannerNavBar extends mixin<BannerNavBarProps>() {
                         {nav}
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     }
 }

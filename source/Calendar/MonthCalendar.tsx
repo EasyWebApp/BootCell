@@ -127,7 +127,7 @@ export class MonthCalendar extends mixin<
         { dayGrid }: MonthCalendarState
     ) {
         return (
-            <Fragment>
+            <>
                 <header className="d-flex justify-content-between align-items-center py-3">
                     <IconButton
                         className="px-2"
@@ -148,7 +148,7 @@ export class MonthCalendar extends mixin<
                         <tr>{this.renderRow(row, index)}</tr>
                     ))}
                 </CalendarTable>
-            </Fragment>
+            </>
         );
     }
 }
