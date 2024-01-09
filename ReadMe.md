@@ -2,10 +2,10 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v2][2], [BootStrap v5][3], [BootStrap Icon v1][4] & [FontAwesome v5][5]
+[Web Components][1] UI library based on [WebCell v3][2], [BootStrap v5][3], [BootStrap Icon v1][4] & [FontAwesome v6][5]
 
-[![NPM Dependency](https://david-dm.org/EasyWebApp/BootCell.svg)][6]
-[![CI & CD](https://github.com/EasyWebApp/BootCell/workflows/CI%20&%20CD/badge.svg)][7]
+[![NPM Dependency](https://img.shields.io/librariesio/github/EasyWebApp/WebCell.svg)][6]
+[![CI & CD](https://github.com/EasyWebApp/BootCell/actions/workflows/main.yml/badge.svg)][7]
 
 [![Anti 996 license](https://img.shields.io/badge/license-Anti%20996-blue.svg)][8]
 [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/ico/awesome.svg)][9]
@@ -23,28 +23,28 @@ npm install boot-cell iterable-observer @nuintun/qrcode
 ```html
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.css"
+    href="https://unpkg.com/dialog-polyfill@0.5.6/dist/dialog-polyfill.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.11.2/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+    href="https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
 />
 <script
     crossorigin
     src="https://polyfill.app/api/polyfill?features=es.array.flat,es.object.from-entries,regenerator-runtime,intersection-observer,resize-observer"
 ></script>
-<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/share-api-polyfill@1.0.21/dist/share-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.6.0/custom-elements-es5-adapter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.6.0/webcomponents-bundle.js"></script>
+<script src="https://unpkg.com/dialog-polyfill@0.5.6/dist/dialog-polyfill.js"></script>
+<script src="https://unpkg.com/share-api-polyfill@1.1.1/dist/share-min.js"></script>
+<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/custom-elements-es5-adapter.js"></script>
+<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-bundle.js"></script>
 ```
 
 ## Components
@@ -163,8 +163,8 @@ Replace **BootStrap official CSS** file with these 3th-party libraries's directl
 [3]: https://getbootstrap.com/
 [4]: https://icons.getbootstrap.com/
 [5]: https://fontawesome.com/
-[6]: https://david-dm.org/EasyWebApp/BootCell
-[7]: https://github.com/EasyWebApp/BootCell/actions
+[6]: https://libraries.io/npm/boot-cell
+[7]: https://github.com/EasyWebApp/BootCell/actions/workflows/main.yml
 [8]: https://github.com/996icu/996.ICU/blob/master/LICENSE
 [9]: https://github.com/jaywcjlove/awesome-uikit
 [10]: https://nodei.co/npm/boot-cell/
