@@ -1,7 +1,9 @@
+.parcelrc
 .parcel-cache/
 .prettierrc.yml
+v1/
 test/
-jest.config.js
+jest.config.ts
 docs/
 .husky/
 .github/
