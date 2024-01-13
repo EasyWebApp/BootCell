@@ -1,6 +1,6 @@
 import { JsxProps, VNode } from 'dom-renderer';
 import { observable } from 'mobx';
-import { FC, attribute, component, observer } from 'web-cell';
+import { FC, WebCellProps, attribute, component, observer } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
 import { Container, ContainerProps } from './Grid';
@@ -38,7 +38,7 @@ export const NavbarToggle: FC<NavbarToggleProps> = ({
     </button>
 );
 
-export interface NavbarProps extends JsxProps<HTMLDivElement> {
+export interface NavbarProps extends WebCellProps {
     variant?: 'light' | 'dark';
     bg?: BackgroundColor;
     expand?: boolean | Size;

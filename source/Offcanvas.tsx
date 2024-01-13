@@ -2,6 +2,8 @@ import { JsxProps } from 'dom-renderer';
 import { FC } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
+import { CloseButton } from './Button';
+
 export const OffcanvasTitle: FC<JsxProps<HTMLHeadingElement>> = ({
     className = '',
     children,
@@ -27,14 +29,7 @@ export const OffcanvasHeader: FC<OffcanvasHeaderProps> = ({
     <div className={`offcanvas-header ${className}`} {...props}>
         {children}
 
-        {closeButton && (
-            <button
-                className="btn-close"
-                type="button"
-                ariaLabel="Close"
-                onClick={onHide}
-            />
-        )}
+        {closeButton && <CloseButton onClick={onHide} />}
     </div>
 );
 
