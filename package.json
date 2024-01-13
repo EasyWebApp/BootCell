@@ -26,10 +26,10 @@
     "dependencies": {
         "@swc/helpers": "^0.5.3",
         "classnames": "^2.5.1",
-        "dom-renderer": "^2.0.4",
+        "dom-renderer": "^2.0.5",
         "mobx": "^6.12.0",
         "regenerator-runtime": "^0.14.1",
-        "web-cell": "^3.0.0-rc.4",
+        "web-cell": "^3.0.0-rc.6",
         "web-utility": "^4.1.3"
     },
     "peerDependencies": {

@@ -1,11 +1,11 @@
-import { WebCellProps, createCell } from 'web-cell';
 import classNames from 'classnames';
+import { WebCellProps } from 'web-cell';
 
-import { TextColors } from '../utility/constant';
+import { Color } from './type';
 
 export interface IconProps extends WebCellProps {
     name: string;
-    color?: TextColors;
+    color?: Color;
     size?: number;
 }
 
@@ -15,7 +15,7 @@ export function Icon({
     color,
     name,
     size,
-    defaultSlot,
+    children,
     ...rest
 }: IconProps) {
     return (
