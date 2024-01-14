@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "2.0.0-beta.0",
+    "version": "2.0.0-beta.2",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v3, BootStrap v5, BootStrap Icon v1 & FontAwesome v6",
