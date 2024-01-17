@@ -13,14 +13,9 @@ export const NavLink: FC<NavLinkProps> = ({
     children,
     ...props
 }) => (
-    <li className="nav-item">
-        <a
-            className={`nav-link ${active ? 'active' : ''} ${className}`}
-            {...props}
-        >
-            {children}
-        </a>
-    </li>
+    <a className={`nav-link ${active ? 'active' : ''} ${className}`} {...props}>
+        {children}
+    </a>
 );
 
 export interface Nav extends WebCell {}
