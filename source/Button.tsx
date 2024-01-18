@@ -32,7 +32,7 @@ export const Button: FC<ButtonProps> = ({
             tabIndex={disabled ? -1 : tabIndex}
             ariaDisabled={disabled + ''}
             ariaPressed={active + ''}
-            {...props}
+            {...{ href, ...props }}
         >
             {children}
         </a>

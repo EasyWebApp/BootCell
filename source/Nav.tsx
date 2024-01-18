@@ -1,9 +1,11 @@
-import { JsxProps } from 'dom-renderer';
+import { JsxChildren } from 'dom-renderer';
 import { FC, WebCell, WebCellProps, component } from 'web-cell';
 
+import { ButtonProps } from './Button';
+import { Dropdown, DropdownMenu, DropdownToggle } from './Dropdown';
 import { OffcanvasNavbar } from './Navbar';
 
-export interface NavLinkProps extends JsxProps<HTMLAnchorElement> {
+export interface NavLinkProps extends WebCellProps<HTMLAnchorElement> {
     active?: boolean;
 }
 
@@ -16,6 +18,35 @@ export const NavLink: FC<NavLinkProps> = ({
     <a className={`nav-link ${active ? 'active' : ''} ${className}`} {...props}>
         {children}
     </a>
+);
+
+export interface NavDropdownProps
+    extends Omit<NavLinkProps, 'title'>,
+        Pick<ButtonProps, 'disabled' | 'onClick'> {
+    title: JsxChildren;
+}
+
+export const NavDropdown: FC<NavDropdownProps> = ({
+    title,
+    disabled,
+    onClick,
+    children
+}) => (
+    <Dropdown className="nav-item">
+        <DropdownToggle
+            className="nav-link"
+            href="#"
+            disabled={disabled}
+            onClick={event => {
+                event.preventDefault();
+                onClick?.(event);
+            }}
+        >
+            {title}
+        </DropdownToggle>
+
+        <DropdownMenu>{children}</DropdownMenu>
+    </Dropdown>
 );
 
 export interface Nav extends WebCell {}
