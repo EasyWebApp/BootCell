@@ -17,7 +17,7 @@ export interface ButtonProps
 export const Button: FC<ButtonProps> = ({
     className,
     href,
-    variant = 'primary',
+    variant,
     active,
     children,
     ...props
@@ -30,14 +30,14 @@ export const Button: FC<ButtonProps> = ({
             role="button"
             className={classNames(Class, { disabled, active })}
             tabIndex={disabled ? -1 : tabIndex}
-            ariaDisabled={disabled + ''}
-            ariaPressed={active + ''}
-            {...props}
+            ariaDisabled={disabled?.toString()}
+            ariaPressed={active?.toString()}
+            {...{ href, ...props }}
         >
             {children}
         </a>
     ) : (
-        <button className={Class} {...props} ariaPressed={active + ''}>
+        <button className={Class} {...props} ariaPressed={active?.toString()}>
             {children}
         </button>
     );

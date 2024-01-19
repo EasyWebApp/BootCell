@@ -1,7 +1,14 @@
 import { JsxProps, VNode } from 'dom-renderer';
 import { observable } from 'mobx';
-import { FC, WebCellProps, attribute, component, observer } from 'web-cell';
-import { uniqueID } from 'web-utility';
+import {
+    FC,
+    WebCell,
+    WebCellProps,
+    attribute,
+    component,
+    observer
+} from 'web-cell';
+import { delegate, uniqueID } from 'web-utility';
 
 import { Container, ContainerProps } from './Grid';
 import {
@@ -73,12 +80,14 @@ export interface OffcanvasNavbarProps
     brand?: VNode;
 }
 
+export interface OffcanvasNavbar extends WebCell {}
+
 @component({
     tagName: 'offcanvas-navbar',
     mode: 'open'
 })
 @observer
-export class OffcanvasNavbar extends HTMLElement {
+export class OffcanvasNavbar extends HTMLElement implements WebCell {
     declare props: OffcanvasNavbarProps;
 
     @attribute
@@ -124,6 +133,30 @@ export class OffcanvasNavbar extends HTMLElement {
     @observable
     accessor closeButton = true;
 
+    connectedCallback() {
+        globalThis.addEventListener?.('keyup', this.close, true);
+
+        this.addEventListener('click', this.handleLink);
+    }
+
+    disconnectedCallback() {
+        globalThis.removeEventListener?.('keyup', this.close, true);
+
+        this.addEventListener('click', this.handleLink);
+    }
+
+    close = (event?: KeyboardEvent | MouseEvent) => {
+        if (
+            event instanceof KeyboardEvent &&
+            !['Escape', 'Enter'].includes(event.key)
+        )
+            return;
+
+        this.open = false;
+    };
+
+    handleLink = delegate('a[href].nav-link', this.close);
+
     renderContent() {
         const { variant, bg, expand, fixed, sticky, fluid, brand } = this,
             { title, titleId, offcanvasId, open, closeButton } = this;
@@ -141,6 +174,7 @@ export class OffcanvasNavbar extends HTMLElement {
                         id={offcanvasId}
                         aria-labelledby={titleId}
                         show={open}
+                        onHide={this.close}
                     >
                         <OffcanvasHeader
                             closeButton={closeButton}

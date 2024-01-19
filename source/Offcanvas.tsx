@@ -1,10 +1,10 @@
-import { JsxProps } from 'dom-renderer';
-import { FC } from 'web-cell';
+import classNames from 'classnames';
+import { FC, WebCellProps } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
 import { CloseButton } from './Button';
 
-export const OffcanvasTitle: FC<JsxProps<HTMLHeadingElement>> = ({
+export const OffcanvasTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     className = '',
     children,
     ...props
@@ -14,7 +14,7 @@ export const OffcanvasTitle: FC<JsxProps<HTMLHeadingElement>> = ({
     </h5>
 );
 
-export interface OffcanvasHeaderProps extends JsxProps<HTMLDivElement> {
+export interface OffcanvasHeaderProps extends WebCellProps<HTMLDivElement> {
     closeButton?: boolean;
     onHide?: () => any;
 }
@@ -33,7 +33,7 @@ export const OffcanvasHeader: FC<OffcanvasHeaderProps> = ({
     </div>
 );
 
-export const OffcanvasBody: FC<JsxProps<HTMLDivElement>> = ({
+export const OffcanvasBody: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',
     children,
     ...props
@@ -43,30 +43,37 @@ export const OffcanvasBody: FC<JsxProps<HTMLDivElement>> = ({
     </div>
 );
 
-export interface OffcanvasProps extends JsxProps<HTMLDivElement> {
+export interface OffcanvasProps
+    extends Omit<OffcanvasHeaderProps, 'closeButton'> {
     backdrop?: boolean | 'static';
     show?: boolean;
 }
 
 export const Offcanvas: FC<OffcanvasProps> = ({
     className = '',
+    style,
     backdrop = true,
     show,
+    onHide,
     children,
     ...props
 }) => (
     <>
         <div
-            className={`offcanvas ${className} ${
-                show ? 'offcanvas-end show' : 'offcanvas-start'
-            }`}
+            className={classNames(
+                'offcanvas',
+                show ? 'offcanvas-end show' : 'offcanvas-start',
+                className
+            )}
+            style={{ maxWidth: '75vw', ...style }}
             tabIndex={-1}
             {...(backdrop === 'static' ? { 'data-bs-backdrop': 'static' } : {})}
             {...props}
         >
             {children}
         </div>
-        {show && <div className="offcanvas-backdrop show" />}
+
+        {show && <div className="offcanvas-backdrop show" onClick={onHide} />}
     </>
 );
 
@@ -80,11 +87,12 @@ export const OffcanvasBox: FC<OffcanvasBoxProps> = ({
     title,
     titleId = uniqueID(),
     closeButton,
+    onHide,
     children,
     ...props
 }) => (
-    <Offcanvas {...props} aria-labelledby={titleId}>
-        <OffcanvasHeader closeButton={closeButton}>
+    <Offcanvas {...{ ...props, onHide }} aria-labelledby={titleId}>
+        <OffcanvasHeader {...{ closeButton, onHide }}>
             <OffcanvasTitle id={titleId}>{title}</OffcanvasTitle>
         </OffcanvasHeader>
         <OffcanvasBody>{children}</OffcanvasBody>

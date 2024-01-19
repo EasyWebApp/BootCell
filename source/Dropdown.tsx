@@ -46,6 +46,8 @@ export const DropdownItem: FC<WebCellProps<HTMLAnchorElement>> = ({
 );
 
 export interface DropdownButtonProps extends WebCellProps, ButtonProps {
+    boxClass?: string;
+    buttonClass?: string;
     caption: JsxChildren;
 }
 
@@ -56,6 +58,14 @@ export interface DropdownButtonProps extends WebCellProps, ButtonProps {
 @observer
 export class DropdownButton extends HTMLElement {
     declare props: DropdownButtonProps;
+
+    @attribute
+    @observable
+    accessor boxClass: string;
+
+    @attribute
+    @observable
+    accessor buttonClass: string;
 
     @attribute
     @observable
@@ -70,16 +80,21 @@ export class DropdownButton extends HTMLElement {
 
     @attribute
     @observable
+    accessor disabled = false;
+
+    @attribute
+    @observable
     accessor show = false;
 
     renderContent() {
-        const { variant, size, caption, show } = this;
+        const { boxClass, buttonClass, variant, size, caption } = this,
+            { disabled, show } = this;
 
         return (
-            <Dropdown className={classNames({ show })}>
+            <Dropdown className={classNames(boxClass, { show })}>
                 <DropdownToggle
-                    className={classNames({ show })}
-                    {...{ variant, size }}
+                    className={classNames(buttonClass, { show })}
+                    {...{ variant, size, disabled }}
                     onClick={() => (this.show = !show)}
                 >
                     {caption}
@@ -98,6 +113,11 @@ export class DropdownButton extends HTMLElement {
                     rel="stylesheet"
                     href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
                 />
+                <style>
+                    {`:host {
+                        display: inline-block;
+                    }`}
+                </style>
                 {this.renderContent()}
             </>
         );
