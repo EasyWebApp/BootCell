@@ -14,37 +14,70 @@
 
 ## Usage
 
+### Installation
+
 ```shell
-npm install boot-cell iterable-observer @nuintun/qrcode
+npm install dom-renderer web-cell boot-cell
+npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 ```
 
-`index.html`
+#### `package.json`
+
+```json
+{
+    "scripts": {
+        "start": "parcel source/index.html --open",
+        "build": "parcel build source/index.html --public-url ."
+    }
+}
+```
+
+#### `tsconfig.json`
+
+```json
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ES2020",
+        "moduleResolution": "Node",
+        "useDefineForClassFields": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "dom-renderer"
+    }
+}
+```
+
+#### `.parcelrc`
+
+```json
+{
+    "extends": "@parcel/config-default",
+    "transformers": {
+        "*.{ts,tsx}": ["@parcel/transformer-typescript-tsc"]
+    }
+}
+```
+
+### `source/index.html`
 
 ```html
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/dialog-polyfill@0.5.6/dist/dialog-polyfill.css"
-/>
 <link
     rel="stylesheet"
     href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.11.2/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
     href="https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
 />
-<script
-    crossorigin
-    src="https://polyfill.app/api/polyfill?features=es.array.flat,es.object.from-entries,regenerator-runtime,intersection-observer,resize-observer"
-></script>
-<script src="https://unpkg.com/dialog-polyfill@0.5.6/dist/dialog-polyfill.js"></script>
-<script src="https://unpkg.com/share-api-polyfill@1.1.1/dist/share-min.js"></script>
-<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/custom-elements-es5-adapter.js"></script>
-<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-bundle.js"></script>
+<script src="https://polyfill.web-cell.dev/feature/ECMAScript.js"></script>
+<script src="https://polyfill.web-cell.dev/feature/WebComponents.js"></script>
+<script src="https://polyfill.web-cell.dev/feature/ElementInternals.js"></script>
+<script src="https://polyfill.web-cell.dev/feature/Dialog.js"></script>
+<script src="https://polyfill.web-cell.dev/feature/Share.js"></script>
 ```
 
 ## Components
