@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { WebCellProps } from 'web-cell';
+import { FC, WebCellProps } from 'web-cell';
 
 import { Color } from './type';
 
@@ -9,7 +9,7 @@ export interface IconProps extends WebCellProps {
     size?: number;
 }
 
-export function Icon({
+export const Icon: FC<IconProps> = ({
     className,
     style,
     color,
@@ -17,19 +17,42 @@ export function Icon({
     size,
     children,
     ...rest
-}: IconProps) {
-    return (
-        <i
-            className={classNames(
-                `bi-${name}`,
-                color && `text-${color}`,
-                className
-            )}
-            style={{
-                ...style,
-                fontSize: size ? `${size}rem` : undefined
-            }}
-            {...rest}
-        />
-    );
+}) => (
+    <i
+        className={classNames(
+            `bi-${name}`,
+            color && `text-${color}`,
+            className
+        )}
+        style={{
+            ...style,
+            fontSize: size ? `${size}rem` : undefined
+        }}
+        {...rest}
+    />
+);
+
+export interface BGIconProps extends IconProps {
+    type?: 'square' | 'circle';
 }
+
+export const BGIcon: FC<BGIconProps> = ({
+    className = '',
+    type = 'square',
+    color = 'primary',
+    children,
+    ...props
+}) => (
+    <span
+        className={classNames(
+            'd-inline-block',
+            'p-3',
+            `bg-${color}`,
+            `rounded${type === 'square' ? '' : '-circle'}`,
+            className
+        )}
+        {...props}
+    >
+        <Icon color={color === 'light' ? 'dark' : 'light'} {...props} />
+    </span>
+);
