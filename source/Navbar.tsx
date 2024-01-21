@@ -1,4 +1,4 @@
-import { JsxProps, VNode } from 'dom-renderer';
+import { JsxChildren, JsxProps } from 'dom-renderer';
 import { observable } from 'mobx';
 import {
     FC,
@@ -77,7 +77,7 @@ export interface OffcanvasNavbarProps
     extends OffcanvasBoxProps,
         NavbarProps,
         ContainerProps {
-    brand?: VNode;
+    brand?: JsxChildren;
 }
 
 export interface OffcanvasNavbar extends WebCell {}
@@ -121,7 +121,7 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
     titleId = uniqueID();
 
     @observable
-    accessor brand: VNode;
+    accessor brand: OffcanvasNavbarProps['brand'];
 
     offcanvasId = uniqueID();
 
