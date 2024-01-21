@@ -18,12 +18,18 @@ export const Button: FC<ButtonProps> = ({
     className,
     href,
     variant,
+    size,
     active,
     children,
     ...props
 }) => {
     const { disabled, tabIndex } = props,
-        Class = classNames('btn', variant && `btn-${variant}`, className);
+        Class = classNames(
+            'btn',
+            variant && `btn-${variant}`,
+            size && `btn-${size}`,
+            className
+        );
 
     return href ? (
         <a
