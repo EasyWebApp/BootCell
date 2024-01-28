@@ -81,7 +81,7 @@ export type FormControlProps<T extends FormControlTag> = WebCellProps &
     };
 
 export const FormControl = <T extends FormControlTag = 'input'>({
-    as: Tag,
+    as: Tag = 'input' as T,
     className = '',
     htmlSize,
     size,
