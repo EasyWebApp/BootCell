@@ -15,6 +15,7 @@ export * from './Tooltip';
 export * from './Dropdown';
 export * from './Collapse';
 export * from './Accordion';
+export * from './Carousel';
 export * from './Nav';
 export * from './Navbar';
 export * from './Offcanvas';
