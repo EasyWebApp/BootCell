@@ -13,7 +13,9 @@ interface TimeSection {
     label: string;
 }
 
-const colors = Object.keys(Status).slice(0, 4);
+const colors = Object.keys(Status)
+    .filter(color => color !== 'tertiary')
+    .slice(0, 4);
 
 export interface CountDownProps {
     endTime?: string | Date | number;
@@ -100,7 +102,7 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
                         key={value}
-                        className={`list-inline-item display-4 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-5`}
+                        className={`list-inline-item fs-4 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-3`}
                         style={{ width: '5.5rem', height: '5.5rem' }}
                     >
                         <small>

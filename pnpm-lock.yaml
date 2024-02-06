@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.14.1
     version: 0.14.1
   web-cell:
-    specifier: ^3.0.0-rc.8
-    version: 3.0.0-rc.8(element-internals-polyfill@1.3.10)(typescript@5.3.3)
+    specifier: ^3.0.0-rc.9
+    version: 3.0.0-rc.9(element-internals-polyfill@1.3.10)(typescript@5.3.3)
   web-utility:
     specifier: ^4.1.3
     version: 4.1.3(typescript@5.3.3)
@@ -4968,8 +4968,8 @@ packages:
       - typescript
     dev: true
 
-  /web-cell@3.0.0-rc.8(element-internals-polyfill@1.3.10)(typescript@5.3.3):
-    resolution: {integrity: sha512-oxgBKP9nv7LFKRQmUBoltxVTlcBPatCvSlsUEaV31GA4tG5OT1e718HDZRrk3bSUfFL8KA6WR/i7wSxZohE20g==}
+  /web-cell@3.0.0-rc.9(element-internals-polyfill@1.3.10)(typescript@5.3.3):
+    resolution: {integrity: sha512-wUStFWbybREI1b7TdAksuh7qqneGCeatKnI//LpahXhwlG92B3hWYHG7DCYH7FIpBEd7/Id0EaAbYDFPj81MMA==}
     peerDependencies:
       '@webcomponents/webcomponentsjs': ^2.8
       core-js: ^3
