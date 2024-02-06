@@ -19,4 +19,5 @@ export * from './Carousel';
 export * from './Nav';
 export * from './Navbar';
 export * from './Offcanvas';
+export * from './CountDown';
 export * from './MonthCalendar';

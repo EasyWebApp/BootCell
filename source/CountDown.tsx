@@ -1,14 +1,7 @@
-import {
-    WebCellProps,
-    component,
-    mixin,
-    attribute,
-    watch,
-    createCell
-} from 'web-cell';
+import { computed, observable } from 'mobx';
+import { WebCell, attribute, component, observer } from 'web-cell';
 
-import { Status } from '../../utility/constant';
-import style from './index.less';
+import { Status } from './type';
 
 interface TimeUnit {
     scale: number;
@@ -22,24 +15,24 @@ interface TimeSection {
 
 const colors = Object.keys(Status).slice(0, 4);
 
-export interface CountDownProps extends WebCellProps {
+export interface CountDownProps {
     endTime?: string | Date | number;
 }
 
-@component({
-    tagName: 'count-down',
-    renderTarget: 'children'
-})
-export class CountDown extends mixin<CountDownProps>() {
+export interface CountDown extends WebCell<CountDownProps> {}
+
+@component({ tagName: 'count-down' })
+@observer
+export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
     @attribute
-    @watch
-    endTime: CountDownProps['endTime'] = Date.now();
+    @observable
+    accessor endTime: CountDownProps['endTime'] = Date.now();
 
-    @watch
-    rest = 0;
+    @observable
+    accessor rest = 0;
 
-    @watch
-    units: TimeUnit[] = [
+    @observable
+    accessor units: TimeUnit[] = [
         {
             scale: 24,
             label: 'D'
@@ -58,6 +51,7 @@ export class CountDown extends mixin<CountDownProps>() {
         }
     ];
 
+    @computed
     get timeSections() {
         var { rest } = this;
 
@@ -105,7 +99,9 @@ export class CountDown extends mixin<CountDownProps>() {
             <ol className="list-inline text-white">
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
-                        className={`list-inline-item display-4 bg-${colors[index]} ${style.section}`}
+                        key={value}
+                        className={`list-inline-item display-4 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-5`}
+                        style={{ width: '5.5rem', height: '5.5rem' }}
                     >
                         <small>
                             {(value + '').padStart(2, '0')}
