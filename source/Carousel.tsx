@@ -81,9 +81,8 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         clearInterval(this.timer);
     }
 
-    @on('slotchange', 'slot')
-    handleSlotChange(_: Event, slot: HTMLSlotElement) {
-        const items = slot.assignedElements();
+    mountedCallback() {
+        const items = [...this.querySelectorAll('.carousel-item')];
 
         if (this.itemMeta.length !== items.length)
             this.itemMeta = items.map(item => ({

@@ -85,7 +85,7 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
         } else if (this.timer) clearInterval(this.timer);
     };
 
-    connectedCallback() {
+    mountedCallback() {
         if (typeof this.endTime !== 'number')
             this.endTime = new Date(this.endTime).valueOf();
 
@@ -102,7 +102,7 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
                         key={value}
-                        className={`list-inline-item fs-4 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-3`}
+                        className={`list-inline-item fs-1 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-4`}
                         style={{ width: '5.5rem', height: '5.5rem' }}
                     >
                         <small>

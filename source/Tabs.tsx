@@ -8,7 +8,6 @@ import {
     on,
     reaction
 } from 'web-cell';
-import { CustomElement } from 'web-utility';
 
 import { Nav, NavLink } from './Nav';
 
@@ -28,12 +27,14 @@ export class Tab extends HTMLElement implements WebCell<TabProps> {
     }
 }
 
+export interface Tabs extends WebCell {}
+
 @component({
     tagName: 'tabs-box',
     mode: 'open'
 })
 @observer
-export class Tabs extends HTMLElement implements CustomElement {
+export class Tabs extends HTMLElement implements WebCell {
     @observable
     accessor tabMeta: TabProps[] = [];
 
@@ -45,9 +46,8 @@ export class Tabs extends HTMLElement implements CustomElement {
         this.turnPaneTo(this.currentIndex);
     }
 
-    @on('slotchange', 'slot')
-    handleSlotChange(_: Event, slot: HTMLSlotElement) {
-        const tabs = slot.assignedElements() as Tab[];
+    mountedCallback() {
+        const tabs = [...this.querySelectorAll<Tab>('tab-pane')];
 
         if (this.tabMeta.length !== tabs.length)
             this.tabMeta = tabs.map(({ caption }) => ({ caption }));
