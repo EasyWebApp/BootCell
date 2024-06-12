@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { Color } from './type';
+import { Color } from '../type';
 
 export interface BadgeProps extends WebCellProps<HTMLAnchorElement> {
     bg?: Color;

@@ -1,14 +1,14 @@
-import { createCell } from 'web-cell';
+import { FC } from 'web-cell';
 import classNames from 'classnames';
 
-import { TextColors } from '../utility/constant';
+import { Color } from '../type';
 import { IconProps } from './Icon';
 
 export interface FAIconProps extends Omit<IconProps, 'size'> {
     group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     fixedWidth?: boolean;
-    color?: TextColors;
+    color?: Color;
     inverse?: boolean;
     border?: boolean;
     rotate?: 90 | 180 | 270;
@@ -19,7 +19,7 @@ export interface FAIconProps extends Omit<IconProps, 'size'> {
     listItem?: boolean;
 }
 
-export function FAIcon({
+export const FAIcon: FC<FAIconProps> = ({
     group = 'solid',
     name,
     size,
@@ -36,7 +36,7 @@ export function FAIcon({
     className,
     defaultSlot,
     ...rest
-}: FAIconProps) {
+}) => {
     const icon = (
         <span
             className={classNames(
@@ -60,24 +60,28 @@ export function FAIcon({
     );
 
     return listItem ? <span className="fa-li">{icon}</span> : icon;
-}
+};
 
-export interface BGIconProps extends FAIconProps {
+export interface FABGIconProps extends FAIconProps {
     type: 'square' | 'circle';
 }
 
-export function BGIcon({ size, color, className, type, ...rest }: BGIconProps) {
-    return (
-        <span
-            className={classNames(
-                'fa-stack',
-                size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
-                color && 'text-' + color,
-                className
-            )}
-        >
-            <FAIcon name={type} stack={2} />
-            <FAIcon {...rest} stack={1} inverse />
-        </span>
-    );
-}
+export const FABGIcon: FC<FABGIconProps> = ({
+    size,
+    color,
+    className,
+    type,
+    ...rest
+}) => (
+    <span
+        className={classNames(
+            'fa-stack',
+            size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
+            color && 'text-' + color,
+            className
+        )}
+    >
+        <FAIcon name={type} stack={2} />
+        <FAIcon {...rest} stack={1} inverse />
+    </span>
+);

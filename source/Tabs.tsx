@@ -22,7 +22,7 @@ export class Tab extends HTMLElement implements WebCell<TabProps> {
     caption: JsxChildren;
 
     connectedCallback() {
-        this.classList.add('tab-pane', 'fade');
+        this.classList.add('tab-pane');
         this.role = 'tabpanel';
     }
 }
@@ -42,15 +42,16 @@ export class Tabs extends HTMLElement implements WebCell {
     @observable
     accessor currentIndex = 0;
 
-    connectedCallback() {
-        this.turnPaneTo(this.currentIndex);
-    }
-
     mountedCallback() {
         const tabs = [...this.querySelectorAll<Tab>('tab-pane')];
 
-        if (this.tabMeta.length !== tabs.length)
-            this.tabMeta = tabs.map(({ caption }) => ({ caption }));
+        this.tabMeta = tabs.map(tab => {
+            tab.hidden = true;
+
+            return { caption: tab.caption };
+        });
+
+        this.turnPaneTo(this.currentIndex);
     }
 
     @on('click', '.nav-tabs > .nav-link')

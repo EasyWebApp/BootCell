@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { JsxChildren } from 'dom-renderer';
-import { FC, WebCellProps } from 'web-cell';
+import { FC } from 'web-cell';
 
 import { BackgroundColor } from './type';
 import { Container, ContainerProps } from './Grid';
@@ -13,17 +13,24 @@ export interface JumbotronProps
 }
 
 export const Jumbotron: FC<JumbotronProps> = ({
-    className,
     fluid,
+    className = `py-5 ${fluid ? '' : 'px-5'}`,
     bg = 'body-tertiary',
     rounded = fluid ? 0 : 3,
     title,
     description,
     children,
     ...props
-}) => {
-    const content = (
-        <>
+}) => (
+    <header
+        className={classNames(
+            bg && `bg-${bg}`,
+            rounded && `rounded-${rounded}`,
+            className
+        )}
+        {...props}
+    >
+        <Container fluid={fluid}>
             <h1 className="display-4">{title}</h1>
 
             <p className="lead">{description}</p>
@@ -34,21 +41,6 @@ export const Jumbotron: FC<JumbotronProps> = ({
                     {children}
                 </>
             )}
-        </>
-    );
-
-    return (
-        <header
-            className={classNames(
-                'py-5',
-                !fluid && 'px-5',
-                bg && `bg-${bg}`,
-                rounded && `rounded-${rounded}`,
-                className
-            )}
-            {...props}
-        >
-            {fluid ? <Container fluid={fluid}>{content}</Container> : content}
-        </header>
-    );
-};
+        </Container>
+    </header>
+);

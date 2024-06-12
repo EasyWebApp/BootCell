@@ -1,21 +1,30 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-export interface RatioProps extends WebCellProps {
+export interface RatioProps extends WebCellProps<HTMLDivElement> {
     aspectRatio?: number | '1x1' | '4x3' | '16x9' | '21x9';
 }
 
-export const Ratio: FC<RatioProps> = ({ aspectRatio = '1x1', children }) => (
+export const Ratio: FC<RatioProps> = ({
+    className,
+    style,
+    aspectRatio = '1x1',
+    children,
+    ...props
+}) => (
     <div
         className={classNames(
             'ratio',
-            typeof aspectRatio === 'string' && `ratio-${aspectRatio}`
+            typeof aspectRatio === 'string' && `ratio-${aspectRatio}`,
+            className
         )}
-        style={
-            typeof aspectRatio === 'number'
+        style={{
+            ...style,
+            ...(typeof aspectRatio === 'number'
                 ? { '--bs-aspect-ratio': `${aspectRatio * 100}%` }
-                : undefined
-        }
+                : null)
+        }}
+        {...props}
     >
         {children}
     </div>
