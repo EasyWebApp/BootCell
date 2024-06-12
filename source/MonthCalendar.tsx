@@ -10,7 +10,7 @@ import {
     splitArray
 } from 'web-utility';
 
-import { Badge } from './Badge';
+import { Badge } from './Reminder';
 import { Button, ButtonProps } from './Button';
 import { Table, TableProps } from './Table';
 

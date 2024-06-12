@@ -1,20 +1,16 @@
-import {
-    WebCellProps,
-    VNodeChildElement,
-    createCell,
-    Fragment
-} from 'web-cell';
+import { FC, WebCellProps } from 'web-cell';
+import { JsxChildren } from 'dom-renderer';
 import classNames from 'classnames';
 
 export interface MediaObjectProps extends WebCellProps {
     listItem?: boolean;
     title: string;
-    image: string | VNodeChildElement;
+    image: JsxChildren;
     imageRow?: 'start' | 'center' | 'end';
     imageColumn?: 'start' | 'end';
 }
 
-export function MediaObject({
+export const MediaObject: FC<MediaObjectProps> = ({
     className,
     listItem,
     title,
@@ -23,7 +19,7 @@ export function MediaObject({
     imageColumn = 'start',
     defaultSlot,
     ...rest
-}: MediaObjectProps) {
+}) => {
     const start = imageColumn === 'start';
     const Tag = listItem ? 'li' : 'div',
         Class = classNames('d-flex', !start && 'flex-row-reverse', className);
@@ -53,4 +49,4 @@ export function MediaObject({
             {body}
         </Tag>
     );
-}
+};

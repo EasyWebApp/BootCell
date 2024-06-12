@@ -3,7 +3,7 @@ import { JsxChildren, VNode } from 'dom-renderer';
 import { FC, WebCellProps } from 'web-cell';
 
 import { FormControlProps } from './Form';
-import { Icon, IconProps } from './Icon';
+import { Icon, IconProps } from './Reminder';
 import { Color } from './type';
 
 export interface ButtonProps

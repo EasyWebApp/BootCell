@@ -4,7 +4,7 @@
 
 [Web Components][1] UI library based on [WebCell v3][2], [BootStrap v5][3], [BootStrap Icon v1][4] & [FontAwesome v6][5]
 
-[![NPM Dependency](https://img.shields.io/librariesio/github/EasyWebApp/WebCell.svg)][6]
+[![NPM Dependency](https://img.shields.io/librariesio/github/EasyWebApp/BootCell.svg)][6]
 [![CI & CD](https://github.com/EasyWebApp/BootCell/actions/workflows/main.yml/badge.svg)][7]
 
 [![Anti 996 license](https://img.shields.io/badge/license-Anti%20996-blue.svg)][8]
@@ -63,7 +63,7 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
@@ -178,10 +178,6 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 7. [Size](https://web-cell.dev/BootCell/enums/utility_constant.size.html)
 8. [Position](https://web-cell.dev/BootCell/enums/utility_constant.position.html)
 9. [JustifyType](https://web-cell.dev/BootCell/enums/utility_constant.justifytype.html)
-
-## Utilities
-
-1. [encodeQRC](https://web-cell.dev/BootCell/modules/utility_qrcode.html#encodeqrc)
 
 ## Theme
 

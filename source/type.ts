@@ -10,7 +10,14 @@ export enum Status {
     danger = 'danger'
 }
 
-export type Color = Exclude<keyof typeof Status, 'tertiary'> | 'light' | 'dark';
+export enum Theme {
+    light = 'light',
+    dark = 'dark'
+}
+
+export type Color =
+    | Exclude<keyof typeof Status, 'tertiary'>
+    | keyof typeof Theme;
 
 export type BackgroundColor =
     | Subtle<Color>
