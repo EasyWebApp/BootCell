@@ -17,7 +17,7 @@ export const MediaObject: FC<MediaObjectProps> = ({
     image,
     imageRow = 'start',
     imageColumn = 'start',
-    defaultSlot,
+    children,
     ...rest
 }) => {
     const start = imageColumn === 'start';
@@ -39,7 +39,7 @@ export const MediaObject: FC<MediaObjectProps> = ({
             </div>
             <div className={`flex-grow-1 ${start ? 'ms-3' : 'me-3'}`}>
                 <h5 className="mt-0">{title}</h5>
-                {defaultSlot}
+                {children}
             </div>
         </>
     );
