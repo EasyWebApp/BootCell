@@ -12,7 +12,7 @@ import {
 
 import { Badge } from './Reminder';
 import { Button, ButtonProps } from './Button';
-import { Table, TableProps } from './Table';
+import { Table, TableProps } from './Content';
 
 export interface DateData {
     date: TimeData;

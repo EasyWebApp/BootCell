@@ -1,14 +1,14 @@
 import { FC } from 'web-cell';
 import classNames from 'classnames';
 
-import { Color } from '../type';
+import { TextColor } from '../type';
 import { IconProps } from './Icon';
 
 export interface FAIconProps extends Omit<IconProps, 'size'> {
     group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     fixedWidth?: boolean;
-    color?: Color;
+    color?: TextColor;
     inverse?: boolean;
     border?: boolean;
     rotate?: 90 | 180 | 270;
@@ -34,7 +34,7 @@ export const FAIcon: FC<FAIconProps> = ({
     stack,
     listItem,
     className,
-    defaultSlot,
+    children,
     ...rest
 }) => {
     const icon = (

@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "2.0.0-beta.23",
+    "version": "2.0.0-beta.26",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v3, BootStrap v5, BootStrap Icon v1 & FontAwesome v6",
@@ -27,9 +27,9 @@
         "@swc/helpers": "^0.5.11",
         "classnames": "^2.5.1",
         "dom-renderer": "^2.1.7",
-        "mobx": "^6.12.3",
+        "mobx": "^6.12.4",
         "regenerator-runtime": "^0.14.1",
-        "web-cell": "^3.0.0-rc.15",
+        "web-cell": "^3.0.0-rc.16",
         "web-utility": "^4.4.0"
     },
     "peerDependencies": {
@@ -49,7 +49,6 @@
         "@parcel/transformer-typescript-types": "~2.12.0",
         "@peculiar/webcrypto": "^1.5.0",
         "@tech_query/snabbdom-looks-like": "^2.0.1",
-        "@types/classnames": "^2.3.1",
         "@types/jest": "^29.5.12",
         "@types/resize-observer-browser": "^0.1.11",
         "@types/turndown": "^5.0.4",
@@ -60,7 +59,7 @@
         "iterable-observer": "^1.0.1",
         "jest": "^29.7.0",
         "less": "^4.2.0",
-        "lint-staged": "^15.2.6",
+        "lint-staged": "^15.2.7",
         "markdown-area-element": "^0.2.3",
         "open-cli": "^8.0.0",
         "parcel": "~2.12.0",

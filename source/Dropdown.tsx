@@ -111,7 +111,7 @@ export class DropdownButton extends HTMLElement {
             <>
                 <link
                     rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                 />
                 <style>
                     {`:host {

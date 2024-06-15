@@ -198,7 +198,7 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
             <>
                 <link
                     rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                 />
                 {this.renderContent()}
             </>

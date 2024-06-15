@@ -15,15 +15,17 @@ export enum Theme {
     dark = 'dark'
 }
 
-export type Color =
+export type BasicColor = 'body' | 'black' | 'white';
+
+export type TextColor =
+    | BasicColor
     | Exclude<keyof typeof Status, 'tertiary'>
     | keyof typeof Theme;
 
 export type BackgroundColor =
-    | Subtle<Color>
-    | `body${'' | '-emphasis' | '-secondary' | '-tertiary'}`
-    | 'black'
-    | 'white'
+    | Subtle<TextColor>
+    | `body-${'emphasis' | 'secondary' | 'tertiary'}`
+    | BasicColor
     | 'transparent';
 
 export type Size = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

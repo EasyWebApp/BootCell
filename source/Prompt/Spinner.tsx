@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { Color } from './type';
+import { TextColor } from '../type';
 
 export interface SpinnerProps extends WebCellProps<HTMLDivElement> {
-    variant?: Color;
+    variant?: TextColor;
     size?: 'sm';
     animation?: 'border' | 'grow';
 }

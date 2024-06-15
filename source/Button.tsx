@@ -4,13 +4,13 @@ import { FC, WebCellProps } from 'web-cell';
 
 import { FormControlProps } from './Form';
 import { Icon, IconProps } from './Reminder';
-import { Color } from './type';
+import { TextColor } from './type';
 
 export interface ButtonProps
     extends WebCellProps<HTMLButtonElement>,
         Omit<WebCellProps<HTMLAnchorElement>, 'type'>,
         Pick<FormControlProps<'input'>, 'size'> {
-    variant?: Color | `outline-${Color}` | 'link';
+    variant?: TextColor | `outline-${TextColor}` | 'link';
     active?: boolean;
 }
 

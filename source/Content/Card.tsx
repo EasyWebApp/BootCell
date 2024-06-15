@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { Image, ImageProps } from './Image';
-import { Color, PositionY } from './type';
+import { Image, ImageProps } from '../Image';
+import { TextColor, PositionY } from '../type';
 
 export interface CardProps extends WebCellProps<HTMLDivElement> {
-    bg?: Color;
-    text?: Color | 'white' | 'muted';
-    border?: Color;
+    bg?: TextColor;
+    text?: TextColor | 'white' | 'muted';
+    border?: TextColor;
     body?: boolean;
 }
 
