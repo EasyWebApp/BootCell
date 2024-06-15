@@ -54,9 +54,6 @@ importers:
       '@tech_query/snabbdom-looks-like':
         specifier: ^2.0.1
         version: 2.0.1
-      '@types/classnames':
-        specifier: ^2.3.1
-        version: 2.3.1
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -927,10 +924,6 @@ packages:
 
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
-
-  '@types/classnames@2.3.1':
-    resolution: {integrity: sha512-zeOWb0JGBoVmlQoznvqXbE0tEC/HONsnoUNH19Hc96NFsTAwTXbTqb8FMYkru1F/iqp7a18Ws3nWJvtA1sHD1A==}
-    deprecated: This is a stub types definition. classnames provides its own type definitions, so you do not need this installed.
 
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
@@ -3850,10 +3843,6 @@ snapshots:
   '@types/babel__traverse@7.20.6':
     dependencies:
       '@babel/types': 7.24.7
-
-  '@types/classnames@2.3.1':
-    dependencies:
-      classnames: 2.5.1
 
   '@types/graceful-fs@4.1.9':
     dependencies:

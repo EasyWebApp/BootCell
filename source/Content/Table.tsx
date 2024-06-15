@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { TextColor, Size } from './type';
+import { TextColor, Size } from '../type';
 
 export interface TableProps extends WebCellProps<HTMLTableElement> {
     variant?: TextColor;

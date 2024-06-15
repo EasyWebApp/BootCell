@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { JsxChildren } from 'dom-renderer';
 import { FC } from 'web-cell';
 
-import { BackgroundColor } from './type';
-import { Container, ContainerProps } from './Grid';
+import { BackgroundColor } from '../type';
+import { Container, ContainerProps } from '../Grid';
 
 export interface JumbotronProps
     extends Omit<ContainerProps, 'title'>,
