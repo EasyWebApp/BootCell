@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { Image, ImageProps } from '../Image';
+import { Image, ImageProps } from '../Media/Image';
 import { TextColor, PositionY } from '../type';
 
 export interface CardProps extends WebCellProps<HTMLDivElement> {

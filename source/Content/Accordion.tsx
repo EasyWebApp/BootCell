@@ -10,7 +10,7 @@ import {
     reaction
 } from 'web-cell';
 
-import { CollapseProps, Collapse } from './Collapse';
+import { CollapseProps, Collapse } from '../Layout/Collapse';
 
 export const AccordionItem: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',

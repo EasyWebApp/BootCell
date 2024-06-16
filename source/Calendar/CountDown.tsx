@@ -1,7 +1,7 @@
 import { computed, observable } from 'mobx';
 import { WebCell, attribute, component, observer } from 'web-cell';
 
-import { Status } from './type';
+import { Status } from '../type';
 
 interface TimeUnit {
     scale: number;
@@ -101,7 +101,7 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
             <ol className="list-inline text-white">
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
-                        key={value}
+                        key={label}
                         className={`list-inline-item fs-1 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-4`}
                         style={{ width: '5.5rem', height: '5.5rem' }}
                     >

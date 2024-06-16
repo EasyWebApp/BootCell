@@ -10,9 +10,9 @@ import {
     splitArray
 } from 'web-utility';
 
-import { Badge } from './Reminder';
-import { Button, ButtonProps } from './Button';
-import { Table, TableProps } from './Content';
+import { Badge } from '../Reminder';
+import { Button, ButtonProps } from '../Form/Button';
+import { Table, TableProps } from '../Content';
 
 export interface DateData {
     date: TimeData;

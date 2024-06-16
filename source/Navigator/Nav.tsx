@@ -1,7 +1,7 @@
 import { JsxChildren } from 'dom-renderer';
 import { FC, WebCell, WebCellProps, component } from 'web-cell';
 
-import { ButtonProps } from './Button';
+import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
 import { OffcanvasNavbar } from './Navbar';
 

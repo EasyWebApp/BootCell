@@ -1,7 +1,7 @@
 import { JsxProps } from 'dom-renderer';
 import { FC } from 'web-cell';
 
-import { Size } from './type';
+import { Size } from '../type';
 
 export interface ContainerProps extends JsxProps<HTMLDivElement> {
     fluid?: boolean | Size;

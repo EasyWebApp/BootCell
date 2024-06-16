@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { VNode } from 'dom-renderer';
+import { JsxChildren } from 'dom-renderer';
 import { FC, WebCellProps } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
@@ -108,7 +108,7 @@ export interface FormCheckProps extends WebCellProps<HTMLInputElement> {
     type: 'radio' | 'checkbox' | 'switch';
     inline?: boolean;
     reverse?: boolean;
-    label?: VNode;
+    label?: JsxChildren;
 }
 
 export const FormCheck: FC<FormCheckProps> = ({

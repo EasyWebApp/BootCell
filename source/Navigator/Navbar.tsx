@@ -10,15 +10,15 @@ import {
 } from 'web-cell';
 import { delegate, uniqueID } from 'web-utility';
 
-import { Container, ContainerProps } from './Grid';
+import { Container, ContainerProps } from '../Layout/Grid';
 import {
     Offcanvas,
     OffcanvasBody,
     OffcanvasBoxProps,
     OffcanvasHeader,
     OffcanvasTitle
-} from './Offcanvas';
-import { BackgroundColor, PositionY, Size } from './type';
+} from '../Layout/Offcanvas';
+import { BackgroundColor, PositionY, Size } from '../type';
 
 export type NavbarBrandProps = JsxProps<HTMLAnchorElement>;
 

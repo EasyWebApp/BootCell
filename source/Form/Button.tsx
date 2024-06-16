@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { JsxChildren, VNode } from 'dom-renderer';
 import { FC, WebCellProps } from 'web-cell';
+import { uniqueID } from 'web-utility';
 
-import { FormControlProps } from './Form';
-import { Icon, IconProps } from './Reminder';
-import { TextColor } from './type';
+import { FormCheckProps, FormControlProps } from './Form';
+import { Icon, IconProps } from '../Reminder';
+import { TextColor } from '../type';
 
 export interface ButtonProps
     extends WebCellProps<HTMLButtonElement>,
@@ -81,4 +82,26 @@ export const CloseButton: FC<WebCellProps<HTMLButtonElement>> = ({
         ariaLabel="Close"
         {...props}
     />
+);
+
+export interface ToggleButtonProps
+    extends WebCellProps<HTMLInputElement>,
+        Pick<ButtonProps, 'variant'> {
+    type: Exclude<FormCheckProps['type'], 'switch'>;
+}
+
+export const ToggleButton: FC<ToggleButtonProps> = ({
+    className = '',
+    id = uniqueID(),
+    variant = 'primary',
+    children,
+    ...props
+}) => (
+    <>
+        <input className="btn-check" id={id} autocomplete="off" {...props} />
+
+        <label className={`btn btn-${variant} ${className}`} htmlFor={id}>
+            {children}
+        </label>
+    </>
 );
