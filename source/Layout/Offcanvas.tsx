@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
-import { CloseButton } from './Button';
+import { CloseButton } from '../Form/Button';
 
 export const OffcanvasTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     className = '',

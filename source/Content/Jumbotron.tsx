@@ -3,7 +3,7 @@ import { JsxChildren } from 'dom-renderer';
 import { FC } from 'web-cell';
 
 import { BackgroundColor } from '../type';
-import { Container, ContainerProps } from '../Grid';
+import { Container, ContainerProps } from '../Layout/Grid';
 
 export interface JumbotronProps
     extends Omit<ContainerProps, 'title'>,

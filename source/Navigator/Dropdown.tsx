@@ -3,7 +3,7 @@ import { JsxChildren } from 'dom-renderer';
 import { observable } from 'mobx';
 import { FC, WebCellProps, attribute, component, observer } from 'web-cell';
 
-import { Button, ButtonProps } from './Button';
+import { Button, ButtonProps } from '../Form/Button';
 
 export const Dropdown: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',

@@ -9,7 +9,7 @@ import {
     reaction
 } from 'web-cell';
 
-import { Nav, NavLink } from '../Nav';
+import { Nav, NavLink } from '../Navigator/Nav';
 
 export interface TabProps {
     caption: JsxChildren;
