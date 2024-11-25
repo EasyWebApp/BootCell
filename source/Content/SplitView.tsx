@@ -1,15 +1,13 @@
-import { component, mixin, createCell, Fragment } from 'web-cell';
+import { component } from 'web-cell';
 import { Observable } from 'iterable-observer';
 
 @component({
     tagName: 'split-view',
-    renderTarget: 'children'
+    mode: 'open'
 })
-export class SplitView extends mixin() {
+export class SplitView extends HTMLElement {
     connectedCallback() {
         this.classList.add('d-flex', 'w-100');
-
-        super.connectedCallback();
     }
 
     toggleDrag({ type, target, pointerId }: PointerEvent) {
@@ -33,11 +31,11 @@ export class SplitView extends mixin() {
     }
 
     render() {
-        const [left, right] = this.defaultSlot;
-
         return (
             <>
-                <div style={{ width: '25%' }}>{left}</div>
+                <div style={{ width: '25%' }}>
+                    <slot name="left" />
+                </div>
                 <div
                     className="border border-secondary m-1"
                     style={{ cursor: 'col-resize' }}
@@ -45,7 +43,9 @@ export class SplitView extends mixin() {
                     onPointerUp={this.toggleDrag}
                     ref={this.watchLine}
                 />
-                <div className="flex-fill">{right}</div>
+                <div className="flex-fill">
+                    <slot name="right" />
+                </div>
             </>
         );
     }
