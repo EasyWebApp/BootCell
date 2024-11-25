@@ -1,15 +1,9 @@
-import {
-    WebCellProps,
-    WebCellElement,
-    VNodeChildElement,
-    VNode,
-    createCell,
-    Fragment
-} from 'web-cell';
+import { WebCellProps } from 'web-cell';
+import { JsxChildren, VNode } from 'dom-renderer';
 import classNames from 'classnames';
 
 export interface StepProps extends WebCellProps {
-    icon?: WebCellElement;
+    icon?: JsxChildren;
     active?: boolean;
     disabled?: boolean;
 }
@@ -18,17 +12,17 @@ export function Step({
     active,
     disabled,
     icon,
-    defaultSlot,
+    children: defaultSlot,
     ...rest
 }: StepProps) {
     return (
-        <div className={classNames('step', active && 'active')} {...rest}>
+        <div className={classNames('step', { active })} {...rest}>
             <button
                 type="button"
                 className="step-trigger"
                 disabled={disabled}
                 role="tab"
-                aria-selected={!!active + ''}
+                ariaSelected={!!active + ''}
             >
                 <span className="bs-stepper-circle">{icon}</span>
                 {defaultSlot[0] && (
@@ -39,18 +33,18 @@ export function Step({
     );
 }
 
-export function isStep(node: VNodeChildElement): node is VNode {
-    return (node as VNode).data?.class?.['step'];
+export function isStep(node: JsxChildren): node is VNode {
+    return (node as VNode).props?.className?.split(/\s+/).includes('step');
 }
 
 export interface StepperProps extends WebCellProps {}
 
-export function Stepper({ className, defaultSlot, ...rest }: StepperProps) {
+export function Stepper({ className, children, ...rest }: StepperProps) {
     return (
         <nav {...rest} className={classNames('bs-stepper-header', className)}>
-            {(defaultSlot as VNode[]).map((node, index) => (
+            {(children as JsxChildren[]).map((node, index) => (
                 <>
-                    {index ? <div className="line" /> : null}
+                    {!!index && <div className="line" />}
                     {node}
                 </>
             ))}

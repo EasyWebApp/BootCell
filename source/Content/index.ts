@@ -1,3 +1,4 @@
+export * from './SplitView';
 export * from './ListGroup';
 export * from './Table';
 export * from './Jumbotron';
