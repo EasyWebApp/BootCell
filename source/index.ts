@@ -10,6 +10,7 @@ export * from './Prompt';
 export * from './Navigator/Dropdown';
 export * from './Navigator/Nav';
 export * from './Navigator/Navbar';
+export * from './Navigator/Pagination';
 export * from './Navigator/Stepper';
 export * from './Calendar/CountDown';
 export * from './Calendar/MonthCalendar';

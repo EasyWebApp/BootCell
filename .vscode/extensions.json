@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "yzhang.markdown-all-in-one",
+        "redhat.vscode-yaml",
+        "clinyong.vscode-css-modules",
+        "akamud.vscode-caniuse",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "pflannery.vscode-versionlens",
+        "christian-kohler.npm-intellisense",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "github.vscode-github-actions",
+        "github.copilot"
+    ]
+}
