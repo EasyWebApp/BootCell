@@ -56,11 +56,13 @@ export function isButton(node: JsxChildren): node is VNode {
     return /^(a|input|button)/.test(selector) && props?.className?.btn;
 }
 
-export type IconButtonProps = IconProps & ButtonProps;
+export type IconButtonProps = IconProps & Omit<ButtonProps, 'size'>;
 
 export const IconButton: FC<IconButtonProps> = ({
     className,
     name,
+    color,
+    size,
     ...button
 }) => (
     <Button
@@ -68,7 +70,7 @@ export const IconButton: FC<IconButtonProps> = ({
         style={{ lineHeight: '0.8' }}
         {...button}
     >
-        <Icon name={name} />
+        <Icon {...{ name, color, size }} />
     </Button>
 );
 
