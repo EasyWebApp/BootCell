@@ -14,7 +14,7 @@ export const Pagination: FC<PaginationProps> = ({
     ...props
 }) => (
     <nav {...props}>
-        <ol className={`pagination ${size ? `pagination-${size}` : ''}`}>
+        <ol className={`m-0 pagination ${size ? `pagination-${size}` : ''}`}>
             {children}
         </ol>
     </nav>
@@ -75,7 +75,7 @@ export const Pager: FC<PagerProps> = ({
 
     return (
         <form
-            className="d-flex align-items-center gap-3"
+            className="m-0 d-flex align-items-center gap-3"
             onSubmit={onChange && (event => event.preventDefault())}
         >
             <FormControl
@@ -104,7 +104,7 @@ export const Pager: FC<PagerProps> = ({
                     onChange?.({ pageSize, pageIndex: +input.value });
                 }}
             />
-            <Pagination className="my-0">
+            <Pagination>
                 {pageIndex > 1 && (
                     <PaginationItem {...propsOf(1)}>1</PaginationItem>
                 )}

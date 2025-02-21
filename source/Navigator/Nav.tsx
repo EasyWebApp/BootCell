@@ -1,5 +1,15 @@
+import classNames from 'classnames';
 import { JsxChildren } from 'dom-renderer';
-import { FC, WebCell, WebCellProps, component } from 'web-cell';
+import { observable } from 'mobx';
+import {
+    FC,
+    WebCell,
+    WebCellProps,
+    attribute,
+    component,
+    reaction
+} from 'web-cell';
+import { CustomElement } from 'web-utility';
 
 import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
@@ -41,21 +51,47 @@ export const NavDropdown: FC<NavDropdownProps> = ({
     </DropdownButton>
 );
 
-export interface Nav extends WebCell {}
+export interface NavProps extends WebCellProps {
+    variant?: 'pills' | 'underline' | 'tabs';
+    fill?: boolean;
+    justify?: boolean;
+}
+
+export interface Nav extends WebCell<NavProps> {}
 
 @component({
     tagName: 'bs-nav',
     mode: 'open'
 })
-export class Nav extends HTMLElement {
-    declare props: WebCellProps;
+export class Nav extends HTMLElement implements CustomElement {
+    @attribute
+    @observable
+    accessor variant: 'pills' | 'underline' | 'tabs' | undefined;
+
+    @attribute
+    @observable
+    accessor fill = false;
+
+    @attribute
+    @observable
+    accessor justify = false;
+
+    @reaction(({ variant, fill, justify }) => ({ variant, fill, justify }))
+    protected updateClass({ variant, fill, justify }: this) {
+        this.className = classNames('nav', this.className, {
+            [`nav-${variant}`]: variant,
+            'nav-fill': fill,
+            [`nav-justified`]: justify
+        });
+    }
 
     connectedCallback() {
+        this.role = 'tablist';
+
         const navBar = this.closest<OffcanvasNavbar>(
             'offcanvas-navbar, .navbar'
         );
-
-        if (!navBar) return this.classList.add('nav');
+        if (!navBar) return;
 
         const expand =
             navBar.expand ||

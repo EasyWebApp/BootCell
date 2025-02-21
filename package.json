@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v3, BootStrap v5, BootStrap Icon v1 & FontAwesome v6",
@@ -31,7 +31,7 @@
         "mobx": "^6.13.6",
         "regenerator-runtime": "^0.14.1",
         "web-cell": "^3.0.3",
-        "web-utility": "^4.4.2"
+        "web-utility": "^4.4.3"
     },
     "peerDependencies": {
         "@fortawesome/fontawesome-free": "^6",
