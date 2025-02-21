@@ -7,6 +7,7 @@ import {
     WebCellProps,
     attribute,
     component,
+    observer,
     reaction
 } from 'web-cell';
 import { CustomElement } from 'web-utility';
@@ -63,6 +64,7 @@ export interface Nav extends WebCell<NavProps> {}
     tagName: 'bs-nav',
     mode: 'open'
 })
+@observer
 export class Nav extends HTMLElement implements CustomElement {
     @attribute
     @observable
@@ -77,7 +79,7 @@ export class Nav extends HTMLElement implements CustomElement {
     accessor justify = false;
 
     @reaction(({ variant, fill, justify }) => ({ variant, fill, justify }))
-    protected updateClass({ variant, fill, justify }: this) {
+    protected updateClass({ variant, fill, justify } = this) {
         this.className = classNames('nav', this.className, {
             [`nav-${variant}`]: variant,
             'nav-fill': fill,
@@ -86,6 +88,7 @@ export class Nav extends HTMLElement implements CustomElement {
     }
 
     connectedCallback() {
+        this.updateClass();
         this.role = 'tablist';
 
         const navBar = this.closest<OffcanvasNavbar>(
