@@ -10,7 +10,6 @@ import {
     observer,
     reaction
 } from 'web-cell';
-import { CustomElement } from 'web-utility';
 
 import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
@@ -65,7 +64,7 @@ export interface Nav extends WebCell<NavProps> {}
     mode: 'open'
 })
 @observer
-export class Nav extends HTMLElement implements CustomElement {
+export class Nav extends HTMLElement implements WebCell<NavProps> {
     @attribute
     @observable
     accessor variant: 'pills' | 'underline' | 'tabs' | undefined;
