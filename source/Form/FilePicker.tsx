@@ -17,7 +17,7 @@ export interface FilePickerProps extends WebCellProps<HTMLInputElement> {
 
 export interface FilePicker extends WebField<FilePickerProps> {}
 
-@component({ tagName: 'file-picker' })
+@component({ tagName: 'file-picker', mode: 'open' })
 @formField
 @observer
 export class FilePicker
@@ -26,7 +26,7 @@ export class FilePicker
 {
     @attribute
     @observable
-    accessor accept: HTMLInputElement['accept'] = '';
+    accessor accept: HTMLInputElement['accept'] = '*/*';
 
     handleAdd = (event: Event) => {
         const file = (event.currentTarget as HTMLInputElement).files?.[0];
@@ -65,7 +65,7 @@ export class FilePicker
         );
     }
 
-    render() {
+    renderContent() {
         const { value, accept } = this;
 
         return (
@@ -90,6 +90,18 @@ export class FilePicker
                     />
                 )}
             </div>
+        );
+    }
+
+    render() {
+        return (
+            <>
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+                />
+                {this.renderContent()}
+            </>
         );
     }
 }
