@@ -1,3 +1,4 @@
+import { CoreFileOptions, fileOpen } from 'browser-fs-access';
 import { observable } from 'mobx';
 import {
     attribute,
@@ -8,6 +9,7 @@ import {
     WebCellProps,
     WebField
 } from 'web-cell';
+import { makeArray } from 'web-utility';
 
 import { FilePicker, FilePickerProps } from './FilePicker';
 
@@ -113,6 +115,23 @@ export class FileUploader extends HTMLElement implements WebFileField {
                   : [];
     }
 
+    handleAdd = async () => {
+        const { accept, multiple, store } = this;
+
+        const fileOption = accept.split(',').reduce((option, type) => {
+            type = type.trim();
+
+            if (type.includes('/')) (option.mimeTypes ||= []).push(type);
+            else (option.extensions ||= []).push(type);
+
+            return option;
+        }, {} as CoreFileOptions);
+
+        const files = makeArray(await fileOpen({ multiple, ...fileOption }));
+
+        for (const file of files) await store.upload(file);
+    };
+
     handleDrop = (index: number) => (event: DragEvent) => {
         event.preventDefault();
 
@@ -133,7 +152,7 @@ export class FileUploader extends HTMLElement implements WebFileField {
         };
 
     renderContent() {
-        const { accept, multiple, required } = this,
+        const { accept, multiple } = this,
             { files } = this.store;
 
         return (
@@ -158,12 +177,13 @@ export class FileUploader extends HTMLElement implements WebFileField {
                     </li>
                 ))}
                 {(multiple || !files[0]) && (
-                    <li className="list-inline-item">
-                        <FilePicker
-                            style={{ width: '10rem', height: '10rem' }}
-                            required={!files[0] && required}
-                            onChange={this.handleChange()}
-                        />
+                    <li
+                        role="button"
+                        className="list-inline-item border rounded d-flex justify-content-center align-items-center display-1"
+                        style={{ width: '10rem', height: '10rem' }}
+                        onClick={this.handleAdd}
+                    >
+                        +
                     </li>
                 )}
             </ol>

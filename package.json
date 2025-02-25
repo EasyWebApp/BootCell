@@ -1,6 +1,6 @@
 {
     "name": "boot-cell",
-    "version": "2.0.0-rc.8",
+    "version": "2.0.0-rc.10",
     "license": "LGPL-3.0",
     "author": "shiy2008@gmail.com",
     "description": "Web Components UI library based on WebCell v3, BootStrap v5, BootStrap Icon v1 & FontAwesome v6",
@@ -25,8 +25,9 @@
     "module": "dist/index.esm.js",
     "dependencies": {
         "@swc/helpers": "^0.5.15",
+        "browser-fs-access": "^0.35.0",
         "classnames": "^2.5.1",
-        "dom-renderer": "^2.6.1",
+        "dom-renderer": "^2.6.2",
         "iterable-observer": "^1.1.0",
         "mobx": "^6.13.6",
         "regenerator-runtime": "^0.14.1",

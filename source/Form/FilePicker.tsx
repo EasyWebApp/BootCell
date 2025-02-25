@@ -28,6 +28,10 @@ export class FilePicker
     @observable
     accessor accept: HTMLInputElement['accept'] = '*/*';
 
+    @attribute
+    @observable
+    accessor multiple = false;
+
     handleAdd = (event: Event) => {
         const file = (event.currentTarget as HTMLInputElement).files?.[0];
 
@@ -48,7 +52,7 @@ export class FilePicker
     };
 
     renderInput() {
-        const { name, value, required, disabled, accept } = this;
+        const { name, value, required, disabled, accept, multiple } = this;
 
         return (
             <>
@@ -57,7 +61,7 @@ export class FilePicker
                     type="file"
                     name={value ? undefined : name}
                     required={!value && required}
-                    {...{ disabled, accept }}
+                    {...{ disabled, accept, multiple }}
                     onChange={this.handleAdd}
                 />
                 {value && <input type="hidden" name={name} value={value} />}
