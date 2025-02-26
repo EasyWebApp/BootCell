@@ -13,17 +13,15 @@ export interface ModalProps extends WebCellProps<HTMLDivElement> {
     show?: boolean;
 }
 
-function emitHide(event: Event) {
-    if (
-        event.type === 'keyup'
-            ? (event as KeyboardEvent).key === 'Escape'
-            : event.type === 'click' &&
-              (event.currentTarget as HTMLElement).className === 'btn-close'
-    )
-        (event.currentTarget as HTMLElement)
-            .closest('.modal')
-            .dispatchEvent(new CustomEvent('hide'));
-}
+const emitHideByKeyUp = () =>
+    document
+        .querySelectorAll('.modal.show')
+        .forEach(modal => modal.dispatchEvent(new CustomEvent('hide')));
+
+const emitHideByClick = ({ currentTarget }: MouseEvent) =>
+    (currentTarget as HTMLElement)
+        .closest('.modal')
+        .dispatchEvent(new CustomEvent('hide'));
 
 export const Modal: FC<ModalProps> = ({
     className,
@@ -45,8 +43,8 @@ export const Modal: FC<ModalProps> = ({
         ariaHidden={!show + ''}
         ref={node =>
             node
-                ? globalThis.addEventListener?.('keyup', emitHide)
-                : globalThis.removeEventListener?.('keyup', emitHide)
+                ? globalThis.addEventListener?.('keyup', emitHideByKeyUp)
+                : globalThis.removeEventListener?.('keyup', emitHideByKeyUp)
         }
         {...props}
     >
@@ -83,7 +81,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
                 type="button"
                 className="btn-close"
                 ariaLabel="Close"
-                onClick={emitHide}
+                onClick={emitHideByClick}
             />
         )}
     </div>
