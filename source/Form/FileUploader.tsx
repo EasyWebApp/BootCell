@@ -115,6 +115,14 @@ export class FileUploader extends HTMLElement implements WebFileField {
                   : [];
     }
 
+    @reaction(({ store }) => store?.files)
+    emitFiles(files?: FileModel['files']) {
+        if (files) {
+            this.value = files[1] ? files : files[0];
+            this.emit('change', [...files]);
+        }
+    }
+
     handleAdd = async () => {
         const { accept, multiple, store } = this;
 
@@ -142,13 +150,11 @@ export class FileUploader extends HTMLElement implements WebFileField {
 
     handleChange =
         (oldURI = ''): FilePickerProps['onChange'] =>
-        async ({ detail: { file } }) => {
+        ({ detail: { file } }) => {
             const { store } = this;
 
-            if (oldURI) await store.delete(oldURI);
-            if (file) await store.upload(file);
-
-            this.emit('change', [...store.files]);
+            if (oldURI) return store.delete(oldURI);
+            if (file) return store.upload(file);
         };
 
     renderContent() {
