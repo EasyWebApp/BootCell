@@ -64,14 +64,20 @@ export abstract class FileModel {
     }
 }
 
-export interface FileUploaderProps extends WebCellProps<HTMLInputElement> {
+export interface WebFileFieldProps
+    extends Omit<WebCellProps<HTMLInputElement>, 'defaultValue' | 'value'> {
+    defaultValue?: string | string[];
+    value?: string | string[];
+}
+
+export interface FileUploaderProps extends WebFileFieldProps {
     store: FileModel;
 }
 
 export interface WebFileField
-    extends Omit<WebField<FileUploaderProps>, 'defaultValue' | 'value'> {
-    defaultValue?: string | string[];
-    value?: string | string[];
+    extends Pick<FileUploaderProps, 'defaultValue' | 'value'>,
+        Omit<WebField<FileUploaderProps>, 'defaultValue' | 'value' | 'props'> {
+    props: FileUploaderProps;
 }
 
 export interface FileUploader extends WebFileField {}
@@ -176,7 +182,6 @@ export class FileUploader extends HTMLElement implements WebFileField {
                     >
                         <FilePicker
                             accept={accept}
-                            style={{ height: '10rem' }}
                             value={file}
                             onChange={this.handleChange(file)}
                         />

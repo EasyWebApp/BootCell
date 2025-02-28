@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { computed, observable } from 'mobx';
 import {
     attribute,
     component,
@@ -32,10 +32,26 @@ export class FilePicker
     @observable
     accessor multiple = false;
 
-    handleAdd = (event: Event) => {
-        const file = (event.currentTarget as HTMLInputElement).files?.[0];
+    @observable
+    accessor file: File | undefined;
 
-        this.value = file ? URL.createObjectURL(file) : '';
+    @computed
+    get fileType() {
+        const { accept, file } = this;
+
+        return file?.type || file?.name.match(/\.\w+$/)?.[0] || accept;
+    }
+
+    connectedCallback() {
+        this.classList.add('d-block');
+        this.style.width = '10rem';
+        this.style.height = '10rem';
+    }
+
+    handleAdd = ({ currentTarget }: Event) => {
+        const file = (currentTarget as HTMLInputElement).files?.[0];
+
+        this.value = (this.file = file) ? URL.createObjectURL(file) : '';
 
         this.emit('change', { value: this.value, file });
     };
@@ -70,14 +86,14 @@ export class FilePicker
     }
 
     renderContent() {
-        const { value, accept } = this;
+        const { value, fileType } = this;
 
         return (
-            <div className="form-control position-relative">
+            <div className="d-inline-block w-100 h-100 border rounded position-relative">
                 {value ? (
                     <FilePreview
                         className="w-100 h-100 object-fit-contain"
-                        type={accept}
+                        type={fileType}
                         path={value + ''}
                     />
                 ) : (
@@ -103,6 +119,10 @@ export class FilePicker
                 <link
                     rel="stylesheet"
                     href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
                 />
                 {this.renderContent()}
             </>

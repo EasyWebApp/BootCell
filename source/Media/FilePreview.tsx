@@ -23,18 +23,31 @@ export const FileTypeMap = {
     sheet: 'xlsx'
 };
 
-export const FilePreview: FC<FilePreviewProps> = ({ type, path, ...props }) => {
+export const FilePreview: FC<FilePreviewProps> = ({
+    className = '',
+    type,
+    path,
+    ...props
+}) => {
     const [category, ...kind] = type?.split(/\W+/) || [],
         fileName = new URL(path, 'http://localhost').pathname.split('/').at(-1);
-
-    const extension = FileTypeMap[kind.at(-1)] || fileName?.split('.').at(-1);
+    const extension =
+        FileTypeMap[kind.at(-1)] ||
+        (fileName?.includes('.') ? fileName.split('.').at(-1) : kind.at(-1));
 
     return category === 'image' ? (
-        <ImagePreview fluid loading="lazy" src={path} {...props} />
+        <ImagePreview
+            className={className}
+            fluid
+            loading="lazy"
+            src={path}
+            {...props}
+        />
     ) : category === 'audio' ? (
-        <audio controls src={path} {...props} />
+        <audio className={className} controls src={path} {...props} />
     ) : category === 'video' ? (
         <video
+            className={className}
             muted
             src={path}
             onMouseEnter={({ currentTarget }) =>
@@ -47,7 +60,7 @@ export const FilePreview: FC<FilePreviewProps> = ({ type, path, ...props }) => {
         />
     ) : (
         <a
-            className="d-inline-block px-3 py-2"
+            className={`d-inline-flex justify-content-center align-items-center ${className}`}
             download={fileName}
             href={path}
             {...props}

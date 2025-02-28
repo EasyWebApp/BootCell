@@ -39,11 +39,7 @@ const Content = () => (
                 <section>
                     <h2>File Picker</h2>
 
-                    <FilePicker
-                        name="file"
-                        accept="image/*"
-                        onChange={console.log}
-                    />
+                    <FilePicker name="file" onChange={console.log} />
                 </section>
 
                 <h2>File Uploader</h2>
