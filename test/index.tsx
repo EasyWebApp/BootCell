@@ -7,7 +7,8 @@ import {
     FileModel,
     FilePicker,
     FileUploader,
-    FormControl
+    FormControl,
+    RangeInput
 } from '../source/Form';
 
 configure({ enforceActions: 'never' });
@@ -32,8 +33,12 @@ const Content = () => (
                     <h3>Regular</h3>
                     <FormControl type="range" name="count" />
 
-                    {/* <h3>Star</h3>
-                    <ScoreRange className="text-warning" name="score" /> */}
+                    <h3>Star</h3>
+                    <RangeInput
+                        className="text-warning"
+                        name="score"
+                        icon={value => (value ? '★' : '☆')}
+                    />
                 </section>
 
                 <section>
