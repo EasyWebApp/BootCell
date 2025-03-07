@@ -6,3 +6,4 @@ export * from './Card';
 export * from './MediaObject';
 export * from './Accordion';
 export * from './Tabs';
+export * from './CodeBlock';
