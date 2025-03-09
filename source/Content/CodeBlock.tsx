@@ -1,17 +1,15 @@
 import MIME from 'mime';
 import { computed, observable } from 'mobx';
-import { codeToHtml } from 'shiki';
+import { highlight, languages } from 'prismjs';
 import {
     attribute,
     component,
     observer,
-    reaction,
     WebCell,
     WebCellProps
 } from 'web-cell';
 
 import { IconButton } from '../Form';
-import * as styles from './CodeBlock.module.less';
 
 export interface CodeBlockProps extends WebCellProps<HTMLPreElement> {
     name?: string;
@@ -22,7 +20,7 @@ export interface CodeBlockProps extends WebCellProps<HTMLPreElement> {
 
 export interface CodeBlock extends WebCell<CodeBlockProps> {}
 
-@component({ tagName: 'code-block' })
+@component({ tagName: 'code-block', mode: 'open' })
 @observer
 export class CodeBlock extends HTMLElement implements WebCell<CodeBlockProps> {
     @attribute
@@ -38,44 +36,61 @@ export class CodeBlock extends HTMLElement implements WebCell<CodeBlockProps> {
 
     @attribute
     @observable
-    accessor theme = '';
+    accessor theme = 'okaidia';
 
-    @observable
-    accessor markup = '';
+    @computed
+    get markup() {
+        const { value, language } = this;
+
+        return (
+            value && language && highlight(value, languages[language], language)
+        );
+    }
 
     @computed
     get dataURI() {
-        return `data:${MIME.getType(this.name)};base64,${btoa(this.value)}`;
+        return URL.createObjectURL(
+            new Blob([this.value], { type: MIME.getType(this.name) })
+        );
     }
 
-    @reaction(({ value, language, theme }) => value + language + theme)
-    async connectedCallback() {
-        if (this.value)
-            this.markup = await codeToHtml(this.value, {
-                lang: this.language,
-                theme: this.theme
-            });
+    connectedCallback() {
+        this.classList.add(
+            'd-block',
+            'bg-dark',
+            'rounded',
+            'p-3',
+            'position-relative'
+        );
     }
 
     render() {
-        const { name, dataURI, markup } = this;
+        const { name, dataURI, theme, markup } = this;
 
         return (
             <>
-                {name && (
-                    <div className="text-end mb-2">
-                        <IconButton
-                            name="download"
-                            variant="warning"
-                            download={name}
-                            href={dataURI}
-                        />
-                    </div>
-                )}
-                <div
-                    className={`rounded overflow-hidden ${styles.code}`}
-                    innerHTML={markup}
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                 />
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href={`https://unpkg.com/prismjs@1.29.0/themes/prism-${theme}.min.css`}
+                />
+                {name && (
+                    <IconButton
+                        className="position-absolute top-0 end-0"
+                        variant="warning"
+                        name="download"
+                        download={name}
+                        href={dataURI}
+                    />
+                )}
+                <pre className="m-0" innerHTML={markup} />
             </>
         );
     }

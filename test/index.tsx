@@ -2,6 +2,7 @@ import { DOMRenderer } from 'dom-renderer';
 import { configure } from 'mobx';
 import { documentReady, formToJSON } from 'web-utility';
 
+import { CodeBlock } from '../source/Content';
 import {
     Button,
     FileModel,
@@ -10,6 +11,8 @@ import {
     FormControl,
     RangeInput
 } from '../source/Form';
+
+import 'prismjs/components/prism-typescript';
 
 configure({ enforceActions: 'never' });
 
@@ -59,6 +62,12 @@ const Content = () => (
                     Submit
                 </Button>
             </form>
+            <h2>Code Block</h2>
+            <CodeBlock
+                language="typescript"
+                name="test.js"
+                value="alert('你好，世界！')"
+            />
             {/* <section>
                 <h2>Tab View</h2>
 
