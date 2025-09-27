@@ -23,7 +23,8 @@ export const Container: FC<ContainerProps> = ({
     </div>
 );
 
-export type RowProps = Record<'xs' | Size, number | 'auto'> & WebCellProps;
+export type RowProps = Partial<Record<'xs' | Size, number | 'auto'>> &
+    WebCellProps;
 
 export const Row: FC<RowProps> = ({
     className,
