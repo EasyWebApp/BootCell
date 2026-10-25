@@ -1,8 +1,8 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { PopoverBox } from '../../source/Prompt/Popover';
-import { Button } from '../../source/Form/Button';
+import { PopoverBox } from '../../Prompt/Popover';
+import { Button } from '../../../source/Form/Button';
 
 const { render } = PopoverBox.prototype;
 

@@ -1,5 +1,7 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { fn } from 'jest-mock';
+import { describe, it } from 'node:test';
+import { assertLooksLike, render } from '../render';
 
 import { Alert } from '../../source/Prompt/Alert';
 import { CloseButton } from '../../source/Form/Button';
@@ -28,5 +30,20 @@ describe('Alert', () => {
                 <CloseButton />
             </aside>
         );
+    });
+
+    it('should forward close events and allow hiding the alert', () => {
+        const onClose = fn();
+        const root = render(
+            <Alert dismissible show={false} onClose={onClose}>
+                Content
+            </Alert>
+        );
+        expect(root.querySelector('aside').classList.contains('show')).toBe(
+            false
+        );
+        root.querySelector('button').click();
+        expect(onClose).toHaveBeenCalledTimes(1);
+        expect(onClose.mock.calls[0][0]).toBeInstanceOf(MouseEvent);
     });
 });

@@ -1,6 +1,7 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-
+import { expect } from 'expect';
+import { fn } from 'jest-mock';
+import { describe, it } from 'node:test';
+import { assertLooksLike, render } from '../render';
 import { Button, IconButton } from '../../source/Form/Button';
 import { Icon } from '../../source/Reminder/Icon';
 
@@ -49,13 +50,34 @@ describe('Button', () => {
             />,
             <a
                 className="btn p-1 m-1"
-                style={{ lineHeight: '0.8' }}
                 href="https://getbootstrap.com"
                 role="button"
-                aria-disabled="false"
             >
                 <Icon name="bootstrap" />
             </a>
         );
+    });
+
+    it('should forward click events without firing disabled buttons', () => {
+        const onClick = fn();
+        const root = render(
+            <Button active variant="link" onClick={onClick}>
+                Go
+            </Button>
+        );
+        const button = root.querySelector('button');
+
+        expect(button.className).toBe('btn btn-link');
+        expect(button.getAttribute('aria-pressed')).toBe('true');
+        button.click();
+        expect(onClick).toHaveBeenCalledTimes(1);
+        render(
+            <Button disabled onClick={onClick}>
+                Disabled
+            </Button>
+        )
+            .querySelector('button')
+            .click();
+        expect(onClick).toHaveBeenCalledTimes(1);
     });
 });

@@ -1,35 +1,49 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { ListGroup, ListItem } from '../../source/Content/ListGroup';
+import { ListGroup, ListGroupItem } from '../../source/Content/ListGroup';
+import { render } from '../render';
 
-describe('Nav', () => {
-    it('should render Nav Links with different states', () => {
-        assertLooksLike(
+describe('ListGroup', () => {
+    it('should render horizontal links with active and disabled states', () => {
+        const root = render(
             <ListGroup horizontal="lg">
-                <ListItem title="Test" href="#test" active>
-                    <i>Test</i>
-                </ListItem>
-                <ListItem title="Example" href="#example" disabled>
-                    <i>Example</i>
-                </ListItem>
-            </ListGroup>,
-            <div className="list-group list-group-horizontal-lg">
-                <a
-                    className="list-group-item list-group-item-action active"
-                    href="#test"
-                >
-                    <i>Test</i>
-                </a>
-                <a
-                    className="list-group-item list-group-item-action disabled"
-                    href="#example"
-                    tabIndex={-1}
-                    aria-disabled="true"
-                >
-                    <i>Example</i>
-                </a>
-            </div>
+                <ListGroupItem href="#test" active>
+                    Test
+                </ListGroupItem>
+                <ListGroupItem href="#example" disabled>
+                    Example
+                </ListGroupItem>
+            </ListGroup>
         );
+        const links = root.querySelectorAll('a');
+
+        expect(root.firstElementChild.className).toBe(
+            'list-group list-group-horizontal-lg'
+        );
+        expect(links[0].className).toBe(
+            'list-group-item list-group-item-action active'
+        );
+        expect(links[0].getAttribute('aria-current')).toBe('true');
+        expect(links[1].className).toBe(
+            'list-group-item list-group-item-action disabled pe-none'
+        );
+        expect(links[1].getAttribute('aria-disabled')).toBe('true');
+        expect(links[1].textContent).toBe('Example');
+    });
+
+    it('should support numbered flush lists and item variants', () => {
+        const root = render(
+            <ListGroup numbered variant="flush">
+                <ListGroupItem variant="success">Done</ListGroupItem>
+            </ListGroup>
+        );
+        expect(root.firstElementChild.className).toBe(
+            'list-group list-group-flush list-group-numbered'
+        );
+        expect(root.querySelector('a').className).toBe(
+            'list-group-item list-group-item-success'
+        );
+        expect(root.querySelector('a').hasAttribute('href')).toBe(false);
     });
 });

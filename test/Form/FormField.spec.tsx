@@ -1,85 +1,45 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { FormField } from '../../source/Form/FormField';
-import { Field } from '../../source/Form/Field';
+import { FormField } from '../../source/Form/Form';
+import { render } from '../render';
 
-describe('Form Fields', () => {
-    it('should render an Input with Tips text', () => {
-        assertLooksLike(
-            <FormField id="test" tips="Example" />,
-            <div className="form-group">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="test"
-                    aria-describedby="test-tips"
-                />
-                <small id="test-tips" className="form-text fg-secondary">
-                    Example
-                </small>
-            </div>
+describe('FormField', () => {
+    it('should compose a label and a control inside the supplied group', () => {
+        const root = render(
+            <FormField className="mb-4" id="name" label="Name" required />
         );
+        expect(root.firstElementChild.className).toBe('mb-4');
+        expect(root.querySelector('label').textContent).toBe('Name');
+        expect(root.querySelector('input').id).toBe('name');
+        expect(root.querySelector('input').required).toBe(true);
     });
 
-    it('should render a Custom File Field', () => {
-        assertLooksLike(
-            <Field type="file" id="test" label="Image" />,
-            <div className="form-file">
-                <input type="file" className="form-file-input" id="test" />
-                <label
-                    className="form-file-label"
-                    htmlFor="test"
-                    data-file="Image"
-                    data-browse="Browse"
-                />
-            </div>
+    it('should render a floating label inferred from the placeholder', () => {
+        const root = render(
+            <FormField id="name" labelFloat placeholder="Name" />
         );
+        expect(root.firstElementChild.className.trim()).toBe('form-floating');
+        expect(
+            Array.from(root.firstElementChild.children, node => node.tagName)
+        ).toEqual(['INPUT', 'LABEL']);
+        expect(root.querySelector('label').textContent).toBe('Name');
+        expect(root.querySelector('input').placeholder).toBe('Name');
     });
 
-    it('should render a Form Field with a Floating Label', () => {
-        assertLooksLike(
-            <FormField id="test" labelFloat placeholder="Test" />,
-            <div className="form-floating">
-                <input
-                    type="text"
-                    className="form-control"
-                    id="test"
-                    placeholder="Test"
-                />
-                <label htmlFor="test">Test</label>
-            </div>
+    it('should prefer an explicit label over title and placeholder', () => {
+        const root = render(
+            <FormField
+                label="Explicit"
+                title="Title"
+                placeholder="Placeholder"
+            />
         );
-    });
-
-    it('should render a Form Field with Column layout', () => {
-        assertLooksLike(
-            <FormField id="test" labelColumn={2} label="Test" />,
-            <div className="form-group row">
-                <label
-                    htmlFor="test"
-                    className="sm:col-2 form-label text-nowrap"
-                >
-                    Test
-                </label>
-                <div className="sm:col-10">
-                    <input type="text" id="test" />
-                </div>
-            </div>
-        );
-    });
-
-    it('should render a Form Field with Slot', () => {
-        assertLooksLike(
-            <FormField label="Avatar" id="test">
-                <input type="image" />
-            </FormField>,
-            <div className="form-group">
-                <label className="form-label" htmlFor="test">
-                    Avatar
-                </label>
-                <input type="image" />
-            </div>
-        );
+        expect(root.querySelector('label').textContent).toBe('Explicit');
+        expect(
+            render(
+                <FormField title="Title" placeholder="Placeholder" />
+            ).querySelector('label').textContent
+        ).toBe('Title');
     });
 });

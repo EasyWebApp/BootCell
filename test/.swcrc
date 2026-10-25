@@ -1,0 +1,22 @@
+{
+    "jsc": {
+        "target": "es2022",
+        "parser": {
+            "syntax": "typescript",
+            "tsx": true,
+            "decorators": true
+        },
+        "transform": {
+            "decoratorVersion": "2022-03",
+            "useDefineForClassFields": true,
+            "react": {
+                "runtime": "automatic",
+                "importSource": "dom-renderer"
+            }
+        }
+    },
+    "module": {
+        "type": "commonjs"
+    },
+    "sourceMaps": "inline"
+}

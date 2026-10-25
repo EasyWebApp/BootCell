@@ -1,7 +1,7 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
 
-import { FAIcon, BGIcon } from '../../source/Reminder/FAIcon';
+import { FAIcon, FABGIcon } from '../../source/Reminder/FAIcon';
 
 describe('FontAwesome Icon', () => {
     it('should render a Solid-style Icon defaultly', () => {
@@ -40,7 +40,7 @@ describe('FontAwesome Icon', () => {
             <ul className="fa-ul">
                 <li>
                     <span className="fa-li">
-                        <span className="fas fa-home" />
+                        <span className="fas fa-home" aria-hidden="true" />
                     </span>
                     Home
                 </li>
@@ -50,7 +50,7 @@ describe('FontAwesome Icon', () => {
 
     it('should render a Stacked Square Icon', () => {
         assertLooksLike(
-            <BGIcon type="square" name="github" size={2} color="dark" />,
+            <FABGIcon type="square" name="github" size={2} color="dark" />,
             <span className="fa-stack fa-2x fg-body">
                 <FAIcon name="square" stack={2} />
                 <FAIcon name="github" inverse stack={1} />

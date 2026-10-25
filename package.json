@@ -45,43 +45,37 @@
         "share-api-polyfill": "^1"
     },
     "devDependencies": {
-        "@jest/types": "^29.6.3",
         "@parcel/config-default": "~2.16.0",
         "@parcel/packager-ts": "~2.16.0",
         "@parcel/transformer-less": "~2.16.0",
         "@parcel/transformer-typescript-tsc": "~2.16.0",
         "@parcel/transformer-typescript-types": "~2.16.0",
-        "@types/jest": "^29.5.14",
+        "@swc-node/register": "^1.12.1",
+        "@swc/core": "^1.13.20",
+        "@types/node": "^26.6.5",
         "@types/prismjs": "^1.26.5",
         "@types/turndown": "^5.0.5",
         "buffer": "^6.0.3",
         "cross-env": "^10.0.0",
+        "expect": "^30.2.0",
         "husky": "^9.1.7",
-        "identity-obj-proxy": "^3.0.0",
-        "jest": "^29.7.0",
+        "jest-mock": "^30.2.0",
+        "jsdom": "^26.1.0",
         "less": "^4.4.1",
         "lint-staged": "^16.2.1",
         "open-cli": "^8.0.0",
         "parcel": "~2.16.0",
         "prettier": "^3.6.2",
         "process": "^0.11.10",
-        "ts-jest": "^29.4.4",
-        "ts-node": "^10.9.2",
         "typedoc": "^0.28.13",
         "typedoc-plugin-mdn-links": "^5.0.9",
         "typescript": "~5.9.2"
     },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "@parcel/watcher",
-            "@swc/core",
-            "lmdb",
-            "msgpackr-extract"
-        ]
-    },
     "scripts": {
         "prepare": "husky",
-        "test": "lint-staged  &&  tsc --noEmit",
+        "test": "lint-staged  &&  npm run test:types  &&  npm run test:unit",
+        "test:types": "tsc --noEmit  &&  tsc --noEmit -p test/tsconfig.json",
+        "test:unit": "node --import ./test/register.mjs --test \"test/**/*.spec.tsx\"",
         "start": "cd test/  &&  rm -rf dist/ ../.parcel-cache  &&  parcel index.html --open",
         "pack-dist": "rm -rf dist/  &&  parcel build source/index.ts",
         "pack-docs": "rm -rf docs/  &&  typedoc source/",
@@ -90,7 +84,7 @@
         "prepublishOnly": "npm test  &&  npm run build"
     },
     "lint-staged": {
-        "*.{html,md,less,json,yml,js,ts,tsx}": "prettier --write"
+        "*.{html,md,less,json,yml,js,mjs,ts,tsx}": "prettier --write"
     },
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "targets": {

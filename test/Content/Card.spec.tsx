@@ -1,93 +1,83 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { Card, CardHeader, CardFooter } from '../../source/Content/Card';
-import { NavLink, Nav } from '../../source/Navigator/Nav';
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    CardFooter,
+    CardTitle,
+    CardImg
+} from '../../source/Content/Card';
+import { NavLink } from '../../source/Navigator/Nav';
+import { assertLooksLike, render } from '../render';
 
 describe('Card', () => {
-    it('should render Vertical layout by default', () => {
-        assertLooksLike(
-            <Card title="Test" image="test.png" />,
-            <div className="card">
-                <img className="card-img-top" src="test.png" />
-                <div className="card-body">
-                    <h5 className="card-title">Test</h5>
-                </div>
-            </div>
+    it('should compose an image, title and body', () => {
+        const root = render(
+            <Card>
+                <CardImg src="test.png" variant="top" />
+                <CardBody>
+                    <CardTitle>Test</CardTitle>Content
+                </CardBody>
+            </Card>
+        );
+
+        expect(root.querySelector('.card > img').getAttribute('src')).toBe(
+            'test.png'
+        );
+        expect(root.querySelector('img').className).toBe('card-img-top ');
+        expect(root.querySelector('.card-body h5').textContent).toBe('Test');
+        expect(root.querySelector('.card-body').textContent).toBe(
+            'TestContent'
         );
     });
 
-    it('should render a Card with a Header & a Footer', () => {
+    it('should preserve header, body and footer order', () => {
         assertLooksLike(
             <Card>
-                <CardHeader>head</CardHeader>
-                text<div>content</div>
-                <CardFooter>foot</CardFooter>
+                <CardHeader>Head</CardHeader>
+                <CardBody>Content</CardBody>
+                <CardFooter>Foot</CardFooter>
             </Card>,
             <div className="card">
-                <div className="card-header">head</div>
-                <div className="card-body">
-                    text<div>content</div>
-                </div>
-                <div className="card-footer">foot</div>
+                <div className="card-header">Head</div>
+                <div className="card-body">Content</div>
+                <div className="card-footer">Foot</div>
             </div>
         );
     });
 
-    it('should render a Card with a Navigator Header', () => {
+    it('should wrap children in a body when requested', () => {
         assertLooksLike(
+            <Card body>Content</Card>,
+            <div className="card">
+                <div className="card-body">Content</div>
+            </div>
+        );
+    });
+
+    it('should allow navigation inside the header', () => {
+        const root = render(
             <Card>
-                <CardHeader itemMode="tabs">
-                    <NavLink>Link</NavLink>
+                <CardHeader>
+                    <NavLink href="#test">Link</NavLink>
                 </CardHeader>
-            </Card>,
-            <div className="card">
-                <div className="card-header">
-                    <Nav className="card-header-tabs" itemMode="tabs">
-                        <NavLink>Link</NavLink>
-                    </Nav>
-                </div>
-            </div>
+            </Card>
+        );
+
+        expect(root.querySelector('.card-header > .nav-link').textContent).toBe(
+            'Link'
         );
     });
 
-    it('should render Horizontal layout as "direction" set', () => {
-        assertLooksLike(
-            <Card title="Test" image="test.png" direction="row" />,
-            <div className="card justify-content-center">
-                <div className="row no-gutters align-items-center">
-                    <div className="md:col-4">
-                        <img className="card-img-top" src="test.png" />
-                    </div>
-                    <div className="md:col-8">
-                        <div className="card-body">
-                            <h5 className="card-title">Test</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    });
+    it('should apply theme, foreground and border utilities', () => {
+        const card = render(
+            <Card bg="dark" text="white" border="primary" className="test" />
+        ).firstElementChild;
 
-    it('should render Image-overlay layout as "overlay" enabled', () => {
-        assertLooksLike(
-            <Card
-                className="theme-inverse fg-white"
-                title="Test"
-                text="example"
-                image="test.png"
-                overlay
-            >
-                <time>Last updated 3 mins ago</time>
-            </Card>,
-            <div className="card theme-inverse fg-white">
-                <img className="card-img" src="test.png" />
-                <div className="card-img-overlay">
-                    <h5 className="card-title">Test</h5>
-                    <p className="card-text">example</p>
-                    <time>Last updated 3 mins ago</time>
-                </div>
-            </div>
+        expect(card.className).toBe(
+            'card theme-inverse fg-white border-primary test'
         );
     });
 });

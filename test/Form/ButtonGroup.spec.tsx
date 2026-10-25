@@ -1,7 +1,6 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-
-import { ButtonGroup, Toolbar } from '../../source/Form/ButtonGroup';
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
+import { ButtonGroup, ButtonToolbar } from '../../source/Form/ButtonGroup';
 
 describe('Button Group', () => {
     it('should render an ordinary Button Group defaultly', () => {
@@ -31,9 +30,9 @@ describe('Button Group', () => {
 
     it('should render a Toolbar within a Button Group', () => {
         assertLooksLike(
-            <Toolbar>
+            <ButtonToolbar>
                 <ButtonGroup />
-            </Toolbar>,
+            </ButtonToolbar>,
             <div className="btn-toolbar" role="toolbar">
                 <div className="btn-group" role="group" />
             </div>

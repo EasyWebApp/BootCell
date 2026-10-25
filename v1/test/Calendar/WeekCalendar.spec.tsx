@@ -1,11 +1,8 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import {
-    WeekCalendar,
-    WeekCalendarProps
-} from '../../source/Calendar/WeekCalendar';
-import { WeekDays, CalendarTable } from '../../source/Calendar/CalendarTable';
+import { WeekCalendar, WeekCalendarProps } from '../../Calendar/WeekCalendar';
+import { WeekDays, CalendarTable } from '../../Calendar/CalendarTable';
 
 const { render } = WeekCalendar.prototype;
 

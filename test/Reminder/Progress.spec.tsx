@@ -1,105 +1,73 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { Progress, ProgressBar } from '../../source/Reminder/Progress';
+import { ProgressBar } from '../../source/Reminder/Progress';
+import { render } from '../render';
 
-describe('Progress', () => {
-    it('should render a Progress Bar with Primary status defaultly', () => {
-        assertLooksLike(
-            <Progress />,
+describe('ProgressBar', () => {
+    it('should render default bounds and primary styling', () => {
+        const root = render(<ProgressBar />);
+        const bar = root.querySelector('[role="progressbar"]');
 
-            <div className="progress">
-                <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="0"
-                    style={{ width: '0%' }}
-                />
-            </div>
+        expect(bar.getAttribute('aria-valuemin')).toBe('0');
+        expect(bar.getAttribute('aria-valuemax')).toBe('100');
+        expect(bar.getAttribute('aria-valuenow')).toBe('0');
+        expect(
+            root.querySelector<HTMLElement>('.progress-bar').style.width
+        ).toBe('0%');
+        expect(root.querySelector('.progress-bar').className).toBe(
+            'progress-bar theme-primary'
         );
     });
 
-    it('should render a Progress Bar with a default Label', () => {
-        assertLooksLike(
-            <Progress label />,
-
-            <div className="progress">
-                <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="0"
-                    style={{ width: '0%' }}
-                >
-                    0%
-                </div>
-            </div>
-        );
+    it('should support default and custom labels', () => {
+        expect(render(<ProgressBar now={64} label />).textContent).toBe('64%');
+        expect(
+            render(<ProgressBar now={64} label={now => `${now} percent`} />)
+                .textContent
+        ).toBe('64 percent');
     });
 
-    it('should render a Progress Bar with a custom Label', () => {
-        assertLooksLike(
-            <Progress label={percent => `${percent} percent`} />,
-
-            <div className="progress">
-                <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="0"
-                    style={{ width: '0%' }}
-                >
-                    0 percent
-                </div>
-            </div>
+    it('should render bounds, striped and animated variants', () => {
+        const root = render(
+            <ProgressBar
+                min={10}
+                max={80}
+                now={64}
+                striped
+                animated
+                variant="info"
+            />
         );
+        expect(
+            root
+                .querySelector('[role="progressbar"]')
+                .getAttribute('aria-valuemin')
+        ).toBe('10');
+        expect(
+            root
+                .querySelector('[role="progressbar"]')
+                .getAttribute('aria-valuemax')
+        ).toBe('80');
+        expect(root.querySelector('.progress-bar').className).toBe(
+            'progress-bar theme-info progress-bar-striped progress-bar-animated'
+        );
+        expect(
+            root.querySelector<HTMLElement>('.progress-bar').style.width
+        ).toBe('64%');
     });
 
-    it('should render a Progress Bar with styles', () => {
-        assertLooksLike(
-            <Progress striped animated status="info" percent={64} />,
-
-            <div className="progress">
-                <div
-                    className="progress-bar progress-bar-striped progress-bar-animated theme-info"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="64"
-                    style={{ width: '64%' }}
-                />
-            </div>
+    it('should stack child progress bars without adding an extra bar', () => {
+        const root = render(
+            <ProgressBar>
+                <ProgressBar now={20} />
+                <ProgressBar now={10} striped />
+            </ProgressBar>
         );
-    });
-
-    it('should render a Progress with multiple Bars', () => {
-        assertLooksLike(
-            <Progress>
-                <ProgressBar />
-                <ProgressBar percent={10} striped />
-            </Progress>,
-            <div className="progress">
-                <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="0"
-                    style={{ width: '0%' }}
-                />
-                <div
-                    className="progress-bar progress-bar-striped"
-                    role="progressbar"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="10"
-                    style={{ width: '10%' }}
-                />
-            </div>
-        );
+        expect(
+            root.firstElementChild.classList.contains('progress-stacked')
+        ).toBe(true);
+        expect(root.querySelectorAll('[role="progressbar"]')).toHaveLength(2);
+        expect(root.querySelectorAll('.progress-bar')).toHaveLength(2);
     });
 });

@@ -1,6 +1,8 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
-
+import { expect } from 'expect';
+import { spyOn } from 'jest-mock';
+import { runInAction } from 'mobx';
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
 import {
     Carousel,
     CarouselCaption,
@@ -83,5 +85,40 @@ describe('Carousel', () => {
                 Slide
             </div>
         );
+    });
+
+    it('should advance using button controls and select indicators on Enter', context => {
+        const carousel = new Carousel();
+        const turn = spyOn(carousel, 'turnByOffset').mockImplementation(
+            () => {}
+        );
+        context.after(() => turn.mockRestore());
+        const button = document.createElement('button');
+        button.dataset.bsSlide = 'next';
+
+        carousel.handleButtonClick(new MouseEvent('click'), button);
+        expect(turn).toHaveBeenCalledWith(1);
+
+        button.dataset.bsSlide = 'prev';
+        carousel.handleButtonPress(
+            new KeyboardEvent('keyup', { key: 'Enter' }),
+            button
+        );
+        expect(turn).toHaveBeenLastCalledWith(-1);
+
+        carousel.handleButtonPress(
+            new KeyboardEvent('keyup', { key: 'Escape' }),
+            button
+        );
+        expect(turn).toHaveBeenCalledTimes(2);
+
+        button.dataset.bsSlideTo = '2';
+        runInAction(() =>
+            carousel.handleIndicatorsButtonPress(
+                new KeyboardEvent('keyup', { key: 'Enter' }),
+                button
+            )
+        );
+        expect(carousel.currentIndex).toBe(2);
     });
 });

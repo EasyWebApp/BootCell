@@ -1,7 +1,7 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { describe, it } from 'node:test';
 
 import { BootstrapStyles } from '../source/BootstrapStyles';
+import { assertLooksLike } from './render';
 
 describe('Bootstrap styles', () => {
     it('should provide Bootstrap and Bootstrap Icons stylesheets', () => {

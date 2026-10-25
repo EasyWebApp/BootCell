@@ -2,15 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Jest",
+            "name": "Debug unit tests",
             "type": "node",
             "request": "launch",
-            "port": 9229,
             "runtimeArgs": [
-                "--inspect-brk",
-                "${workspaceRoot}/node_modules/jest/bin/jest.js",
-                "--runInBand"
+                "--import",
+                "./test/register.mjs",
+                "--test",
+                "--test-concurrency=1",
+                "test/**/*.spec.tsx"
             ],
+            "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
         }

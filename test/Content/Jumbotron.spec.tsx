@@ -1,8 +1,6 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
-
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
 import { Jumbotron } from '../../source/Content/Jumbotron';
-
 describe('Jumbotron', () => {
     it('should render a Simple Jumbotron defaultly', () => {
         assertLooksLike(
@@ -19,14 +17,17 @@ describe('Jumbotron', () => {
             </header>
         );
     });
-
     it('should render a Fluid Jumbotron with an Inner Container', () => {
         assertLooksLike(
-            <Jumbotron title="Test" description="test" fluid />,
+            <Jumbotron title="Test" description="test" fluid>
+                <p>Example</p>
+            </Jumbotron>,
             <header className="bg-1 rounded-0 py-12">
                 <div className="container-fluid ">
                     <h1 className="fs-5xl fw-light">Test</h1>
                     <p className="fs-lg fw-light">test</p>
+                    <hr className="my-7" />
+                    <p>Example</p>
                 </div>
             </header>
         );

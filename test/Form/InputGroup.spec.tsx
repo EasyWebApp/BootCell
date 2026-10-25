@@ -1,86 +1,61 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { InputGroup } from '../../source/Form/InputGroup';
-import { Field } from '../../source/Form/Field';
-import { ToggleField } from '../../source/Form/ToggleField';
+import {
+    FormCheck,
+    FormControl,
+    InputGroup,
+    InputGroupText
+} from '../../source/Form/Form';
 import { Button } from '../../source/Form/Button';
+import { render } from '../render';
 
-describe('Input Group', () => {
-    it('should render an Input Group with a prepend/append label', () => {
-        assertLooksLike(
+describe('InputGroup', () => {
+    it('should compose prepend and append text with an input', () => {
+        const root = render(
             <InputGroup id="test">
-                Test
-                <Field id="sample" />
-            </InputGroup>,
-            <div className="input-group" id="test">
-                <label className="input-group-text" htmlFor="sample">
-                    Test
-                </label>
-                <input type="text" className="form-control" id="sample" />
-            </div>
+                <InputGroupText>@</InputGroupText>
+                <FormControl id="sample" />
+                <InputGroupText>.com</InputGroupText>
+            </InputGroup>
         );
+        expect(root.firstElementChild.id).toBe('test');
+        expect(root.firstElementChild.className).toBe('input-group');
+        expect(
+            Array.from(
+                root.querySelectorAll('.input-group-text'),
+                node => node.textContent
+            )
+        ).toEqual(['@', '.com']);
+        expect(root.querySelector('input').id).toBe('sample');
     });
 
-    it('should render an sized Input Group with "size" property', () => {
-        assertLooksLike(
-            <InputGroup id="test" size="lg">
-                <Field id="sample" />
-            </InputGroup>,
-            <div className="input-group input-group-lg" id="test">
-                <input type="text" className="form-control" id="sample" />
-            </div>
+    it('should size groups without changing control HTML sizes', () => {
+        const root = render(
+            <InputGroup size="lg">
+                <FormControl />
+            </InputGroup>
         );
+        expect(root.firstElementChild.className).toBe(
+            'input-group input-group-lg'
+        );
+        expect(root.querySelector('input').className).toBe('form-control');
     });
 
-    it('should render a Radio/Checkbox as a label', () => {
-        assertLooksLike(
-            <InputGroup id="test">
-                <ToggleField type="radio" labelHidden>
-                    test
-                </ToggleField>
-                <Field id="sample" />
-            </InputGroup>,
-            <div className="input-group" id="test">
-                <div className="input-group-text">
-                    <input className="radio" type="radio" aria-label="test" />
-                </div>
-                <input type="text" className="form-control" id="sample" />
-            </div>
+    it('should accept check controls and buttons as explicit addons', () => {
+        const root = render(
+            <InputGroup>
+                <InputGroupText>
+                    <FormCheck id="pick" type="radio" label="Pick" />
+                </InputGroupText>
+                <FormControl />
+                <Button>Go</Button>
+            </InputGroup>
         );
-    });
-
-    it('should render Multiple Labels', () => {
-        assertLooksLike(
-            <InputGroup id="test">
-                1
-                <Field id="sample" />
-                <i>2</i>
-            </InputGroup>,
-            <div className="input-group" id="test">
-                <label className="input-group-text" htmlFor="sample">
-                    1
-                </label>
-                <input type="text" className="form-control" id="sample" />
-                <label className="input-group-text">
-                    <i>2</i>
-                </label>
-            </div>
-        );
-    });
-
-    it('should render an Input Group within Button labels', () => {
-        assertLooksLike(
-            <InputGroup id="test">
-                <Field id="sample" />
-                <Button>1</Button>
-                <Button>2</Button>
-            </InputGroup>,
-            <div className="input-group">
-                <input type="text" className="form-control" id="sample" />
-                <button className="btn">1</button>
-                <button className="btn">2</button>
-            </div>
-        );
+        expect(
+            root.querySelector('.input-group-text input').getAttribute('type')
+        ).toBe('radio');
+        expect(root.querySelector('button').textContent).toBe('Go');
+        expect(root.querySelectorAll('input')).toHaveLength(2);
     });
 });

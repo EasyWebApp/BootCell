@@ -1,8 +1,8 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { Form } from '../../source/Form/Form';
-import { FormField } from '../../source/Form/FormField';
+import { Form } from '../../Form/Form';
+import { FormField } from '../../Form/FormField';
 
 describe('Form', () => {
     it('should render a Form Container with Custom Validator', () => {

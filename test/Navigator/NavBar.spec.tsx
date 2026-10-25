@@ -1,262 +1,71 @@
-import { createCell, Fragment } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
+
 import {
-    BannerNavBar,
-    BannerNavBarProps,
-    NavBar,
-    NavBarProps,
-    NavBarToggler
-} from '../../source/Navigator/NavBar';
-import { NavLink } from '../../source/Navigator/Nav';
-import { CollapseBox } from '../../source/Content/Collapse';
+    DrawerNavbar,
+    Navbar,
+    NavbarBrand,
+    NavbarToggle
+} from '../../source/Navigator/Navbar';
+import { render } from '../render';
 
-const { render: renderBanner } = BannerNavBar.prototype;
-
-function InlineBanner({
-    defaultSlot,
-    narrow,
-    expand = 'md',
-    fixed = 'top',
-    direction = 'left',
-    theme = 'dark',
-    background = 'dark',
-    brand,
-    open = false
-}: BannerNavBarProps) {
-    return renderBanner.call(
-        { UID: 'test' },
-        {
-            narrow,
-            expand,
-            fixed,
-            direction,
-            theme,
-            background,
-            brand,
-            open,
-            defaultSlot
-        }
-    );
-}
-
-const { render, renderContent } = NavBar.prototype;
-
-function InlineNavBar({
-    defaultSlot,
-    narrow,
-    expand = 'md',
-    fixed = 'top',
-    direction = 'left',
-    drawer = false,
-    theme = 'dark',
-    background = 'dark',
-    menuAlign = 'start',
-    brand,
-    open = false
-}: NavBarProps) {
-    return render.call(
-        { renderContent: renderContent.bind({ UID: 'test' }) },
-        {
-            narrow,
-            expand,
-            fixed,
-            direction,
-            drawer,
-            theme,
-            background,
-            menuAlign,
-            brand,
-            open,
-            defaultSlot
-        }
-    );
-}
-
-describe('Navigator Bar', () => {
-    it('should render a Toggle Button with ARIA properties', () => {
-        assertLooksLike(
-            <NavBarToggler aria-controls="test" aria-expanded="true" />,
-            <button
-                type="button"
-                className="navbar-toggler"
+describe('Navbar', () => {
+    it('should render a native toggle with ARIA properties', () => {
+        const toggle = render(
+            <NavbarToggle
                 aria-controls="test"
-                aria-expanded="true"
-                aria-label="Toggle navigation"
+                ariaExpanded="true"
+                ariaLabel="Toggle navigation"
+            />
+        ).querySelector('button');
+
+        expect(toggle.type).toBe('button');
+        expect(toggle.getAttribute('aria-controls')).toBe('test');
+        expect(toggle.getAttribute('aria-expanded')).toBe('true');
+        expect(toggle.querySelector('.navbar-toggler-icon')).not.toBeNull();
+    });
+
+    it('should compose a brand, theme and responsive layout', () => {
+        const root = render(
+            <Navbar
+                variant="dark"
+                bg="dark"
+                expand="xxl"
+                fixed="top"
+                sticky="bottom"
             >
-                <span className="navbar-toggler-icon" />
-            </button>
+                <NavbarBrand href=".">Test</NavbarBrand>
+            </Navbar>
         );
+        const nav = root.querySelector('nav');
+
+        expect(nav.classList.contains('theme-inverse')).toBe(true);
+        expect(nav.classList.contains('2xl:navbar-expand')).toBe(true);
+        expect(nav.classList.contains('fixed-top')).toBe(true);
+        expect(nav.classList.contains('sticky-bottom')).toBe(true);
+        expect(nav.getAttribute('data-bs-theme')).toBe('dark');
+        expect(nav.querySelector('a').textContent).toBe('Test');
     });
 
-    it('should render a simple NavBar with extra content on the top', () => {
-        assertLooksLike(
-            <InlineBanner brand="Test">text</InlineBanner>,
-            <>
-                <CollapseBox id="test" open={false}>
-                    test
-                </CollapseBox>
-                <div className="navbar" data-bs-theme="dark">
-                    <div className="container-fluid">
-                        <a className="navbar-brand" href=".">
-                            Test
-                        </a>
-                        <NavBarToggler
-                            aria-controls="test"
-                            aria-expanded="false"
-                        />
-                    </div>
-                </div>
-            </>
+    it('should wire the drawer title and toggle to stable IDs', () => {
+        const navbar = new DrawerNavbar();
+        navbar.title = 'Test';
+        navbar.expand = 'md';
+        const root = render(navbar.renderContent());
+        const dialog = root.querySelector('dialog');
+        const toggle = root.querySelector<HTMLButtonElement>('.navbar-toggler');
+
+        expect(toggle.getAttribute('aria-controls')).toBe(dialog.id);
+        expect(dialog.getAttribute('aria-labelledby')).toBe(
+            root.querySelector('h5').id
         );
-    });
-
-    it('should render a narrow NavBar with extra content on the top', () => {
-        assertLooksLike(
-            <InlineBanner narrow brand="Test">
-                text
-            </InlineBanner>,
-            <>
-                <CollapseBox id="test" open={false}>
-                    <div className="container">test</div>
-                </CollapseBox>
-                <div className="navbar" data-bs-theme="dark">
-                    <div className="container">
-                        <a className="navbar-brand" href=".">
-                            Test
-                        </a>
-                        <NavBarToggler
-                            aria-controls="test"
-                            aria-expanded="false"
-                        />
-                    </div>
-                </div>
-            </>
-        );
-    });
-
-    it('should render a top-sticky dark Narrow Bar defaultly', () => {
-        assertLooksLike(
-            <InlineNavBar brand="Test">
-                <NavLink href="/example" active>
-                    Example
-                </NavLink>
-                <a />
-            </InlineNavBar>,
-
-            <div className="container-fluid">
-                <a
-                    target="_top"
-                    href="."
-                    className="navbar-brand d-flex align-items-center"
-                >
-                    Test
-                </a>
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    aria-controls="test"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon" />
-                </button>
-                <CollapseBox className="drawer drawer-end" id="test">
-                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
-                        <a
-                            className="nav-item nav-link text-nowrap active"
-                            href="/example"
-                            aria-disabled="false"
-                        >
-                            Example
-                            <span className="visually-hidden">(current)</span>
-                        </a>
-                    </nav>
-                    <div className="md:d-flex justify-content-end align-items-center">
-                        <a />
-                    </div>
-                </CollapseBox>
-            </div>
-        );
-    });
-
-    it('should render a reversed Narrow Bar wrapped by a container', () => {
-        assertLooksLike(
-            <InlineNavBar narrow direction="right" brand="Test">
-                <NavLink href="/example" active>
-                    Example
-                </NavLink>
-            </InlineNavBar>,
-            <div className="container flex-row-reverse">
-                <a
-                    target="_top"
-                    href="."
-                    className="navbar-brand d-flex align-items-center"
-                >
-                    Test
-                </a>
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    aria-controls="test"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon" />
-                </button>
-                <CollapseBox className="drawer drawer-end" id="test">
-                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
-                        <a
-                            className="nav-item nav-link text-nowrap active"
-                            href="/example"
-                            aria-disabled="false"
-                        >
-                            Example
-                            <span className="visually-hidden">(current)</span>
-                        </a>
-                    </nav>
-                </CollapseBox>
-            </div>
-        );
-    });
-
-    it('should render an open Drawer NavBar', () => {
-        assertLooksLike(
-            <InlineNavBar brand="Test" drawer open>
-                <NavLink href="/example" active>
-                    Example
-                </NavLink>
-            </InlineNavBar>,
-
-            <div className="container-fluid">
-                <a
-                    target="_top"
-                    href="."
-                    className="navbar-brand d-flex align-items-center"
-                >
-                    Test
-                </a>
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    aria-controls="test"
-                    aria-expanded="true"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon" />
-                </button>
-                <div className="md:d-flex w-100 drawer open" id="test">
-                    <nav className="nav navbar-nav flex-grow-1 justify-content-start">
-                        <a
-                            className="nav-item nav-link text-nowrap active"
-                            href="/example"
-                            aria-disabled="false"
-                        >
-                            Example
-                            <span className="visually-hidden">(current)</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-        );
+        expect(dialog.classList.contains('md:drawer')).toBe(true);
+        expect(root.querySelector('slot')).not.toBeNull();
+        toggle.click();
+        expect(navbar.open).toBe(true);
+        navbar.close(new KeyboardEvent('keyup', { key: 'a' }));
+        expect(navbar.open).toBe(true);
+        navbar.close(new KeyboardEvent('keyup', { key: 'Escape' }));
+        expect(navbar.open).toBe(false);
     });
 });

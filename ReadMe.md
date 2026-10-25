@@ -67,7 +67,7 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
 />
 <link
     rel="stylesheet"
@@ -183,9 +183,9 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 
 Replace **BootStrap official CSS** file with these 3th-party libraries's directly:
 
--   https://bootswatch.com/
--   https://mdbootstrap.github.io/bootstrap-material-design/
--   https://daemonite.github.io/material/
+- https://bootswatch.com/
+- https://mdbootstrap.github.io/bootstrap-material-design/
+- https://daemonite.github.io/material/
 
 [1]: https://www.webcomponents.org/
 [2]: https://web-cell.dev/

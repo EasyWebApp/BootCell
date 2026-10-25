@@ -1,5 +1,5 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { assertLooksLike } from '../render';
+import { describe, it } from 'node:test';
 
 import { Badge } from '../../source/Reminder/Badge';
 

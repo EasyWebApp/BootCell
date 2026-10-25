@@ -3,10 +3,10 @@ import { createCell } from 'web-cell';
 
 self.navigator.share = async () => {};
 
-import { ShareBar } from '../../source/Navigator/ShareBar';
-import style from '../../source/Navigator/ShareBar/index.less';
+import { ShareBar } from '../../Navigator/ShareBar';
+import style from '../../Navigator/ShareBar/index.less';
 
-import { BGIcon } from '../../source/Reminder/FAIcon';
+import { BGIcon } from '../../../source/Reminder/FAIcon';
 
 describe('Share Bar', () => {
     it('should render Vendor Icons', () => {
