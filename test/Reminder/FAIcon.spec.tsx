@@ -22,6 +22,13 @@ describe('FontAwesome Icon', () => {
         );
     });
 
+    it('should use Bootstrap 6 foreground utilities for its color', () => {
+        assertLooksLike(
+            <FAIcon name="home" color="dark" />,
+            <span className="fas fa-home fg-body" aria-hidden="true" />
+        );
+    });
+
     it('should render an Icon with Padding wrapper for List items', () => {
         assertLooksLike(
             <ul className="fa-ul">
