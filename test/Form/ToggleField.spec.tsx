@@ -20,12 +20,7 @@ describe('Form controls', () => {
             <FormCheck type="switch" id="test" label="Enable" />,
             <div className="form-field">
                 <div className="switch">
-                    <input
-                        type="checkbox"
-                        role="switch"
-                        {...{ switch: true }}
-                        id="test"
-                    />
+                    <input type="checkbox" role="switch" switch id="test" />
                 </div>
                 <label htmlFor="test">Enable</label>
             </div>

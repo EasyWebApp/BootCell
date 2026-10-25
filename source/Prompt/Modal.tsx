@@ -53,10 +53,7 @@ export const Modal: FC<ModalProps> = ({
 
             const dialog = node as HTMLDialogElement;
 
-            if (show && !dialog.open)
-                typeof dialog.showModal === 'function'
-                    ? dialog.showModal()
-                    : (dialog.open = true);
+            if (show && !dialog.open) dialog.showModal();
             else if (!show && dialog.open) dialog.close();
         }}
         onCancel={event => {

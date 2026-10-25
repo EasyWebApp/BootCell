@@ -13,7 +13,7 @@ import {
 
 import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
-import { OffcanvasNavbar } from './Navbar';
+import { DrawerNavbar } from './Navbar';
 
 export interface NavLinkProps extends WebCellProps<HTMLAnchorElement> {
     active?: boolean;
@@ -90,9 +90,7 @@ export class Nav extends HTMLElement implements WebCell<NavProps> {
         this.updateClass();
         this.role = 'tablist';
 
-        const navBar = this.closest<OffcanvasNavbar>(
-            'offcanvas-navbar, .navbar'
-        );
+        const navBar = this.closest<DrawerNavbar>('drawer-navbar, .navbar');
         if (!navBar) return;
 
         const expand =

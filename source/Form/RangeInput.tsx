@@ -9,6 +9,8 @@ import {
     WebField
 } from 'web-cell';
 
+import { BootstrapStyles } from '../BootstrapStyles';
+
 export interface RangeInputProps extends WebCellProps<HTMLInputElement> {
     icon?: JsxChildren | ((itemValue: number) => JsxChildren);
 }
@@ -68,10 +70,7 @@ export class RangeInput
 
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 <div className="form-range position-relative">
                     <input
                         className={`form-range-input ${icon ? 'opacity-0' : ''}`}

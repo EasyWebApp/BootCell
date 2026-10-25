@@ -10,6 +10,7 @@ import {
 } from 'web-cell';
 
 import { IconButton } from '../Form';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export interface CodeBlockProps extends WebCellProps<HTMLPreElement> {
     name?: string;
@@ -69,14 +70,7 @@ export class CodeBlock extends HTMLElement implements WebCell<CodeBlockProps> {
 
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-                />
+                <BootstrapStyles />
                 <link
                     rel="stylesheet"
                     href={`https://unpkg.com/prismjs@1.29.0/themes/prism-${theme}.min.css`}

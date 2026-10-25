@@ -1,4 +1,5 @@
 export * from './type';
+export * from './BootstrapStyles';
 export * from './Layout';
 export * from './Content';
 export * from './Form';

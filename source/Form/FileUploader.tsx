@@ -12,6 +12,7 @@ import {
 import { makeArray } from 'web-utility';
 
 import { FilePicker, FilePickerProps } from './FilePicker';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export abstract class FileModel {
     @observable
@@ -204,10 +205,7 @@ export class FileUploader extends HTMLElement implements WebFileField {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

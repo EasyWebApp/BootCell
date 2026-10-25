@@ -12,12 +12,13 @@ import { delegate, uniqueID } from 'web-utility';
 
 import { Container, ContainerProps } from '../Layout/Grid';
 import {
-    Offcanvas,
-    OffcanvasBody,
-    OffcanvasBoxProps,
-    OffcanvasHeader,
-    OffcanvasTitle
-} from '../Layout/Offcanvas';
+    Drawer,
+    DrawerBody,
+    DrawerBoxProps,
+    DrawerHeader,
+    DrawerTitle
+} from '../Layout/Drawer';
+import { BootstrapStyles } from '../BootstrapStyles';
 import { BackgroundColor, PositionY, Size, backgroundClassName } from '../type';
 
 export type NavbarBrandProps = JsxProps<HTMLAnchorElement>;
@@ -77,42 +78,42 @@ export const Navbar: FC<NavbarProps> = ({
     </nav>
 );
 
-export interface OffcanvasNavbarProps
-    extends OffcanvasBoxProps,
+export interface DrawerNavbarProps
+    extends DrawerBoxProps,
         NavbarProps,
         ContainerProps {
     brand?: JsxChildren;
 }
 
-export interface OffcanvasNavbar extends WebCell {}
+export interface DrawerNavbar extends WebCell {}
 
 @component({
-    tagName: 'offcanvas-navbar',
+    tagName: 'drawer-navbar',
     mode: 'open'
 })
 @observer
-export class OffcanvasNavbar extends HTMLElement implements WebCell {
-    declare props: OffcanvasNavbarProps;
+export class DrawerNavbar extends HTMLElement implements WebCell {
+    declare props: DrawerNavbarProps;
 
     @attribute
     @observable
-    accessor variant: OffcanvasNavbarProps['variant'];
+    accessor variant: DrawerNavbarProps['variant'];
 
     @attribute
     @observable
-    accessor bg: OffcanvasNavbarProps['bg'];
+    accessor bg: DrawerNavbarProps['bg'];
 
     @attribute
     @observable
-    accessor expand: OffcanvasNavbarProps['expand'];
+    accessor expand: DrawerNavbarProps['expand'];
 
     @attribute
     @observable
-    accessor fixed: OffcanvasNavbarProps['fixed'];
+    accessor fixed: DrawerNavbarProps['fixed'];
 
     @attribute
     @observable
-    accessor sticky: OffcanvasNavbarProps['sticky'];
+    accessor sticky: DrawerNavbarProps['sticky'];
 
     @attribute
     @observable
@@ -125,9 +126,9 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
     titleId = uniqueID();
 
     @observable
-    accessor brand: OffcanvasNavbarProps['brand'];
+    accessor brand: DrawerNavbarProps['brand'];
 
-    offcanvasId = uniqueID();
+    drawerId = uniqueID();
 
     @attribute
     @observable
@@ -163,19 +164,19 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
 
     renderContent() {
         const { variant, bg, expand, fixed, sticky, fluid, brand } = this,
-            { title, titleId, offcanvasId, open, closeButton } = this;
+            { title, titleId, drawerId, open, closeButton } = this;
 
         return (
             <Navbar {...{ variant, bg, expand, fixed, sticky }}>
                 <Container fluid={fluid}>
                     {brand || title}
                     <NavbarToggle
-                        aria-controls={offcanvasId}
+                        aria-controls={drawerId}
                         ariaLabel="Toggle navigation"
                         onClick={() => (this.open = true)}
                     />
-                    <Offcanvas
-                        id={offcanvasId}
+                    <Drawer
+                        id={drawerId}
                         className={
                             expand && expand !== true
                                 ? `${expand === 'xxl' ? '2xl' : expand}:drawer`
@@ -185,18 +186,18 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
                         show={open}
                         onHide={this.close}
                     >
-                        <OffcanvasHeader
+                        <DrawerHeader
                             closeButton={closeButton}
                             onHide={() => (this.open = false)}
                         >
-                            <OffcanvasTitle id={titleId}>
+                            <DrawerTitle id={titleId}>
                                 {brand || title}
-                            </OffcanvasTitle>
-                        </OffcanvasHeader>
-                        <OffcanvasBody>
+                            </DrawerTitle>
+                        </DrawerHeader>
+                        <DrawerBody>
                             <slot />
-                        </OffcanvasBody>
-                    </Offcanvas>
+                        </DrawerBody>
+                    </Drawer>
                 </Container>
             </Navbar>
         );
@@ -205,10 +206,7 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

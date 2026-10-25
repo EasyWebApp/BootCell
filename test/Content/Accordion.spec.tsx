@@ -17,18 +17,10 @@ describe('Accordion', () => {
             <details className="accordion-item " open>
                 <summary className="accordion-header ">
                     Test
-                    <svg
-                        className="accordion-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                    <i
+                        className="bi-chevron-down accordion-icon"
                         aria-hidden="true"
-                    >
-                        <path d="m2 5 6 6 6-6" />
-                    </svg>
+                    />
                 </summary>
                 <div className="accordion-body ">Content</div>
             </details>

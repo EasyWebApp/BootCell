@@ -141,7 +141,7 @@ export const FormCheck: FC<FormCheckProps> = ({
                 <input
                     type="checkbox"
                     role="switch"
-                    {...{ switch: true }}
+                    switch
                     id={id}
                     {...props}
                 />
@@ -149,9 +149,8 @@ export const FormCheck: FC<FormCheckProps> = ({
         ) : (
             <input
                 className={type === 'radio' ? 'radio' : 'check'}
-                type={type}
-                id={id}
                 style={reverse ? { gridColumn: '2' } : undefined}
+                {...{ type, id }}
                 {...props}
             />
         )}

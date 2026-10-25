@@ -10,6 +10,7 @@ import {
 
 import { FilePreview } from '../Media/FilePreview';
 import { CloseButton } from './Button';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export interface FilePickerProps extends WebCellProps<HTMLInputElement> {
     onChange?: (event: CustomEvent<{ value: string; file?: File }>) => any;
@@ -116,14 +117,7 @@ export class FilePicker
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

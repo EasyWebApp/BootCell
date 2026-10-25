@@ -4,7 +4,7 @@ import { uniqueID } from 'web-utility';
 
 import { CloseButton } from '../Form/Button';
 
-export const OffcanvasTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
+export const DrawerTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     className = '',
     children,
     ...props
@@ -14,12 +14,12 @@ export const OffcanvasTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     </h5>
 );
 
-export interface OffcanvasHeaderProps extends WebCellProps<HTMLDivElement> {
+export interface DrawerHeaderProps extends WebCellProps<HTMLDivElement> {
     closeButton?: boolean;
     onHide?: () => any;
 }
 
-export const OffcanvasHeader: FC<OffcanvasHeaderProps> = ({
+export const DrawerHeader: FC<DrawerHeaderProps> = ({
     className = '',
     closeButton,
     children,
@@ -35,7 +35,7 @@ export const OffcanvasHeader: FC<OffcanvasHeaderProps> = ({
     </div>
 );
 
-export const OffcanvasBody: FC<WebCellProps<HTMLDivElement>> = ({
+export const DrawerBody: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',
     children,
     ...props
@@ -45,13 +45,13 @@ export const OffcanvasBody: FC<WebCellProps<HTMLDivElement>> = ({
     </div>
 );
 
-export interface OffcanvasProps extends WebCellProps<HTMLDialogElement> {
+export interface DrawerProps extends WebCellProps<HTMLDialogElement> {
     backdrop?: boolean | 'static';
     show?: boolean;
     onHide?: () => any;
 }
 
-export const Offcanvas: FC<OffcanvasProps> = ({
+export const Drawer: FC<DrawerProps> = ({
     className = '',
     style,
     backdrop = true,
@@ -74,13 +74,10 @@ export const Offcanvas: FC<OffcanvasProps> = ({
 
             const dialog = node as HTMLDialogElement;
 
-            if (show && !dialog.open)
-                backdrop === false && typeof dialog.show === 'function'
-                    ? dialog.show()
-                    : typeof dialog.showModal === 'function'
-                      ? dialog.showModal()
-                      : (dialog.open = true);
-            else if (!show && dialog.open) dialog.close();
+            if (show && !dialog.open) {
+                if (backdrop === false) dialog.show();
+                else dialog.showModal();
+            } else if (!show && dialog.open) dialog.close();
         }}
         data-bs-backdrop={
             backdrop === 'static'
@@ -102,13 +99,13 @@ export const Offcanvas: FC<OffcanvasProps> = ({
     </dialog>
 );
 
-export interface OffcanvasBoxProps extends OffcanvasProps {
+export interface DrawerBoxProps extends DrawerProps {
     title?: string;
     closeButton?: boolean;
     titleId?: string;
 }
 
-export const OffcanvasBox: FC<OffcanvasBoxProps> = ({
+export const DrawerBox: FC<DrawerBoxProps> = ({
     title,
     titleId = uniqueID(),
     closeButton,
@@ -116,10 +113,10 @@ export const OffcanvasBox: FC<OffcanvasBoxProps> = ({
     children,
     ...props
 }) => (
-    <Offcanvas {...{ ...props, onHide }} aria-labelledby={titleId}>
-        <OffcanvasHeader {...{ closeButton, onHide }}>
-            <OffcanvasTitle id={titleId}>{title}</OffcanvasTitle>
-        </OffcanvasHeader>
-        <OffcanvasBody>{children}</OffcanvasBody>
-    </Offcanvas>
+    <Drawer {...{ ...props, onHide }} aria-labelledby={titleId}>
+        <DrawerHeader {...{ closeButton, onHide }}>
+            <DrawerTitle id={titleId}>{title}</DrawerTitle>
+        </DrawerHeader>
+        <DrawerBody>{children}</DrawerBody>
+    </Drawer>
 );

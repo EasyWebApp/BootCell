@@ -4,6 +4,7 @@ import { observable } from 'mobx';
 import { FC, WebCellProps, attribute, component, observer } from 'web-cell';
 
 import { Button, ButtonProps } from '../Form/Button';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export const Dropdown: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',
@@ -109,10 +110,7 @@ export class DropdownButton extends HTMLElement {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 <style>
                     {`:host {
                         display: inline-block;

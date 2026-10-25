@@ -10,6 +10,8 @@ import {
     reaction
 } from 'web-cell';
 
+import { BootstrapStyles } from '../BootstrapStyles';
+
 export interface CarouselItemProps extends WebCellProps<HTMLDivElement> {
     interval?: number;
 }
@@ -195,10 +197,7 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

@@ -10,6 +10,8 @@ import {
     reaction
 } from 'web-cell';
 
+import { Icon } from '../Reminder/Icon';
+
 export const AccordionItem: FC<WebCellProps<HTMLDetailsElement>> = ({
     className = '',
     children,
@@ -27,18 +29,11 @@ export const AccordionHeader: FC<WebCellProps<HTMLElement>> = ({
 }) => (
     <summary className={`accordion-header ${className}`} {...props}>
         {children}
-        <svg
+        <Icon
             className="accordion-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            name="chevron-down"
             aria-hidden="true"
-        >
-            <path d="m2 5 6 6 6-6" />
-        </svg>
+        />
     </summary>
 );
 

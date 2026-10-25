@@ -30,12 +30,7 @@ describe('FormCheck', () => {
                     className="switch"
                     style={{ gridColumn: '2', gridRow: '1' }}
                 >
-                    <input
-                        type="checkbox"
-                        role="switch"
-                        {...{ switch: true }}
-                        id="updates"
-                    />
+                    <input type="checkbox" role="switch" switch id="updates" />
                 </div>
                 <label
                     htmlFor="updates"

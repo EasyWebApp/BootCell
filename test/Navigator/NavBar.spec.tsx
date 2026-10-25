@@ -47,7 +47,7 @@ function InlineNavBar({
     expand = 'md',
     fixed = 'top',
     direction = 'left',
-    offcanvas = false,
+    drawer = false,
     theme = 'dark',
     background = 'dark',
     menuAlign = 'start',
@@ -61,7 +61,7 @@ function InlineNavBar({
             expand,
             fixed,
             direction,
-            offcanvas,
+            drawer,
             theme,
             background,
             menuAlign,
@@ -219,9 +219,9 @@ describe('Navigator Bar', () => {
         );
     });
 
-    it('should render an open Offcanvas NavBar', () => {
+    it('should render an open Drawer NavBar', () => {
         assertLooksLike(
-            <InlineNavBar brand="Test" offcanvas open>
+            <InlineNavBar brand="Test" drawer open>
                 <NavLink href="/example" active>
                     Example
                 </NavLink>
