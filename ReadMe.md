@@ -2,7 +2,7 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v3][2], [BootStrap v5][3], [BootStrap Icon v1][4] & [FontAwesome v6][5]
+[Web Components][1] UI library based on [WebCell v3][2], [BootStrap v6][3], [BootStrap Icon v1][4] & [FontAwesome v6][5]
 
 [![NPM Dependency](https://img.shields.io/librariesio/github/EasyWebApp/BootCell.svg)][6]
 [![CI & CD](https://github.com/EasyWebApp/BootCell/actions/workflows/main.yml/badge.svg)][7]
@@ -63,7 +63,7 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 ```html
 <link
     rel="stylesheet"
-    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
 />
 <link
     rel="stylesheet"
