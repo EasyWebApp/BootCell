@@ -2,7 +2,7 @@
 
 # BootCell
 
-[Web Components][1] UI library based on [WebCell v3][2], [BootStrap v6][3], [BootStrap Icon v1][4] & [FontAwesome v6][5]
+[Web Components][1] UI library based on [WebCell v3][2], [BootStrap v6][3], [BootStrap Icon v1][4] & [FontAwesome v7][5]
 
 [![NPM Dependency](https://img.shields.io/librariesio/github/EasyWebApp/BootCell.svg)][6]
 [![CI & CD](https://github.com/EasyWebApp/BootCell/actions/workflows/main.yml/badge.svg)][7]
@@ -71,7 +71,7 @@ npm install parcel @parcel/config-default @parcel/transformer-typescript-tsc -D
 />
 <link
     rel="stylesheet"
-    href="https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
+    href="https://unpkg.com/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"
 />
 <script src="https://polyfill.web-cell.dev/feature/ECMAScript.js"></script>
 <script src="https://polyfill.web-cell.dev/feature/WebComponents.js"></script>

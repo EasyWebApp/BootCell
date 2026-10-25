@@ -11,6 +11,8 @@ components and prop types; old catalog entries are not compatibility aliases.
 - [Bootstrap 6 themes][3]
 - [WebCell documentation][4]
 - [MobX releases][5]
+- [Font Awesome upgrade guide][6]
+- [Font Awesome v7 changes][7]
 
 ## Imports and custom elements
 
@@ -78,6 +80,27 @@ For example, use `theme="inverse"` for an inverse button, `color="body"` for bod
 foreground, or `bg="1"` for a layer background. Subtle backgrounds use values
 such as `subtle-primary`, not `primary-subtle`. Check the exported prop types
 instead of retaining runtime conversion helpers.
+
+## Font Awesome components
+
+BootCell now requires `@fortawesome/fontawesome-free` v7. Replace the previous
+stylesheet with the v7 assets; do not load both versions.
+
+- `FAIcon` defaults to `family="classic"` and `group="solid"`, emitting
+  `fa-classic fa-solid` rather than the abbreviated `fas`.
+- `group="brands"` emits `fa-brands` without a family class. Set it on brand
+  icons, including `<FABGIcon name="github" group="brands" type="square" />`;
+  the background shape remains Classic Solid.
+- Replace `group="duotone"` with `family="duotone" group="solid"`. `family`
+  also accepts `sharp` and `sharp-duotone`; `group` supports `thin`.
+  These non-Free families/styles require separately supplied Pro assets:
+  BootCell does not bundle them or provide a fallback.
+- Remove `fixedWidth`; use `width="auto"` or `width="fixed"` when an explicit
+  width override is needed. Omitting `width` leaves the v7 stylesheet default.
+- Replace `pull="left"` / `"right"` with `pull="start"` / `"end"`.
+- Replace `animation="pulse"` with `animation="spin-pulse"`.
+- Icon `name` is forwarded unchanged; BootCell does not translate old icon names.
+  Review downstream selectors and snapshots using abbreviated style classes.
 
 ## Responsive props
 
@@ -157,3 +180,5 @@ shadow-root content automatically.
 [3]: https://github.com/twbs/bootstrap/blob/v6.0.0-alpha.1/site/src/content/docs/customize/theme.mdx
 [4]: https://web-cell.dev/
 [5]: https://github.com/mobxjs/mobx/releases
+[6]: https://docs.fontawesome.com/upgrade/upgrade-from-older-versions
+[7]: https://docs.fontawesome.com/upgrade/whats-changed
