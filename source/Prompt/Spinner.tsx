@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { TextColor, foregroundClassName } from '../type';
+import { TextColor } from '../type';
 
 export interface SpinnerProps extends WebCellProps<HTMLDivElement> {
     variant?: TextColor;
@@ -21,7 +21,7 @@ export const Spinner: FC<SpinnerProps> = ({
         className={classNames(
             `spinner-${animation}`,
             size && `spinner-${animation}-${size}`,
-            variant && foregroundClassName(variant),
+            variant && `fg-${variant}`,
             className
         )}
         role="status"

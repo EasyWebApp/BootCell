@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
 import { CloseButton } from '../Form/Button';
-import { TextColor, themeClassName } from '../type';
+import { ThemeColor } from '../type';
 
 export interface AlertProps extends WebCellProps {
-    variant?: TextColor;
+    variant?: ThemeColor;
     title?: string;
     dismissible?: boolean;
     show?: boolean;
@@ -24,7 +24,7 @@ export const Alert: FC<AlertProps> = ({
     <aside
         className={classNames(
             'alert',
-            themeClassName(variant),
+            `theme-${variant}`,
             { 'alert-dismissible fade': dismissible, show },
             className
         )}

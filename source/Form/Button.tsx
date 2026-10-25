@@ -5,13 +5,15 @@ import { uniqueID } from 'web-utility';
 
 import { FormCheckProps, FormControlProps } from './Form';
 import { Icon, IconProps } from '../Reminder';
-import { TextColor, themeClassName } from '../type';
+import { ThemeColor } from '../type';
 
 export interface ButtonProps
-    extends WebCellProps<HTMLButtonElement>,
+    extends
+        WebCellProps<HTMLButtonElement>,
         Omit<WebCellProps<HTMLAnchorElement>, 'type'>,
         Pick<FormControlProps<'input'>, 'size'> {
-    variant?: TextColor | `outline-${TextColor}` | 'link';
+    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link';
+    theme?: ThemeColor;
     active?: boolean;
 }
 
@@ -19,26 +21,17 @@ export const Button: FC<ButtonProps> = ({
     className,
     href,
     variant,
+    theme,
     size,
     active,
     children,
     ...props
 }) => {
     const { disabled, tabIndex } = props,
-        buttonVariant =
-            variant === 'link'
-                ? 'btn-link'
-                : variant
-                  ? [
-                        variant.startsWith('outline-')
-                            ? 'btn-outline'
-                            : 'btn-solid',
-                        themeClassName(variant.replace(/^outline-/, ''))
-                    ]
-                  : '',
         Class = classNames(
             'btn',
-            buttonVariant,
+            variant && `btn-${variant}`,
+            theme && `theme-${theme}`,
             size && `btn-${size}`,
             className
         );
@@ -98,23 +91,25 @@ export const CloseButton: FC<WebCellProps<HTMLButtonElement>> = ({
 );
 
 export interface ToggleButtonProps
-    extends WebCellProps<HTMLInputElement>,
-        Pick<ButtonProps, 'variant'> {
+    extends
+        WebCellProps<HTMLInputElement>,
+        Pick<ButtonProps, 'variant' | 'theme'> {
     type: Exclude<FormCheckProps['type'], 'switch'>;
 }
 
 export const ToggleButton: FC<ToggleButtonProps> = ({
     className = '',
     id = uniqueID(),
-    variant = 'primary',
+    variant = 'solid',
+    theme = 'primary',
     children,
     ...props
 }) => (
     <label
         className={classNames(
             'btn-check',
-            variant.startsWith('outline-') ? 'btn-outline' : 'btn-solid',
-            themeClassName(variant.replace(/^outline-/, '')),
+            `btn-${variant}`,
+            `theme-${theme}`,
             className
         )}
     >

@@ -78,7 +78,8 @@ export class CodeBlock extends HTMLElement implements WebCell<CodeBlockProps> {
                 {name && (
                     <IconButton
                         className="position-absolute top-0 end-0"
-                        variant="warning"
+                        variant="solid"
+                        theme="warning"
                         name="download"
                         download={name}
                         href={dataURI}

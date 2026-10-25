@@ -19,7 +19,7 @@ import {
     DrawerTitle
 } from '../Layout/Drawer';
 import { BootstrapStyles } from '../BootstrapStyles';
-import { BackgroundColor, PositionY, Size, backgroundClassName } from '../type';
+import { BackgroundColor, PositionY, Size } from '../type';
 
 export type NavbarBrandProps = JsxProps<HTMLAnchorElement>;
 
@@ -56,20 +56,20 @@ export interface NavbarProps extends WebCellProps {
 
 export const Navbar: FC<NavbarProps> = ({
     variant = 'light',
-    bg = 'body-tertiary',
+    bg = '1',
     fixed,
     sticky,
     expand,
     children
 }) => (
     <nav
-        className={`navbar ${backgroundClassName(bg)} ${fixed ? `fixed-${fixed}` : ''} ${
+        className={`navbar bg-${bg} ${fixed ? `fixed-${fixed}` : ''} ${
             sticky ? `sticky-${sticky}` : ''
         } ${
             expand
                 ? expand === true
                     ? 'navbar-expand'
-                    : `${expand === 'xxl' ? '2xl' : expand}:navbar-expand`
+                    : `${expand}:navbar-expand`
                 : ''
         }`}
         data-bs-theme={variant}
@@ -79,9 +79,7 @@ export const Navbar: FC<NavbarProps> = ({
 );
 
 export interface DrawerNavbarProps
-    extends DrawerBoxProps,
-        NavbarProps,
-        ContainerProps {
+    extends DrawerBoxProps, NavbarProps, ContainerProps {
     brand?: JsxChildren;
 }
 
@@ -178,9 +176,7 @@ export class DrawerNavbar extends HTMLElement implements WebCell {
                     <Drawer
                         id={drawerId}
                         className={
-                            expand && expand !== true
-                                ? `${expand === 'xxl' ? '2xl' : expand}:drawer`
-                                : ''
+                            expand && expand !== true ? `${expand}:drawer` : ''
                         }
                         aria-labelledby={titleId}
                         show={open}

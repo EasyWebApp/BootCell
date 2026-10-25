@@ -24,7 +24,7 @@ describe('FontAwesome Icon', () => {
 
     it('should use Bootstrap 6 foreground utilities for its color', () => {
         assertLooksLike(
-            <FAIcon name="home" color="dark" />,
+            <FAIcon name="home" color="body" />,
             <span className="fas fa-home fg-body" aria-hidden="true" />
         );
     });
@@ -50,7 +50,7 @@ describe('FontAwesome Icon', () => {
 
     it('should render a Stacked Square Icon', () => {
         assertLooksLike(
-            <FABGIcon type="square" name="github" size={2} color="dark" />,
+            <FABGIcon type="square" name="github" size={2} color="body" />,
             <span className="fa-stack fa-2x fg-body">
                 <FAIcon name="square" stack={2} />
                 <FAIcon name="github" inverse stack={1} />

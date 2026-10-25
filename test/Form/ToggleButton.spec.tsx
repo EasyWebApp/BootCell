@@ -38,12 +38,17 @@ describe('Form controls', () => {
         );
     });
 
-    it('should preserve an outline toggle button variant', () => {
+    it('should compose a native outline variant and theme', () => {
         assertLooksLike(
-            <ToggleButton type="radio" id="test" variant="outline-primary">
+            <ToggleButton
+                type="radio"
+                id="test"
+                variant="outline"
+                theme="accent"
+            >
                 Choose
             </ToggleButton>,
-            <label className="btn-check btn-outline theme-primary">
+            <label className="btn-check btn-outline theme-accent">
                 <input id="test" autocomplete="off" type="radio" />
                 Choose
             </label>

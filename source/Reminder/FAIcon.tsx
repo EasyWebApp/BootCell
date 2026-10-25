@@ -1,7 +1,7 @@
 import { FC } from 'web-cell';
 import classNames from 'classnames';
 
-import { TextColor, foregroundClassName } from '../type';
+import { TextColor } from '../type';
 import { IconProps } from './Icon';
 
 export interface FAIconProps extends Omit<IconProps, 'size'> {
@@ -51,7 +51,7 @@ export const FAIcon: FC<FAIconProps> = ({
                 animation && 'fa-' + animation,
                 pull && 'fa-pull-' + pull,
                 stack && `fa-stack-${stack}x`,
-                color && foregroundClassName(color),
+                color && `fg-${color}`,
                 className
             )}
             aria-hidden="true"
@@ -77,7 +77,7 @@ export const FABGIcon: FC<FABGIconProps> = ({
         className={classNames(
             'fa-stack',
             size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
-            color && foregroundClassName(color),
+            color && `fg-${color}`,
             className
         )}
     >

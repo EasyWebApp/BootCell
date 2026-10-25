@@ -29,8 +29,8 @@ describe('Navbar', () => {
         const root = render(
             <Navbar
                 variant="dark"
-                bg="dark"
-                expand="xxl"
+                bg="inverse"
+                expand="2xl"
                 fixed="top"
                 sticky="bottom"
             >
@@ -39,7 +39,7 @@ describe('Navbar', () => {
         );
         const nav = root.querySelector('nav');
 
-        expect(nav.classList.contains('theme-inverse')).toBe(true);
+        expect(nav.classList.contains('bg-inverse')).toBe(true);
         expect(nav.classList.contains('2xl:navbar-expand')).toBe(true);
         expect(nav.classList.contains('fixed-top')).toBe(true);
         expect(nav.classList.contains('sticky-bottom')).toBe(true);

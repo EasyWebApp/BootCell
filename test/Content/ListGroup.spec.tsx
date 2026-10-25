@@ -19,7 +19,7 @@ describe('ListGroup', () => {
         const links = root.querySelectorAll('a');
 
         expect(root.firstElementChild.className).toBe(
-            'list-group list-group-horizontal-lg'
+            'list-group lg:list-group-horizontal'
         );
         expect(links[0].className).toBe(
             'list-group-item list-group-item-action active'
@@ -42,7 +42,7 @@ describe('ListGroup', () => {
             'list-group list-group-flush list-group-numbered'
         );
         expect(root.querySelector('a').className).toBe(
-            'list-group-item list-group-item-success'
+            'list-group-item theme-success'
         );
         expect(root.querySelector('a').hasAttribute('href')).toBe(false);
     });

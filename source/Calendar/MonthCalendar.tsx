@@ -13,7 +13,6 @@ import {
 import { Badge } from '../Reminder';
 import { Button, ButtonProps } from '../Form/Button';
 import { Table, TableProps } from '../Content';
-import { themeClassName } from '../type';
 
 export interface DateData {
     date: TimeData;
@@ -22,8 +21,9 @@ export interface DateData {
 }
 
 export interface MonthCalendarProps
-    extends Omit<TableProps, 'variant' | 'onChange' | 'onSelect'>,
-        Pick<ButtonProps, 'variant'> {
+    extends
+        Omit<TableProps, 'variant' | 'onChange' | 'onSelect'>,
+        Pick<ButtonProps, 'variant' | 'theme'> {
     locale?: Navigator['language'];
     value?: DateData[];
     onSelect?: (event: CustomEvent<DateData>) => any;
@@ -40,7 +40,11 @@ export class MonthCalendar
 {
     @attribute
     @observable
-    accessor variant: MonthCalendarProps['variant'] = 'primary';
+    accessor variant: MonthCalendarProps['variant'] = 'solid';
+
+    @attribute
+    @observable
+    accessor theme: MonthCalendarProps['theme'] = 'primary';
 
     @attribute
     @observable
@@ -116,7 +120,8 @@ export class MonthCalendar
     };
 
     render() {
-        const { style, variant, weekFormatter, currentDate, dateGrid } = this;
+        const { style, variant, theme, weekFormatter, currentDate, dateGrid } =
+            this;
 
         return (
             <Table style={{ tableLayout: 'fixed', ...style }}>
@@ -124,6 +129,7 @@ export class MonthCalendar
                     <div className="d-flex justify-content-between align-items-center">
                         <Button
                             variant={variant}
+                            theme={theme}
                             onClick={() => this.changeMonth(-1)}
                         >
                             &lt;
@@ -133,6 +139,7 @@ export class MonthCalendar
 
                         <Button
                             variant={variant}
+                            theme={theme}
                             onClick={() => this.changeMonth(1)}
                         >
                             &gt;
@@ -144,7 +151,7 @@ export class MonthCalendar
                         {dateGrid[0].map((date, index, { length }) => (
                             <td
                                 key={index}
-                                className={themeClassName(variant)}
+                                className={`theme-${theme}`}
                                 style={{ width: `calc(100% / ${length})` }}
                             >
                                 {weekFormatter.format(date)}

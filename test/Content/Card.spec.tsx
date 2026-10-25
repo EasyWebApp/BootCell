@@ -71,13 +71,13 @@ describe('Card', () => {
         );
     });
 
-    it('should apply theme, foreground and border utilities', () => {
+    it('should apply native background, foreground and border utilities', () => {
         const card = render(
-            <Card bg="dark" text="white" border="primary" className="test" />
+            <Card bg="inverse" text="white" border="primary" className="test" />
         ).firstElementChild;
 
         expect(card.className).toBe(
-            'card theme-inverse fg-white border-primary test'
+            'card bg-inverse fg-white border-primary test'
         );
     });
 });

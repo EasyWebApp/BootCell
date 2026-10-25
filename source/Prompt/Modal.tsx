@@ -38,9 +38,7 @@ export const Modal: FC<ModalProps> = ({
             size && `dialog-${size}`,
             fullscreen &&
                 `${
-                    fullscreen === true
-                        ? ''
-                        : `${fullscreen.replace(/^xxl/, '2xl')}:`
+                    fullscreen === true ? '' : `${fullscreen}:`
                 }dialog-fullscreen`,
             scrollable && 'dialog-scrollable',
             className

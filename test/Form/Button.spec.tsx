@@ -8,19 +8,56 @@ import { Icon } from '../../source/Reminder/Icon';
 describe('Button', () => {
     it('should render an outline Button', () => {
         assertLooksLike(
-            <Button variant="outline-primary">Test</Button>,
+            <Button variant="outline" theme="primary">
+                Test
+            </Button>,
             <button className="btn btn-outline theme-primary">Test</button>
         );
     });
 
     it('should render a solid Button', () => {
         assertLooksLike(
-            <Button variant="primary" className="d-block w-100">
+            <Button variant="solid" theme="primary" className="d-block w-100">
                 Test
             </Button>,
             <button className="btn btn-solid theme-primary d-block w-100">
                 Test
             </button>
+        );
+    });
+
+    it('should compose native button variants and themes independently', () => {
+        const variants = [
+            'solid',
+            'outline',
+            'subtle',
+            'text',
+            'link'
+        ] as const;
+        const themes = [
+            'primary',
+            'secondary',
+            'accent',
+            'inverse',
+            'success',
+            'info',
+            'warning',
+            'danger'
+        ] as const;
+
+        for (const variant of variants)
+            for (const theme of themes)
+                assertLooksLike(
+                    <Button variant={variant} theme={theme}>
+                        Test
+                    </Button>,
+                    <button className={`btn btn-${variant} theme-${theme}`}>
+                        Test
+                    </button>
+                );
+        assertLooksLike(
+            <Button theme="accent">Test</Button>,
+            <button className="btn theme-accent">Test</button>
         );
     });
 

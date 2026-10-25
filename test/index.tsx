@@ -58,7 +58,12 @@ const Content = () => (
                     multiple
                     onChange={console.log}
                 />
-                <Button type="submit" variant="success" className="my-3">
+                <Button
+                    type="submit"
+                    variant="solid"
+                    theme="success"
+                    className="my-3"
+                >
                     Submit
                 </Button>
             </form>

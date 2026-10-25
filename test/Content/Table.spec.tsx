@@ -42,14 +42,14 @@ describe('Table', () => {
             render(<Table responsive="xl" />).firstElementChild.className
         ).toBe('xl:table-responsive');
         expect(
-            render(<Table responsive="xxl" />).firstElementChild.className
+            render(<Table responsive="2xl" />).firstElementChild.className
         ).toBe('2xl:table-responsive');
     });
 
     it('should apply table variants and sizing', () => {
         const table = render(
             <Table
-                variant="dark"
+                variant="inverse"
                 size="sm"
                 bordered
                 striped
@@ -59,7 +59,7 @@ describe('Table', () => {
         ).querySelector('table');
 
         expect(table.className).toBe(
-            'table table-dark table-sm table-striped table-hover table-bordered caption-top'
+            'table theme-inverse table-sm table-striped table-hover table-bordered caption-top'
         );
     });
 

@@ -54,6 +54,28 @@ describe('MonthCalendar', () => {
         expect(onChange.mock.calls[0][0].detail).toEqual(instance.currentDate);
     });
 
+    it('should share the native theme across navigation and weekday headings', () => {
+        const instance = calendar();
+        runInAction(() => {
+            instance.variant = 'outline';
+            instance.theme = 'accent';
+        });
+        const root = render(instance.render());
+
+        expect(
+            Array.from(root.querySelectorAll('button'), node => node.className)
+        ).toEqual([
+            'btn btn-outline theme-accent',
+            'btn btn-outline theme-accent'
+        ]);
+        expect(
+            Array.from(
+                root.querySelectorAll('thead td'),
+                node => node.className
+            )
+        ).toEqual(Array(7).fill('theme-accent'));
+    });
+
     it('should render event links and emit the selected date data', () => {
         const instance = calendar();
         const item: DateData = {

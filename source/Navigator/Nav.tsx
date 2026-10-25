@@ -31,7 +31,8 @@ export const NavLink: FC<NavLinkProps> = ({
 );
 
 export interface NavDropdownProps
-    extends Omit<NavLinkProps, 'title' | 'type'>,
+    extends
+        Omit<NavLinkProps, 'title' | 'type'>,
         Pick<ButtonProps, 'disabled' | 'onClick'> {
     title: JsxChildren;
 }
@@ -101,10 +102,7 @@ export class Nav extends HTMLElement implements WebCell<NavProps> {
             'navbar-nav',
             'align-items-center',
             expand && 'flex-column',
-            expand &&
-                (expand === true
-                    ? 'flex-row'
-                    : `${expand === 'xxl' ? '2xl' : expand}:flex-row`)
+            expand && (expand === true ? 'flex-row' : `${expand}:flex-row`)
         );
     }
 

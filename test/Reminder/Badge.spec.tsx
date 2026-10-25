@@ -7,7 +7,7 @@ describe('Badge', () => {
     it('should render a Simple Badge defaultly', () => {
         assertLooksLike(
             <Badge bg="secondary">1</Badge>,
-            <span className="badge theme-secondary">1</span>
+            <span className="badge bg-secondary">1</span>
         );
     });
 
@@ -17,7 +17,7 @@ describe('Badge', () => {
                 2
             </Badge>,
             <a
-                className="badge theme-secondary rounded-pill text-decoration-none"
+                className="badge bg-secondary rounded-pill text-decoration-none"
                 href="#"
             >
                 2

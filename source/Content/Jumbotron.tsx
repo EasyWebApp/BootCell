@@ -2,11 +2,12 @@ import classNames from 'classnames';
 import { JsxChildren } from 'dom-renderer';
 import { FC } from 'web-cell';
 
-import { BackgroundColor, backgroundClassName } from '../type';
+import { BackgroundColor } from '../type';
 import { Container, ContainerProps } from '../Layout/Grid';
 
 export interface JumbotronProps
-    extends Omit<ContainerProps, 'title'>,
+    extends
+        Omit<ContainerProps, 'title'>,
         Record<'title' | 'description', JsxChildren> {
     bg?: BackgroundColor;
     rounded?: 0 | 1 | 2 | 3 | 4 | 5;
@@ -15,7 +16,7 @@ export interface JumbotronProps
 export const Jumbotron: FC<JumbotronProps> = ({
     fluid,
     className = `py-12 ${fluid ? '' : 'px-12'}`,
-    bg = 'body-tertiary',
+    bg = '1',
     rounded = fluid ? 0 : 3,
     title,
     description,
@@ -24,7 +25,7 @@ export const Jumbotron: FC<JumbotronProps> = ({
 }) => (
     <header
         className={classNames(
-            bg && backgroundClassName(bg),
+            bg && `bg-${bg}`,
             rounded != null && `rounded-${rounded ? rounded + 2 : 0}`,
             className
         )}

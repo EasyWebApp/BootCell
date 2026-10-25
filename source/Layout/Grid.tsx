@@ -17,7 +17,7 @@ export const Container: FC<ContainerProps> = ({
         className={
             fluid === true
                 ? `container-fluid ${className}`
-                : `${fluid ? `${fluid === 'xxl' ? '2xl' : fluid}:container` : 'container'} ${className}`
+                : `${fluid ? `${fluid}:container` : 'container'} ${className}`
         }
         {...props}
     >
@@ -35,7 +35,7 @@ export const Row: FC<RowProps> = ({
     md,
     lg,
     xl,
-    xxl,
+    '2xl': twoXL,
     children,
     ...props
 }) => {
@@ -49,7 +49,7 @@ export const Row: FC<RowProps> = ({
               ? `lg:row-cols-${lg}`
               : xl
                 ? `xl:row-cols-${xl}`
-                : xxl && `2xl:row-cols-${xxl}`;
+                : twoXL && `2xl:row-cols-${twoXL}`;
 
     return (
         <div className={classNames('row', columnClass, className)} {...props}>
@@ -67,7 +67,7 @@ export const Col: FC<ColProps> = ({
     md,
     lg,
     xl,
-    xxl,
+    '2xl': twoXL,
     children,
     ...props
 }) => {
@@ -81,7 +81,7 @@ export const Col: FC<ColProps> = ({
               ? `lg:col-${lg}`
               : xl
                 ? `xl:col-${xl}`
-                : xxl && `2xl:col-${xxl}`;
+                : twoXL && `2xl:col-${twoXL}`;
 
     return (
         <div className={classNames('col', columnClass, className)} {...props}>
