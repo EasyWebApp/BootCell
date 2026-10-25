@@ -1,5 +1,6 @@
 import { describe, it } from 'node:test';
-import { assertLooksLike } from '../render';
+import { expect } from 'expect';
+import { assertLooksLike, render } from '../render';
 import { FormCheck } from '../../source/Form/Form';
 import { ToggleButton } from '../../source/Form/Button';
 
@@ -18,9 +19,12 @@ describe('Form controls', () => {
         assertLooksLike(
             <FormCheck type="switch" id="test" label="Enable" />,
             <div className="form-field">
-                <div className="switch">
-                    <input type="checkbox" role="switch" switch id="test" />
-                </div>
+                <input
+                    className="switch"
+                    type="checkbox"
+                    role="switch"
+                    id="test"
+                />
                 <label htmlFor="test">Enable</label>
             </div>
         );
@@ -53,5 +57,28 @@ describe('Form controls', () => {
                 Choose
             </label>
         );
+    });
+
+    it('supports inputRef and button sizing without leaking sizing to the input', () => {
+        let input: Node;
+        const root = render(
+            <ToggleButton
+                type="checkbox"
+                id="sized"
+                size="sm"
+                disabled
+                inputRef={node => {
+                    input = node;
+                }}
+            >
+                Choice
+            </ToggleButton>
+        );
+        expect(root.querySelector('label').classList.contains('btn-sm')).toBe(
+            true
+        );
+        expect(input).toBe(root.querySelector('input'));
+        expect(root.querySelector('input').disabled).toBe(true);
+        expect(root.querySelector('input').hasAttribute('size')).toBe(false);
     });
 });

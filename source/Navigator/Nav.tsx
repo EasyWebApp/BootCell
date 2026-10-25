@@ -14,18 +14,34 @@ import {
 import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
 import { DrawerNavbar } from './Navbar';
+import { BackgroundColor } from '../type';
 
 export interface NavLinkProps extends WebCellProps<HTMLAnchorElement> {
     active?: boolean;
+    disabled?: boolean;
 }
 
 export const NavLink: FC<NavLinkProps> = ({
     className = '',
     active,
+    disabled,
+    onClick,
     children,
     ...props
 }) => (
-    <a className={`nav-link ${active ? 'active' : ''} ${className}`} {...props}>
+    <a
+        {...props}
+        className={classNames('nav-link', { active, disabled }, className)}
+        tabIndex={disabled ? -1 : props.tabIndex}
+        ariaDisabled={disabled ? 'true' : props.ariaDisabled}
+        ariaCurrent={active ? 'page' : props.ariaCurrent}
+        onClick={event => {
+            if (disabled) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else onClick?.(event);
+        }}
+    >
         {children}
     </a>
 );
@@ -56,6 +72,10 @@ export interface NavProps extends WebCellProps {
     variant?: 'pills' | 'underline' | 'tabs';
     fill?: boolean;
     justify?: boolean;
+    direction?: 'row' | 'column';
+    align?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+    scrollable?: boolean;
+    bg?: BackgroundColor;
 }
 
 export interface Nav extends WebCell<NavProps> {}
@@ -78,18 +98,43 @@ export class Nav extends HTMLElement implements WebCell<NavProps> {
     @observable
     accessor justify = false;
 
-    @reaction(({ variant, fill, justify }) => ({ variant, fill, justify }))
-    protected updateClass({ variant, fill, justify } = this) {
-        this.className = classNames('nav', this.className, {
+    @attribute @observable accessor direction: NavProps['direction'];
+    @attribute @observable accessor align: NavProps['align'];
+    @attribute @observable accessor scrollable = false;
+    @attribute @observable accessor bg: BackgroundColor;
+
+    private managedClasses: string[] = [];
+
+    @reaction(
+        ({ variant, fill, justify, direction, align, scrollable, bg }) => ({
+            variant,
+            fill,
+            justify,
+            direction,
+            align,
+            scrollable,
+            bg
+        })
+    )
+    protected updateClass(
+        { variant, fill, justify, direction, align, scrollable, bg } = this
+    ) {
+        this.classList.remove(...this.managedClasses);
+        this.managedClasses = classNames('nav', {
             [`nav-${variant}`]: variant,
             'nav-fill': fill,
-            [`nav-justified`]: justify
-        });
+            'nav-justified': justify,
+            [`flex-${direction}`]: direction,
+            [`justify-content-${align}`]: align,
+            'flex-nowrap overflow-x-auto': scrollable,
+            [`bg-${bg}`]: bg
+        }).split(' ');
+        this.classList.add(...this.managedClasses);
     }
 
     connectedCallback() {
         this.updateClass();
-        this.role = 'tablist';
+        this.role ||= 'tablist';
 
         const navBar = this.closest<DrawerNavbar>('drawer-navbar, .navbar');
         if (!navBar) return;

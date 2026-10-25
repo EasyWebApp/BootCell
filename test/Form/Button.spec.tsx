@@ -2,7 +2,7 @@ import { expect } from 'expect';
 import { fn } from 'jest-mock';
 import { describe, it } from 'node:test';
 import { assertLooksLike, render } from '../render';
-import { Button, IconButton } from '../../source/Form/Button';
+import { Button, IconButton, isButton } from '../../source/Form/Button';
 import { Icon } from '../../source/Reminder/Icon';
 
 describe('Button', () => {
@@ -116,5 +116,31 @@ describe('Button', () => {
             .querySelector('button')
             .click();
         expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('blocks disabled anchor actions as well as native button actions', () => {
+        const onClick = fn();
+        const anchor = render(
+            <Button disabled href="#test" onClick={onClick}>
+                Go
+            </Button>
+        ).querySelector('a');
+        const event = new MouseEvent('click', { cancelable: true });
+        anchor.dispatchEvent(event);
+        expect(event.defaultPrevented).toBe(true);
+        expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('recognizes current JSX buttons without legacy VNode fields', () => {
+        expect(isButton(<Button />)).toBe(true);
+        expect(isButton(<Button href="#test" />)).toBe(true);
+        for (const node of [
+            null,
+            false,
+            'text',
+            <div className="btn" />,
+            <button className="btn-link" />
+        ])
+            expect(isButton(node)).toBe(false);
     });
 });

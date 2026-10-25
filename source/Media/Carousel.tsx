@@ -1,3 +1,4 @@
+import { JsxChildren } from 'dom-renderer';
 import { observable } from 'mobx';
 import {
     FC,
@@ -6,34 +7,21 @@ import {
     attribute,
     component,
     observer,
-    on,
-    reaction
+    on
 } from 'web-cell';
 
 import { BootstrapStyles } from '../BootstrapStyles';
+import { CarouselModel } from './CarouselModel';
 
-export interface CarouselItemProps extends WebCellProps<HTMLDivElement> {
-    interval?: number;
+export interface CarouselCaptionProps extends WebCellProps<HTMLDivElement> {
+    detail?: string;
 }
 
-export const CarouselItem: FC<CarouselItemProps> = ({
-    className = '',
-    interval,
-    children,
-    ...props
-}) => (
-    <div
-        className={`carousel-item ${className}`}
-        {...props}
-        data-bs-interval={interval}
-    >
-        {children}
-    </div>
-);
-
-export const CarouselCaption: FC<WebCellProps<HTMLDivElement>> = ({
+export const CarouselCaption: FC<CarouselCaptionProps> = ({
     className = '',
     style,
+    title,
+    detail,
     children,
     ...props
 }) => (
@@ -49,146 +37,298 @@ export const CarouselCaption: FC<WebCellProps<HTMLDivElement>> = ({
         data-carousel-caption=""
         {...props}
     >
-        {children}
+        {children != null && (!Array.isArray(children) || children.length) ? (
+            children
+        ) : (
+            <>
+                <h5>{title}</h5>
+                {detail && <p>{detail}</p>}
+            </>
+        )}
     </div>
 );
 
-interface ItemMeta {
-    caption?: string;
+export interface CarouselItemProps extends CarouselCaptionProps {
+    interval?: number;
+    image?: string;
 }
 
+export const CarouselItem: FC<CarouselItemProps> = ({
+    className = '',
+    interval,
+    image,
+    title,
+    detail,
+    children,
+    ...props
+}) => (
+    <div
+        className={`carousel-item ${className}`}
+        {...props}
+        data-bs-interval={interval}
+    >
+        {children != null && (!Array.isArray(children) || children.length) ? (
+            children
+        ) : (
+            <>
+                {image && (
+                    <img
+                        className="d-block w-100"
+                        src={image}
+                        alt={title || ''}
+                    />
+                )}
+                {title && <CarouselCaption title={title} detail={detail} />}
+            </>
+        )}
+    </div>
+);
+
 export interface CarouselProps {
-    interval?: number;
+    mode?: 'slide' | 'fade';
+    slide?: boolean;
+    fade?: boolean;
+    controls?: boolean;
+    indicators?: boolean;
+    indicatorLabels?: string[];
+    interval?: number | null;
+    activeIndex?: number;
+    defaultActiveIndex?: number;
+    currentIndex?: number;
+    /** Also emits a bubbling `select` CustomEvent<CarouselSelectionDetail>. */
+    onSelect?: (index: number, event?: Event | null) => void;
+    keyboard?: boolean;
+    pause?: 'hover' | false;
+    wrap?: boolean;
+    touch?: boolean;
+    prevIcon?: JsxChildren;
+    nextIcon?: JsxChildren;
+    prevLabel?: string | null;
+    nextLabel?: string | null;
 }
 
 export interface Carousel extends WebCell<CarouselProps> {}
 
-@component({
-    tagName: 'carousel-box',
-    mode: 'open'
-})
+export interface CarouselSelectionDetail {
+    activeIndex: number;
+    originalEvent: Event | null;
+}
+
+@component({ tagName: 'carousel-box', mode: 'open' })
 @observer
 export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
-    @attribute
-    @observable
-    accessor interval: number | undefined;
+    @attribute @observable accessor interval: number | null = 5000;
+    @attribute @observable accessor currentIndex = 0;
+    @attribute @observable accessor activeIndex: number | undefined;
+    @attribute @observable accessor defaultActiveIndex: number | undefined;
+    @attribute @observable accessor mode: CarouselProps['mode'] = 'slide';
+    @attribute @observable accessor slide = true;
+    @attribute @observable accessor fade = false;
+    @attribute @observable accessor controls = true;
+    @attribute @observable accessor indicators = true;
+    @attribute @observable accessor keyboard = true;
+    @attribute @observable accessor pause: 'hover' | false = 'hover';
+    @attribute @observable accessor wrap = true;
+    @attribute @observable accessor touch = true;
+    @observable accessor indicatorLabels: string[] = [];
+    @observable accessor prevIcon: JsxChildren;
+    @observable accessor nextIcon: JsxChildren;
+    @observable accessor prevLabel: string | null = 'Previous';
+    @observable accessor nextLabel: string | null = 'Next';
+    onSelect?: CarouselProps['onSelect'];
+    readonly model = new CarouselModel(this);
 
-    @observable
-    accessor itemMeta: ItemMeta[] = [];
-
-    @attribute
-    @observable
-    accessor currentIndex = 0;
-
-    private timer: number;
-
-    connectedCallback() {
-        if (this.interval)
-            this.timer ||= window.setInterval(
-                () => this.turnByOffset(1),
-                this.interval
-            );
-        else this.handleActiveItem(this.currentIndex);
+    // Match Tabs' JSX bridge without populating the native onselect slot.
+    get onselect(): GlobalEventHandlers['onselect'] {
+        return null;
+    }
+    set onselect(value: CarouselProps['onSelect'] | null) {
+        this.onSelect = value ?? undefined;
     }
 
-    disconnectedCallback() {
-        clearInterval(this.timer);
+    get itemMeta() {
+        return this.model.items.map(item => ({
+            caption: (
+                item.querySelector('[data-carousel-caption]')?.textContent ||
+                item.textContent ||
+                ''
+            ).trim()
+        }));
+    }
+
+    connectedCallback() {
+        if (this.mounted) {
+            this.model.mount();
+            void this.update();
+        }
     }
 
     mountedCallback() {
-        const items = [...this.querySelectorAll('.carousel-item')];
-
-        if (this.itemMeta.length !== items.length)
-            this.itemMeta = items.map(item => ({
-                caption: (
-                    item.querySelector('[data-carousel-caption]')
-                        ?.textContent || item.textContent
-                ).trim()
-            }));
+        this.model.mount();
     }
 
-    turnByOffset(delta: number) {
-        this.currentIndex = (this.currentIndex + delta) % this.itemMeta.length;
+    disconnectedCallback() {
+        this.model.dispose();
     }
 
-    @on('click', '.carousel-overlay-controls > button')
-    handleButtonClick(_: MouseEvent, { dataset }: HTMLButtonElement) {
-        this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
+    turnTo(index = this.model.index + 1, event?: Event) {
+        this.model.select(index, event);
     }
 
-    @on('keyup', '.carousel-overlay-controls > button')
-    handleButtonPress({ key }: KeyboardEvent, { dataset }: HTMLButtonElement) {
-        if (key === 'Enter')
-            this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
+    turnBack() {
+        this.turnByOffset(-1);
     }
 
-    @on('click', '.carousel-indicators button')
-    handleIndicatorsButtonClick(_: MouseEvent, { dataset }: HTMLButtonElement) {
-        this.currentIndex = +dataset.bsSlideTo;
+    next(event?: Event) {
+        this.turnByOffset(1, event);
     }
 
-    @on('keyup', '.carousel-indicators button')
-    handleIndicatorsButtonPress(
-        { key }: KeyboardEvent,
+    prev(event?: Event) {
+        this.turnByOffset(-1, event);
+    }
+
+    turnByOffset(delta: number, event?: Event) {
+        this.model.select(this.model.index + delta, event);
+    }
+
+    handleActiveItem(_index = this.model.index) {
+        this.model.synchronize();
+    }
+
+    @on('click', '[data-bs-slide]')
+    handleButtonClick(event: MouseEvent, { dataset }: HTMLButtonElement) {
+        this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1, event);
+    }
+
+    // Compatibility helpers; native buttons already synthesize one click on Enter.
+    handleButtonPress(event: KeyboardEvent, target: HTMLButtonElement) {
+        if (event.key === 'Enter')
+            this.turnByOffset(target.dataset.bsSlide === 'next' ? 1 : -1);
+    }
+
+    @on('click', '[data-bs-slide-to]')
+    handleIndicatorsButtonClick(
+        event: MouseEvent,
         { dataset }: HTMLButtonElement
     ) {
-        if (key === 'Enter') this.currentIndex = +dataset.bsSlideTo;
+        this.model.select(+dataset.bsSlideTo, event);
     }
 
-    @reaction(({ currentIndex }) => currentIndex)
-    handleActiveItem(currentIndex: number) {
-        this.querySelector('.carousel-item.active')?.classList.remove('active');
+    handleIndicatorsButtonPress(
+        event: KeyboardEvent,
+        target: HTMLButtonElement
+    ) {
+        if (event.key === 'Enter')
+            this.model.select(+target.dataset.bsSlideTo, event);
+    }
 
-        this.children[currentIndex].classList.add('active');
+    @on('keydown', '.carousel')
+    handleKeyDown(event: KeyboardEvent) {
+        this.model.keyDown(event);
     }
 
     renderContent() {
-        const { itemMeta, currentIndex } = this;
-
+        const { model, itemMeta, controls, indicators, indicatorLabels } = this;
+        const index = model.index;
         return (
-            <div className="carousel carousel-overlay">
-                <div className="carousel-inner">
+            <div
+                className={`carousel carousel-overlay ${model.fading ? 'carousel-fade' : ''} ${this.slide ? '' : 'carousel-no-animation'}`}
+                role="region"
+                aria-roledescription="carousel"
+                ariaLabel={this.getAttribute('aria-label') || 'Carousel'}
+                tabIndex={0}
+                onMouseEnter={() => model.setHover(true)}
+                onMouseLeave={() => model.setHover(false)}
+                onTouchStart={event => model.touchStart(event)}
+                onTouchEnd={event => model.touchEnd(event)}
+                onTouchCancel={() => model.cancelTouch()}
+            >
+                <div
+                    className="carousel-inner"
+                    style={{
+                        scrollBehavior: this.slide ? undefined : 'auto',
+                        overflowX:
+                            !this.touch || model.fading ? 'hidden' : undefined,
+                        touchAction: this.touch ? undefined : 'pan-y'
+                    }}
+                    onScroll={() => model.scheduleScroll()}
+                    onScrollEnd={() => model.finishScroll()}
+                    onWheel={() => model.cancelScrollCommand()}
+                    onPointerDown={() => model.cancelScrollCommand()}
+                >
                     <slot />
                 </div>
                 <div className="carousel-overlay-controls">
-                    <button
-                        type="button"
-                        className="btn-icon"
-                        data-bs-slide="prev"
-                    >
-                        <span
-                            className="carousel-icon-prev"
-                            ariaHidden="true"
-                        />
-                        <span className="visually-hidden">-1</span>
-                    </button>
-                    <div className="carousel-indicators">
-                        {itemMeta.map(({ caption }, index) => (
-                            <button
-                                type="button"
-                                ariaLabel={caption}
-                                data-bs-target=""
-                                data-bs-slide-to={index}
-                                className={
-                                    currentIndex === index ? 'active' : ''
-                                }
-                                ariaCurrent={
-                                    currentIndex === index ? 'true' : ''
-                                }
-                            />
-                        ))}
-                    </div>
-                    <button
-                        type="button"
-                        className="btn-icon"
-                        data-bs-slide="next"
-                    >
-                        <span
-                            className="carousel-icon-next"
-                            ariaHidden="true"
-                        />
-                        <span className="visually-hidden">+1</span>
-                    </button>
+                    {controls && (
+                        <button
+                            type="button"
+                            className="btn-icon"
+                            data-bs-slide="prev"
+                            disabled={!this.wrap && index <= 0}
+                            ariaLabel={this.prevLabel || undefined}
+                        >
+                            {this.prevIcon !== undefined ? (
+                                this.prevIcon
+                            ) : (
+                                <span
+                                    className="carousel-icon-prev"
+                                    ariaHidden="true"
+                                />
+                            )}
+                            {this.prevLabel && (
+                                <span className="visually-hidden">
+                                    {this.prevLabel}
+                                </span>
+                            )}
+                        </button>
+                    )}
+                    {indicators && (
+                        <div className="carousel-indicators">
+                            {itemMeta.map(({ caption }, position) => (
+                                <button
+                                    type="button"
+                                    ariaLabel={
+                                        indicatorLabels[position] ||
+                                        caption ||
+                                        `Slide ${position + 1}`
+                                    }
+                                    data-bs-target=""
+                                    data-bs-slide-to={position}
+                                    className={
+                                        index === position ? 'active' : ''
+                                    }
+                                    ariaCurrent={
+                                        index === position ? 'true' : 'false'
+                                    }
+                                />
+                            ))}
+                        </div>
+                    )}
+                    {controls && (
+                        <button
+                            type="button"
+                            className="btn-icon"
+                            data-bs-slide="next"
+                            disabled={
+                                !this.wrap && index >= itemMeta.length - 1
+                            }
+                            ariaLabel={this.nextLabel || undefined}
+                        >
+                            {this.nextIcon !== undefined ? (
+                                this.nextIcon
+                            ) : (
+                                <span
+                                    className="carousel-icon-next"
+                                    ariaHidden="true"
+                                />
+                            )}
+                            {this.nextLabel && (
+                                <span className="visually-hidden">
+                                    {this.nextLabel}
+                                </span>
+                            )}
+                        </button>
+                    )}
                 </div>
             </div>
         );
@@ -198,6 +338,18 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         return (
             <>
                 <BootstrapStyles />
+                <style>{`
+                    :host { display: block }
+                    slot { display: contents }
+                    ::slotted(.carousel-item) { position: relative; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always }
+                    .carousel-fade ::slotted(.carousel-item) { grid-area: 1/1; width: 100%; visibility: hidden; opacity: 0 }
+                    .carousel-fade ::slotted(.carousel-item.active) { visibility: visible; opacity: 1 }
+                    @media (prefers-reduced-motion: no-preference) {
+                        .carousel-fade ::slotted(.carousel-item) { transition: opacity .6s ease, visibility 0s linear .6s }
+                        .carousel-fade ::slotted(.carousel-item.active) { transition: opacity .6s ease }
+                    }
+                    .carousel-no-animation ::slotted(.carousel-item) { transition: none }
+                `}</style>
                 {this.renderContent()}
             </>
         );

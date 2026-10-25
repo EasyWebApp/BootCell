@@ -23,6 +23,11 @@
     "types": "dist/index.d.ts",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
+    "exports": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.esm.js",
+        "require": "./dist/index.js"
+    },
     "dependencies": {
         "@swc/helpers": "^0.5.23",
         "browser-fs-access": "^0.38.0",
@@ -31,6 +36,7 @@
         "iterable-observer": "^1.1.1",
         "mime": "^4.1.1",
         "prismjs": "^1.30.0",
+        "qrcode": "^1.5.4",
         "regenerator-runtime": "^0.14.1",
         "web-cell": "^3.2.2",
         "web-utility": "^4.8.1"
@@ -54,6 +60,7 @@
         "@swc/core": "^1.16.20",
         "@types/node": "^26.6.5",
         "@types/prismjs": "^1.26.6",
+        "@types/qrcode": "^1.5.5",
         "@types/turndown": "^5.0.6",
         "buffer": "^6.0.3",
         "cross-env": "^10.1.0",

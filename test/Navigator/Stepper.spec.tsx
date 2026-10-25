@@ -1,9 +1,29 @@
 import { describe, it } from 'node:test';
-import { assertLooksLike } from '../render';
+import { expect } from 'expect';
+import { assertLooksLike, render } from '../render';
 
 import { Stepper, Step } from '../../source/Navigator/Stepper';
 
 describe('Stepper', () => {
+    it('links step triggers to panels and supports missing children', () => {
+        const root = render(
+            <Stepper>
+                <Step
+                    triggerId="step-1"
+                    controls="pane-1"
+                    tabIndex={0}
+                    active
+                />
+            </Stepper>
+        );
+        expect(root.querySelector('nav')?.getAttribute('role')).toBe('tablist');
+        expect(root.querySelector('button')?.id).toBe('step-1');
+        expect(
+            root.querySelector('button')?.getAttribute('aria-controls')
+        ).toBe('pane-1');
+        expect(root.querySelector('button')?.tabIndex).toBe(0);
+        expect(() => render(<Stepper />)).not.toThrow();
+    });
     it('should render steps with different states', () => {
         assertLooksLike(
             <Stepper>
