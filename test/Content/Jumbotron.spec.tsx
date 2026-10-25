@@ -9,11 +9,13 @@ describe('Jumbotron', () => {
             <Jumbotron title="Test" description="test">
                 <p>Example</p>
             </Jumbotron>,
-            <header className="bg-light mb-4 py-5 px-5 rounded-3">
-                <h1 className="display-4">Test</h1>
-                <p className="lead">test</p>
-                <hr className="my-4" />
-                <p>Example</p>
+            <header className="bg-1 rounded-5 py-12 px-12">
+                <div className="container ">
+                    <h1 className="fs-5xl fw-light">Test</h1>
+                    <p className="fs-lg fw-light">test</p>
+                    <hr className="my-7" />
+                    <p>Example</p>
+                </div>
             </header>
         );
     });
@@ -21,10 +23,10 @@ describe('Jumbotron', () => {
     it('should render a Fluid Jumbotron with an Inner Container', () => {
         assertLooksLike(
             <Jumbotron title="Test" description="test" fluid />,
-            <header className="bg-light mb-4 py-5 rounded-0">
-                <div className="container">
-                    <h1 className="display-4">Test</h1>
-                    <p className="lead">test</p>
+            <header className="bg-1 rounded-0 py-12">
+                <div className="container-fluid ">
+                    <h1 className="fs-5xl fw-light">Test</h1>
+                    <p className="fs-lg fw-light">test</p>
                 </div>
             </header>
         );

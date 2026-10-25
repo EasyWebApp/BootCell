@@ -14,10 +14,7 @@ describe('BootStrap Icon', () => {
     it('should render a Font Icon with Color & Size controls', () => {
         assertLooksLike(
             <Icon name="heart-fill" color="dark" size={2} />,
-            <i
-                className="bi-heart-fill text-dark"
-                style={{ fontSize: '2rem' }}
-            />
+            <i className="bi-heart-fill fg-body" style={{ fontSize: '2rem' }} />
         );
     });
 });

@@ -95,7 +95,7 @@ describe('Navigator Bar', () => {
                 <CollapseBox id="test" open={false}>
                     test
                 </CollapseBox>
-                <div className="navbar navbar-dark">
+                <div className="navbar" data-bs-theme="dark">
                     <div className="container-fluid">
                         <a className="navbar-brand" href=".">
                             Test
@@ -119,7 +119,7 @@ describe('Navigator Bar', () => {
                 <CollapseBox id="test" open={false}>
                     <div className="container">test</div>
                 </CollapseBox>
-                <div className="navbar navbar-dark">
+                <div className="navbar" data-bs-theme="dark">
                     <div className="container">
                         <a className="navbar-brand" href=".">
                             Test
@@ -160,7 +160,7 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <CollapseBox className="navbar-collapse" id="test">
+                <CollapseBox className="drawer drawer-end" id="test">
                     <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
@@ -168,10 +168,10 @@ describe('Navigator Bar', () => {
                             aria-disabled="false"
                         >
                             Example
-                            <span className="sr-only">(current)</span>
+                            <span className="visually-hidden">(current)</span>
                         </a>
                     </nav>
-                    <div className="d-md-flex justify-content-end align-items-center">
+                    <div className="md:d-flex justify-content-end align-items-center">
                         <a />
                     </div>
                 </CollapseBox>
@@ -203,7 +203,7 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <CollapseBox className="navbar-collapse" id="test">
+                <CollapseBox className="drawer drawer-end" id="test">
                     <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
@@ -211,7 +211,7 @@ describe('Navigator Bar', () => {
                             aria-disabled="false"
                         >
                             Example
-                            <span className="sr-only">(current)</span>
+                            <span className="visually-hidden">(current)</span>
                         </a>
                     </nav>
                 </CollapseBox>
@@ -244,10 +244,7 @@ describe('Navigator Bar', () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div
-                    className="d-md-flex w-100 offcanvas-collapse open"
-                    id="test"
-                >
+                <div className="md:d-flex w-100 drawer open" id="test">
                     <nav className="nav navbar-nav flex-grow-1 justify-content-start">
                         <a
                             className="nav-item nav-link text-nowrap active"
@@ -255,7 +252,7 @@ describe('Navigator Bar', () => {
                             aria-disabled="false"
                         >
                             Example
-                            <span className="sr-only">(current)</span>
+                            <span className="visually-hidden">(current)</span>
                         </a>
                     </nav>
                 </div>

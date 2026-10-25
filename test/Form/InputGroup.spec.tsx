@@ -43,11 +43,7 @@ describe('Input Group', () => {
             </InputGroup>,
             <div className="input-group" id="test">
                 <div className="input-group-text">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        aria-label="test"
-                    />
+                    <input className="radio" type="radio" aria-label="test" />
                 </div>
                 <input type="text" className="form-control" id="sample" />
             </div>

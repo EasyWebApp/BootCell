@@ -56,10 +56,10 @@ describe('Card', () => {
             <Card title="Test" image="test.png" direction="row" />,
             <div className="card justify-content-center">
                 <div className="row no-gutters align-items-center">
-                    <div className="col-md-4">
+                    <div className="md:col-4">
                         <img className="card-img-top" src="test.png" />
                     </div>
-                    <div className="col-md-8">
+                    <div className="md:col-8">
                         <div className="card-body">
                             <h5 className="card-title">Test</h5>
                         </div>
@@ -72,7 +72,7 @@ describe('Card', () => {
     it('should render Image-overlay layout as "overlay" enabled', () => {
         assertLooksLike(
             <Card
-                className="bg-dark text-white"
+                className="theme-inverse fg-white"
                 title="Test"
                 text="example"
                 image="test.png"
@@ -80,7 +80,7 @@ describe('Card', () => {
             >
                 <time>Last updated 3 mins ago</time>
             </Card>,
-            <div className="card bg-dark text-white">
+            <div className="card theme-inverse fg-white">
                 <img className="card-img" src="test.png" />
                 <div className="card-img-overlay">
                     <h5 className="card-title">Test</h5>

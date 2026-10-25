@@ -28,7 +28,7 @@ describe('Toast', () => {
                     <img className="rounded me-2" alt="Icon" src="test.png" />
 
                     <strong className="me-auto">Test</strong>
-                    <small className="text-muted">just now</small>
+                    <small className="fg-secondary">just now</small>
                     <CloseButton className="ms-2 mb-1" />
                 </div>
                 <div className="toast-body">example</div>

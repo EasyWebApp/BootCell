@@ -10,7 +10,7 @@ export const Dropdown: FC<WebCellProps<HTMLDivElement>> = ({
     children,
     ...props
 }) => (
-    <div className={`dropdown ${className}`} {...props}>
+    <div className={className} {...props}>
         {children}
     </div>
 );
@@ -20,7 +20,7 @@ export const DropdownToggle: FC<ButtonProps> = ({
     children,
     ...props
 }) => (
-    <Button {...props} className={`dropdown-toggle ${className}`} type="button">
+    <Button {...props} className={className} type="button">
         {children}
     </Button>
 );
@@ -30,9 +30,9 @@ export const DropdownMenu: FC<WebCellProps> = ({
     children,
     ...props
 }) => (
-    <nav className={`dropdown-menu ${className}`} {...props}>
+    <div className={`menu ${className}`} {...props}>
         {children}
-    </nav>
+    </div>
 );
 
 export const DropdownItem: FC<WebCellProps<HTMLAnchorElement>> = ({
@@ -40,7 +40,7 @@ export const DropdownItem: FC<WebCellProps<HTMLAnchorElement>> = ({
     children,
     ...props
 }) => (
-    <a className={`dropdown-item ${className}`} {...props}>
+    <a className={`menu-item ${className}`} {...props}>
         {children}
     </a>
 );

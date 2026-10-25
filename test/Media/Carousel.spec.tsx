@@ -1,122 +1,86 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { WebCellElement, createCell, Fragment } from 'web-cell';
+import { createCell } from 'web-cell';
+
 import {
+    Carousel,
     CarouselCaption,
-    CarouselItem,
-    CarouselView
+    CarouselItem
 } from '../../source/Media/Carousel';
 
-const { render } = CarouselView.prototype;
-
-describe('Carousel View', () => {
-    var items_input: WebCellElement, items_output: WebCellElement;
-
-    it('should render variants of Carousel Items', () => {
-        items_input = (
-            <>
-                <CarouselItem image="test.png" title="Test" detail="test" />
-                <CarouselItem>
-                    <img src="test.png" />
-                    <CarouselCaption title="Test" detail="test" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="test.png" />
-                    <CarouselCaption>
-                        <h3>Example</h3>
-                    </CarouselCaption>
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="test.png" />
-                    <h3>Example</h3>
-                </CarouselItem>
-            </>
+describe('Carousel', () => {
+    it('should render a caption without the removed Bootstrap caption class', () => {
+        assertLooksLike(
+            <CarouselCaption>Caption</CarouselCaption>,
+            <div
+                className=""
+                style={{
+                    position: 'absolute',
+                    insetInline: '15%',
+                    bottom: '1rem',
+                    color: 'white'
+                }}
+                data-carousel-caption=""
+            >
+                Caption
+            </div>
         );
-
-        items_output = (
-            <>
-                <section className="carousel-item">
-                    <img className="d-block w-100" src="test.png" alt="Test" />
-                    <div
-                        className="carousel-caption d-none d-md-block"
-                        style={{ textShadow: '1px 2px 3px black' }}
-                    >
-                        <h5>Test</h5>
-                        <p>test</p>
-                    </div>
-                </section>
-                <section className="carousel-item">
-                    <img src="test.png" />
-                    <div
-                        className="carousel-caption d-none d-md-block"
-                        style={{ textShadow: '1px 2px 3px black' }}
-                    >
-                        <h5>Test</h5>
-                        <p>test</p>
-                    </div>
-                </section>
-                <section className="carousel-item">
-                    <img src="test.png" />
-                    <div
-                        className="carousel-caption d-none d-md-block"
-                        style={{ textShadow: '1px 2px 3px black' }}
-                    >
-                        <h3>Example</h3>
-                    </div>
-                </section>
-                <section className="carousel-item">
-                    <img src="test.png" />
-                    <h3>Example</h3>
-                </section>
-            </>
-        );
-
-        assertLooksLike(<div>{items_input}</div>, <div>{items_output}</div>);
     });
 
-    it('should render Image & Caption list', () => {
+    it('should render the v6 carousel control classes', () => {
+        const { renderContent } = Carousel.prototype;
+
         assertLooksLike(
-            render.call(
-                { UID: 'test' },
-                {
-                    controls: true,
-                    indicators: true,
-                    activeIndex: 0,
-                    defaultSlot: items_input
-                }
-            ),
-            <div className="carousel slide" id="test">
-                <ol className="carousel-indicators">
-                    <li className="active" data-index="0" />
-                    <li data-index="1" />
-                </ol>
+            renderContent.call({
+                itemMeta: [{ caption: 'Slide' }],
+                currentIndex: 0
+            }),
+            <div className="carousel carousel-overlay">
+                <div className="carousel-inner">
+                    <slot />
+                </div>
+                <div className="carousel-overlay-controls">
+                    <button
+                        type="button"
+                        className="btn-icon"
+                        data-bs-slide="prev"
+                    >
+                        <span
+                            className="carousel-icon-prev"
+                            aria-hidden="true"
+                        />
+                        <span className="visually-hidden">-1</span>
+                    </button>
+                    <div className="carousel-indicators">
+                        <button
+                            type="button"
+                            aria-label="Slide"
+                            data-bs-target=""
+                            data-bs-slide-to={0}
+                            className="active"
+                            aria-current="true"
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        className="btn-icon"
+                        data-bs-slide="next"
+                    >
+                        <span
+                            className="carousel-icon-next"
+                            aria-hidden="true"
+                        />
+                        <span className="visually-hidden">+1</span>
+                    </button>
+                </div>
+            </div>
+        );
+    });
 
-                <div className="carousel-inner">{items_output}</div>
-
-                <a
-                    className="carousel-control-prev"
-                    href="#test"
-                    role="button"
-                    data-index="-1"
-                >
-                    <span
-                        className="carousel-control-prev-icon"
-                        aria-hidden="true"
-                    />
-                    <span className="sr-only">Previous</span>
-                </a>
-
-                <a
-                    className="carousel-control-next"
-                    href="#test"
-                    role="button"
-                    data-index="1"
-                >
-                    <span
-                        className="carousel-control-next-icon"
-                        aria-hidden="true"
-                    />
-                    <span className="sr-only">Next</span>
-                </a>
+    it('should add the carousel-item class to its slide', () => {
+        assertLooksLike(
+            <CarouselItem interval={3000}>Slide</CarouselItem>,
+            <div className="carousel-item " data-bs-interval={3000}>
+                Slide
             </div>
         );
     });

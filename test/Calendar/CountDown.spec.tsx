@@ -17,9 +17,9 @@ describe('CountDown', () => {
                     { value: 1, label: 's' }
                 ]
             }),
-            <ol className="list-inline text-white">
+            <ol className="list-inline fg-white">
                 <li
-                    className={`list-inline-item display-4 bg-primary ${style.section}`}
+                    className={`list-inline-item fs-5xl theme-primary d-inline-flex align-items-center justify-content-center rounded-6 ${style.section}`}
                 >
                     <small>
                         01
@@ -27,7 +27,7 @@ describe('CountDown', () => {
                     </small>
                 </li>
                 <li
-                    className={`list-inline-item display-4 bg-secondary ${style.section}`}
+                    className={`list-inline-item fs-5xl theme-secondary d-inline-flex align-items-center justify-content-center rounded-6 ${style.section}`}
                 >
                     <small>
                         01
@@ -35,7 +35,7 @@ describe('CountDown', () => {
                     </small>
                 </li>
                 <li
-                    className={`list-inline-item display-4 bg-success ${style.section}`}
+                    className={`list-inline-item fs-5xl theme-success d-inline-flex align-items-center justify-content-center rounded-6 ${style.section}`}
                 >
                     <small>
                         01
@@ -43,7 +43,7 @@ describe('CountDown', () => {
                     </small>
                 </li>
                 <li
-                    className={`list-inline-item display-4 bg-danger ${style.section}`}
+                    className={`list-inline-item fs-5xl theme-danger d-inline-flex align-items-center justify-content-center rounded-6 ${style.section}`}
                 >
                     <small>
                         01

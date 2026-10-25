@@ -25,7 +25,7 @@ describe('Nav', () => {
                     aria-disabled="false"
                 >
                     Test
-                    <span className="sr-only">(current)</span>
+                    <span className="visually-hidden">(current)</span>
                 </a>
                 <a
                     className="nav-item nav-link text-nowrap disabled"
@@ -70,7 +70,7 @@ describe('Nav', () => {
                         aria-disabled="false"
                     >
                         Test
-                        <span className="sr-only">(current)</span>
+                        <span className="visually-hidden">(current)</span>
                     </a>
                 </nav>
             </div>

@@ -10,7 +10,7 @@ describe('Spinner', () => {
         assertLooksLike(
             <Spinner />,
             <div className="spinner-border" role="status" aria-hidden="false">
-                <span className="sr-only">Loading...</span>
+                <span className="visually-hidden">Loading...</span>
             </div>
         );
     });

@@ -16,7 +16,7 @@ describe('Media Item', () => {
                         alt="Test"
                     />
                 </div>
-                <div className="flex-grow-1 ms-3">
+                <div className="flex-grow-1 ms-5">
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -35,7 +35,7 @@ describe('Media Item', () => {
                         alt="Test"
                     />
                 </div>
-                <div className="flex-grow-1 me-3">
+                <div className="flex-grow-1 me-5">
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -55,7 +55,7 @@ describe('Media Item', () => {
                 <div className="flex-shrink-0">
                     <img src="test.png" />
                 </div>
-                <div className="flex-grow-1 me-3">
+                <div className="flex-grow-1 me-5">
                     <h5 className="mt-0">Test</h5>
                     Example
                 </div>

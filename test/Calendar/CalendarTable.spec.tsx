@@ -22,7 +22,7 @@ describe('Calendar Table', () => {
                     )}
                 >
                     <thead>
-                        <tr className="bg-primary text-white">
+                        <tr className="theme-primary">
                             <th className="text-truncate">Monday</th>
                             <th className="text-truncate">Tuesday</th>
                             <th className="text-truncate">Wednesday</th>

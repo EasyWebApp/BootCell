@@ -18,7 +18,7 @@ import {
     OffcanvasHeader,
     OffcanvasTitle
 } from '../Layout/Offcanvas';
-import { BackgroundColor, PositionY, Size } from '../type';
+import { BackgroundColor, PositionY, Size, backgroundClassName } from '../type';
 
 export type NavbarBrandProps = JsxProps<HTMLAnchorElement>;
 
@@ -62,10 +62,14 @@ export const Navbar: FC<NavbarProps> = ({
     children
 }) => (
     <nav
-        className={`navbar bg-${bg} ${fixed ? `fixed-${fixed}` : ''} ${
+        className={`navbar ${backgroundClassName(bg)} ${fixed ? `fixed-${fixed}` : ''} ${
             sticky ? `sticky-${sticky}` : ''
         } ${
-            expand ? `navbar-expand${expand === true ? '' : `-${expand}`}` : ''
+            expand
+                ? expand === true
+                    ? 'navbar-expand'
+                    : `${expand === 'xxl' ? '2xl' : expand}:navbar-expand`
+                : ''
         }`}
         data-bs-theme={variant}
     >
@@ -172,6 +176,11 @@ export class OffcanvasNavbar extends HTMLElement implements WebCell {
                     />
                     <Offcanvas
                         id={offcanvasId}
+                        className={
+                            expand && expand !== true
+                                ? `${expand === 'xxl' ? '2xl' : expand}:drawer`
+                                : ''
+                        }
                         aria-labelledby={titleId}
                         show={open}
                         onHide={this.close}

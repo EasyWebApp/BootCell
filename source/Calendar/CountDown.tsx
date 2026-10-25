@@ -102,7 +102,7 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
                         key={label}
-                        className={`list-inline-item fs-1 bg-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-4`}
+                        className={`list-inline-item fs-5xl theme-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-6`}
                         style={{ width: '5.5rem', height: '5.5rem' }}
                     >
                         <small>

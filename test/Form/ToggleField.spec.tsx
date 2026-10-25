@@ -1,100 +1,58 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { ToggleField } from '../../source/Form/ToggleField';
+import { FormCheck } from '../../source/Form/Form';
+import { ToggleButton } from '../../source/Form/Button';
 
-describe('Toggle Fields', () => {
-    it('should render a disabled Radio input without label tag', () => {
+describe('Form controls', () => {
+    it('should render a Bootstrap 6 radio field', () => {
         assertLooksLike(
-            <ToggleField type="radio" disabled labelHidden>
-                test
-            </ToggleField>,
-            <div>
-                <input
-                    className="form-check-input"
-                    type="radio"
-                    disabled
-                    aria-label="test"
-                />
+            <FormCheck type="radio" id="test" label="Choose" />,
+            <div className="form-field">
+                <input className="radio" type="radio" id="test" />
+                <label htmlFor="test">Choose</label>
             </div>
         );
     });
 
-    it('should render a checked Radio input with label tag', () => {
+    it('should render a Bootstrap 6 switch field', () => {
         assertLooksLike(
-            <ToggleField type="radio" checked id="test">
-                test
-            </ToggleField>,
-            <div className="form-check">
-                <input
-                    className="form-check-input"
-                    type="radio"
-                    checked
-                    id="test"
-                />
-                <label className="form-check-label" htmlFor="test">
-                    test
-                </label>
+            <FormCheck type="switch" id="test" label="Enable" />,
+            <div className="form-field">
+                <div className="switch">
+                    <input
+                        type="checkbox"
+                        role="switch"
+                        {...{ switch: true }}
+                        id="test"
+                    />
+                </div>
+                <label htmlFor="test">Enable</label>
             </div>
         );
     });
 
-    it('should render an inline Radio input with label tag', () => {
+    it('should render a toggle button with its input inside the label', () => {
         assertLooksLike(
-            <ToggleField type="radio" inline id="test">
-                test
-            </ToggleField>,
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" id="test" />
-                <label className="form-check-label" htmlFor="test">
-                    test
-                </label>
-            </div>
+            <ToggleButton type="radio" id="test">
+                Choose
+            </ToggleButton>,
+            <label className="btn-check btn-solid theme-primary">
+                <input id="test" autocomplete="off" type="radio" />
+                Choose
+            </label>
         );
     });
 
-    it('should render a Switch Checkbox', () => {
+    it('should preserve an outline toggle button variant', () => {
         assertLooksLike(
-            <ToggleField mode="switch" id="test">
-                Enable
-            </ToggleField>,
-            <div className="form-check form-switch">
-                <input
-                    type="checkbox"
-                    className="form-check-input"
-                    role="switch"
-                    id="test"
-                />
-                <label className="form-check-label" htmlFor="test">
-                    Enable
-                </label>
-            </div>
-        );
-    });
-
-    it('should render a Radio Button with Button style', () => {
-        assertLooksLike(
-            <div>
-                <ToggleField
-                    type="radio"
-                    mode="button"
-                    color="primary"
-                    id="test"
-                >
-                    test
-                </ToggleField>
-            </div>,
-            <div>
-                <input
-                    className="btn-check"
-                    type="radio"
-                    autocomplete="off"
-                    id="test"
-                />
-                <label className="btn btn-primary" htmlFor="test">
-                    test
-                </label>
-            </div>
+            <ToggleButton type="radio" id="test" variant="outline-primary">
+                Choose
+            </ToggleButton>,
+            <label className="btn-check btn-outline theme-primary">
+                <input id="test" autocomplete="off" type="radio" />
+                Choose
+            </label>
         );
     });
 });

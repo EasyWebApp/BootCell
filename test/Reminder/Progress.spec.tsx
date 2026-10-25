@@ -65,7 +65,7 @@ describe('Progress', () => {
 
             <div className="progress">
                 <div
-                    className="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                    className="progress-bar progress-bar-striped progress-bar-animated theme-info"
                     role="progressbar"
                     aria-valuemin="0"
                     aria-valuemax="100"

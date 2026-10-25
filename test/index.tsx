@@ -38,7 +38,7 @@ const Content = () => (
 
                     <h3>Star</h3>
                     <RangeInput
-                        className="text-warning"
+                        className="fg-warning"
                         name="score"
                         icon={value => (value ? '★' : '☆')}
                     />

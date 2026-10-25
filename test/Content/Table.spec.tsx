@@ -90,7 +90,7 @@ describe('Table', () => {
                 small
                 responsive="xl"
             />,
-            <div className="table-responsive-xl">
+            <div className="xl:table-responsive">
                 <table
                     className={classNames(
                         'table',

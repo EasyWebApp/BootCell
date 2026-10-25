@@ -8,12 +8,12 @@ describe('Form', () => {
     it('should render a Form Container with Custom Validator', () => {
         assertLooksLike(
             <Form validate />,
-            <form className="needs-validation" novalidate />
+            <form data-bs-validate novalidate />
         );
     });
 
     it('should render a Validated Form container', () => {
-        assertLooksLike(<Form validated />, <form className="was-validated" />);
+        assertLooksLike(<Form validated />, <form data-bs-validate />);
     });
 
     it('should render an Inline Form', () => {

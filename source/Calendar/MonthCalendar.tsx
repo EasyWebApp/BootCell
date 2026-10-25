@@ -13,6 +13,7 @@ import {
 import { Badge } from '../Reminder';
 import { Button, ButtonProps } from '../Form/Button';
 import { Table, TableProps } from '../Content';
+import { themeClassName } from '../type';
 
 export interface DateData {
     date: TimeData;
@@ -143,7 +144,7 @@ export class MonthCalendar
                         {dateGrid[0].map((date, index, { length }) => (
                             <td
                                 key={index}
-                                className={`bg-${variant} text-white`}
+                                className={themeClassName(variant)}
                                 style={{ width: `calc(100% / ${length})` }}
                             >
                                 {weekFormatter.format(date)}

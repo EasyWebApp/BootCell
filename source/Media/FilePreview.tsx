@@ -66,7 +66,7 @@ export const FilePreview: FC<FilePreviewProps> = ({
             {...props}
         >
             {extension ? (
-                <Icon className="fs-1" name={`filetype-${extension}`} />
+                <Icon className="fs-4xl" name={`filetype-${extension}`} />
             ) : (
                 path
             )}

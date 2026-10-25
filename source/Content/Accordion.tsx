@@ -10,39 +10,46 @@ import {
     reaction
 } from 'web-cell';
 
-import { CollapseProps, Collapse } from '../Layout/Collapse';
-
-export const AccordionItem: FC<WebCellProps<HTMLDivElement>> = ({
+export const AccordionItem: FC<WebCellProps<HTMLDetailsElement>> = ({
     className = '',
     children,
     ...props
 }) => (
-    <div className={`accordion-item ${className}`} {...props}>
+    <details className={`accordion-item ${className}`} {...props}>
+        {children}
+    </details>
+);
+
+export const AccordionHeader: FC<WebCellProps<HTMLElement>> = ({
+    className = '',
+    children,
+    ...props
+}) => (
+    <summary className={`accordion-header ${className}`} {...props}>
+        {children}
+        <svg
+            className="accordion-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+        >
+            <path d="m2 5 6 6 6-6" />
+        </svg>
+    </summary>
+);
+
+export const AccordionBody: FC<WebCellProps<HTMLDivElement>> = ({
+    className = '',
+    children,
+    ...props
+}) => (
+    <div className={`accordion-body ${className}`} {...props}>
         {children}
     </div>
-);
-
-export const AccordionHeader: FC<WebCellProps<HTMLHeadingElement>> = ({
-    className = '',
-    children,
-    onClick,
-    ...props
-}) => (
-    <h2 className={`accordion-header ${className}`} {...props}>
-        <button className="accordion-button" type="button" onClick={onClick}>
-            {children}
-        </button>
-    </h2>
-);
-
-export const AccordionBody: FC<CollapseProps> = ({
-    className = '',
-    children,
-    ...props
-}) => (
-    <Collapse className={`accordion-collapse ${className}`} {...props}>
-        <div className="accordion-body">{children}</div>
-    </Collapse>
 );
 
 export interface AccordionProps {
@@ -76,24 +83,14 @@ export class Accordion extends HTMLElement implements WebCell<AccordionProps> {
     }
 
     @on('click', '.accordion-header')
-    handleClick(
-        _,
-        { nextElementSibling: currentCollapse }: HTMLHeadingElement
-    ) {
-        if (!this.alwaysOpen)
-            for (const collapse of this.querySelectorAll<HTMLDivElement>(
-                '.accordion-collapse'
+    handleClick(_, currentHeader: HTMLElement) {
+        const currentItem = currentHeader.parentElement as HTMLDetailsElement;
+
+        if (!this.alwaysOpen && !currentItem.open)
+            for (const item of this.querySelectorAll<HTMLDetailsElement>(
+                '.accordion-item[open]'
             ))
-                if (collapse !== currentCollapse) {
-                    collapse.classList.remove('show');
-                    collapse.previousElementSibling.querySelector(
-                        'button'
-                    ).ariaExpanded = 'false';
-                }
-        currentCollapse.classList.toggle('show');
-        currentCollapse.previousElementSibling.querySelector(
-            'button'
-        ).ariaExpanded = 'false';
+                if (item !== currentItem) item.open = false;
     }
 
     render() {

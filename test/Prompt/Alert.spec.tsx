@@ -8,7 +8,7 @@ describe('Alert', () => {
     it('should render a Simple Alert defaultly', () => {
         assertLooksLike(
             <Alert>Example</Alert>,
-            <aside className="alert alert-primary show" role="alert">
+            <aside className="alert theme-primary show" role="alert">
                 Example
             </aside>
         );
@@ -16,11 +16,11 @@ describe('Alert', () => {
 
     it('should render a Dismissible Alert while "closable" property equals True', () => {
         assertLooksLike(
-            <Alert title="Test" closable>
+            <Alert title="Test" dismissible>
                 Example
             </Alert>,
             <aside
-                className="alert alert-primary alert-dismissible fade show"
+                className="alert theme-primary alert-dismissible fade show"
                 role="alert"
             >
                 <h4 className="alert-heading">Test</h4>

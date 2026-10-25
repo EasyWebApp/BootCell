@@ -97,7 +97,7 @@ export class FilePicker
                         path={value + ''}
                     />
                 ) : (
-                    <div className="w-100 h-100 d-flex justify-content-center align-items-center display-1">
+                    <div className="w-100 h-100 d-flex justify-content-center align-items-center fs-6xl fw-light">
                         +
                     </div>
                 )}

@@ -5,7 +5,7 @@ import { uniqueID } from 'web-utility';
 
 import { FormCheckProps, FormControlProps } from './Form';
 import { Icon, IconProps } from '../Reminder';
-import { TextColor } from '../type';
+import { TextColor, themeClassName } from '../type';
 
 export interface ButtonProps
     extends WebCellProps<HTMLButtonElement>,
@@ -25,9 +25,20 @@ export const Button: FC<ButtonProps> = ({
     ...props
 }) => {
     const { disabled, tabIndex } = props,
+        buttonVariant =
+            variant === 'link'
+                ? 'btn-link'
+                : variant
+                  ? [
+                        variant.startsWith('outline-')
+                            ? 'btn-outline'
+                            : 'btn-solid',
+                        themeClassName(variant.replace(/^outline-/, ''))
+                    ]
+                  : '',
         Class = classNames(
             'btn',
-            variant && `btn-${variant}`,
+            buttonVariant,
             size && `btn-${size}`,
             className
         );
@@ -99,11 +110,15 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
     children,
     ...props
 }) => (
-    <>
-        <input className="btn-check" id={id} autocomplete="off" {...props} />
-
-        <label className={`btn btn-${variant} ${className}`} htmlFor={id}>
-            {children}
-        </label>
-    </>
+    <label
+        className={classNames(
+            'btn-check',
+            variant.startsWith('outline-') ? 'btn-outline' : 'btn-solid',
+            themeClassName(variant.replace(/^outline-/, '')),
+            className
+        )}
+    >
+        <input id={id} autocomplete="off" {...props} />
+        {children}
+    </label>
 );

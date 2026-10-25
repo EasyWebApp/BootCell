@@ -5,23 +5,19 @@ import { Button, IconButton } from '../../source/Form/Button';
 import { Icon } from '../../source/Reminder/Icon';
 
 describe('Button', () => {
-    it('should render a Button with outline', () => {
+    it('should render an outline Button', () => {
         assertLooksLike(
-            <Button outline color="primary">
-                Test
-            </Button>,
-            <button type="button" className="btn btn-outline-primary">
-                Test
-            </button>
+            <Button variant="outline-primary">Test</Button>,
+            <button className="btn btn-outline theme-primary">Test</button>
         );
     });
 
-    it('should render a Button as block', () => {
+    it('should render a solid Button', () => {
         assertLooksLike(
-            <Button color="primary" block>
+            <Button variant="primary" className="d-block w-100">
                 Test
             </Button>,
-            <button type="button" className="btn btn-primary d-block w-100">
+            <button className="btn btn-solid theme-primary d-block w-100">
                 Test
             </button>
         );

@@ -15,7 +15,7 @@ describe('Form Fields', () => {
                     id="test"
                     aria-describedby="test-tips"
                 />
-                <small id="test-tips" className="form-text text-muted">
+                <small id="test-tips" className="form-text fg-secondary">
                     Example
                 </small>
             </div>
@@ -58,11 +58,11 @@ describe('Form Fields', () => {
             <div className="form-group row">
                 <label
                     htmlFor="test"
-                    className="col-sm-2 col-form-label text-nowrap"
+                    className="sm:col-2 form-label text-nowrap"
                 >
                     Test
                 </label>
-                <div className="col-sm-10">
+                <div className="sm:col-10">
                     <input type="text" id="test" />
                 </div>
             </div>

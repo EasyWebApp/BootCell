@@ -17,7 +17,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item active" aria-current="page">
                     <a className="page-link">
-                        1 <span className="sr-only">(current)</span>
+                        1 <span className="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li className="page-item disabled">
@@ -45,7 +45,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item active" aria-current="page">
                     <a className="page-link">
-                        2 <span className="sr-only">(current)</span>
+                        2 <span className="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li className="page-item">
@@ -83,7 +83,7 @@ describe('Pagination', () => {
                 </li>
                 <li className="page-item active" aria-current="page">
                     <a className="page-link">
-                        3 <span className="sr-only">(current)</span>
+                        3 <span className="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li className="page-item disabled">

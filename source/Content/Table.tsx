@@ -48,9 +48,11 @@ export const Table: FC<TableProps> = ({
 
     return responsive ? (
         <div
-            className={`table-responsive${
-                responsive === true ? '' : `-${responsive}`
-            }`}
+            className={
+                responsive === true
+                    ? 'table-responsive'
+                    : `${responsive === 'xxl' ? '2xl' : responsive}:table-responsive`
+            }
         >
             {table}
         </div>

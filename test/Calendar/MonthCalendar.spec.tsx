@@ -46,140 +46,140 @@ describe('Month Calendar', () => {
                 </header>
                 <CalendarTable>
                     <tr>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{29}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{30}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{31}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{1}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{2}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{3}</a>
                         </td>
-                        <td className="p-3 p-sm-4 bg-primary">
+                        <td className="p-3 sm:p-4 bg-primary">
                             <a>{4}</a>
                         </td>
                     </tr>
                     <tr>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{5}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{6}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{7}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{8}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{9}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{10}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{11}</a>
                         </td>
                     </tr>
                     <tr>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{12}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{13}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{14}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{15}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{16}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{17}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{18}</a>
                         </td>
                     </tr>
                     <tr>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{19}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{20}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{21}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{22}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{23}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{24}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{25}</a>
                         </td>
                     </tr>
                     <tr>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{26}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{27}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{28}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{29}</a>
                         </td>
-                        <td className="p-3 p-sm-4">
+                        <td className="p-3 sm:p-4">
                             <a>{30}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{1}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{2}</a>
                         </td>
                     </tr>
                     <tr>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{3}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{4}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{5}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{6}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{7}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{8}</a>
                         </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
+                        <td className="p-3 sm:p-4 fg-secondary bg-1">
                             <a>{9}</a>
                         </td>
                     </tr>

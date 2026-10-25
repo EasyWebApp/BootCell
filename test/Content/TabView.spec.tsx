@@ -61,7 +61,7 @@ describe('Tab List', () => {
                         Second
                     </a>
                 </nav>
-                <div className="tab-content flex-fill pt-2">
+                <div className="tab-content flex-fill pt-3">
                     <div className="bs-stepper-pane" role="tabpanel">
                         <h4 className="text-center">111</h4>
                     </div>
@@ -161,7 +161,7 @@ describe('Tab List', () => {
                         Second
                     </a>
                 </div>
-                <div className="tab-content flex-fill ms-3">
+                <div className="tab-content flex-fill ms-5">
                     <div className="bs-stepper-pane" role="tabpanel">
                         <h4 className="text-center">111</h4>
                     </div>

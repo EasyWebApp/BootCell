@@ -44,7 +44,7 @@ describe('FontAwesome Icon', () => {
     it('should render a Stacked Square Icon', () => {
         assertLooksLike(
             <BGIcon type="square" name="github" size={2} color="dark" />,
-            <span className="fa-stack fa-2x text-dark">
+            <span className="fa-stack fa-2x fg-body">
                 <FAIcon name="square" stack={2} />
                 <FAIcon name="github" inverse stack={1} />
             </span>

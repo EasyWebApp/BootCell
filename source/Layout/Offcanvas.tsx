@@ -9,7 +9,7 @@ export const OffcanvasTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     children,
     ...props
 }) => (
-    <h5 className={`offcanvas-title ${className}`} {...props}>
+    <h5 className={`drawer-title ${className}`} {...props}>
         {children}
     </h5>
 );
@@ -26,10 +26,12 @@ export const OffcanvasHeader: FC<OffcanvasHeaderProps> = ({
     onHide,
     ...props
 }) => (
-    <div className={`offcanvas-header ${className}`} {...props}>
+    <div className={`drawer-header ${className}`} {...props}>
         {children}
 
-        {closeButton && <CloseButton onClick={onHide} />}
+        {closeButton && (
+            <CloseButton data-bs-dismiss="drawer" onClick={onHide} />
+        )}
     </div>
 );
 
@@ -38,15 +40,15 @@ export const OffcanvasBody: FC<WebCellProps<HTMLDivElement>> = ({
     children,
     ...props
 }) => (
-    <div className={`offcanvas-body ${className}`} {...props}>
+    <div className={`drawer-body ${className}`} {...props}>
         {children}
     </div>
 );
 
-export interface OffcanvasProps
-    extends Omit<OffcanvasHeaderProps, 'closeButton'> {
+export interface OffcanvasProps extends WebCellProps<HTMLDialogElement> {
     backdrop?: boolean | 'static';
     show?: boolean;
+    onHide?: () => any;
 }
 
 export const Offcanvas: FC<OffcanvasProps> = ({
@@ -55,31 +57,54 @@ export const Offcanvas: FC<OffcanvasProps> = ({
     backdrop = true,
     show,
     onHide,
+    onClick,
     children,
     ...props
 }) => (
-    <>
-        <div
-            className={classNames(
-                'offcanvas',
-                show ? 'offcanvas-end show' : 'offcanvas-start',
-                className
-            )}
-            style={{ maxWidth: '75vw', ...style }}
-            tabIndex={-1}
-            {...(backdrop === 'static' ? { 'data-bs-backdrop': 'static' } : {})}
-            {...props}
-        >
-            {children}
-        </div>
+    <dialog
+        className={classNames('drawer drawer-end', className)}
+        style={{
+            '--drawer-backdrop-bg':
+                backdrop === false ? 'transparent' : undefined,
+            ...style
+        }}
+        tabIndex={-1}
+        ref={node => {
+            if (!node) return;
 
-        {show && <div className="offcanvas-backdrop show" onClick={onHide} />}
-    </>
+            const dialog = node as HTMLDialogElement;
+
+            if (show && !dialog.open)
+                backdrop === false && typeof dialog.show === 'function'
+                    ? dialog.show()
+                    : typeof dialog.showModal === 'function'
+                      ? dialog.showModal()
+                      : (dialog.open = true);
+            else if (!show && dialog.open) dialog.close();
+        }}
+        data-bs-backdrop={
+            backdrop === 'static'
+                ? 'static'
+                : backdrop === false
+                  ? 'false'
+                  : undefined
+        }
+        onCancel={() => onHide?.()}
+        onClick={event => {
+            onClick?.(event);
+
+            if (event.target === event.currentTarget && backdrop === true)
+                onHide?.();
+        }}
+        {...props}
+    >
+        {children}
+    </dialog>
 );
 
-export interface OffcanvasBoxProps
-    extends OffcanvasProps,
-        OffcanvasHeaderProps {
+export interface OffcanvasBoxProps extends OffcanvasProps {
+    title?: string;
+    closeButton?: boolean;
     titleId?: string;
 }
 

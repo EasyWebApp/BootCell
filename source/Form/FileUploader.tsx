@@ -190,7 +190,7 @@ export class FileUploader extends HTMLElement implements WebFileField {
                 {(multiple || !files[0]) && (
                     <li
                         role="button"
-                        className="list-inline-item border rounded d-flex justify-content-center align-items-center display-1"
+                        className="list-inline-item border rounded d-flex justify-content-center align-items-center fs-6xl fw-light"
                         style={{ width: '10rem', height: '10rem' }}
                         onClick={this.handleAdd}
                     >

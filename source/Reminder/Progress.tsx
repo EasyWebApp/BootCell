@@ -3,7 +3,7 @@ import { JsxChildren } from 'dom-renderer';
 import { isEmpty } from 'web-utility';
 import classNames from 'classnames';
 
-import { Status } from '../type';
+import { Status, themeClassName } from '../type';
 
 export interface ProgressBarProps
     extends WebCellProps<HTMLDivElement>,
@@ -36,7 +36,7 @@ export const ProgressBar: FC<ProgressBarProps> = ({
             <div
                 className={classNames(
                     'progress-bar',
-                    `text-bg-${variant}`,
+                    themeClassName(variant),
                     striped && 'progress-bar-striped',
                     animated && `progress-bar-animated`
                 )}

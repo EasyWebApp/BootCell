@@ -57,9 +57,9 @@ export class CodeBlock extends HTMLElement implements WebCell<CodeBlockProps> {
     connectedCallback() {
         this.classList.add(
             'd-block',
-            'bg-dark',
+            'theme-inverse',
             'rounded',
-            'p-3',
+            'p-5',
             'position-relative'
         );
     }

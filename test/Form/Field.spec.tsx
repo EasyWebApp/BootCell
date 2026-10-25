@@ -32,7 +32,7 @@ describe('Field', () => {
             <Field is="select" id="test" multiple size={3}>
                 <option>Example</option>
             </Field>,
-            <select className="form-select" id="test" multiple size={3}>
+            <select className="form-control" id="test" multiple size={3}>
                 <option>Example</option>
             </select>
         );
@@ -49,7 +49,7 @@ describe('Field', () => {
         );
         assertLooksLike(
             <Field is="select" id="test" size="lg" />,
-            <select className="form-select form-select-lg" id="test" />
+            <select className="form-control form-control-lg" id="test" />
         );
     });
 });

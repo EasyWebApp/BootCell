@@ -72,20 +72,22 @@ export class RangeInput
                     rel="stylesheet"
                     href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
                 />
-                <input
-                    className={icon ? 'opacity-0' : ''}
-                    style={{ margin: '0 -0.5rem', cursor: 'pointer' }}
-                    type="range"
-                    min={min?.toString()}
-                    max={max?.toString()}
-                    value={value?.toString()}
-                    onChange={this.handleChange}
-                />
-                <ol className="list-unstyled user-select-none position-absolute start-0 top-0 w-100 h-100 pe-none d-flex justify-content-around">
-                    {Array.from({ length: max }, (_, index) =>
-                        this.renderItem(index)
-                    )}
-                </ol>
+                <div className="form-range position-relative">
+                    <input
+                        className={`form-range-input ${icon ? 'opacity-0' : ''}`}
+                        style={{ margin: '0 -0.5rem', cursor: 'pointer' }}
+                        type="range"
+                        min={min?.toString()}
+                        max={max?.toString()}
+                        value={value?.toString()}
+                        onChange={this.handleChange}
+                    />
+                    <ol className="list-unstyled user-select-none position-absolute start-0 top-0 w-100 h-100 pe-none d-flex justify-content-around">
+                        {Array.from({ length: max }, (_, index) =>
+                            this.renderItem(index)
+                        )}
+                    </ol>
+                </div>
             </>
         );
     }

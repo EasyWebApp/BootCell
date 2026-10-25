@@ -1,65 +1,37 @@
-import { createCell } from 'web-cell';
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { createCell } from 'web-cell';
 
-import { Accordion, AccordionPanel } from '../../source/Content/Accordion';
-import { CollapseBox } from '../../source/Content/Collapse';
+import {
+    AccordionBody,
+    AccordionHeader,
+    AccordionItem
+} from '../../source/Content/Accordion';
 
 describe('Accordion', () => {
-    it('should render Card list', () => {
+    it('should render native details markup', () => {
         assertLooksLike(
-            <Accordion>
-                <AccordionPanel id="random_0" title="Test" active>
-                    test
-                </AccordionPanel>
-                <AccordionPanel id="random_1" title="Example">
-                    example
-                </AccordionPanel>
-            </Accordion>,
-            <div className="accordion">
-                <section className="card">
-                    <header className="card-header" id="accordion_h_random_0">
-                        <h2 className="mb-0">
-                            <button
-                                type="button"
-                                className="btn btn-link"
-                                aria-expanded="true"
-                                aria-controls="accordion_b_random_0"
-                            >
-                                Test
-                            </button>
-                        </h2>
-                    </header>
-                    <CollapseBox
-                        id="accordion_b_random_0"
-                        key="accordion_b_random_0"
-                        aria-labelledby="accordion_h_random_0"
-                        open
+            <AccordionItem open>
+                <AccordionHeader>Test</AccordionHeader>
+                <AccordionBody>Content</AccordionBody>
+            </AccordionItem>,
+            <details className="accordion-item " open>
+                <summary className="accordion-header ">
+                    Test
+                    <svg
+                        className="accordion-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
                     >
-                        <div className="card-body">test</div>
-                    </CollapseBox>
-                </section>
-                <section className="card">
-                    <header className="card-header" id="accordion_h_random_1">
-                        <h2 className="mb-0">
-                            <button
-                                type="button"
-                                className="btn btn-link collapsed"
-                                aria-expanded="false"
-                                aria-controls="accordion_b_random_1"
-                            >
-                                Example
-                            </button>
-                        </h2>
-                    </header>
-                    <CollapseBox
-                        id="accordion_b_random_1"
-                        key="accordion_b_random_1"
-                        aria-labelledby="accordion_h_random_1"
-                    >
-                        <div className="card-body">example</div>
-                    </CollapseBox>
-                </section>
-            </div>
+                        <path d="m2 5 6 6 6-6" />
+                    </svg>
+                </summary>
+                <div className="accordion-body ">Content</div>
+            </details>
         );
     });
 });

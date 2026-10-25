@@ -97,13 +97,16 @@ export class Nav extends HTMLElement implements WebCell<NavProps> {
 
         const expand =
             navBar.expand ||
-            navBar.className.match(/navbar-expand(-(\S+))?/)?.[2];
+            navBar.className.match(/(?:^|\s)(\S+):navbar-expand/)?.[1];
 
         this.classList.add(
             'navbar-nav',
             'align-items-center',
             expand && 'flex-column',
-            expand && `flex-${expand}-row`
+            expand &&
+                (expand === true
+                    ? 'flex-row'
+                    : `${expand === 'xxl' ? '2xl' : expand}:flex-row`)
         );
     }
 

@@ -2,7 +2,12 @@ import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
 import { Image, ImageProps } from '../Media/Image';
-import { TextColor, PositionY } from '../type';
+import {
+    TextColor,
+    PositionY,
+    foregroundClassName,
+    themeClassName
+} from '../type';
 
 export interface CardProps extends WebCellProps<HTMLDivElement> {
     bg?: TextColor;
@@ -23,8 +28,8 @@ export const Card: FC<CardProps> = ({
     <div
         className={classNames(
             'card',
-            bg && `text-bg-${bg}`,
-            text && `text-${text}`,
+            bg && themeClassName(bg),
+            text && foregroundClassName(text),
             border && `border-${border}`,
             className
         )}
