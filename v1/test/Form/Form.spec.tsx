@@ -1,19 +1,19 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { Form } from '../../source/Form/Form';
-import { FormField } from '../../source/Form/FormField';
+import { Form } from '../../Form/Form';
+import { FormField } from '../../Form/FormField';
 
 describe('Form', () => {
     it('should render a Form Container with Custom Validator', () => {
         assertLooksLike(
             <Form validate />,
-            <form className="needs-validation" novalidate />
+            <form data-bs-validate novalidate />
         );
     });
 
     it('should render a Validated Form container', () => {
-        assertLooksLike(<Form validated />, <form className="was-validated" />);
+        assertLooksLike(<Form validated />, <form data-bs-validate />);
     });
 
     it('should render an Inline Form', () => {

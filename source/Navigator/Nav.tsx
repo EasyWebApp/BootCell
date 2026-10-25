@@ -13,7 +13,7 @@ import {
 
 import { ButtonProps } from '../Form/Button';
 import { DropdownButton } from './Dropdown';
-import { OffcanvasNavbar } from './Navbar';
+import { DrawerNavbar } from './Navbar';
 
 export interface NavLinkProps extends WebCellProps<HTMLAnchorElement> {
     active?: boolean;
@@ -31,7 +31,8 @@ export const NavLink: FC<NavLinkProps> = ({
 );
 
 export interface NavDropdownProps
-    extends Omit<NavLinkProps, 'title' | 'type'>,
+    extends
+        Omit<NavLinkProps, 'title' | 'type'>,
         Pick<ButtonProps, 'disabled' | 'onClick'> {
     title: JsxChildren;
 }
@@ -90,20 +91,18 @@ export class Nav extends HTMLElement implements WebCell<NavProps> {
         this.updateClass();
         this.role = 'tablist';
 
-        const navBar = this.closest<OffcanvasNavbar>(
-            'offcanvas-navbar, .navbar'
-        );
+        const navBar = this.closest<DrawerNavbar>('drawer-navbar, .navbar');
         if (!navBar) return;
 
         const expand =
             navBar.expand ||
-            navBar.className.match(/navbar-expand(-(\S+))?/)?.[2];
+            navBar.className.match(/(?:^|\s)(\S+):navbar-expand/)?.[1];
 
         this.classList.add(
             'navbar-nav',
             'align-items-center',
             expand && 'flex-column',
-            expand && `flex-${expand}-row`
+            expand && (expand === true ? 'flex-row' : `${expand}:flex-row`)
         );
     }
 

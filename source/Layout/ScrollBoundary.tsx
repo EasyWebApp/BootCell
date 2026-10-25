@@ -31,13 +31,13 @@ export const ScrollBoundary: FC<ScrollBoundaryProps> = ({
 }) => (
     <div className={classNames('position-relative', className)}>
         <div
-            className="position-absolute top-0 left-0 w-100"
+            className="position-absolute top-0 start-0 w-100"
             ref={touch('top', onTouch)}
         >
             {top}
         </div>
         <div
-            className="position-absolute top-0 left-0 h-100"
+            className="position-absolute top-0 start-0 h-100"
             ref={touch('left', onTouch)}
         >
             {left}
@@ -46,13 +46,13 @@ export const ScrollBoundary: FC<ScrollBoundaryProps> = ({
         {children}
 
         <div
-            className="position-absolute top-0 right-0 h-100"
+            className="position-absolute top-0 end-0 h-100"
             ref={touch('right', onTouch)}
         >
             {right}
         </div>
         <div
-            className="position-absolute top-100 left-0 w-100"
+            className="position-absolute top-100 start-0 w-100"
             ref={touch('bottom', onTouch)}
         >
             {bottom}

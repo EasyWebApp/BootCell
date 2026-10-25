@@ -21,7 +21,7 @@ export const Spinner: FC<SpinnerProps> = ({
         className={classNames(
             `spinner-${animation}`,
             size && `spinner-${animation}-${size}`,
-            variant && `text-${variant}`,
+            variant && `fg-${variant}`,
             className
         )}
         role="status"
@@ -49,7 +49,10 @@ export const SpinnerBox: FC<SpinnerBoxProps> = ({
         {children}
 
         {cover && (
-            <div className="modal-backdrop show d-flex justify-content-center align-items-center">
+            <div
+                className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+                style={{ backgroundColor: 'rgb(0 0 0 / 50%)' }}
+            >
                 <Spinner
                     {...{ variant, size, animation, role, ariaHidden: 'true' }}
                 />

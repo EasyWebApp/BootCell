@@ -12,6 +12,7 @@ import {
 import { makeArray } from 'web-utility';
 
 import { FilePicker, FilePickerProps } from './FilePicker';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export abstract class FileModel {
     @observable
@@ -190,7 +191,7 @@ export class FileUploader extends HTMLElement implements WebFileField {
                 {(multiple || !files[0]) && (
                     <li
                         role="button"
-                        className="list-inline-item border rounded d-flex justify-content-center align-items-center display-1"
+                        className="list-inline-item border rounded d-flex justify-content-center align-items-center fs-6xl fw-light"
                         style={{ width: '10rem', height: '10rem' }}
                         onClick={this.handleAdd}
                     >
@@ -204,10 +205,7 @@ export class FileUploader extends HTMLElement implements WebFileField {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

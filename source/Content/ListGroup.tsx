@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { Size, Status, Theme } from '../type';
+import { Size, ThemeColor } from '../type';
 
 export interface ListGroupProps extends WebCellProps<HTMLDivElement> {
     variant?: 'flush';
@@ -23,7 +23,7 @@ export const ListGroup: FC<ListGroupProps> = ({
             variant && `list-group-${variant}`,
             numbered && `list-group-numbered`,
             horizontal &&
-                `list-group-horizontal${horizontal === true ? '' : `-${horizontal}`}`,
+                `${horizontal === true ? '' : `${horizontal}:`}list-group-horizontal`,
             className
         )}
         {...props}
@@ -33,9 +33,10 @@ export const ListGroup: FC<ListGroupProps> = ({
 );
 
 export interface ListGroupItemProps
-    extends WebCellProps<HTMLAnchorElement>,
+    extends
+        WebCellProps<HTMLAnchorElement>,
         Partial<Record<'active' | 'disabled', boolean>> {
-    variant?: keyof typeof Status | keyof typeof Theme;
+    variant?: ThemeColor;
 }
 
 export const ListGroupItem: FC<ListGroupItemProps> = ({
@@ -50,7 +51,7 @@ export const ListGroupItem: FC<ListGroupItemProps> = ({
     <a
         className={classNames(
             'list-group-item',
-            variant && `list-group-item-${variant}`,
+            variant && `theme-${variant}`,
             href && 'list-group-item-action',
             { active, disabled },
             disabled && 'pe-none',

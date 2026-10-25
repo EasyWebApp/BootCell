@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { TextColor } from '../type';
+import { BackgroundColor, TextColor } from '../type';
 
 export interface IconProps extends WebCellProps {
     name: string;
@@ -19,11 +19,7 @@ export const Icon: FC<IconProps> = ({
     ...rest
 }) => (
     <i
-        className={classNames(
-            `bi-${name}`,
-            color && `text-${color}`,
-            className
-        )}
+        className={classNames(`bi-${name}`, color && `fg-${color}`, className)}
         style={{
             ...style,
             fontSize: size ? `${size}rem` : undefined
@@ -34,25 +30,27 @@ export const Icon: FC<IconProps> = ({
 
 export interface BGIconProps extends IconProps {
     type?: 'square' | 'circle';
+    bg?: BackgroundColor;
 }
 
 export const BGIcon: FC<BGIconProps> = ({
     className = '',
     type = 'square',
-    color = 'primary',
+    color = 'contrast-primary',
+    bg = 'primary',
     children,
     ...props
 }) => (
     <span
         className={classNames(
             'd-inline-block',
-            'p-3',
-            `bg-${color}`,
+            'p-5',
+            `bg-${bg}`,
             `rounded${type === 'square' ? '' : '-circle'}`,
             className
         )}
         {...props}
     >
-        <Icon color={color === 'light' ? 'dark' : 'light'} {...props} />
+        <Icon color={color} {...props} />
     </span>
 );

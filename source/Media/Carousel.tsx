@@ -10,6 +10,8 @@ import {
     reaction
 } from 'web-cell';
 
+import { BootstrapStyles } from '../BootstrapStyles';
+
 export interface CarouselItemProps extends WebCellProps<HTMLDivElement> {
     interval?: number;
 }
@@ -31,10 +33,22 @@ export const CarouselItem: FC<CarouselItemProps> = ({
 
 export const CarouselCaption: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',
+    style,
     children,
     ...props
 }) => (
-    <div className={`carousel-caption ${className}`} {...props}>
+    <div
+        className={className}
+        style={{
+            position: 'absolute',
+            insetInline: '15%',
+            bottom: '1rem',
+            color: 'white',
+            ...style
+        }}
+        data-carousel-caption=""
+        {...props}
+    >
         {children}
     </div>
 );
@@ -87,8 +101,8 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         if (this.itemMeta.length !== items.length)
             this.itemMeta = items.map(item => ({
                 caption: (
-                    item.querySelector('.carousel-caption')?.textContent ||
-                    item.textContent
+                    item.querySelector('[data-carousel-caption]')
+                        ?.textContent || item.textContent
                 ).trim()
             }));
     }
@@ -97,12 +111,12 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         this.currentIndex = (this.currentIndex + delta) % this.itemMeta.length;
     }
 
-    @on('click', '.carousel > button')
+    @on('click', '.carousel-overlay-controls > button')
     handleButtonClick(_: MouseEvent, { dataset }: HTMLButtonElement) {
         this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
     }
 
-    @on('keyup', '.carousel > button')
+    @on('keyup', '.carousel-overlay-controls > button')
     handleButtonPress({ key }: KeyboardEvent, { dataset }: HTMLButtonElement) {
         if (key === 'Enter')
             this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
@@ -132,43 +146,50 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         const { itemMeta, currentIndex } = this;
 
         return (
-            <div className="carousel">
-                <div className="carousel-indicators">
-                    {itemMeta.map(({ caption }, index) => (
-                        <button
-                            type="button"
-                            ariaLabel={caption}
-                            data-bs-slide-to={index}
-                            className={currentIndex === index ? 'active' : ''}
-                            ariaCurrent={currentIndex === index ? 'true' : ''}
-                        />
-                    ))}
-                </div>
+            <div className="carousel carousel-overlay">
                 <div className="carousel-inner">
                     <slot />
                 </div>
-                <button
-                    type="button"
-                    className="carousel-control-prev"
-                    data-bs-slide="prev"
-                >
-                    <span
-                        className="carousel-control-prev-icon"
-                        ariaHidden="true"
-                    />
-                    <span className="visually-hidden">-1</span>
-                </button>
-                <button
-                    type="button"
-                    className="carousel-control-next"
-                    data-bs-slide="next"
-                >
-                    <span
-                        className="carousel-control-next-icon"
-                        ariaHidden="true"
-                    />
-                    <span className="visually-hidden">+1</span>
-                </button>
+                <div className="carousel-overlay-controls">
+                    <button
+                        type="button"
+                        className="btn-icon"
+                        data-bs-slide="prev"
+                    >
+                        <span
+                            className="carousel-icon-prev"
+                            ariaHidden="true"
+                        />
+                        <span className="visually-hidden">-1</span>
+                    </button>
+                    <div className="carousel-indicators">
+                        {itemMeta.map(({ caption }, index) => (
+                            <button
+                                type="button"
+                                ariaLabel={caption}
+                                data-bs-target=""
+                                data-bs-slide-to={index}
+                                className={
+                                    currentIndex === index ? 'active' : ''
+                                }
+                                ariaCurrent={
+                                    currentIndex === index ? 'true' : ''
+                                }
+                            />
+                        ))}
+                    </div>
+                    <button
+                        type="button"
+                        className="btn-icon"
+                        data-bs-slide="next"
+                    >
+                        <span
+                            className="carousel-icon-next"
+                            ariaHidden="true"
+                        />
+                        <span className="visually-hidden">+1</span>
+                    </button>
+                </div>
             </div>
         );
     }
@@ -176,10 +197,7 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

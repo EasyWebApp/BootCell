@@ -5,13 +5,15 @@ import { uniqueID } from 'web-utility';
 
 import { FormCheckProps, FormControlProps } from './Form';
 import { Icon, IconProps } from '../Reminder';
-import { TextColor } from '../type';
+import { ThemeColor } from '../type';
 
 export interface ButtonProps
-    extends WebCellProps<HTMLButtonElement>,
+    extends
+        WebCellProps<HTMLButtonElement>,
         Omit<WebCellProps<HTMLAnchorElement>, 'type'>,
         Pick<FormControlProps<'input'>, 'size'> {
-    variant?: TextColor | `outline-${TextColor}` | 'link';
+    variant?: 'solid' | 'outline' | 'subtle' | 'text' | 'link';
+    theme?: ThemeColor;
     active?: boolean;
 }
 
@@ -19,6 +21,7 @@ export const Button: FC<ButtonProps> = ({
     className,
     href,
     variant,
+    theme,
     size,
     active,
     children,
@@ -28,6 +31,7 @@ export const Button: FC<ButtonProps> = ({
         Class = classNames(
             'btn',
             variant && `btn-${variant}`,
+            theme && `theme-${theme}`,
             size && `btn-${size}`,
             className
         );
@@ -87,23 +91,29 @@ export const CloseButton: FC<WebCellProps<HTMLButtonElement>> = ({
 );
 
 export interface ToggleButtonProps
-    extends WebCellProps<HTMLInputElement>,
-        Pick<ButtonProps, 'variant'> {
+    extends
+        WebCellProps<HTMLInputElement>,
+        Pick<ButtonProps, 'variant' | 'theme'> {
     type: Exclude<FormCheckProps['type'], 'switch'>;
 }
 
 export const ToggleButton: FC<ToggleButtonProps> = ({
     className = '',
     id = uniqueID(),
-    variant = 'primary',
+    variant = 'solid',
+    theme = 'primary',
     children,
     ...props
 }) => (
-    <>
-        <input className="btn-check" id={id} autocomplete="off" {...props} />
-
-        <label className={`btn btn-${variant} ${className}`} htmlFor={id}>
-            {children}
-        </label>
-    </>
+    <label
+        className={classNames(
+            'btn-check',
+            `btn-${variant}`,
+            `theme-${theme}`,
+            className
+        )}
+    >
+        <input id={id} autocomplete="off" {...props} />
+        {children}
+    </label>
 );

@@ -1,8 +1,8 @@
 import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
 import { createCell } from 'web-cell';
 
-import { ToastBox, ToastProps } from '../../source/Prompt/Toast';
-import { CloseButton } from '../../source/Form/Button';
+import { ToastBox, ToastProps } from '../../Prompt/Toast';
+import { CloseButton } from '../../../source/Form/Button';
 
 const { render } = ToastBox.prototype;
 
@@ -28,7 +28,7 @@ describe('Toast', () => {
                     <img className="rounded me-2" alt="Icon" src="test.png" />
 
                     <strong className="me-auto">Test</strong>
-                    <small className="text-muted">just now</small>
+                    <small className="fg-secondary">just now</small>
                     <CloseButton className="ms-2 mb-1" />
                 </div>
                 <div className="toast-body">example</div>

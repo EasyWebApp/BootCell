@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { TextColor, Size } from '../type';
+import { ThemeColor, Size } from '../type';
 
 export interface TableProps extends WebCellProps<HTMLTableElement> {
-    variant?: TextColor;
+    variant?: ThemeColor;
     size?: 'sm';
     responsive?: boolean | Size;
     striped?: boolean | 'columns';
@@ -31,7 +31,7 @@ export const Table: FC<TableProps> = ({
         <table
             className={classNames(
                 'table',
-                variant && `table-${variant}`,
+                variant && `theme-${variant}`,
                 size && `table-${size}`,
                 striped &&
                     `table-striped${striped === 'columns' ? '-columns' : ''}`,
@@ -48,9 +48,11 @@ export const Table: FC<TableProps> = ({
 
     return responsive ? (
         <div
-            className={`table-responsive${
-                responsive === true ? '' : `-${responsive}`
-            }`}
+            className={
+                responsive === true
+                    ? 'table-responsive'
+                    : `${responsive}:table-responsive`
+            }
         >
             {table}
         </div>

@@ -5,25 +5,27 @@ import { TextColor } from '../type';
 import { IconProps } from './Icon';
 
 export interface FAIconProps extends Omit<IconProps, 'size'> {
-    group?: 'solid' | 'brands' | 'regular' | 'light' | 'duotone';
+    family?: 'classic' | 'duotone' | 'sharp' | 'sharp-duotone';
+    group?: 'solid' | 'brands' | 'regular' | 'light' | 'thin';
     size?: 'xs' | 'sm' | 'lg' | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-    fixedWidth?: boolean;
+    width?: 'auto' | 'fixed';
     color?: TextColor;
     inverse?: boolean;
     border?: boolean;
     rotate?: 90 | 180 | 270;
     flip?: 'horizontal' | 'vertical' | 'both';
-    animation?: 'spin' | 'pulse';
-    pull?: 'left' | 'right';
+    animation?: 'spin' | 'spin-pulse';
+    pull?: 'start' | 'end';
     stack?: 1 | 2;
     listItem?: boolean;
 }
 
 export const FAIcon: FC<FAIconProps> = ({
+    family = 'classic',
     group = 'solid',
     name,
     size,
-    fixedWidth,
+    width,
     color,
     inverse,
     border,
@@ -40,10 +42,11 @@ export const FAIcon: FC<FAIconProps> = ({
     const icon = (
         <span
             className={classNames(
-                'fa' + group[0],
+                group !== 'brands' && `fa-${family}`,
+                `fa-${group}`,
                 'fa-' + name,
                 size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
-                fixedWidth && 'fa-fw',
+                width && `fa-width-${width}`,
                 inverse && 'fa-inverse',
                 border && 'fa-border',
                 rotate && 'fa-rotate-' + rotate,
@@ -51,7 +54,7 @@ export const FAIcon: FC<FAIconProps> = ({
                 animation && 'fa-' + animation,
                 pull && 'fa-pull-' + pull,
                 stack && `fa-stack-${stack}x`,
-                color && 'text-' + color,
+                color && `fg-${color}`,
                 className
             )}
             aria-hidden="true"
@@ -77,7 +80,7 @@ export const FABGIcon: FC<FABGIconProps> = ({
         className={classNames(
             'fa-stack',
             size && 'fa-' + (typeof size === 'number' ? size + 'x' : size),
-            color && 'text-' + color,
+            color && `fg-${color}`,
             className
         )}
     >

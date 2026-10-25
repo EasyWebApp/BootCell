@@ -1,47 +1,56 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
 import { Spinner, SpinnerBox } from '../../source/Prompt/Spinner';
 import { Button } from '../../source/Form/Button';
-import style from '../../source/Prompt/Spinner/index.less';
+import { render } from '../render';
 
 describe('Spinner', () => {
-    it('should render a single Border Spinner by default', () => {
-        assertLooksLike(
-            <Spinner />,
-            <div className="spinner-border" role="status" aria-hidden="false">
-                <span className="sr-only">Loading...</span>
-            </div>
+    it('should render a border spinner with accessible loading text', () => {
+        const root = render(Spinner({}));
+
+        expect(root.firstElementChild.className).toBe('spinner-border');
+        expect(root.firstElementChild.getAttribute('role')).toBe('status');
+        expect(root.querySelector('.visually-hidden').textContent).toBe(
+            'Loading...'
         );
     });
 
-    it('should render an Embeded Spinner', () => {
-        assertLooksLike(
+    it('should compose small colored growing spinners in a button', () => {
+        const root = render(
             <Button disabled>
-                <Spinner embed>Pending...</Spinner>
-            </Button>,
-            <Button disabled>
-                <div
-                    className="spinner-border"
-                    role="status"
-                    aria-hidden="true"
-                />
-                Pending...
+                <Spinner size="sm" variant="primary" animation="grow">
+                    Pending...
+                </Spinner>
             </Button>
         );
+        expect(root.querySelector('button').disabled).toBe(true);
+        expect(root.querySelector('[role="status"]').className).toBe(
+            'spinner-grow spinner-grow-sm fg-primary'
+        );
+        expect(root.querySelector('.visually-hidden').textContent).toBe(
+            'Pending...'
+        );
     });
 
-    it('should render Slots & Cover', () => {
-        assertLooksLike(
+    it('should render projected content with an optional cover', () => {
+        const root = render(
             <SpinnerBox className="test" cover>
-                test
-            </SpinnerBox>,
-            <div className={`${style['spinner-box']} test`}>
-                test
-                <div className={`${style['spinner-cover']} ${style.active}`}>
-                    <Spinner />
-                </div>
-            </div>
+                Content
+            </SpinnerBox>
         );
+        expect(root.firstElementChild.className).toBe('position-relative test');
+        expect(root.firstElementChild.firstChild.textContent).toBe('Content');
+        expect(
+            root.querySelector('.position-absolute').getAttribute('style')
+        ).toContain('background-color: rgba(0, 0, 0, 0.5)');
+        expect(
+            root.querySelector('.spinner-border').getAttribute('aria-hidden')
+        ).toBe('true');
+        expect(
+            render(<SpinnerBox>Content</SpinnerBox>).querySelector(
+                '.spinner-border'
+            )
+        ).toBeNull();
     });
 });

@@ -1,190 +1,101 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { expect } from 'expect';
+import { fn } from 'jest-mock';
+import { runInAction } from 'mobx';
+import { describe, it } from 'node:test';
 
-import { WeekDays, CalendarTable } from '../../source/Calendar/CalendarTable';
-import {
-    MonthCalendar,
-    MonthCalendarProps
-} from '../../source/Calendar/MonthCalendar';
-import { IconButton } from '../../source/Form/Button';
+import { DateData, MonthCalendar } from '../../source/Calendar/MonthCalendar';
+import { render } from '../render';
 
-const {
-    prototype: { render, renderRow },
-    createDayGrid
-} = MonthCalendar;
+function calendar() {
+    const calendar = new MonthCalendar();
 
-function InlineCalendar({ date, renderCell }: MonthCalendarProps) {
-    return (
-        <div>
-            {render.call(
-                { renderRow: renderRow.bind({ props: { date, renderCell } }) },
-                {
-                    date,
-                    dateTemplate: 'YYYY-MM',
-                    weekDays: WeekDays
-                },
-                { dayGrid: createDayGrid(new Date(date)) }
-            )}
-        </div>
-    );
+    runInAction(() => {
+        calendar.currentDate = new Date(2024, 1, 15);
+        calendar.locale = 'en-US';
+    });
+    return calendar;
 }
 
-describe('Month Calendar', () => {
-    const date = new Date(1989, 5, 4);
+describe('MonthCalendar', () => {
+    it('should produce six complete weeks including a leap day', () => {
+        const grid = calendar().dateGrid;
 
-    it('should render a Calendar Table based on the Date', () => {
-        assertLooksLike(
-            <InlineCalendar
-                date={date}
-                renderCell={date => <a>{date.getDate()}</a>}
-            />,
-            <div>
-                <header className="d-flex justify-content-between align-items-center py-3">
-                    <IconButton className="px-2" name="chevron-left" />
-                    <time className="fw-bold">1989-06</time>
-                    <IconButton className="px-2" name="chevron-right" />
-                </header>
-                <CalendarTable>
-                    <tr>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{29}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{30}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{31}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{1}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{2}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{3}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 bg-primary">
-                            <a>{4}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="p-3 p-sm-4">
-                            <a>{5}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{6}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{7}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{8}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{9}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{10}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{11}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="p-3 p-sm-4">
-                            <a>{12}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{13}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{14}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{15}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{16}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{17}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{18}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="p-3 p-sm-4">
-                            <a>{19}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{20}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{21}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{22}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{23}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{24}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{25}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="p-3 p-sm-4">
-                            <a>{26}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{27}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{28}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{29}</a>
-                        </td>
-                        <td className="p-3 p-sm-4">
-                            <a>{30}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{1}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{2}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{3}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{4}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{5}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{6}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{7}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{8}</a>
-                        </td>
-                        <td className="p-3 p-sm-4 text-secondary bg-light">
-                            <a>{9}</a>
-                        </td>
-                    </tr>
-                </CalendarTable>
-            </div>
+        expect(grid).toHaveLength(6);
+        expect(grid.every(week => week.length === 7)).toBe(true);
+        expect(grid[0][0]).toEqual(new Date(2024, 0, 28));
+        expect(grid[4][4]).toEqual(new Date(2024, 1, 29));
+        expect(grid[5][6]).toEqual(new Date(2024, 2, 9));
+    });
+
+    it('should render localized weekdays, navigation and date cells', () => {
+        const root = render(calendar().render());
+
+        expect(root.querySelectorAll('tbody td')).toHaveLength(42);
+        expect(root.querySelector('caption').textContent).toContain('2024-02');
+        expect(root.querySelector('thead').textContent).toBe(
+            'SundayMondayTuesdayWednesdayThursdayFridaySaturday'
         );
+        expect(
+            root.querySelector('tbody td').classList.contains('opacity-50')
+        ).toBe(true);
+    });
+
+    it('should emit a change when navigating between months', () => {
+        const instance = calendar();
+        const onChange = fn<(event: CustomEvent<Date>) => void>();
+        instance.addEventListener('change', onChange);
+
+        render(instance.render())
+            .querySelector<HTMLButtonElement>('button')
+            .click();
+
+        expect(instance.currentDate).toEqual(new Date(2024, 0, 15));
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange.mock.calls[0][0].detail).toEqual(instance.currentDate);
+    });
+
+    it('should share the native theme across navigation and weekday headings', () => {
+        const instance = calendar();
+        runInAction(() => {
+            instance.variant = 'outline';
+            instance.theme = 'accent';
+        });
+        const root = render(instance.render());
+
+        expect(
+            Array.from(root.querySelectorAll('button'), node => node.className)
+        ).toEqual([
+            'btn btn-outline theme-accent',
+            'btn btn-outline theme-accent'
+        ]);
+        expect(
+            Array.from(
+                root.querySelectorAll('thead td'),
+                node => node.className
+            )
+        ).toEqual(Array(7).fill('theme-accent'));
+    });
+
+    it('should render event links and emit the selected date data', () => {
+        const instance = calendar();
+        const item: DateData = {
+            date: new Date(2024, 1, 15),
+            content: 'Meeting',
+            link: '#meeting'
+        };
+        const onSelect = fn<(event: CustomEvent<DateData>) => void>();
+        instance.addEventListener('select', onSelect);
+        runInAction(() => {
+            instance.value = [item];
+        });
+        const link = render(
+            instance.renderDate(new Date(2024, 1, 15))
+        ).querySelector('a');
+
+        expect(link.getAttribute('href')).toBe('#meeting');
+        expect(link.textContent).toBe('Meeting');
+        link.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        expect(onSelect).toHaveBeenCalledTimes(1);
+        expect(onSelect.mock.calls[0][0].detail).toEqual(item);
     });
 });

@@ -1,79 +1,51 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { Nav, NavLink } from '../../source/Navigator/Nav';
-import { DropMenuItem, DropMenu } from '../../source/Navigator/DropMenu';
+import { Nav, NavDropdown, NavLink } from '../../source/Navigator/Nav';
+import { render } from '../render';
 
 describe('Nav', () => {
-    it('should render Nav Links with different states', () => {
-        assertLooksLike(
-            <Nav>
-                <NavLink href="#test" active>
-                    Test
-                </NavLink>
-                <NavLink href="#example" disabled>
-                    Example
-                </NavLink>
-                <NavLink title="Nested">
-                    <DropMenuItem href="#sample">Sample</DropMenuItem>
-                </NavLink>
-            </Nav>,
-            <nav className="nav">
-                <a
-                    className="nav-item nav-link text-nowrap active"
-                    href="#test"
-                    aria-disabled="false"
-                >
-                    Test
-                    <span className="sr-only">(current)</span>
-                </a>
-                <a
-                    className="nav-item nav-link text-nowrap disabled"
-                    href="#example"
-                    tabIndex={-1}
-                    aria-disabled="true"
-                >
-                    Example
-                </a>
-                <DropMenu caption="Nested" aria-disabled="false" />
-            </nav>
-        );
+    it('should render active links with native attributes', () => {
+        const link = render(
+            <NavLink active href="#test" ariaDisabled="true">
+                Test
+            </NavLink>
+        ).querySelector('a');
+
+        expect(link.classList.contains('active')).toBe(true);
+        expect(link.getAttribute('href')).toBe('#test');
+        expect(link.getAttribute('aria-disabled')).toBe('true');
+        expect(link.textContent).toBe('Test');
     });
 
-    it('should render a Nav within multiple style items', () => {
-        assertLooksLike(
-            <Nav itemMode="tabs" />,
-            <nav className="nav nav-tabs" />
-        );
-        assertLooksLike(
-            <Nav itemMode="pills" />,
-            <nav className="nav nav-pills" />
-        );
-        assertLooksLike(
-            <Nav itemMode="masthead" />,
-            <nav className="nav nav-masthead" />
-        );
-    });
+    for (const variant of ['tabs', 'pills', 'underline'] as const)
+        it(`should initialize a ${variant} custom navigation element`, async () => {
+            const nav = new Nav();
+            nav.variant = variant;
+            nav.fill = true;
+            nav.justify = true;
+            // Invoke the WebCell lifecycle on a detached element to avoid resource loads.
+            await nav.connectedCallback();
 
-    it('should render a Nav wrapped by a Scroller', () => {
-        assertLooksLike(
-            <Nav scrollable>
-                <NavLink href="#test" active>
-                    Test
-                </NavLink>
-            </Nav>,
-            <div className="nav-scroller bg-white shadow-sm">
-                <nav className="nav nav-underline">
-                    <a
-                        className="nav-item nav-link text-nowrap active"
-                        href="#test"
-                        aria-disabled="false"
-                    >
-                        Test
-                        <span className="sr-only">(current)</span>
-                    </a>
-                </nav>
-            </div>
+            expect(nav.classList.contains(`nav-${variant}`)).toBe(true);
+            expect(nav.classList.contains('nav-fill')).toBe(true);
+            expect(nav.classList.contains('nav-justified')).toBe(true);
+            expect(nav.role).toBe('tablist');
+            expect(nav.shadowRoot.querySelector('slot')).not.toBeNull();
+        });
+
+    it('should compose dropdown navigation with projected children', () => {
+        const tree = (
+            <NavDropdown title="More">
+                <a href="#sample">Sample</a>
+            </NavDropdown>
         );
+        expect(tree.tagName).toBe('dropdown-button');
+        expect(tree.props).toMatchObject({
+            boxClass: 'nav-item',
+            buttonClass: 'nav-link',
+            caption: 'More'
+        });
+        expect(tree.children[0].props.href).toBe('#sample');
     });
 });

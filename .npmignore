@@ -1,9 +1,9 @@
 .parcelrc
 .parcel-cache/
 .prettierrc.yml
+pnpm-workspace.yaml
 v1/
 test/
-jest.config.ts
 docs/
 .husky/
 .github/

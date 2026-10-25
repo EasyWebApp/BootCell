@@ -21,11 +21,16 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
     children,
     ...props
 }) => (
-    <li
-        className={classNames('breadcrumb-item', { active }, className)}
-        ariaCurrent={active ? 'page' : undefined}
-        {...props}
-    >
-        {active ? children : <a {...{ href, target }}>{children}</a>}
-    </li>
+    <>
+        <li className={classNames('breadcrumb-item', className)} {...props}>
+            <a
+                className={classNames('breadcrumb-link', { active })}
+                {...{ href, target }}
+                ariaCurrent={active ? 'page' : undefined}
+            >
+                {children}
+            </a>
+        </li>
+        {!active && <li className="breadcrumb-divider" aria-hidden="true" />}
+    </>
 );

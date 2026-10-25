@@ -3,7 +3,7 @@ import { FC, WebCellProps } from 'web-cell';
 
 import { Size } from '../type';
 
-export interface ModalProps extends WebCellProps<HTMLDivElement> {
+export interface ModalProps extends WebCellProps<HTMLDialogElement> {
     backdrop?: 'static' | boolean;
     size?: 'sm' | 'lg' | 'xl';
     fullscreen?: true | `${Size}-down`;
@@ -13,14 +13,9 @@ export interface ModalProps extends WebCellProps<HTMLDivElement> {
     show?: boolean;
 }
 
-const emitHideByKeyUp = () =>
-    document
-        .querySelectorAll('.modal.show')
-        .forEach(modal => modal.dispatchEvent(new CustomEvent('hide')));
-
 const emitHideByClick = ({ currentTarget }: MouseEvent) =>
     (currentTarget as HTMLElement)
-        .closest('.modal')
+        .closest('.dialog')
         .dispatchEvent(new CustomEvent('hide'));
 
 export const Modal: FC<ModalProps> = ({
@@ -36,31 +31,37 @@ export const Modal: FC<ModalProps> = ({
     children,
     ...props
 }) => (
-    <div
-        className={classNames('modal', { fade: animation, show }, className)}
+    <dialog
+        className={classNames(
+            'dialog',
+            !animation && 'dialog-instant',
+            size && `dialog-${size}`,
+            fullscreen &&
+                `${
+                    fullscreen === true ? '' : `${fullscreen}:`
+                }dialog-fullscreen`,
+            scrollable && 'dialog-scrollable',
+            className
+        )}
         data-bs-backdrop={backdrop != null ? backdrop + '' : undefined}
         tabIndex={-1}
         ariaHidden={!show + ''}
-        ref={node =>
-            node
-                ? globalThis.addEventListener?.('keyup', emitHideByKeyUp)
-                : globalThis.removeEventListener?.('keyup', emitHideByKeyUp)
-        }
+        ref={node => {
+            if (!node) return;
+
+            const dialog = node as HTMLDialogElement;
+
+            if (show && !dialog.open) dialog.showModal();
+            else if (!show && dialog.open) dialog.close();
+        }}
+        onCancel={event => {
+            event.preventDefault();
+            event.currentTarget.dispatchEvent(new CustomEvent('hide'));
+        }}
         {...props}
     >
-        <div
-            className={classNames(
-                'modal-dialog',
-                size && `modal-${size}`,
-                fullscreen &&
-                    `modal-fullscreen${fullscreen === true ? '' : `-${fullscreen}`}`,
-                centered && 'modal-dialog-centered',
-                scrollable && 'modal-dialog-scrollable'
-            )}
-        >
-            <div className="modal-content">{children}</div>
-        </div>
-    </div>
+        {children}
+    </dialog>
 );
 
 export interface ModalHeaderProps extends WebCellProps<HTMLDivElement> {
@@ -73,13 +74,14 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
     closeButton,
     ...props
 }) => (
-    <div className={`modal-header ${className}`} {...props}>
+    <div className={`dialog-header ${className}`} {...props}>
         {children}
 
         {closeButton && (
             <button
                 type="button"
                 className="btn-close"
+                data-bs-dismiss="dialog"
                 ariaLabel="Close"
                 onClick={emitHideByClick}
             />
@@ -90,11 +92,11 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
 export type ModalTitleProps = WebCellProps<HTMLHeadingElement>;
 
 export const ModalTitle: FC<ModalTitleProps> = ({
-    className = 'fs-5',
+    className = 'fs-lg',
     children,
     ...props
 }) => (
-    <h1 className={`modal-title ${className}`} {...props}>
+    <h1 className={`dialog-title ${className}`} {...props}>
         {children}
     </h1>
 );
@@ -106,7 +108,7 @@ export const ModalBody: FC<ModalBodyProps> = ({
     children,
     ...props
 }) => (
-    <div className={`modal-body ${className}`} {...props}>
+    <div className={`dialog-body ${className}`} {...props}>
         {children}
     </div>
 );
@@ -118,7 +120,7 @@ export const ModalFooter: FC<ModalFooterProps> = ({
     children,
     ...props
 }) => (
-    <div className={`modal-footer ${className}`} {...props}>
+    <div className={`dialog-footer ${className}`} {...props}>
         {children}
     </div>
 );

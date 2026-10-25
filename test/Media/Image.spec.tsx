@@ -1,52 +1,28 @@
-import { createCell } from 'web-cell';
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
 import { Image } from '../../source/Media/Image';
+import { render } from '../render';
 
-describe('Image components', () => {
-    it('should render a thumbnail Image', () => {
-        assertLooksLike(
-            <Image thumbnail src="test.png" />,
-            <img
-                className="img-thumbnail"
-                src="test.png"
-                // @ts-ignore
-                lazyLoad="1"
-                loading="lazy"
-            />
-        );
+describe('Image', () => {
+    it('should render a thumbnail and preserve native image properties', () => {
+        const image = render(
+            <Image thumbnail src="test.png" alt="Test" loading="lazy" />
+        ).querySelector('img');
+
+        expect(image.className).toBe('img-thumbnail');
+        expect(image.getAttribute('src')).toBe('test.png');
+        expect(image.alt).toBe('Test');
+        expect(image.loading).toBe('lazy');
     });
 
-    it('should render a background Image', () => {
-        assertLooksLike(
-            <Image background src="test.png">
-                Test
-            </Image>,
-            <div
-                className="back-image"
-                style={{ backgroundImage: `url(test.png)` }}
-            >
-                Test
-            </div>
-        );
-    });
-
-    it('should render an Image in a figure box', () => {
-        assertLooksLike(
-            <Image className="test" caption="Test" alt="Test" src="test.png" />,
-            <figure className="figure test">
-                <img
-                    className="img-fluid figure-img"
-                    alt="Test"
-                    src="test.png"
-                    // @ts-ignore
-                    lazyLoad="1"
-                    loading="lazy"
-                />
-                <figcaption className="figure-caption text-center">
-                    Test
-                </figcaption>
-            </figure>
-        );
+    it('should compose fluid and rounded styles with custom classes', () => {
+        expect(
+            render(<Image fluid rounded className="test" />).firstElementChild
+                .className
+        ).toBe('img-fluid rounded test');
+        expect(
+            render(<Image roundedCircle />).firstElementChild.className
+        ).toBe('rounded-circle');
     });
 });

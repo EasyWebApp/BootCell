@@ -1,6 +1,5 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
-
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
 import { MediaObject } from '../../source/Content/MediaObject';
 
 describe('Media Item', () => {
@@ -16,7 +15,7 @@ describe('Media Item', () => {
                         alt="Test"
                     />
                 </div>
-                <div className="flex-grow-1 ms-3">
+                <div className="flex-grow-1 ms-5">
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -35,7 +34,7 @@ describe('Media Item', () => {
                         alt="Test"
                     />
                 </div>
-                <div className="flex-grow-1 me-3">
+                <div className="flex-grow-1 me-5">
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -55,7 +54,7 @@ describe('Media Item', () => {
                 <div className="flex-shrink-0">
                     <img src="test.png" />
                 </div>
-                <div className="flex-grow-1 me-3">
+                <div className="flex-grow-1 me-5">
                     <h5 className="mt-0">Test</h5>
                     Example
                 </div>

@@ -4,13 +4,14 @@ import { observable } from 'mobx';
 import { FC, WebCellProps, attribute, component, observer } from 'web-cell';
 
 import { Button, ButtonProps } from '../Form/Button';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export const Dropdown: FC<WebCellProps<HTMLDivElement>> = ({
     className = '',
     children,
     ...props
 }) => (
-    <div className={`dropdown ${className}`} {...props}>
+    <div className={className} {...props}>
         {children}
     </div>
 );
@@ -20,7 +21,7 @@ export const DropdownToggle: FC<ButtonProps> = ({
     children,
     ...props
 }) => (
-    <Button {...props} className={`dropdown-toggle ${className}`} type="button">
+    <Button {...props} className={className} type="button">
         {children}
     </Button>
 );
@@ -30,9 +31,9 @@ export const DropdownMenu: FC<WebCellProps> = ({
     children,
     ...props
 }) => (
-    <nav className={`dropdown-menu ${className}`} {...props}>
+    <div className={`menu ${className}`} {...props}>
         {children}
-    </nav>
+    </div>
 );
 
 export const DropdownItem: FC<WebCellProps<HTMLAnchorElement>> = ({
@@ -40,7 +41,7 @@ export const DropdownItem: FC<WebCellProps<HTMLAnchorElement>> = ({
     children,
     ...props
 }) => (
-    <a className={`dropdown-item ${className}`} {...props}>
+    <a className={`menu-item ${className}`} {...props}>
         {children}
     </a>
 );
@@ -109,10 +110,7 @@ export class DropdownButton extends HTMLElement {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 <style>
                     {`:host {
                         display: inline-block;

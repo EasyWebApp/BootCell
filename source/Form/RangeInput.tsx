@@ -9,6 +9,8 @@ import {
     WebField
 } from 'web-cell';
 
+import { BootstrapStyles } from '../BootstrapStyles';
+
 export interface RangeInputProps extends WebCellProps<HTMLInputElement> {
     icon?: JsxChildren | ((itemValue: number) => JsxChildren);
 }
@@ -68,24 +70,23 @@ export class RangeInput
 
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
-                <input
-                    className={icon ? 'opacity-0' : ''}
-                    style={{ margin: '0 -0.5rem', cursor: 'pointer' }}
-                    type="range"
-                    min={min?.toString()}
-                    max={max?.toString()}
-                    value={value?.toString()}
-                    onChange={this.handleChange}
-                />
-                <ol className="list-unstyled user-select-none position-absolute start-0 top-0 w-100 h-100 pe-none d-flex justify-content-around">
-                    {Array.from({ length: max }, (_, index) =>
-                        this.renderItem(index)
-                    )}
-                </ol>
+                <BootstrapStyles />
+                <div className="form-range position-relative">
+                    <input
+                        className={`form-range-input ${icon ? 'opacity-0' : ''}`}
+                        style={{ margin: '0 -0.5rem', cursor: 'pointer' }}
+                        type="range"
+                        min={min?.toString()}
+                        max={max?.toString()}
+                        value={value?.toString()}
+                        onChange={this.handleChange}
+                    />
+                    <ol className="list-unstyled user-select-none position-absolute start-0 top-0 w-100 h-100 pe-none d-flex justify-content-around">
+                        {Array.from({ length: max }, (_, index) =>
+                            this.renderItem(index)
+                        )}
+                    </ol>
+                </div>
             </>
         );
     }

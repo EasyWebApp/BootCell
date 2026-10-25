@@ -1,30 +1,33 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { describe, it } from 'node:test';
+import { assertLooksLike } from '../render';
 
-import { BreadCrumb } from '../../source/Navigator/BreadCrumb';
+import { BreadCrumb, BreadcrumbItem } from '../../source/Navigator/BreadCrumb';
 
 describe('Bread Crumb', () => {
-    it('should render Link list', () => {
+    it('should render v6 breadcrumb links and divider', () => {
         assertLooksLike(
-            <BreadCrumb
-                path={[
-                    {
-                        title: 'Test',
-                        href: 'test'
-                    },
-                    {
-                        title: 'Example',
-                        href: 'example'
-                    }
-                ]}
-            />,
+            <BreadCrumb aria-label="breadcrumb">
+                <BreadcrumbItem href="test">Test</BreadcrumbItem>
+                <BreadcrumbItem href="example" active>
+                    Example
+                </BreadcrumbItem>
+            </BreadCrumb>,
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                        <a href="test">Test</a>
+                        <a className="breadcrumb-link" href="test">
+                            Test
+                        </a>
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                        Example
+                    <li className="breadcrumb-divider" aria-hidden="true" />
+                    <li className="breadcrumb-item">
+                        <a
+                            className="breadcrumb-link active"
+                            href="example"
+                            aria-current="page"
+                        >
+                            Example
+                        </a>
                     </li>
                 </ol>
             </nav>

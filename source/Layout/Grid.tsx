@@ -14,9 +14,11 @@ export const Container: FC<ContainerProps> = ({
     ...props
 }) => (
     <div
-        className={`container${
-            fluid === true ? '-fluid' : fluid ? `-${fluid}` : ''
-        } ${className}`}
+        className={
+            fluid === true
+                ? `container-fluid ${className}`
+                : `${fluid ? `${fluid}:container` : 'container'} ${className}`
+        }
         {...props}
     >
         {children}
@@ -33,26 +35,21 @@ export const Row: FC<RowProps> = ({
     md,
     lg,
     xl,
-    xxl,
+    '2xl': twoXL,
     children,
     ...props
 }) => {
-    const size = xs || sm || md || lg || xl || xxl;
-    const columnClass = size
-        ? `row-cols${
-              xs
-                  ? ''
-                  : sm
-                    ? '-sm'
-                    : md
-                      ? '-md'
-                      : lg
-                        ? '-lg'
-                        : xl
-                          ? '-xl'
-                          : xxl && '-xxl'
-          }-${size}`
-        : '';
+    const columnClass = xs
+        ? `row-cols-${xs}`
+        : sm
+          ? `sm:row-cols-${sm}`
+          : md
+            ? `md:row-cols-${md}`
+            : lg
+              ? `lg:row-cols-${lg}`
+              : xl
+                ? `xl:row-cols-${xl}`
+                : twoXL && `2xl:row-cols-${twoXL}`;
 
     return (
         <div className={classNames('row', columnClass, className)} {...props}>
@@ -70,26 +67,21 @@ export const Col: FC<ColProps> = ({
     md,
     lg,
     xl,
-    xxl,
+    '2xl': twoXL,
     children,
     ...props
 }) => {
-    const size = xs || sm || md || lg || xl || xxl;
-    const columnClass = size
-        ? `col${
-              xs
-                  ? ''
-                  : sm
-                    ? '-sm'
-                    : md
-                      ? '-md'
-                      : lg
-                        ? '-lg'
-                        : xl
-                          ? '-xl'
-                          : xxl && '-xxl'
-          }-${size}`
-        : '';
+    const columnClass = xs
+        ? `col-${xs}`
+        : sm
+          ? `sm:col-${sm}`
+          : md
+            ? `md:col-${md}`
+            : lg
+              ? `lg:col-${lg}`
+              : xl
+                ? `xl:col-${xl}`
+                : twoXL && `2xl:col-${twoXL}`;
 
     return (
         <div className={classNames('col', columnClass, className)} {...props}>

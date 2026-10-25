@@ -10,6 +10,7 @@ import {
 } from 'web-cell';
 
 import { Nav, NavLink } from '../Navigator/Nav';
+import { BootstrapStyles } from '../BootstrapStyles';
 
 export interface TabProps {
     caption: JsxChildren;
@@ -106,10 +107,7 @@ export class Tabs extends HTMLElement implements WebCell {
     render() {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 {this.renderContent()}
             </>
         );

@@ -1,28 +1,41 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { TooltipBox } from '../../source/Prompt/Tooltip';
-import { Button } from '../../source/Form/Button';
-
-const { render } = TooltipBox.prototype;
+import { Tooltip, TooltipBox } from '../../source/Prompt/Tooltip';
+import { render } from '../render';
 
 describe('Tooltip', () => {
-    it('should render a Horizontal Tooltip defaultly', () => {
-        assertLooksLike(
-            <div>
-                {render({
-                    defaultSlot: [<Button>Test</Button>],
-                    text: 'notice',
-                    position: 'top'
-                })}
-            </div>,
-            <div>
-                <Button>Test</Button>
-                <div className="tooltip bs-tooltip-top fade" role="tooltip">
-                    <div className="tooltip-arrow" />
-                    <div className="tooltip-inner">notice</div>
-                </div>
-            </div>
-        );
+    it('should render tooltip content and an arrow', () => {
+        const root = render(<Tooltip>Notice</Tooltip>);
+
+        expect(
+            root.querySelector('[role="tooltip"]').classList.contains('show')
+        ).toBe(true);
+        expect(root.querySelector('.tooltip-arrow')).not.toBeNull();
+        expect(root.querySelector('.tooltip-inner').textContent).toBe('Notice');
+    });
+
+    it('should toggle projected content on hover and remove listeners on disconnect', async () => {
+        const tooltip = new TooltipBox();
+        tooltip.content = 'Notice';
+        await tooltip.connectedCallback();
+
+        expect(tooltip.show).toBe(false);
+        expect(
+            render(tooltip.render()).querySelector('[role="tooltip"]')
+        ).toBeNull();
+
+        tooltip.dispatchEvent(new MouseEvent('mouseenter'));
+        expect(tooltip.show).toBe(true);
+        expect(
+            render(tooltip.render()).querySelector('.tooltip-inner').textContent
+        ).toBe('Notice');
+
+        tooltip.dispatchEvent(new MouseEvent('mouseleave'));
+        expect(tooltip.show).toBe(false);
+
+        tooltip.disconnectedCallback();
+        tooltip.dispatchEvent(new MouseEvent('mouseenter'));
+        expect(tooltip.show).toBe(false);
     });
 });

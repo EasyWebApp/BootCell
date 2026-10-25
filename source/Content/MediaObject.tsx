@@ -37,7 +37,7 @@ export const MediaObject: FC<MediaObjectProps> = ({
                     image
                 )}
             </div>
-            <div className={`flex-grow-1 ${start ? 'ms-3' : 'me-3'}`}>
+            <div className={`flex-grow-1 ${start ? 'ms-5' : 'me-5'}`}>
                 <h5 className="mt-0">{title}</h5>
                 {children}
             </div>

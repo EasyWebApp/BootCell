@@ -124,23 +124,42 @@ export const FormCheck: FC<FormCheckProps> = ({
 }) => (
     <div
         className={classNames(
-            label && 'form-check',
-            inline && 'form-check-inline',
-            reverse && 'form-check-reverse',
-            type === 'switch' && 'form-switch',
+            'form-field',
+            inline && 'd-inline-grid',
             className
         )}
-        style={style}
+        style={{
+            ...style,
+            ...(reverse ? { gridTemplateColumns: '1fr auto' } : {})
+        }}
     >
-        <input
-            className="form-check-input"
-            type={type === 'switch' ? 'checkbox' : type}
-            role={type === 'switch' ? 'switch' : undefined}
-            id={id}
-            {...props}
-        />
+        {type === 'switch' ? (
+            <div
+                className="switch"
+                style={reverse ? { gridColumn: '2', gridRow: '1' } : undefined}
+            >
+                <input
+                    type="checkbox"
+                    role="switch"
+                    switch
+                    id={id}
+                    {...props}
+                />
+            </div>
+        ) : (
+            <input
+                className={type === 'radio' ? 'radio' : 'check'}
+                style={reverse ? { gridColumn: '2' } : undefined}
+                {...{ type, id }}
+                {...props}
+            />
+        )}
         {label && (
-            <label className="form-check-label" htmlFor={id} title={title}>
+            <label
+                htmlFor={id}
+                title={title}
+                style={reverse ? { gridColumn: '1', gridRow: '1' } : undefined}
+            >
                 {label}
             </label>
         )}

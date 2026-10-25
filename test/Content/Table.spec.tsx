@@ -1,122 +1,72 @@
-import { assertLooksLike } from '@tech_query/snabbdom-looks-like';
-import { createCell } from 'web-cell';
-import classNames from 'classnames';
+import { expect } from 'expect';
+import { describe, it } from 'node:test';
 
-import { Table, TableRow, InputCell } from '../../source/Content/Table';
-import style from '../../source/Content/Table/index.less';
-import { Field } from '../../source/Form/Field';
+import { Table } from '../../source/Content/Table';
+import { assertLooksLike, render } from '../render';
 
 describe('Table', () => {
-    it('should render a Responsive Table defaultly', () => {
+    it('should preserve native table sections without a wrapper by default', () => {
         assertLooksLike(
             <Table>
-                <TableRow type="head">
-                    <th></th>
-                </TableRow>
-                <TableRow>
-                    <td></td>
-                </TableRow>
+                <thead>
+                    <tr>
+                        <th>Head</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cell</td>
+                    </tr>
+                </tbody>
             </Table>,
-            <div className="table-responsive">
-                <table className={`table ${style.table}`}>
-                    <thead>
-                        <tr data-type="head">
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-type="body">
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Head</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cell</td>
+                    </tr>
+                </tbody>
+            </table>
         );
     });
 
-    it('should render a Checkable Table', () => {
-        assertLooksLike(
-            <Table>
-                <TableRow type="head" id="all" checked={false}>
-                    <th></th>
-                </TableRow>
-                <TableRow id="row-1" checked>
-                    <td></td>
-                </TableRow>
-            </Table>,
-            <div className="table-responsive">
-                <table className={`table ${style.table}`}>
-                    <thead>
-                        <tr data-type="head" id="all">
-                            <th className={style['row-checker']}>
-                                <Field
-                                    type="checkbox"
-                                    id="all-check"
-                                    name="table-row"
-                                    value="all"
-                                    checked={false}
-                                />
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-type="body" id="row-1">
-                            <td className={style['row-checker']}>
-                                <Field
-                                    type="checkbox"
-                                    id="row-1-check"
-                                    name="table-row"
-                                    value="row-1"
-                                    checked
-                                />
-                            </td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    it('should render responsive wrappers at all sizes or a breakpoint', () => {
+        expect(render(<Table responsive />).firstElementChild.className).toBe(
+            'table-responsive'
         );
+        expect(
+            render(<Table responsive="xl" />).firstElementChild.className
+        ).toBe('xl:table-responsive');
+        expect(
+            render(<Table responsive="2xl" />).firstElementChild.className
+        ).toBe('2xl:table-responsive');
     });
 
-    it('should render a Responsive Table with options', () => {
-        assertLooksLike(
+    it('should apply table variants and sizing', () => {
+        const table = render(
             <Table
-                theme="dark"
-                center
-                border
+                variant="inverse"
+                size="sm"
+                bordered
                 striped
                 hover
-                small
-                responsive="xl"
-            />,
-            <div className="table-responsive-xl">
-                <table
-                    className={classNames(
-                        'table',
-                        'table-dark',
-                        'table-bordered',
-                        'table-striped',
-                        'table-hover',
-                        'table-sm',
-                        style.table,
-                        style['cell-center']
-                    )}
-                />
-            </div>
+                caption="top"
+            />
+        ).querySelector('table');
+
+        expect(table.className).toBe(
+            'table theme-inverse table-sm table-striped table-hover table-bordered caption-top'
         );
     });
 
-    it('should render an Inputable Table Cell', () => {
-        assertLooksLike(
-            <InputCell colSpan={2} name="test" required />,
-            <td colSpan={2}>
-                <input
-                    className="form-control border-start-0 border-end-0 border-top-0 rounded-0"
-                    name="test"
-                    required
-                />
-            </td>
-        );
+    it('should support striped columns and borderless tables', () => {
+        expect(
+            render(<Table striped="columns" borderless />).firstElementChild
+                .className
+        ).toBe('table table-striped-columns table-borderless');
     });
 });

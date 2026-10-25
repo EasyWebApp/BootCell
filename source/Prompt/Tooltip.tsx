@@ -9,6 +9,8 @@ import {
     observer
 } from 'web-cell';
 
+import { BootstrapStyles } from '../BootstrapStyles';
+
 export const Tooltip: FC<WebCellProps> = ({
     className = '',
     children,
@@ -63,10 +65,7 @@ export class TooltipBox extends HTMLElement implements WebCell {
 
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                />
+                <BootstrapStyles />
                 <slot />
 
                 {show && <Tooltip>{content}</Tooltip>}

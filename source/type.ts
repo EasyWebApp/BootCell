@@ -1,13 +1,12 @@
-type Subtle<T extends string> = `${T}${'' | '-subtle'}`;
-
 export enum Status {
     primary = 'primary',
     secondary = 'secondary',
-    tertiary = 'tertiary',
     success = 'success',
     info = 'info',
     warning = 'warning',
-    danger = 'danger'
+    danger = 'danger',
+    accent = 'accent',
+    inverse = 'inverse'
 }
 
 export enum Theme {
@@ -17,17 +16,24 @@ export enum Theme {
 
 export type BasicColor = 'body' | 'black' | 'white';
 
+export type ThemeColor = keyof typeof Status;
+
+type LayerColor = '1' | '2' | '3' | '4';
+
 export type TextColor =
     | BasicColor
-    | Exclude<keyof typeof Status, 'tertiary'>
-    | keyof typeof Theme;
+    | LayerColor
+    | ThemeColor
+    | `${'emphasis' | 'contrast'}-${ThemeColor}`
+    | 'reset';
 
 export type BackgroundColor =
-    | Subtle<TextColor>
-    | `body-${'emphasis' | 'secondary' | 'tertiary'}`
+    | ThemeColor
+    | `${'subtle' | 'muted'}-${ThemeColor}`
     | BasicColor
+    | LayerColor
     | 'transparent';
 
-export type Size = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export type PositionY = 'top' | 'bottom';

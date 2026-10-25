@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
 import { Image, ImageProps } from '../Media/Image';
-import { TextColor, PositionY } from '../type';
+import { BackgroundColor, TextColor, PositionY } from '../type';
 
 export interface CardProps extends WebCellProps<HTMLDivElement> {
-    bg?: TextColor;
-    text?: TextColor | 'white' | 'muted';
+    bg?: BackgroundColor;
+    text?: TextColor;
     border?: TextColor;
     body?: boolean;
 }
@@ -23,8 +23,8 @@ export const Card: FC<CardProps> = ({
     <div
         className={classNames(
             'card',
-            bg && `text-bg-${bg}`,
-            text && `text-${text}`,
+            bg && `bg-${bg}`,
+            text && `fg-${text}`,
             border && `border-${border}`,
             className
         )}

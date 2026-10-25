@@ -6,7 +6,8 @@ import { BackgroundColor } from '../type';
 import { Container, ContainerProps } from '../Layout/Grid';
 
 export interface JumbotronProps
-    extends Omit<ContainerProps, 'title'>,
+    extends
+        Omit<ContainerProps, 'title'>,
         Record<'title' | 'description', JsxChildren> {
     bg?: BackgroundColor;
     rounded?: 0 | 1 | 2 | 3 | 4 | 5;
@@ -14,8 +15,8 @@ export interface JumbotronProps
 
 export const Jumbotron: FC<JumbotronProps> = ({
     fluid,
-    className = `py-5 ${fluid ? '' : 'px-5'}`,
-    bg = 'body-tertiary',
+    className = `py-12 ${fluid ? '' : 'px-12'}`,
+    bg = '1',
     rounded = fluid ? 0 : 3,
     title,
     description,
@@ -25,19 +26,19 @@ export const Jumbotron: FC<JumbotronProps> = ({
     <header
         className={classNames(
             bg && `bg-${bg}`,
-            rounded && `rounded-${rounded}`,
+            rounded != null && `rounded-${rounded ? rounded + 2 : 0}`,
             className
         )}
         {...props}
     >
         <Container fluid={fluid}>
-            <h1 className="display-4">{title}</h1>
+            <h1 className="fs-5xl fw-light">{title}</h1>
 
-            <p className="lead">{description}</p>
+            <p className="fs-lg fw-light">{description}</p>
 
             {children && (
                 <>
-                    <hr className="my-4" />
+                    <hr className="my-7" />
                     {children}
                 </>
             )}
