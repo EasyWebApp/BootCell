@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import { expect } from 'expect';
 import { DOMRenderer } from 'dom-renderer';
+import { runInAction } from 'mobx';
 import { assertLooksLike, render } from '../render';
 import {
     Dropdown,
@@ -74,6 +75,17 @@ describe('Menu', () => {
                 .querySelector('a')
                 .classList.contains('theme-danger')
         ).toBe(true);
+
+        runInAction(() => (button.theme = 'success'));
+        await tick();
+        expect(toggle.classList.contains('theme-success')).toBe(true);
+        expect(toggle.classList.contains('theme-danger')).toBe(false);
+        expect(
+            button.shadowRoot
+                .querySelector('a')
+                .classList.contains('theme-success')
+        ).toBe(true);
+
         toggle.click();
         await tick();
         expect(document.activeElement).toBe(item);

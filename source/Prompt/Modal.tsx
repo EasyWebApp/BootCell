@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
 import { Size } from '../type';
+import { DialogController } from '../Layout/DialogController';
 
 export interface ModalProps extends WebCellProps<HTMLDialogElement> {
     backdrop?: 'static' | boolean;
@@ -46,14 +47,11 @@ export const Modal: FC<ModalProps> = ({
         data-bs-backdrop={backdrop != null ? backdrop + '' : undefined}
         tabIndex={-1}
         ariaHidden={!show + ''}
-        ref={node => {
-            if (!node) return;
-
-            const dialog = node as HTMLDialogElement;
-
-            if (show && !dialog.open) dialog.showModal();
-            else if (!show && dialog.open) dialog.close();
-        }}
+        data-bs-open={String(!!show)}
+        {...DialogController.props(
+            { show: !!show, modal: backdrop !== false },
+            ref
+        )}
         onCancel={event => {
             event.preventDefault();
             event.currentTarget.dispatchEvent(new CustomEvent('hide'));

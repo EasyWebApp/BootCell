@@ -138,12 +138,16 @@ snapshots for these BootCell-rendered changes:
   Keep application `show` state in sync with `onHide`. `backdrop={false}` uses
   non-modal `show()`; other values use `showModal()`. Close buttons use the passed
   `onHide` callback. Recheck refs and any queries for a separate backdrop element.
+  Updating `show` or `backdrop` synchronizes the existing dialog without
+  remounting it; refs are forwarded to the native dialog.
 - **Modal:** refs now target `HTMLDialogElement`. Header, title, body, and footer
   are direct children of the dialog; do not rely on `.modal-dialog` or
   `.modal-content` wrappers. Use `show` to control opening and handle the emitted
   `hide` event to update application state. The `centered` prop no longer adds a
   positioning class. Existing `size`, `fullscreen`, `scrollable`, and `animation`
   props now affect the dialog itself.
+  Like Drawer, changes to `show` and `backdrop` apply to the existing dialog.
+  `backdrop={false}` uses non-modal `show()`; other values use `showModal()`.
 - **FormCheck:** renders a `.form-field` wrapper. Radio and checkbox classes are
   on the input; a switch wraps its input inside `.switch`. Check label/input
   selectors and `inline` / `reverse` layouts.

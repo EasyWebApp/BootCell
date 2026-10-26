@@ -1,5 +1,6 @@
 import { expect } from 'expect';
 import { fn } from 'jest-mock';
+import { DOMRenderer } from 'dom-renderer';
 import { describe, it } from 'node:test';
 import { assertLooksLike, render } from '../render';
 import {
@@ -65,5 +66,44 @@ describe('Modal Dialog', () => {
         dialog.dispatchEvent(cancel);
         expect(cancel.defaultPrevented).toBe(true);
         expect(onHide).toHaveBeenCalledTimes(2);
+    });
+
+    it('should update visibility and backdrop mode without reinvoking its ref', () => {
+        const root = document.createElement('div');
+        const renderer = new DOMRenderer();
+        const ref = fn();
+        const view = (show: boolean, backdrop?: boolean | 'static') => (
+            <Modal show={show} backdrop={backdrop} ref={ref}>
+                <ModalBody>Content</ModalBody>
+            </Modal>
+        );
+        renderer.render(view(false), root);
+        const dialog = root.querySelector('dialog');
+        const show = fn(() => (dialog.open = true));
+        const showModal = fn(() => (dialog.open = true));
+        const close = fn(() => (dialog.open = false));
+        Object.assign(dialog, { show, showModal, close });
+
+        expect(ref).toHaveBeenCalledWith(dialog);
+        renderer.render(view(true), root);
+        expect(root.querySelector('dialog')).toBe(dialog);
+        expect(showModal).toHaveBeenCalledTimes(1);
+        expect(dialog.getAttribute('aria-hidden')).toBe('false');
+        expect(ref).toHaveBeenCalledTimes(1);
+        renderer.render(view(true, false), root);
+        expect(close).toHaveBeenCalledTimes(1);
+        expect(show).toHaveBeenCalledTimes(1);
+        renderer.render(view(true, false), root);
+        expect(show).toHaveBeenCalledTimes(1);
+        renderer.render(view(true, 'static'), root);
+        expect(close).toHaveBeenCalledTimes(2);
+        expect(showModal).toHaveBeenCalledTimes(2);
+        renderer.render(view(false), root);
+        expect(dialog.open).toBe(false);
+        expect(dialog.getAttribute('aria-hidden')).toBe('true');
+        expect(dialog.dataset.bsOpen).toBe('false');
+        expect(close).toHaveBeenCalledTimes(3);
+        renderer.render(<div />, root);
+        expect(ref).toHaveBeenLastCalledWith(undefined);
     });
 });
