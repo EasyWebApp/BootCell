@@ -3,6 +3,7 @@ import { FC, WebCellProps } from 'web-cell';
 import { uniqueID } from 'web-utility';
 
 import { CloseButton } from '../Form/Button';
+import { DialogController } from './DialogController';
 
 export const DrawerTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
     className = '',
@@ -58,6 +59,7 @@ export const Drawer: FC<DrawerProps> = ({
     show,
     onHide,
     onClick,
+    ref,
     children,
     ...props
 }) => (
@@ -69,16 +71,11 @@ export const Drawer: FC<DrawerProps> = ({
             ...style
         }}
         tabIndex={-1}
-        ref={node => {
-            if (!node) return;
-
-            const dialog = node as HTMLDialogElement;
-
-            if (show && !dialog.open) {
-                if (backdrop === false) dialog.show();
-                else dialog.showModal();
-            } else if (!show && dialog.open) dialog.close();
-        }}
+        data-bs-open={String(!!show)}
+        {...DialogController.props(
+            { show: !!show, modal: backdrop !== false },
+            ref
+        )}
         data-bs-backdrop={
             backdrop === 'static'
                 ? 'static'

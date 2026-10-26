@@ -2,7 +2,6 @@
 .parcel-cache/
 .prettierrc.yml
 pnpm-workspace.yaml
-v1/
 test/
 docs/
 .husky/

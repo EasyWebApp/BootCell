@@ -1,5 +1,6 @@
 import { expect } from 'expect';
 import { describe, it } from 'node:test';
+import { runInAction } from 'mobx';
 
 import { Nav, NavDropdown, NavLink } from '../../source/Navigator/Nav';
 import { render } from '../render';
@@ -47,5 +48,53 @@ describe('Nav', () => {
             caption: 'More'
         });
         expect(tree.children[0].props.href).toBe('#sample');
+    });
+
+    it('prevents disabled links from navigating or invoking actions', () => {
+        let clicked = false;
+        const root = render(
+            <NavLink
+                href="#test"
+                disabled
+                onClick={() => {
+                    clicked = true;
+                }}
+            >
+                Disabled
+            </NavLink>
+        );
+        const link = root.querySelector('a');
+        const event = new MouseEvent('click', {
+            cancelable: true,
+            bubbles: true
+        });
+        link.dispatchEvent(event);
+        expect(event.defaultPrevented).toBe(true);
+        expect(clicked).toBe(false);
+        expect(link.tabIndex).toBe(-1);
+    });
+
+    it('supports legacy layout through native utilities without stale classes', async () => {
+        const nav = new Nav();
+        nav.className = 'custom';
+        runInAction(() => {
+            nav.variant = 'pills';
+            nav.direction = 'column';
+            nav.align = 'end';
+            nav.scrollable = true;
+        });
+        await nav.connectedCallback();
+        expect(nav.className).toContain('flex-column');
+        expect(nav.className).toContain('overflow-x-auto');
+        runInAction(() => {
+            nav.variant = 'tabs';
+            nav.direction = 'row';
+            nav.align = 'center';
+        });
+        await new Promise(resolve => setTimeout(resolve, 0));
+        expect(nav.classList.contains('nav-pills')).toBe(false);
+        expect(nav.classList.contains('flex-column')).toBe(false);
+        expect(nav.classList.contains('nav-tabs')).toBe(true);
+        expect(nav.classList.contains('custom')).toBe(true);
     });
 });

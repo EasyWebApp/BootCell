@@ -3,12 +3,23 @@ import { configure } from 'mobx';
 import { documentReady, formToJSON } from 'web-utility';
 
 import { CodeBlock } from '../source/Content';
+import { Tab, Tabs } from '../source/Content/Tabs';
+import { WeekCalendar } from '../source/Calendar/WeekCalendar';
+import { ShareBar } from '../source/Navigator/ShareBar';
+import { Wizard } from '../source/Content/Wizard';
+import { Carousel, CarouselItem } from '../source/Media/Carousel';
+import { DropdownButton, DropdownItem } from '../source/Navigator/Dropdown';
+import { PopoverBox } from '../source/Prompt/Popover';
+import { Toast } from '../source/Prompt/Toast';
 import {
     Button,
     FileModel,
     FilePicker,
     FileUploader,
+    Form,
+    FormCheck,
     FormControl,
+    FormField,
     RangeInput
 } from '../source/Form';
 
@@ -73,89 +84,102 @@ const Content = () => (
                 name="test.js"
                 value="alert('你好，世界！')"
             />
-            {/* <section>
-                <h2>Tab View</h2>
-
-                <h3>Nav tab</h3>
-                <TabView>
-                    <NavLink>First</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">111</h4>
-                    </TabPanel>
-
-                    <NavLink>Second</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">222</h4>
-                    </TabPanel>
-                </TabView>
-
-                <h3>Nav tab - Pill</h3>
-                <TabView mode="pills" tabWidth="fill">
-                    <NavLink>First</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">111</h4>
-                    </TabPanel>
-
-                    <NavLink>Second</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">222</h4>
-                    </TabPanel>
-                </TabView>
-
-                <h3>Nav tab - Masthead</h3>
-                <TabView mode="masthead" tabWidth="justified">
-                    <NavLink>First</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">111</h4>
-                    </TabPanel>
-
-                    <NavLink>Second</NavLink>
-                    <TabPanel>
-                        <h4 className="text-center">222</h4>
-                    </TabPanel>
-                </TabView>
-
-                <h3>List tab</h3>
-                <TabView direction="column">
-                    <ListItem>First</ListItem>
-                    <TabPanel>
-                        <h4 className="text-center">111</h4>
-                    </TabPanel>
-
-                    <ListItem>Second</ListItem>
-                    <TabPanel>
-                        <h4 className="text-center">222</h4>
-                    </TabPanel>
-                </TabView>
-
-                <h3>Step tab</h3>
-                <TabView>
-                    <Step icon={1}>First</Step>
-                    <TabPanel>
-                        <form
-                            className="d-flex justify-content-around"
-                            onSubmit={(event: Event) => event.preventDefault()}
-                        >
-                            <Button type="submit">Next</Button>
+            <section>
+                <h2>Tabs</h2>
+                <Tabs>
+                    <Tab caption="First">
+                        <p>First pane</p>
+                    </Tab>
+                    <Tab caption="Second">
+                        <p>Second pane</p>
+                    </Tab>
+                </Tabs>
+            </section>
+            <section>
+                <h2>Week calendar</h2>
+                <WeekCalendar
+                    startTime="08:00"
+                    endTime="18:00"
+                    hourInterval={2}
+                />
+            </section>
+            <section>
+                <h2>Share</h2>
+                <ShareBar targets={['Weixin', 'Twitter']} />
+            </section>
+            <section>
+                <h2>Dropdown and popover</h2>
+                <DropdownButton title="Actions" id="demo-dropdown">
+                    <DropdownItem href="#first" eventKey="first">
+                        First action
+                    </DropdownItem>
+                    <DropdownItem href="#second" eventKey="second">
+                        Second action
+                    </DropdownItem>
+                </DropdownButton>
+                <PopoverBox
+                    header="Details"
+                    body={<strong>Popover content</strong>}
+                >
+                    <Button type="button">Show details</Button>
+                </PopoverBox>
+            </section>
+            <section>
+                <h2>Validated form</h2>
+                <Form validate onSubmit={event => event.preventDefault()}>
+                    <FormField
+                        id="demo-email"
+                        label="Email"
+                        type="email"
+                        required
+                        tips="Use a valid email address"
+                        invalidMessage="Enter a valid email"
+                    />
+                    <FormCheck
+                        type="switch"
+                        id="demo-notify"
+                        label="Notifications"
+                    />
+                    <Button type="submit">Validate form</Button>
+                </Form>
+            </section>
+            <section>
+                <h2>Toast</h2>
+                <Toast title="Notification" time="Now">
+                    Migration complete
+                </Toast>
+            </section>
+            <section>
+                <h2>Wizard</h2>
+                <Wizard>
+                    <Tab caption="Details">
+                        <form>
+                            <label>
+                                Name <input name="name" required />
+                            </label>
+                            <Button type="submit">Next step</Button>
                         </form>
-                    </TabPanel>
-
-                    <Step icon={2}>Second</Step>
-                    <TabPanel>
-                        <form
-                            className="d-flex justify-content-around"
-                            onSubmit={(event: Event) => event.preventDefault()}
-                        >
-                            <Button type="reset" color="danger">
-                                Previous
-                            </Button>
-                            <Button type="submit" color="success">
-                                Submit
-                            </Button>
+                    </Tab>
+                    <Tab caption="Confirm">
+                        <form>
+                            <p>Ready</p>
+                            <Button type="reset">Previous step</Button>
+                            <Button type="submit">Finish</Button>
                         </form>
-                    </TabPanel>
-                </TabView>
-            </section> */}
+                    </Tab>
+                </Wizard>
+            </section>
+            <section>
+                <h2>Carousel</h2>
+                <Carousel interval={null}>
+                    <CarouselItem>
+                        <div className="p-5 bg-2">First slide</div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div className="p-5 bg-3">Second slide</div>
+                    </CarouselItem>
+                </Carousel>
+            </section>
         </main>
     </>
 );

@@ -24,6 +24,7 @@ export const Button: FC<ButtonProps> = ({
     theme,
     size,
     active,
+    onClick,
     children,
     ...props
 }) => {
@@ -44,20 +45,34 @@ export const Button: FC<ButtonProps> = ({
             ariaDisabled={disabled?.toString()}
             ariaPressed={active?.toString()}
             {...{ href, ...props }}
+            onClick={event => {
+                if (disabled) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else onClick?.(event);
+            }}
         >
             {children}
         </a>
     ) : (
-        <button className={Class} {...props} ariaPressed={active?.toString()}>
+        <button
+            className={Class}
+            {...props}
+            onClick={onClick}
+            ariaPressed={active?.toString()}
+        >
             {children}
         </button>
     );
 };
 
 export function isButton(node: JsxChildren): node is VNode {
-    const { selector, props } = node as VNode;
-
-    return /^(a|input|button)/.test(selector) && props?.className?.btn;
+    return (
+        node instanceof VNode &&
+        /^(a|input|button)$/.test(node.tagName?.toLowerCase()) &&
+        typeof node.props?.className === 'string' &&
+        node.props.className.split(/\s+/).includes('btn')
+    );
 }
 
 export type IconButtonProps = IconProps & Omit<ButtonProps, 'size'>;
@@ -92,9 +107,11 @@ export const CloseButton: FC<WebCellProps<HTMLButtonElement>> = ({
 
 export interface ToggleButtonProps
     extends
-        WebCellProps<HTMLInputElement>,
+        Omit<WebCellProps<HTMLInputElement>, 'size'>,
         Pick<ButtonProps, 'variant' | 'theme'> {
     type: Exclude<FormCheckProps['type'], 'switch'>;
+    size?: ButtonProps['size'];
+    inputRef?: WebCellProps<HTMLInputElement>['ref'];
 }
 
 export const ToggleButton: FC<ToggleButtonProps> = ({
@@ -102,6 +119,8 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
     id = uniqueID(),
     variant = 'solid',
     theme = 'primary',
+    size,
+    inputRef,
     children,
     ...props
 }) => (
@@ -110,10 +129,11 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
             'btn-check',
             `btn-${variant}`,
             `theme-${theme}`,
+            size && `btn-${size}`,
             className
         )}
     >
-        <input id={id} autocomplete="off" {...props} />
+        <input id={id} autocomplete="off" {...props} ref={inputRef} />
         {children}
     </label>
 );

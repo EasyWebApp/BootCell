@@ -9,7 +9,7 @@ describe('FormField', () => {
         const root = render(
             <FormField className="mb-4" id="name" label="Name" required />
         );
-        expect(root.firstElementChild.className).toBe('mb-4');
+        expect(root.firstElementChild.className).toBe('form-field mb-4');
         expect(root.querySelector('label').textContent).toBe('Name');
         expect(root.querySelector('input').id).toBe('name');
         expect(root.querySelector('input').required).toBe(true);
@@ -19,12 +19,28 @@ describe('FormField', () => {
         const root = render(
             <FormField id="name" labelFloat placeholder="Name" />
         );
-        expect(root.firstElementChild.className.trim()).toBe('form-floating');
+        expect(root.querySelector('.form-floating')).not.toBeNull();
         expect(
-            Array.from(root.firstElementChild.children, node => node.tagName)
+            Array.from(
+                root.querySelector('.form-floating').children,
+                node => node.tagName
+            )
         ).toEqual(['INPUT', 'LABEL']);
         expect(root.querySelector('label').textContent).toBe('Name');
+        expect(root.querySelector('label').htmlFor).toBe('name');
         expect(root.querySelector('input').placeholder).toBe('Name');
+    });
+
+    it('should preserve the default value of native text controls', () => {
+        const input = render(
+            <FormField label="Name" defaultValue="Ada" />
+        ).querySelector('input');
+        const textarea = render(
+            <FormField as="textarea" label="Notes" defaultValue="Details" />
+        ).querySelector('textarea');
+
+        expect(input.value).toBe('Ada');
+        expect(textarea.value).toBe('Details');
     });
 
     it('should prefer an explicit label over title and placeholder', () => {

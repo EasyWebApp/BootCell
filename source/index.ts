@@ -9,3 +9,6 @@ export * from './Prompt';
 export * from './Navigator';
 export * from './Calendar/CountDown';
 export * from './Calendar/MonthCalendar';
+export * from './Calendar/CalendarTable';
+export * from './Calendar/WeekCalendar';
+export * from './Calendar/WeekCalendarModel';
