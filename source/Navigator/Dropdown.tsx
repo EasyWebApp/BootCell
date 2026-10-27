@@ -74,6 +74,10 @@ export class DropdownButton extends HTMLElement {
 
     @attribute
     @observable
+    accessor theme: ButtonProps['theme'];
+
+    @attribute
+    @observable
     accessor size: ButtonProps['size'];
 
     @observable
@@ -88,14 +92,14 @@ export class DropdownButton extends HTMLElement {
     accessor show = false;
 
     renderContent() {
-        const { boxClass, buttonClass, variant, size, caption } = this,
+        const { boxClass, buttonClass, variant, theme, size, caption } = this,
             { disabled, show } = this;
 
         return (
             <Dropdown className={classNames(boxClass, { show })}>
                 <DropdownToggle
                     className={classNames(buttonClass, { show })}
-                    {...{ variant, size, disabled }}
+                    {...{ variant, theme, size, disabled }}
                     onClick={() => (this.show = !show)}
                 >
                     {caption}

@@ -13,6 +13,7 @@ import {
 } from '../source/Form';
 
 import 'prismjs/components/prism-typescript';
+import { DialogExamples } from './Dialog';
 
 configure({ enforceActions: 'never' });
 
@@ -156,6 +157,21 @@ const Content = () => (
                     </TabPanel>
                 </TabView>
             </section> */}
+            <section>
+                <h2>Dialog</h2>
+                <p>
+                    Compare with the Bootstrap{' '}
+                    <a href="https://getbootstrap.com/docs/5.3/components/offcanvas/">
+                        Offcanvas
+                    </a>{' '}
+                    and{' '}
+                    <a href="https://getbootstrap.com/docs/5.3/components/modal/">
+                        Modal
+                    </a>{' '}
+                    documentation.
+                </p>
+                <DialogExamples />
+            </section>
         </main>
     </>
 );

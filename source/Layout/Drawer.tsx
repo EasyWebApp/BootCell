@@ -1,7 +1,17 @@
 import classNames from 'classnames';
-import { FC, WebCellProps } from 'web-cell';
+import { observable } from 'mobx';
+import {
+    FC,
+    WebCell,
+    WebCellProps,
+    attribute,
+    component,
+    observer,
+    on
+} from 'web-cell';
 import { uniqueID } from 'web-utility';
 
+import { BootstrapStyles } from '../BootstrapStyles';
 import { CloseButton } from '../Form/Button';
 
 export const DrawerTitle: FC<WebCellProps<HTMLHeadingElement>> = ({
@@ -45,59 +55,107 @@ export const DrawerBody: FC<WebCellProps<HTMLDivElement>> = ({
     </div>
 );
 
-export interface DrawerProps extends WebCellProps<HTMLDialogElement> {
+export interface DrawerProps extends WebCellProps {
     backdrop?: boolean | 'static';
     show?: boolean;
-    onHide?: () => any;
+    onHide?: (event: CustomEvent) => any;
 }
 
-export const Drawer: FC<DrawerProps> = ({
-    className = '',
-    style,
-    backdrop = true,
-    show,
-    onHide,
-    onClick,
-    children,
-    ...props
-}) => (
-    <dialog
-        className={classNames('drawer drawer-end', className)}
-        style={{
-            '--drawer-backdrop-bg':
-                backdrop === false ? 'transparent' : undefined,
-            ...style
-        }}
-        tabIndex={-1}
-        ref={node => {
-            if (!node) return;
+export interface Drawer extends WebCell<DrawerProps> {}
 
-            const dialog = node as HTMLDialogElement;
+@component({ tagName: 'drawer-box', mode: 'open' })
+@observer
+export class Drawer extends HTMLElement implements WebCell<DrawerProps> {
+    @attribute
+    @observable
+    accessor backdrop: DrawerProps['backdrop'] = true;
 
-            if (show && !dialog.open) {
-                if (backdrop === false) dialog.show();
-                else dialog.showModal();
-            } else if (!show && dialog.open) dialog.close();
-        }}
-        data-bs-backdrop={
-            backdrop === 'static'
-                ? 'static'
-                : backdrop === false
-                  ? 'false'
-                  : undefined
+    @attribute
+    @observable
+    accessor show = false;
+
+    @attribute
+    @observable
+    accessor ariaLabelledby: string;
+
+    private currentModal?: boolean;
+
+    get dialog() {
+        return this.shadowRoot?.querySelector('dialog');
+    }
+
+    updatedCallback() {
+        const dialog = this.dialog;
+
+        if (!dialog) return;
+
+        const { show, backdrop } = this,
+            modal = backdrop !== false;
+
+        if (
+            dialog.open &&
+            (!show ||
+                (this.currentModal !== undefined &&
+                    this.currentModal !== modal))
+        )
+            dialog.close();
+
+        if (show && !dialog.open) {
+            if (modal) dialog.showModal();
+            else dialog.show();
         }
-        onCancel={() => onHide?.()}
-        onClick={event => {
-            onClick?.(event);
+        this.currentModal = modal;
+    }
 
-            if (event.target === event.currentTarget && backdrop === true)
-                onHide?.();
-        }}
-        {...props}
-    >
-        {children}
-    </dialog>
-);
+    @on('click', 'dialog')
+    handleBackdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
+        if (event.target === dialog && this.backdrop === true)
+            this.emit('hide', undefined, { bubbles: true });
+    }
+
+    @on('click', '[data-bs-dismiss="drawer"]')
+    handleDismiss() {
+        this.emit('hide', undefined, { bubbles: true });
+    }
+
+    render() {
+        const { backdrop, show } = this;
+
+        return (
+            <>
+                <BootstrapStyles />
+                <dialog
+                    key="drawer"
+                    className={classNames(
+                        'drawer drawer-end',
+                        backdrop === 'static' && 'drawer-static',
+                        this.className
+                    )}
+                    style={{
+                        '--drawer-backdrop-bg':
+                            backdrop === false ? 'transparent' : undefined
+                    }}
+                    tabIndex={-1}
+                    id={this.id}
+                    aria-labelledby={this.ariaLabelledby}
+                    data-bs-open={String(!!show)}
+                    data-bs-backdrop={
+                        backdrop === 'static'
+                            ? 'static'
+                            : backdrop === false
+                              ? 'false'
+                              : undefined
+                    }
+                    onCancel={() =>
+                        this.emit('hide', undefined, { bubbles: true })
+                    }
+                >
+                    <slot />
+                </dialog>
+            </>
+        );
+    }
+}
 
 export interface DrawerBoxProps extends DrawerProps {
     title?: string;
@@ -113,8 +171,8 @@ export const DrawerBox: FC<DrawerBoxProps> = ({
     children,
     ...props
 }) => (
-    <Drawer {...{ ...props, onHide }} aria-labelledby={titleId}>
-        <DrawerHeader {...{ closeButton, onHide }}>
+    <Drawer {...{ ...props, onHide }} ariaLabelledby={titleId}>
+        <DrawerHeader {...{ closeButton }}>
             <DrawerTitle id={titleId}>{title}</DrawerTitle>
         </DrawerHeader>
         <DrawerBody>{children}</DrawerBody>
