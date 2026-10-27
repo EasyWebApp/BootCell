@@ -134,16 +134,13 @@ snapshots for these BootCell-rendered changes:
   button. `AccordionBody` is a plain `<div>`, not a `Collapse`; remove its old
   collapse-specific props. Native details interaction controls expansion.
   `alwaysOpen` still determines whether other items may remain open.
-- **Drawer:** renders an `HTMLDialogElement`, not a div plus a separate backdrop.
-  Keep application `show` state in sync with `onHide`. `backdrop={false}` uses
-  non-modal `show()`; other values use `showModal()`. Close buttons use the passed
-  `onHide` callback. Recheck refs and any queries for a separate backdrop element.
-- **Modal:** refs now target `HTMLDialogElement`. Header, title, body, and footer
-  are direct children of the dialog; do not rely on `.modal-dialog` or
-  `.modal-content` wrappers. Use `show` to control opening and handle the emitted
-  `hide` event to update application state. The `centered` prop no longer adds a
-  positioning class. Existing `size`, `fullscreen`, `scrollable`, and `animation`
-  props now affect the dialog itself.
+- **Drawer and Modal:** their public props model Bootstrap options, not the
+  internal HTML element. Use `show` and `backdrop`, plus the component-specific
+  keyboard, size, and layout props, and handle the bubbling `hide` event (or
+  `onHide`) to update application state. Do not rely on native dialog element
+  refs or on arbitrary HTML attributes and styles being forwarded. Children
+  remain normal light-DOM children and are projected into the rendered
+  component.
 - **FormCheck:** renders a `.form-field` wrapper. Radio and checkbox classes are
   on the input; a switch wraps its input inside `.switch`. Check label/input
   selectors and `inline` / `reverse` layouts.

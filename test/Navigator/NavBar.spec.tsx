@@ -1,5 +1,6 @@
 import { expect } from 'expect';
 import { describe, it } from 'node:test';
+import { setTimeout } from 'node:timers/promises';
 
 import {
     DrawerNavbar,
@@ -7,6 +8,7 @@ import {
     NavbarBrand,
     NavbarToggle
 } from '../../source/Navigator/Navbar';
+import { Drawer } from '../../source/Layout/Drawer';
 import { render } from '../render';
 
 describe('Navbar', () => {
@@ -47,12 +49,16 @@ describe('Navbar', () => {
         expect(nav.querySelector('a').textContent).toBe('Test');
     });
 
-    it('should wire the drawer title and toggle to stable IDs', () => {
+    it('should wire the drawer title and toggle to stable IDs', async () => {
         const navbar = new DrawerNavbar();
         navbar.title = 'Test';
         navbar.expand = 'md';
         const root = render(navbar.renderContent());
-        const dialog = root.querySelector('dialog');
+        document.body.append(root);
+        await setTimeout(0);
+
+        const drawer = root.querySelector('drawer-box') as Drawer,
+            { dialog } = drawer;
         const toggle = root.querySelector<HTMLButtonElement>('.navbar-toggler');
 
         expect(toggle.getAttribute('aria-controls')).toBe(dialog.id);
@@ -60,12 +66,13 @@ describe('Navbar', () => {
             root.querySelector('h5').id
         );
         expect(dialog.classList.contains('md:drawer')).toBe(true);
-        expect(root.querySelector('slot')).not.toBeNull();
+        expect(drawer.shadowRoot.querySelector('slot')).not.toBeNull();
         toggle.click();
         expect(navbar.open).toBe(true);
         navbar.close(new KeyboardEvent('keyup', { key: 'a' }));
         expect(navbar.open).toBe(true);
         navbar.close(new KeyboardEvent('keyup', { key: 'Escape' }));
         expect(navbar.open).toBe(false);
+        root.remove();
     });
 });

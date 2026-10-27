@@ -148,7 +148,7 @@ export class DrawerNavbar extends HTMLElement implements WebCell {
         this.addEventListener('click', this.handleLink);
     }
 
-    close = (event?: KeyboardEvent | MouseEvent) => {
+    close = (event?: KeyboardEvent | MouseEvent | CustomEvent) => {
         if (
             event instanceof KeyboardEvent &&
             !['Escape', 'Enter'].includes(event.key)
@@ -178,7 +178,7 @@ export class DrawerNavbar extends HTMLElement implements WebCell {
                         className={
                             expand && expand !== true ? `${expand}:drawer` : ''
                         }
-                        aria-labelledby={titleId}
+                        ariaLabelledby={titleId}
                         show={open}
                         onHide={this.close}
                     >
