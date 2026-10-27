@@ -175,19 +175,22 @@ export type FormFieldProps<T extends FormControlTag> = FormGroupProps &
 
 export const FormField = <T extends FormControlTag = 'input'>({
     className,
+    id = uniqueID(),
     label,
     labelFloat,
     ...props
 }: FormFieldProps<T>) => {
     label ||= props.title || (props as FormControlProps<'input'>).placeholder;
 
-    const field = <FormControl {...(props as FormControlProps<T>)} />;
+    const field = <FormControl {...(props as FormControlProps<T>)} id={id} />;
 
     return labelFloat ? (
-        <FloatingLabel {...{ className, label }}>{field}</FloatingLabel>
+        <FloatingLabel {...{ className, label }} htmlFor={id}>
+            {field}
+        </FloatingLabel>
     ) : (
-        <FormGroup className={className}>
-            <FormLabel>{label}</FormLabel>
+        <FormGroup className={classNames('form-field', className)}>
+            {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
             {field}
         </FormGroup>
     );

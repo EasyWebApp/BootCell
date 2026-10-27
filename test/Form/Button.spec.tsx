@@ -1,11 +1,23 @@
 import { expect } from 'expect';
 import { fn } from 'jest-mock';
 import { describe, it } from 'node:test';
-import { assertLooksLike, render } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
+import { render } from '../render';
 import { Button, IconButton } from '../../source/Form/Button';
 import { Icon } from '../../source/Reminder/Icon';
 
 describe('Button', () => {
+    it('should preserve keys through button and anchor wrappers', () => {
+        expect((<Button key="toggle">Toggle</Button>).key).toBe('toggle');
+        expect(
+            (
+                <Button key="link" href="#page">
+                    Page
+                </Button>
+            ).key
+        ).toBe('link');
+    });
+
     it('should render an outline Button', () => {
         assertLooksLike(
             <Button variant="outline" theme="primary">

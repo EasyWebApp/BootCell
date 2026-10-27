@@ -32,9 +32,25 @@ describe('MonthCalendar', () => {
 
         expect(root.querySelectorAll('tbody td')).toHaveLength(42);
         expect(root.querySelector('caption').textContent).toContain('2024-02');
-        expect(root.querySelector('thead').textContent).toBe(
-            'SundayMondayTuesdayWednesdayThursdayFridaySaturday'
-        );
+        expect(root.querySelector('thead').textContent).toBe('SMTWTFS');
+        expect(
+            [...root.querySelectorAll('thead th')].map(cell =>
+                cell.getAttribute('title')
+            )
+        ).toEqual([
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday'
+        ]);
+        expect(
+            [...root.querySelectorAll('thead th')].every(
+                cell => cell.getAttribute('scope') === 'col'
+            )
+        ).toBe(true);
         expect(
             root.querySelector('tbody td').classList.contains('opacity-50')
         ).toBe(true);
@@ -70,10 +86,32 @@ describe('MonthCalendar', () => {
         ]);
         expect(
             Array.from(
-                root.querySelectorAll('thead td'),
+                root.querySelectorAll('thead th'),
                 node => node.className
             )
         ).toEqual(Array(7).fill('theme-accent'));
+    });
+
+    it('should keep table layout fixed regardless of host CSSStyleDeclaration values', () => {
+        const instance = calendar();
+        instance.style.tableLayout = 'auto';
+        instance.style.width = '390px';
+        const table = render(instance.render()).querySelector('table');
+
+        expect(table.style.tableLayout).toBe('fixed');
+        expect(table.style.width).toBe('');
+    });
+
+    it('should use compact localized headings with full accessible titles', () => {
+        const instance = calendar();
+        runInAction(() => (instance.locale = 'zh-CN'));
+        const root = render(instance.render());
+        const formatter = new Intl.DateTimeFormat('zh-CN', {
+            weekday: 'narrow'
+        });
+        expect(
+            [...root.querySelectorAll('thead th')].map(cell => cell.textContent)
+        ).toEqual(instance.dateGrid[0].map(date => formatter.format(date)));
     });
 
     it('should render event links and emit the selected date data', () => {

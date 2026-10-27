@@ -82,6 +82,10 @@ export class MonthCalendar
         this.emit('change', this.currentDate);
     }
 
+    connectedCallback() {
+        this.style.display ||= 'block';
+    }
+
     renderDate = (date: Date) => {
         const { value } = this,
             dateText = formatDate(date, 'YYYY-MM-DD');
@@ -120,11 +124,14 @@ export class MonthCalendar
     };
 
     render() {
-        const { style, variant, theme, weekFormatter, currentDate, dateGrid } =
-            this;
+        const { variant, theme, weekFormatter, currentDate, dateGrid } = this;
+        const shortWeekFormatter = new Intl.DateTimeFormat(
+            weekFormatter.resolvedOptions().locale,
+            { weekday: 'narrow' }
+        );
 
         return (
-            <Table style={{ tableLayout: 'fixed', ...style }}>
+            <Table style={{ tableLayout: 'fixed' }}>
                 <caption>
                     <div className="d-flex justify-content-between align-items-center">
                         <Button
@@ -149,13 +156,18 @@ export class MonthCalendar
                 <thead>
                     <tr>
                         {dateGrid[0].map((date, index, { length }) => (
-                            <td
+                            <th
                                 key={index}
+                                scope="col"
+                                title={weekFormatter.format(date)}
                                 className={`theme-${theme}`}
-                                style={{ width: `calc(100% / ${length})` }}
+                                style={{
+                                    width: `calc(100% / ${length})`,
+                                    overflowWrap: 'anywhere'
+                                }}
                             >
-                                {weekFormatter.format(date)}
-                            </td>
+                                {shortWeekFormatter.format(date)}
+                            </th>
                         ))}
                     </tr>
                 </thead>

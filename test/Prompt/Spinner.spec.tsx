@@ -26,11 +26,31 @@ describe('Spinner', () => {
         );
         expect(root.querySelector('button').disabled).toBe(true);
         expect(root.querySelector('[role="status"]').className).toBe(
-            'spinner-grow spinner-grow-sm fg-primary'
+            'spinner-grow spinner-sm fg-primary'
         );
         expect(root.querySelector('.visually-hidden').textContent).toBe(
             'Pending...'
         );
+    });
+
+    it('should set alpha.1 small-size variables for both animations and retain style overrides', () => {
+        for (const animation of ['border', 'grow'] as const) {
+            const spinner = render(
+                <Spinner animation={animation} size="sm" />
+            ).querySelector<HTMLElement>('[role="status"]');
+            expect(spinner.classList.contains('spinner-sm')).toBe(true);
+            expect(spinner.style.getPropertyValue('--bs-spinner-width')).toBe(
+                '.75em'
+            );
+            expect(spinner.style.getPropertyValue('--bs-spinner-height')).toBe(
+                '.75em'
+            );
+        }
+        expect(
+            Spinner({ size: 'sm', style: { '--bs-spinner-width': '1rem' } })
+                .style['--bs-spinner-width']
+        ).toBe('1rem');
+        expect(Spinner({}).style['--bs-spinner-width']).toBeUndefined();
     });
 
     it('should render projected content with an optional cover', () => {

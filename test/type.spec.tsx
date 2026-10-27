@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { Button, ButtonProps } from '../source/Form/Button';
 import { Badge } from '../source/Reminder/Badge';
 import { Icon } from '../source/Reminder/Icon';
-import { assertLooksLike } from './render';
+import { assertLooksLike } from 'dom-renderer/assert';
 import {
     BackgroundColor,
     Size,
@@ -58,7 +58,9 @@ describe('Bootstrap 6 naming', () => {
         for (const color of backgrounds)
             assertLooksLike(
                 <Badge bg={color} />,
-                <span className={`badge bg-${color}`} />
+                <span
+                    className={`badge ${Object.hasOwn(Status, color) ? `theme-${color} ` : ''}bg-${color}`}
+                />
             );
         for (const color of foregrounds)
             assertLooksLike(

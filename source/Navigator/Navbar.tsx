@@ -1,5 +1,5 @@
 import { JsxChildren, JsxProps } from 'dom-renderer';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import {
     FC,
     WebCell,
@@ -8,7 +8,7 @@ import {
     component,
     observer
 } from 'web-cell';
-import { delegate, uniqueID } from 'web-utility';
+import { uniqueID } from 'web-utility';
 
 import { Container, ContainerProps } from '../Layout/Grid';
 import {
@@ -39,10 +39,27 @@ export const NavbarToggle: FC<NavbarToggleProps> = ({
     className = '',
     type,
     children,
+    style,
     ...props
 }) => (
-    <button className={`navbar-toggler ${className}`} type="button" {...props}>
-        <span className="navbar-toggler-icon" />
+    <button
+        className={`btn btn-icon navbar-toggler ${className}`}
+        type="button"
+        style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding:
+                'var(--navbar-toggler-padding-y, .25rem) var(--navbar-toggler-padding-x, .75rem)',
+            color: 'var(--navbar-color, inherit)',
+            backgroundColor: 'transparent',
+            border: '1px solid var(--navbar-toggler-border-color, currentColor)',
+            borderRadius: 'var(--navbar-toggler-border-radius, .375rem)',
+            ...style
+        }}
+        {...props}
+    >
+        <span className="navbar-toggler-icon" ariaHidden="true" />
     </button>
 );
 
@@ -136,64 +153,111 @@ export class DrawerNavbar extends HTMLElement implements WebCell {
     @observable
     accessor closeButton = true;
 
-    connectedCallback() {
-        globalThis.addEventListener?.('keyup', this.close, true);
+    @observable
+    private accessor expanded = false;
 
+    private layoutObserver?: ResizeObserver;
+
+    connectedCallback() {
         this.addEventListener('click', this.handleLink);
+        if (this.mounted) {
+            this.update();
+            this.mountedCallback();
+        }
     }
 
     disconnectedCallback() {
-        globalThis.removeEventListener?.('keyup', this.close, true);
-
-        this.addEventListener('click', this.handleLink);
+        this.removeEventListener('click', this.handleLink);
+        this.layoutObserver?.disconnect();
+        this.layoutObserver = undefined;
     }
 
+    mountedCallback() {
+        this.layoutObserver = new ResizeObserver(this.syncLayout);
+        this.layoutObserver.observe(this.shadowRoot.querySelector('nav'));
+        this.layoutObserver.observe(
+            this.shadowRoot.querySelector('.navbar-toggler')
+        );
+        this.syncLayout();
+    }
+
+    updatedCallback() {
+        if (this.layoutObserver) this.syncLayout();
+    }
+
+    @action
+    syncLayout = () => {
+        const toggle = this.shadowRoot.querySelector('.navbar-toggler');
+        if (!toggle) return;
+
+        // Bootstrap 6 expands against the navbar container, not the viewport.
+        this.expanded =
+            this.expand === true || getComputedStyle(toggle).display === 'none';
+        if (this.expanded) this.open = false;
+    };
+
+    @action
+    toggle = () => {
+        this.open = !this.open;
+    };
+
+    @action
     close = (event?: KeyboardEvent | MouseEvent | CustomEvent) => {
-        if (
-            event instanceof KeyboardEvent &&
-            !['Escape', 'Enter'].includes(event.key)
-        )
-            return;
+        if (event instanceof KeyboardEvent && event.key !== 'Escape') return;
 
         this.open = false;
     };
 
-    handleLink = delegate('a[href].nav-link', this.close);
+    handleLink = (event: MouseEvent) => {
+        if (
+            event
+                .composedPath()
+                .some(
+                    node =>
+                        node instanceof HTMLAnchorElement &&
+                        node.matches('a[href].nav-link, a[href].menu-item')
+                )
+        )
+            this.close();
+    };
 
     renderContent() {
-        const { variant, bg, expand, fixed, sticky, fluid, brand } = this,
-            { title, titleId, drawerId, open, closeButton } = this;
+        const { variant, bg, expand, fixed, fluid, brand } = this,
+            { title, titleId, drawerId, open, closeButton, expanded } = this;
 
         return (
-            <Navbar {...{ variant, bg, expand, fixed, sticky }}>
+            <Navbar {...{ variant, bg, expand, fixed }}>
                 <Container fluid={fluid}>
                     {brand || title}
                     <NavbarToggle
+                        key="toggle"
                         aria-controls={drawerId}
+                        ariaExpanded={String(open)}
                         ariaLabel="Toggle navigation"
-                        onClick={() => (this.open = true)}
+                        onClick={this.toggle}
                     />
-                    <Drawer
-                        id={drawerId}
-                        className={
-                            expand && expand !== true ? `${expand}:drawer` : ''
-                        }
-                        ariaLabelledby={titleId}
-                        show={open}
-                        onHide={this.close}
-                    >
-                        <DrawerHeader
-                            closeButton={closeButton}
-                            onHide={() => (this.open = false)}
-                        >
-                            <DrawerTitle id={titleId}>
-                                {brand || title}
-                            </DrawerTitle>
-                        </DrawerHeader>
-                        <DrawerBody>
+                    {expanded ? (
+                        <div key="inline" className="navbar-content">
                             <slot />
-                        </DrawerBody>
-                    </Drawer>
+                        </div>
+                    ) : (
+                        <Drawer
+                            key="drawer"
+                            id={drawerId}
+                            ariaLabelledby={titleId}
+                            show={open}
+                            onHide={this.close}
+                        >
+                            <DrawerHeader closeButton={closeButton}>
+                                <DrawerTitle id={titleId}>
+                                    {brand || title}
+                                </DrawerTitle>
+                            </DrawerHeader>
+                            <DrawerBody>
+                                <slot />
+                            </DrawerBody>
+                        </Drawer>
+                    )}
                 </Container>
             </Navbar>
         );
@@ -203,6 +267,24 @@ export class DrawerNavbar extends HTMLElement implements WebCell {
         return (
             <>
                 <BootstrapStyles />
+                <style>{`
+                    :host { display: block; }
+                    :host([sticky]) { position: sticky; z-index: var(--bs-z-sticky, 1020); }
+                    :host([sticky="top"]) { top: 0; }
+                    :host([sticky="bottom"]) { bottom: 0; }
+                    .navbar-content {
+                        display: flex;
+                        flex: 1;
+                        align-items: center;
+                        min-width: 0;
+                    }
+                    ::slotted(.navbar-nav) {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column !important;
+                    }
+                    .navbar-content ::slotted(.navbar-nav) { flex-direction: row !important; }
+                `}</style>
                 {this.renderContent()}
             </>
         );

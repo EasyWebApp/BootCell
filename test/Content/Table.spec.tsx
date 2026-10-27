@@ -2,7 +2,8 @@ import { expect } from 'expect';
 import { describe, it } from 'node:test';
 
 import { Table } from '../../source/Content/Table';
-import { assertLooksLike, render } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
+import { render } from '../render';
 
 describe('Table', () => {
     it('should preserve native table sections without a wrapper by default', () => {

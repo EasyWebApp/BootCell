@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import {
     FC,
     WebCell,
@@ -109,14 +109,19 @@ export class Drawer extends HTMLElement implements WebCell<DrawerProps> {
 
     @on('click', 'dialog')
     handleBackdropClick(event: MouseEvent, dialog: HTMLDialogElement) {
-        if (event.target === dialog && this.backdrop === true)
-            this.emit('hide', undefined, { bubbles: true });
+        if (event.target === dialog && this.backdrop === true) this.dismiss();
     }
 
     @on('click', '[data-bs-dismiss="drawer"]')
     handleDismiss() {
-        this.emit('hide', undefined, { bubbles: true });
+        this.dismiss();
     }
+
+    @action
+    dismiss = () => {
+        this.show = false;
+        this.emit('hide', undefined, { bubbles: true });
+    };
 
     render() {
         const { backdrop, show } = this;
@@ -146,9 +151,13 @@ export class Drawer extends HTMLElement implements WebCell<DrawerProps> {
                               ? 'false'
                               : undefined
                     }
-                    onCancel={() =>
-                        this.emit('hide', undefined, { bubbles: true })
-                    }
+                    onCancel={event => {
+                        event.preventDefault();
+                        this.dismiss();
+                    }}
+                    onClose={() => {
+                        if (!this.dialog.open && this.show) this.dismiss();
+                    }}
                 >
                     <slot />
                 </dialog>

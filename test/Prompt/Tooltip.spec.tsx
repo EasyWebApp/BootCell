@@ -12,6 +12,17 @@ describe('Tooltip', () => {
             root.querySelector('[role="tooltip"]').classList.contains('show')
         ).toBe(true);
         expect(root.querySelector('.tooltip-arrow')).not.toBeNull();
+        expect(
+            root.querySelector('.tooltip-arrow').getAttribute('style')
+        ).toContain('position: absolute');
+        expect(
+            root
+                .querySelector('[role="tooltip"]')
+                .classList.contains('bs-tooltip-bottom')
+        ).toBe(true);
+        expect(
+            root.querySelector('[role="tooltip"]').classList.contains('top-100')
+        ).toBe(true);
         expect(root.querySelector('.tooltip-inner').textContent).toBe('Notice');
     });
 
@@ -19,6 +30,7 @@ describe('Tooltip', () => {
         const tooltip = new TooltipBox();
         tooltip.content = 'Notice';
         await tooltip.connectedCallback();
+        expect(tooltip.style.position).toBe('relative');
 
         expect(tooltip.show).toBe(false);
         expect(

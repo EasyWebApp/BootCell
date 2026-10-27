@@ -1,6 +1,7 @@
 packages:
   - .
 autoInstallPeers: false
+minimumReleaseAge: 0
 allowBuilds:
     '@parcel/watcher': true
     '@swc/core': true

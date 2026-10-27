@@ -17,15 +17,26 @@ import { DrawerNavbar } from './Navbar';
 
 export interface NavLinkProps extends WebCellProps<HTMLAnchorElement> {
     active?: boolean;
+    disabled?: boolean;
 }
 
 export const NavLink: FC<NavLinkProps> = ({
     className = '',
     active,
+    disabled,
     children,
+    href,
+    onClick,
     ...props
 }) => (
-    <a className={`nav-link ${active ? 'active' : ''} ${className}`} {...props}>
+    <a
+        {...props}
+        className={classNames('nav-link', { active, disabled }, className)}
+        href={disabled ? undefined : href}
+        ariaDisabled={disabled ? 'true' : props.ariaDisabled}
+        tabIndex={disabled ? -1 : props.tabIndex}
+        onClick={disabled ? event => event.preventDefault() : onClick}
+    >
         {children}
     </a>
 );

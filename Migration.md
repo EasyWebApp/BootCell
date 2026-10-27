@@ -162,6 +162,43 @@ supplies local styles or overrides loading, review both the document stylesheets
 and styles inside component shadow roots; document-level CSS does not style
 shadow-root content automatically.
 
+`DropdownButton` positions its menu below the trigger and handles outside clicks
+across shadow roots. Trigger clicks toggle it; selecting a link closes it without
+preventing navigation. Escape closes the menu and restores trigger focus without
+also dismissing a containing drawer. Document listeners are removed on disconnect.
+
+`DrawerNavbar` follows Bootstrap 6's container-based expansion rather than the
+viewport width. Above `expand`, navigation is projected inline instead of relying
+on navbar selectors to reach into the drawer's shadow root. Below it, the toggler
+has explicit Bootstrap-style button styling and `aria-expanded` tracks the drawer.
+Close-button, backdrop, Escape, and native dialog close actions synchronize the
+drawer and navbar state; expanding an open navbar closes its modal drawer.
+
+## Bootstrap 6 alpha.1 component corrections
+
+- `DrawerNavbar.sticky` positions the block-level host, so the inner navbar is
+  not constrained to a one-navbar-high sticky containing block.
+- `SplitView` loads Bootstrap inside its shadow root, reserves a touch-draggable
+  divider, and clamps resizing against the current pane origin and host width.
+- `CountDown` uses explicit theme backgrounds and contrast colors with wrapping,
+  spaced, smaller time tiles. Semantic `Badge.bg` values also select their theme.
+- `Carousel` discovers slides after mounting and slot changes, activates its
+  initial slide with or without autoplay, wraps backwards safely, and scrolls
+  the scroll-snap track when selecting a slide. Captions are anchored to their
+  own slide above the controls. Native button clicks handle Enter only once.
+- Small spinners use `spinner-sm` with explicit small-size variables to avoid
+  the alpha.1 grow-spinner cascade overriding the requested size.
+- `FormField` uses `form-field` layout and associates generated or supplied
+  control IDs with both regular and floating labels.
+- `MediaObject` aligns the image wrapper and allows the text flex item to shrink.
+- `NavLink.disabled` removes navigation and tab focus, adds disabled styling and
+  ARIA state, and suppresses its click callback.
+- Tooltips use bottom placement with a positioned host and arrow.
+- `Row` and `Col` retain every supplied responsive size. Sized columns stack
+  below their first breakpoint; only unsized columns use equal-width `col`.
+- `MonthCalendar` keeps the inner table layout fixed independently of host
+  styles, and uses compact localized weekday headings with full-name titles.
+
 ## Downstream verification checklist
 
 1. Update imports, custom-element tags, button props, color props, and breakpoint
