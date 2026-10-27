@@ -39,17 +39,14 @@ export const Row: FC<RowProps> = ({
     children,
     ...props
 }) => {
-    const columnClass = xs
-        ? `row-cols-${xs}`
-        : sm
-          ? `sm:row-cols-${sm}`
-          : md
-            ? `md:row-cols-${md}`
-            : lg
-              ? `lg:row-cols-${lg}`
-              : xl
-                ? `xl:row-cols-${xl}`
-                : twoXL && `2xl:row-cols-${twoXL}`;
+    const columnClass = classNames(
+        xs && `row-cols-${xs}`,
+        sm && `sm:row-cols-${sm}`,
+        md && `md:row-cols-${md}`,
+        lg && `lg:row-cols-${lg}`,
+        xl && `xl:row-cols-${xl}`,
+        twoXL && `2xl:row-cols-${twoXL}`
+    );
 
     return (
         <div className={classNames('row', columnClass, className)} {...props}>
@@ -71,20 +68,17 @@ export const Col: FC<ColProps> = ({
     children,
     ...props
 }) => {
-    const columnClass = xs
-        ? `col-${xs}`
-        : sm
-          ? `sm:col-${sm}`
-          : md
-            ? `md:col-${md}`
-            : lg
-              ? `lg:col-${lg}`
-              : xl
-                ? `xl:col-${xl}`
-                : twoXL && `2xl:col-${twoXL}`;
+    const columnClass = classNames(
+        xs && `col-${xs}`,
+        sm && `sm:col-${sm}`,
+        md && `md:col-${md}`,
+        lg && `lg:col-${lg}`,
+        xl && `xl:col-${xl}`,
+        twoXL && `2xl:col-${twoXL}`
+    );
 
     return (
-        <div className={classNames('col', columnClass, className)} {...props}>
+        <div className={classNames(columnClass || 'col', className)} {...props}>
             {children}
         </div>
     );

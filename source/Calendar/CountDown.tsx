@@ -96,12 +96,17 @@ export class CountDown extends HTMLElement implements WebCell<CountDownProps> {
 
     render() {
         return (
-            <ol className="list-inline fg-white">
+            <ol className="list-unstyled d-flex flex-wrap gap-3">
                 {this.timeSections.map(({ value, label }, index) => (
                     <li
                         key={label}
-                        className={`list-inline-item fs-5xl theme-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-6`}
-                        style={{ width: '5.5rem', height: '5.5rem' }}
+                        className={`fs-3xl theme-${colors[index]} d-inline-flex align-items-center justify-content-center rounded-6 flex-shrink-0`}
+                        style={{
+                            width: '5.5rem',
+                            height: '5.5rem',
+                            backgroundColor: 'var(--bs-theme-bg)',
+                            color: 'var(--bs-theme-contrast)'
+                        }}
                     >
                         <small>
                             {(value + '').padStart(2, '0')}

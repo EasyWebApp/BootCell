@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import {
     FC,
     WebCell,
@@ -6,8 +6,7 @@ import {
     attribute,
     component,
     observer,
-    on,
-    reaction
+    on
 } from 'web-cell';
 
 import { BootstrapStyles } from '../BootstrapStyles';
@@ -19,12 +18,14 @@ export interface CarouselItemProps extends WebCellProps<HTMLDivElement> {
 export const CarouselItem: FC<CarouselItemProps> = ({
     className = '',
     interval,
+    style,
     children,
     ...props
 }) => (
     <div
         className={`carousel-item ${className}`}
         {...props}
+        style={{ position: 'relative', ...style }}
         data-bs-interval={interval}
     >
         {children}
@@ -42,7 +43,8 @@ export const CarouselCaption: FC<WebCellProps<HTMLDivElement>> = ({
         style={{
             position: 'absolute',
             insetInline: '15%',
-            bottom: '1rem',
+            bottom: '4rem',
+            zIndex: '1',
             color: 'white',
             ...style
         }}
@@ -80,35 +82,84 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
     @observable
     accessor currentIndex = 0;
 
-    private timer: number;
+    private timer?: number;
+    private timerInterval?: number;
 
     connectedCallback() {
-        if (this.interval)
-            this.timer ||= window.setInterval(
-                () => this.turnByOffset(1),
-                this.interval
-            );
-        else this.handleActiveItem(this.currentIndex);
+        if (this.mounted) {
+            this.update();
+            this.syncItems();
+        }
     }
 
     disconnectedCallback() {
-        clearInterval(this.timer);
+        window.clearInterval(this.timer);
+        this.timer = undefined;
     }
 
     mountedCallback() {
-        const items = [...this.querySelectorAll('.carousel-item')];
-
-        if (this.itemMeta.length !== items.length)
-            this.itemMeta = items.map(item => ({
-                caption: (
-                    item.querySelector('[data-carousel-caption]')
-                        ?.textContent || item.textContent
-                ).trim()
-            }));
+        this.syncItems();
     }
 
+    updatedCallback() {
+        this.handleActiveItem(this.currentIndex);
+        this.syncTimer();
+    }
+
+    @action
+    syncItems = () => {
+        const items = [...this.querySelectorAll('.carousel-item')];
+        const metadata = items.map(item => ({
+            caption: (
+                item.querySelector('[data-carousel-caption]')?.textContent ||
+                item.textContent
+            ).trim()
+        }));
+        if (
+            metadata.length !== this.itemMeta.length ||
+            metadata.some(
+                (item, index) => item.caption !== this.itemMeta[index]?.caption
+            )
+        )
+            this.itemMeta = metadata;
+
+        if (items.length)
+            this.currentIndex =
+                ((this.currentIndex % items.length) + items.length) %
+                items.length;
+        else this.currentIndex = 0;
+        this.handleActiveItem(this.currentIndex);
+        this.syncTimer();
+    };
+
+    syncTimer() {
+        const enabled =
+            this.isConnected &&
+            this.mounted &&
+            this.interval > 0 &&
+            this.itemMeta.length > 0;
+        if (
+            enabled &&
+            this.timer !== undefined &&
+            this.timerInterval === this.interval
+        )
+            return;
+        window.clearInterval(this.timer);
+        this.timer = undefined;
+        this.timerInterval = this.interval;
+        if (enabled)
+            this.timer = window.setInterval(
+                () => this.turnByOffset(1),
+                this.interval
+            );
+    }
+
+    @action
     turnByOffset(delta: number) {
-        this.currentIndex = (this.currentIndex + delta) % this.itemMeta.length;
+        const { length } = this.itemMeta;
+        if (length)
+            this.currentIndex =
+                (((this.currentIndex + delta) % length) + length) % length;
     }
 
     @on('click', '.carousel-overlay-controls > button')
@@ -116,30 +167,28 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
     }
 
-    @on('keyup', '.carousel-overlay-controls > button')
-    handleButtonPress({ key }: KeyboardEvent, { dataset }: HTMLButtonElement) {
-        if (key === 'Enter')
-            this.turnByOffset(dataset.bsSlide === 'next' ? 1 : -1);
-    }
-
+    @action
     @on('click', '.carousel-indicators button')
     handleIndicatorsButtonClick(_: MouseEvent, { dataset }: HTMLButtonElement) {
         this.currentIndex = +dataset.bsSlideTo;
     }
 
-    @on('keyup', '.carousel-indicators button')
-    handleIndicatorsButtonPress(
-        { key }: KeyboardEvent,
-        { dataset }: HTMLButtonElement
-    ) {
-        if (key === 'Enter') this.currentIndex = +dataset.bsSlideTo;
-    }
-
-    @reaction(({ currentIndex }) => currentIndex)
     handleActiveItem(currentIndex: number) {
-        this.querySelector('.carousel-item.active')?.classList.remove('active');
+        const items = this.querySelectorAll<HTMLElement>('.carousel-item');
+        items.forEach((item, index) =>
+            item.classList.toggle('active', index === currentIndex)
+        );
 
-        this.children[currentIndex].classList.add('active');
+        const item = items[currentIndex];
+        const container =
+            this.shadowRoot?.querySelector<HTMLElement>('.carousel-inner');
+        if (item && container)
+            container.scrollTo?.({
+                left:
+                    container.scrollLeft +
+                    item.getBoundingClientRect().left -
+                    container.getBoundingClientRect().left
+            });
     }
 
     renderContent() {
@@ -148,7 +197,7 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
         return (
             <div className="carousel carousel-overlay">
                 <div className="carousel-inner">
-                    <slot />
+                    <slot onSlotChange={this.syncItems} />
                 </div>
                 <div className="carousel-overlay-controls">
                     <button
@@ -165,6 +214,7 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
                     <div className="carousel-indicators">
                         {itemMeta.map(({ caption }, index) => (
                             <button
+                                key={index}
                                 type="button"
                                 ariaLabel={caption}
                                 data-bs-target=""
@@ -197,6 +247,15 @@ export class Carousel extends HTMLElement implements WebCell<CarouselProps> {
     render() {
         return (
             <>
+                <style>{`
+                    :host { display: block; min-width: 0; }
+                    ::slotted(.carousel-item) {
+                        flex: 0 0 calc((100% - (var(--bs-carousel-items, 1) - 1) * var(--bs-carousel-items-gap, 0px)) / var(--bs-carousel-items, 1));
+                        min-width: 0;
+                        scroll-snap-align: start;
+                        scroll-snap-stop: always;
+                    }
+                `}</style>
                 <BootstrapStyles />
                 {this.renderContent()}
             </>

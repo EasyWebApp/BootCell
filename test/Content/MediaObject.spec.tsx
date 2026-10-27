@@ -1,5 +1,5 @@
 import { describe, it } from 'node:test';
-import { assertLooksLike } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
 import { MediaObject } from '../../source/Content/MediaObject';
 
 describe('Media Item', () => {
@@ -7,15 +7,10 @@ describe('Media Item', () => {
         assertLooksLike(
             <MediaObject title="Test" image="test.png" />,
             <div className="d-flex">
-                <div className="flex-shrink-0">
-                    <img
-                        className="align-self-start"
-                        style={{ width: '4rem' }}
-                        src="test.png"
-                        alt="Test"
-                    />
+                <div className="flex-shrink-0 align-self-start">
+                    <img style={{ width: '4rem' }} src="test.png" alt="Test" />
                 </div>
-                <div className="flex-grow-1 ms-5">
+                <div className="flex-grow-1 ms-5" style={{ minWidth: '0' }}>
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -26,15 +21,10 @@ describe('Media Item', () => {
         assertLooksLike(
             <MediaObject title="Test" image="test.png" imageColumn="end" />,
             <div className="d-flex flex-row-reverse">
-                <div className="flex-shrink-0">
-                    <img
-                        className="align-self-start"
-                        style={{ width: '4rem' }}
-                        src="test.png"
-                        alt="Test"
-                    />
+                <div className="flex-shrink-0 align-self-start">
+                    <img style={{ width: '4rem' }} src="test.png" alt="Test" />
                 </div>
-                <div className="flex-grow-1 me-5">
+                <div className="flex-grow-1 me-5" style={{ minWidth: '0' }}>
                     <h5 className="mt-0">Test</h5>
                 </div>
             </div>
@@ -47,14 +37,15 @@ describe('Media Item', () => {
                 title="Test"
                 image={<img src="test.png" />}
                 imageColumn="end"
+                imageRow="center"
             >
                 Example
             </MediaObject>,
             <div className="d-flex flex-row-reverse">
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 align-self-center">
                     <img src="test.png" />
                 </div>
-                <div className="flex-grow-1 me-5">
+                <div className="flex-grow-1 me-5" style={{ minWidth: '0' }}>
                     <h5 className="mt-0">Test</h5>
                     Example
                 </div>

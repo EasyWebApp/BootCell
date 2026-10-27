@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, WebCellProps } from 'web-cell';
 
-import { BackgroundColor, TextColor } from '../type';
+import { BackgroundColor, Status, TextColor } from '../type';
 
 export interface BadgeProps extends WebCellProps<HTMLAnchorElement> {
     bg?: BackgroundColor;
@@ -20,6 +20,7 @@ export const Badge: FC<BadgeProps> = ({
 }) => {
     const Class = classNames(
         'badge',
+        bg && Object.hasOwn(Status, bg) && `theme-${bg}`,
         bg && `bg-${bg}`,
         text && `fg-${text}`,
         pill && `rounded-pill`,

@@ -30,6 +30,19 @@ describe('CountDown', () => {
         const tree = counter.render();
 
         expect(tree.tagName).toBe('ol');
+        expect(tree.props.className).toBe(
+            'list-unstyled d-flex flex-wrap gap-3'
+        );
+        for (const section of tree.children) {
+            expect(section.props.className).toContain('fs-3xl');
+            expect(section.props.className).toContain('flex-shrink-0');
+            expect(section.style).toMatchObject({
+                width: '5.5rem',
+                height: '5.5rem',
+                backgroundColor: 'var(--bs-theme-bg)',
+                color: 'var(--bs-theme-contrast)'
+            });
+        }
         expect(
             tree.children.map(({ children }) => children[0].children[0].text)
         ).toEqual(['00', '00', '00', '00']);

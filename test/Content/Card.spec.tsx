@@ -10,7 +10,8 @@ import {
     CardImg
 } from '../../source/Content/Card';
 import { NavLink } from '../../source/Navigator/Nav';
-import { assertLooksLike, render } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
+import { render } from '../render';
 
 describe('Card', () => {
     it('should compose an image, title and body', () => {

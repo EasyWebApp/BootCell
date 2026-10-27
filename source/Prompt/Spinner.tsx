@@ -11,6 +11,7 @@ export interface SpinnerProps extends WebCellProps<HTMLDivElement> {
 
 export const Spinner: FC<SpinnerProps> = ({
     className,
+    style,
     variant,
     size,
     animation = 'border',
@@ -20,11 +21,20 @@ export const Spinner: FC<SpinnerProps> = ({
     <div
         className={classNames(
             `spinner-${animation}`,
-            size && `spinner-${animation}-${size}`,
+            size && `spinner-${size}`,
             variant && `fg-${variant}`,
             className
         )}
         role="status"
+        style={{
+            ...(size
+                ? {
+                      '--bs-spinner-width': '.75em',
+                      '--bs-spinner-height': '.75em'
+                  }
+                : {}),
+            ...style
+        }}
         {...props}
     >
         <span className="visually-hidden">{children}</span>

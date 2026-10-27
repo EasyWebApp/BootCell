@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
+import { assertLooksLike } from 'dom-renderer/assert';
 
 import { BootstrapStyles } from '../source/BootstrapStyles';
-import { assertLooksLike } from './render';
 
 describe('Bootstrap styles', () => {
     it('should provide Bootstrap and Bootstrap Icons stylesheets', () => {

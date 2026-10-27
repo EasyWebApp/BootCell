@@ -1,5 +1,5 @@
 import { describe, it } from 'node:test';
-import { assertLooksLike } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
 import { FormCheck } from '../../source/Form/Form';
 import { ToggleButton } from '../../source/Form/Button';
 

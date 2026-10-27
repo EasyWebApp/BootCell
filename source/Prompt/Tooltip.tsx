@@ -17,11 +17,14 @@ export const Tooltip: FC<WebCellProps> = ({
     ...props
 }) => (
     <div
-        className={`tooltip bs-tooltip show position-absolute ${className}`}
+        className={`tooltip bs-tooltip-bottom show position-absolute top-100 start-0 mt-3 ${className}`}
         role="tooltip"
         {...props}
     >
-        <div className="tooltip-arrow" />
+        <div
+            className="tooltip-arrow"
+            style={{ position: 'absolute', left: '.75rem' }}
+        />
         <div className="tooltip-inner">{children}</div>
     </div>
 );
@@ -48,6 +51,7 @@ export class TooltipBox extends HTMLElement implements WebCell {
 
     connectedCallback() {
         this.style.display = 'inline-block';
+        this.style.position ||= 'relative';
 
         this.addEventListener('mouseenter', this.handleToggle);
         this.addEventListener('mouseleave', this.handleToggle);

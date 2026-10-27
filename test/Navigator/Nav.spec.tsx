@@ -1,10 +1,46 @@
 import { expect } from 'expect';
 import { describe, it } from 'node:test';
+import { fn } from 'jest-mock';
 
 import { Nav, NavDropdown, NavLink } from '../../source/Navigator/Nav';
 import { render } from '../render';
 
 describe('Nav', () => {
+    it('should disable styling, keyboard focus, clicks and navigation together', () => {
+        const onClick = fn();
+        const link = render(
+            <NavLink
+                disabled
+                active
+                href="#disabled"
+                tabIndex={0}
+                onClick={onClick}
+            >
+                Disabled
+            </NavLink>
+        ).querySelector('a');
+        expect(link.classList.contains('disabled')).toBe(true);
+        expect(link.classList.contains('active')).toBe(true);
+        expect(link.getAttribute('href')).toBeNull();
+        expect(link.getAttribute('aria-disabled')).toBe('true');
+        expect(link.tabIndex).toBe(-1);
+        const click = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true
+        });
+        link.dispatchEvent(click);
+        expect(click.defaultPrevented).toBe(true);
+        expect(onClick).not.toHaveBeenCalled();
+        const enabled = render(
+            <NavLink href="#enabled" tabIndex={2} onClick={onClick}>
+                Enabled
+            </NavLink>
+        ).querySelector('a');
+        enabled.click();
+        expect(enabled.tabIndex).toBe(2);
+        expect(enabled.getAttribute('href')).toBe('#enabled');
+        expect(onClick).toHaveBeenCalledTimes(1);
+    });
     it('should render active links with native attributes', () => {
         const link = render(
             <NavLink active href="#test" ariaDisabled="true">

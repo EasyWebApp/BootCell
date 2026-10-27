@@ -1,7 +1,8 @@
 import { expect } from 'expect';
 import { fn } from 'jest-mock';
 import { describe, it } from 'node:test';
-import { assertLooksLike, render } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
+import { render } from '../render';
 
 import { Alert } from '../../source/Prompt/Alert';
 import { CloseButton } from '../../source/Form/Button';

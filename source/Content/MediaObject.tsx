@@ -25,19 +25,17 @@ export const MediaObject: FC<MediaObjectProps> = ({
         Class = classNames('d-flex', !start && 'flex-row-reverse', className);
     const body = (
         <>
-            <div className="flex-shrink-0">
+            <div className={`flex-shrink-0 align-self-${imageRow}`}>
                 {typeof image === 'string' ? (
-                    <img
-                        className={`align-self-${imageRow}`}
-                        style={{ width: '4rem' }}
-                        src={image}
-                        alt={title}
-                    />
+                    <img style={{ width: '4rem' }} src={image} alt={title} />
                 ) : (
                     image
                 )}
             </div>
-            <div className={`flex-grow-1 ${start ? 'ms-5' : 'me-5'}`}>
+            <div
+                className={`flex-grow-1 ${start ? 'ms-5' : 'me-5'}`}
+                style={{ minWidth: '0' }}
+            >
                 <h5 className="mt-0">{title}</h5>
                 {children}
             </div>

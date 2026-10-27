@@ -1,5 +1,5 @@
 import { describe, it } from 'node:test';
-import { assertLooksLike } from '../render';
+import { assertLooksLike } from 'dom-renderer/assert';
 import { Jumbotron } from '../../source/Content/Jumbotron';
 describe('Jumbotron', () => {
     it('should render a Simple Jumbotron defaultly', () => {
